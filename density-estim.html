@@ -1,0 +1,1532 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Density estimation, inference about densities, and inverse problems &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/density-estim.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Fdensity-estim.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/density-estim.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-histogram-and-the-naive-estimator">
+     The Histogram and the Naive Estimator
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kernel-estimates">
+   Kernel estimates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kernel-estimates-of-multivariate-densities">
+   Kernel estimates of multivariate densities
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-em-curse-of-dimensionality">
+     {The {\em Curse of Dimensionality/}}
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nearest-neighbor-estimates">
+   {Nearest neighbor estimates}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-kernel-method">
+     Variable Kernel Method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adaptive-kernel-estimates">
+     Adaptive Kernel estimates
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximum-penalized-likelihood">
+     Maximum Penalized Likelihood
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#confidence-sets-for-densities-with-shape-restrictions-lower-confidence-interval">
+   {Confidence sets for densities with shape restrictions; lower confidence interval
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wavelet-shrinkage">
+   {Wavelet shrinkage}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#time-frequency-localization-windowed-fourier-transform-and-wavelets">
+     Time-frequency localization: windowed Fourier transform and wavelets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#haar-wavelets">
+     Haar wavelets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unconditional-bases">
+     Unconditional bases
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hard-and-soft-thresholding">
+     {Hard and soft thresholding}
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inverse-problems">
+   Inverse Problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nonparametric-regression">
+     Nonparametric regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-abel-s-problem">
+     {Example: Abel’s problem}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-framework-for-inverse-problems">
+     {General framework for inverse problems}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-forward-and-inverse-problems">
+     Linear forward and inverse problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methods-for-inverse-problems">
+   Methods for inverse problems
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Density estimation, inference about densities, and inverse problems</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-histogram-and-the-naive-estimator">
+     The Histogram and the Naive Estimator
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kernel-estimates">
+   Kernel estimates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kernel-estimates-of-multivariate-densities">
+   Kernel estimates of multivariate densities
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-em-curse-of-dimensionality">
+     {The {\em Curse of Dimensionality/}}
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nearest-neighbor-estimates">
+   {Nearest neighbor estimates}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-kernel-method">
+     Variable Kernel Method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adaptive-kernel-estimates">
+     Adaptive Kernel estimates
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximum-penalized-likelihood">
+     Maximum Penalized Likelihood
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#confidence-sets-for-densities-with-shape-restrictions-lower-confidence-interval">
+   {Confidence sets for densities with shape restrictions; lower confidence interval
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wavelet-shrinkage">
+   {Wavelet shrinkage}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#time-frequency-localization-windowed-fourier-transform-and-wavelets">
+     Time-frequency localization: windowed Fourier transform and wavelets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#haar-wavelets">
+     Haar wavelets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unconditional-bases">
+     Unconditional bases
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hard-and-soft-thresholding">
+     {Hard and soft thresholding}
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inverse-problems">
+   Inverse Problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nonparametric-regression">
+     Nonparametric regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-abel-s-problem">
+     {Example: Abel’s problem}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-framework-for-inverse-problems">
+     {General framework for inverse problems}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-forward-and-inverse-problems">
+     Linear forward and inverse problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methods-for-inverse-problems">
+   Methods for inverse problems
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="density-estimation-inference-about-densities-and-inverse-problems">
+<h1>Density estimation, inference about densities, and inverse problems<a class="headerlink" href="#density-estimation-inference-about-densities-and-inverse-problems" title="Permalink to this headline">#</a></h1>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
+<p>Suppose we observe <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^n\)</span> i.i.d. <span class="math notranslate nohighlight">\(F\)</span>, where <span class="math notranslate nohighlight">\(F\)</span> has density <span class="math notranslate nohighlight">\(f\)</span> with respect
+to Lebesgue measure on the real line.
+What can we learn about <span class="math notranslate nohighlight">\(f\)</span> from these data?</p>
+<p>Estimating <span class="math notranslate nohighlight">\(f\)</span> can play a role in exploratory data analysis (EDA)
+as a graphical summary of the data set.
+In some contexts, more rigorous
+estimates and inferences about <span class="math notranslate nohighlight">\(f\)</span> and properties of <span class="math notranslate nohighlight">\(f\)</span> such as
+its value at a point <span class="math notranslate nohighlight">\(f(x_0)\)</span>, its derivative
+at a point <span class="math notranslate nohighlight">\(f'(x_0)\)</span>, a Sobolev norm of <span class="math notranslate nohighlight">\(f\)</span> such as
+<span class="math notranslate nohighlight">\(\|f\|_S^2 = \int (f^2 + f'^2 + f&quot;^2)dx\)</span>,
+and the number and locations of modes of <span class="math notranslate nohighlight">\(f\)</span>,
+also are interesting.
+We will look at some approaches to estimating <span class="math notranslate nohighlight">\(f\)</span>, to finding confidence regious
+for <span class="math notranslate nohighlight">\(f\)</span>, and to testing hypotheses
+about <span class="math notranslate nohighlight">\(f\)</span>.
+We will not dwell on optimality considerations.</p>
+<section id="the-histogram-and-the-naive-estimator">
+<h3>The Histogram and the Naive Estimator<a class="headerlink" href="#the-histogram-and-the-naive-estimator" title="Permalink to this headline">#</a></h3>
+<p>This section follows Silverman  (1990).</p>
+<p>Let <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> denote the empirical cdf of the data <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^n\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1ed45052-f389-43dd-ba5a-d7ab0e0ad6b2">
+<span class="eqno">()<a class="headerlink" href="#equation-1ed45052-f389-43dd-ba5a-d7ab0e0ad6b2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{F}_n(x) = \frac{1}{n} \sum_{j=1}^n 1_{X_j \le x}.
+\end{equation}\]</div>
+<p>Although <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> is often a good estimator of <span class="math notranslate nohighlight">\(F\)</span>,
+<span class="math notranslate nohighlight">\(d \hat{F}_n/dx\)</span> is usually not a good estimator of <span class="math notranslate nohighlight">\(f = dF/dx\)</span>.
+The derivative of the empirical cdf is a sum of point masses
+at the observations.
+It usually is not an enlightening representation of the data.</p>
+<p>Suppose we have a collection of {\em class intervals/} or {\em bins/}
+<span class="math notranslate nohighlight">\(\{ \calI_k = (a_k, a_{k+1}] \}_{k=1}^K\)</span> such that every <span class="math notranslate nohighlight">\(X_j\)</span> is in some <span class="math notranslate nohighlight">\(\calI_k\)</span>.
+(Choosing the intervals to be open on the  left and closed on the right is
+arbitrary; the essential point is that they be disjoint and that their
+union include all the data.)
+Let</p>
+<div class="amsmath math notranslate nohighlight" id="equation-80e6c1ca-4b28-424d-8a18-85d36d6ac989">
+<span class="eqno">()<a class="headerlink" href="#equation-80e6c1ca-4b28-424d-8a18-85d36d6ac989" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    w_k = \diam(\calI_k) = a_{k+1} - a_k.
+\end{equation}\]</div>
+<p>The {\em histogram/} of the data using these bins is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-223a2144-a1b1-460a-bf47-62706fbe2548">
+<span class="eqno">()<a class="headerlink" href="#equation-223a2144-a1b1-460a-bf47-62706fbe2548" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    h(x) = \frac{1}{n}\sum_{k=1}^K \frac{1}{w_k} 1_{x \in \calI_k}
+    \#\left \{ \{X_j\}_{j=1}^n \cap \calI_k \right \}.
+\end{equation}\]</div>
+<p>The histogram is an estimate of <span class="math notranslate nohighlight">\(f\)</span>.
+Its general appearance, including the number and locations of its modes and its smoothness,
+depends strongly on the locations and widths of the bins.
+It is blocky and discontinuous.
+If the bin widths and locations are chosen well, its performance—in
+the sense of convergence to <span class="math notranslate nohighlight">\(f\)</span> in a norm as the sample size <span class="math notranslate nohighlight">\(n\)</span>
+grows—can be reasonable.</p>
+<p>Another estimate of <span class="math notranslate nohighlight">\(f\)</span> derives from the definition of <span class="math notranslate nohighlight">\(f\)</span> as the
+derivative of <span class="math notranslate nohighlight">\(F\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-85b7d2bd-33f4-4647-8764-668527cb40e4">
+<span class="eqno">()<a class="headerlink" href="#equation-85b7d2bd-33f4-4647-8764-668527cb40e4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    f(x) = \lim_{\epsilon \rightarrow 0} \frac{F(x+\epsilon) - F(x)}{\epsilon}
+         = \lim_{h \rightarrow 0} \frac{1}{2h} \Pr \{ x - h &lt; X \le x+h \}
+\end{equation}\]</div>
+<p>One could imagine estimating <span class="math notranslate nohighlight">\(f\)</span> by picking a small value of <span class="math notranslate nohighlight">\(h\)</span> and taking</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f90ff004-dc88-4736-8638-3b9e4c3d49f5">
+<span class="eqno">()<a class="headerlink" href="#equation-f90ff004-dc88-4736-8638-3b9e4c3d49f5" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+    \hat{f}_h(x) &amp; \equiv &amp; \frac{1}{2h} \left ( \hat{F}_n(x+h) - \hat{F}_n(x-h) \right ) \nonumber \\
+               &amp; = &amp; \frac{1}{2nh} \sum_{j=1}^n 1_{x-h &lt; X_j \le x+h} \nonumber \\
+               &amp; = &amp; \frac{1}{n}\sum_{j=1}^n \frac{1}{h} K \left ( \frac{x - X_j}{h} \right ),
+\end{eqnarray}\]</div>
+<p>where <span class="math notranslate nohighlight">\(K(x) = \frac{1}{2}\times1_{-1 &lt; x \le 1}\)</span>.
+This is the {\em naive density estimate/}.
+It amounts to estimating <span class="math notranslate nohighlight">\(f(x)\)</span> by a superposition (sum) of boxcar functions
+centered at the observations, each with width <span class="math notranslate nohighlight">\(2h\)</span> and area <span class="math notranslate nohighlight">\(1/n\)</span>.
+This sum is also blocky and discontinuous, but it avoids one of the arbitrary
+choices in constructing a histogram: the choice of locations of the bins.
+As <span class="math notranslate nohighlight">\(h \rightarrow 0\)</span>, the naive estimate converges weakly to the sum of point masses
+at the data; for <span class="math notranslate nohighlight">\(h &gt;0\)</span>, the naive estimator smooths the data.
+The tuning parameter <span class="math notranslate nohighlight">\(h\)</span> is analogous to the bin width in a histogram.
+Larger values of <span class="math notranslate nohighlight">\(h\)</span> give smoother density estimates.
+Whether “smoother” means “better” depends on the true density <span class="math notranslate nohighlight">\(f\)</span>;
+generally, there is a tradeoff between bias and variance: increasing the smoothness
+increases the bias but decreases the variance.</p>
+<p>It follows from the fact that <span class="math notranslate nohighlight">\(\int_{-\infty}^\infty K(x) dx = 1\)</span> that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c5fdfa48-e416-408a-bc2a-c916b2b21ad0">
+<span class="eqno">()<a class="headerlink" href="#equation-c5fdfa48-e416-408a-bc2a-c916b2b21ad0" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+    \int_{-\infty}^\infty \hat{f}(x) dx
+        &amp;=&amp;
+        \frac{1}{n} \sum_{j=1}^n \frac{1}{h} \int_{-\infty}^\infty K
+        \left ( \frac{x - X_j}{h} \right )
+        \nonumber \\
+        &amp;=&amp; \frac{1}{n} \sum_{j=1}^n 1 = 1.
+\end{eqnarray}\]</div>
+<p>It follows from the fact that <span class="math notranslate nohighlight">\(K(x) \ge 0\)</span> that <span class="math notranslate nohighlight">\(\hat{f} \ge 0\)</span> for all <span class="math notranslate nohighlight">\(x\)</span>.
+Thus <span class="math notranslate nohighlight">\(\hat{f}\)</span> is a probability density function.</p>
+</section>
+</section>
+<section id="kernel-estimates">
+<h2>Kernel estimates<a class="headerlink" href="#kernel-estimates" title="Permalink to this headline">#</a></h2>
+<p>The two properties of the boxcar just mentioned—integrating to one and nonnegativity—hold
+whenever <span class="math notranslate nohighlight">\(K(x)\)</span> is itself a probability density function, not just when <span class="math notranslate nohighlight">\(K\)</span> is a
+unit-area boxcar function.
+Using a smoother {\em kernel/} function <span class="math notranslate nohighlight">\(K\)</span>, such as a Gaussian density,
+leads to a smoother estimate <span class="math notranslate nohighlight">\(\hat{f}_K\)</span>.
+Estimates that are linear combinations of such kernel functions centered at the
+data are called {\em kernel density estimates/}.
+We denote the kernel density estimate with bandwidth (smoothing parameter) <span class="math notranslate nohighlight">\(h\)</span> by</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0fa37f19-fb60-40d4-8c8e-7deb59155e0f">
+<span class="eqno">()<a class="headerlink" href="#equation-0fa37f19-fb60-40d4-8c8e-7deb59155e0f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{f}_h(x) = \frac{1}{nh} \sum_{j=1}^n K \left ( \frac{x - X_j}{h} \right ).
+\end{equation}\]</div>
+<p>The dependence of the estimate on the kernel is not evident in the notation—the kernel
+is understood from context.
+Kernels are always chosen to integrate to one, but there can be asymptotic advantages
+to kernels that are negative in places.
+The density estimates derived using such kernels can fail to be probability densities,
+because they can be negative for some values of <span class="math notranslate nohighlight">\(x\)</span>.
+Typically, <span class="math notranslate nohighlight">\(K\)</span> is chosen to be a symmetric probability density function.</p>
+<p>There is a large body of literature on choosing <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(h\)</span> well, where “well”
+means that the estimate converges asymptotically as rapidly as possible in
+some suitable norm on probability density functions.
+The most common measure of performance is the mean integrated squared error (MISE):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a6259779-052a-4a78-9582-ad692329a279">
+<span class="eqno">()<a class="headerlink" href="#equation-a6259779-052a-4a78-9582-ad692329a279" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+    \mbox{\rm MISE}(\hat{f}) &amp; \equiv &amp;  \EE \int (\hat{f}(x) - f(x))^2 dx \nonumber \\
+    &amp;=&amp; \int \EE (\hat{f}(x) - f(x))^2 dx \nonumber \\
+    &amp;=&amp; \int (\EE \hat{f}(x) - f(x))^2 dx + \int \Var(\hat{f}) dx.
+\end{eqnarray}\]</div>
+<p>The MISE is sum of the integral of the squared pointwise bias of the estimate and the
+pointwise variance of the estimate.
+For kernel estimates,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ad9bde62-42e0-4e05-9cf1-b50d56749593">
+<span class="eqno">()<a class="headerlink" href="#equation-ad9bde62-42e0-4e05-9cf1-b50d56749593" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \EE \hat{f}(x) = \int \frac{1}{h} K \left ( \frac{x - y}{h} \right ) f(y) dy,
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-99a465e4-79c4-4f00-a900-6f5e6fd76a02">
+<span class="eqno">()<a class="headerlink" href="#equation-99a465e4-79c4-4f00-a900-6f5e6fd76a02" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \Var \hat{f}(x) = \int \frac{1}{h^2} K \left ( \frac{x-y}{h} \right )^2 f(y) dy -
+    \left [ \frac{1}{h} \int K \left ( \frac{x-y}{h} \right ) f(y) dy \right ]^2.
+\end{equation}\]</div>
+<p>The expected value of <span class="math notranslate nohighlight">\(\hat{f}\)</span> is a smoothed version of <span class="math notranslate nohighlight">\(f\)</span>, the result of
+convolving <span class="math notranslate nohighlight">\(f\)</span> with the scaled kernel.
+If <span class="math notranslate nohighlight">\(f\)</span> is itself very smooth, smoothing it by convolution with the scaled kernel does not change
+its value much, and the bias of the kernel estimate is small.
+But in places where <span class="math notranslate nohighlight">\(f\)</span> varies rapidly compared with the width of the scaled kernel,
+the local bias of the kernel estimate will be large.
+Note that the bias depends on the kernel function and the scale (bandwidth) <span class="math notranslate nohighlight">\(h\)</span>, not
+on the sample size.</p>
+<p>The two previous expressions for bias and variance rarely lead to tractable
+computations, but good approximations
+are available subject to some assumptions about <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(f\)</span>.
+Suppose <span class="math notranslate nohighlight">\(K\)</span> integrates to 1, is symmetric about zero so that <span class="math notranslate nohighlight">\(\int xK(x)dx = 0\)</span>,
+and has nonzero finite second central moment <span class="math notranslate nohighlight">\(\int x^2 K(x) dx = k_2 \ne 0\)</span>,
+and that <span class="math notranslate nohighlight">\(f\)</span> has as many continuous derivatives as needed.
+Then, to second order in <span class="math notranslate nohighlight">\(h\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a7c7e153-ffc0-4893-9b41-2988dc522762">
+<span class="eqno">()<a class="headerlink" href="#equation-a7c7e153-ffc0-4893-9b41-2988dc522762" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \Bias_h(x) \approx \frac{1}{2} h^2 f&quot;(x) k_2.
+\end{equation}\]</div>
+<p>(See Silverman  (1990), pp.~38ff.)
+Thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d009fa54-d58b-46fd-b235-e37bc3b31bab">
+<span class="eqno">()<a class="headerlink" href="#equation-d009fa54-d58b-46fd-b235-e37bc3b31bab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \int \Bias_h^2 (x) dx \approx \frac{1}{4} h^4 k_2^2 \int (f&quot;)^2(x) dx,
+\end{equation}\]</div>
+<p>confirming more quantitatively that (asymptotically)
+the integrated bias depends on the smoothness
+of <span class="math notranslate nohighlight">\(f\)</span>.
+A similar Taylor series approximation shows that to first order in <span class="math notranslate nohighlight">\(h^{-1}\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2bf03e38-64e4-4b3c-9741-634fc66636d2">
+<span class="eqno">()<a class="headerlink" href="#equation-2bf03e38-64e4-4b3c-9741-634fc66636d2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \Var \hat{f}(x) \approx n^{-1}h^{-1} f(x) \int K^2(u) du,
+\end{equation}\]</div>
+<p>so</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2676336d-65f8-4cd1-9ec1-3312077bb021">
+<span class="eqno">()<a class="headerlink" href="#equation-2676336d-65f8-4cd1-9ec1-3312077bb021" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \int \Var \hat{f}(x) dx \approx n^{-1}h^{-1} \int K^2(u) du.
+\end{equation}\]</div>
+<p>Thus shows that to reduce the integrated bias, one wants a narrow kernel,
+which must have large values to satisfy <span class="math notranslate nohighlight">\(\int K = 1\)</span>,
+while to reduce the integrated variance, one wants the kernel to have small
+values, which requires it to be broad to satisfy <span class="math notranslate nohighlight">\(\int K = 1\)</span>.</p>
+<p>By calculus one can show that the approximate MISE is minimized by choosing the
+bandwidth to be</p>
+<div class="amsmath math notranslate nohighlight" id="equation-27c3dc12-89d6-4438-8235-54780dce847f">
+<span class="eqno">()<a class="headerlink" href="#equation-27c3dc12-89d6-4438-8235-54780dce847f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    h^* = n^{-1/5} k_2^{-2/5} \left [ \int K^2(u) du \right ]^{1/5}
+        \left [ \int (f&quot;)^2(x) dx \right ]^{-1/5},
+\end{equation}\]</div>
+<p>which depends on the unknown density <span class="math notranslate nohighlight">\(f\)</span>.
+Note that the (approximately) optimal bandwidth for MISE decreases with <span class="math notranslate nohighlight">\(n\)</span> as
+<span class="math notranslate nohighlight">\(n^{-1/5}\)</span>.
+For the (approximately) optimal bandwidth <span class="math notranslate nohighlight">\(h^*\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f64dbccd-55f0-4c10-ba40-dec88dd9a46c">
+<span class="eqno">()<a class="headerlink" href="#equation-f64dbccd-55f0-4c10-ba40-dec88dd9a46c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mbox{\rm MISE} \approx n^{-4/5} \times 1.25 C(K) \left [ \int (f&quot;)^2(x) dx \right ]^{1/5},
+\end{equation}\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2412590f-a3a8-4f07-9ccd-904884d9ddd0">
+<span class="eqno">()<a class="headerlink" href="#equation-2412590f-a3a8-4f07-9ccd-904884d9ddd0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    C(K) = k_2^{2/5} \left [ \int K^2(u) du \right ]^{4/5}
+\end{equation}\]</div>
+<p>depends only on the kernel.
+The kernel that is approximately optimal for MISE thus has the smallest
+possible value of <span class="math notranslate nohighlight">\(C(K)\)</span> subject to the restrictions on the moments of <span class="math notranslate nohighlight">\(K\)</span>.
+If we restrict attention to kernels that are probability density functions,
+the optimal kernel is the {\em Epanechnikov kernel/} <span class="math notranslate nohighlight">\(K_e(u)\)</span></p>
+<div class="amsmath math notranslate nohighlight" id="equation-c713f14f-4646-4ef0-8ce5-a9a4979a6eaa">
+<span class="eqno">()<a class="headerlink" href="#equation-c713f14f-4646-4ef0-8ce5-a9a4979a6eaa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    K_e(u) = \frac{3}{4 \sqrt{5}} (  1 - u^2/5 )_+.
+\end{equation}\]</div>
+<p>This is the positive part of a parabola.</p>
+<p>One can define the relative efficiency of other kernels compared with the Epanechnikov
+kernel as the ratio of their values of <span class="math notranslate nohighlight">\(C(K)^{5/4}\)</span>.
+Other common kernels include Tukey’s Biweight (suitably normalized, this is <span class="math notranslate nohighlight">\(\frac{15}{16} (1-u^2)_+^2\)</span>),
+a triangular kernel, the rectangular kernel of the naive estimate, and the Gaussian density.
+Table 3.1 on p.~43 of Silverman  (1990) shows that there is not much
+variation in the efficiency: the rectangular kernel is worst, with an efficiency of about
+93%; the efficiency of the Gaussian is about 95%; the efficiency of the triangular
+kernel is about 99%; and the efficiency of the Biweight is over 99%.
+Thus the choice of kernel can reflect other concerns, such as desired properties of <span class="math notranslate nohighlight">\(\hat{f}\)</span>
+(continuity, computational complexity, and so on).</p>
+<p>Choosing <span class="math notranslate nohighlight">\(h = h(n)\)</span> is much more of a concern for the asymptotic behavior of the density
+estimate.
+To a large extent, choosing <span class="math notranslate nohighlight">\(h\)</span> is a black art, but there are some automatic strategies
+that behave well subject to some assumptions.
+One of the most popular is least-squares cross-validation, which is a resampling method
+related to the jackknife.
+Here is a sketch of the method, following Silverman  (1990), pp.~48ff.</p>
+<p>The integrated squared error of a density estimate <span class="math notranslate nohighlight">\(\hat{f}\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9a165b09-dd21-48df-87d4-3b5d63b1f0f6">
+<span class="eqno">()<a class="headerlink" href="#equation-9a165b09-dd21-48df-87d4-3b5d63b1f0f6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \int (\hat{f} - f)^2 dx = \int \hat{f}^2 dx - 2 \int \hat{f}f dx + \int f^2 dx.
+\end{equation}\]</div>
+<p>The last term does not involve the density estimate, so it is not in our control.
+Thus it is enough to try to minimize</p>
+<div class="amsmath math notranslate nohighlight" id="equation-cb5508a8-a1f5-4cd7-a982-5ea7b3a62c29">
+<span class="eqno">()<a class="headerlink" href="#equation-cb5508a8-a1f5-4cd7-a982-5ea7b3a62c29" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    R(\hat{f}) \equiv \int \hat{f}^2 dx - 2 \int \hat{f}f dx.
+\end{equation}\]</div>
+<p>Cross validation estimates <span class="math notranslate nohighlight">\(R(\hat{f}_h)\)</span> from the data, and chooses <span class="math notranslate nohighlight">\(h\)</span> to minimize
+the estimate.
+The first term in <span class="math notranslate nohighlight">\(R(\hat{f})\)</span> can be calculated explicitly from <span class="math notranslate nohighlight">\(\hat{f}\)</span>.
+Estimating the second term is the crux of the method.
+By analogy to the jackknife, define the {\em leave one out/} kernel density estimate</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d9ce7a47-ea9c-45a1-83c3-f853a97317d9">
+<span class="eqno">()<a class="headerlink" href="#equation-d9ce7a47-ea9c-45a1-83c3-f853a97317d9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{f}_{h,(i)} (x) = \frac{1}{(n-1)h} \sum_{j \ne i} K \left ( \frac{x - X_j}{h} \right ) .
+\end{equation}\]</div>
+<p>Let</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e8b28e64-909c-41e2-bceb-98e028c36ad5">
+<span class="eqno">()<a class="headerlink" href="#equation-e8b28e64-909c-41e2-bceb-98e028c36ad5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    M_0(h) \equiv \int \hat{f}_h^2 - \frac{2}{n} \sum_i \hat{f}_{h,(i)}(X_i).
+\end{equation}\]</div>
+<p>Let’s compute the expected value of <span class="math notranslate nohighlight">\(M_0(h)\)</span>.
+First note that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f41856d1-2fd5-458d-9ff0-c85b7e505a91">
+<span class="eqno">()<a class="headerlink" href="#equation-f41856d1-2fd5-458d-9ff0-c85b7e505a91" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+    \EE \frac{1}{n} \sum_i \hat{f}_{h,(i)} (X_i) &amp; = &amp; \EE \hat{f}_{h,(1)}(X_1) \nonumber \\
+    &amp; = &amp; \EE \int \hat{f}_{h,(1)}(x) f(x) dx \nonumber \\
+    &amp; = &amp; \EE \int \hat{f}_{h}(x) f(x) dx.
+\end{eqnarray}\]</div>
+<p>The last step uses the fact that the expected value of the kernel density estimate
+depends on <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(h\)</span> but not on the sample size.
+Thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0304dbbe-51ff-4c42-b4be-9807ef86530f">
+<span class="eqno">()<a class="headerlink" href="#equation-0304dbbe-51ff-4c42-b4be-9807ef86530f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \EE R(\hat{f}_h) = \EE M_0(h),
+\end{equation}\]</div>
+<p>and <span class="math notranslate nohighlight">\(M_0(h)\)</span> is an unbiased estimator of the ISE of <span class="math notranslate nohighlight">\(\hat{f}_h\)</span>, less the term <span class="math notranslate nohighlight">\(\int f^2\)</span>,
+which does not depend on <span class="math notranslate nohighlight">\(\hat{f}_h\)</span>.
+Provided <span class="math notranslate nohighlight">\(M_0(h)\)</span> is close to <span class="math notranslate nohighlight">\(\EE M_0(h)\)</span>, choosing <span class="math notranslate nohighlight">\(h\)</span> to minimize <span class="math notranslate nohighlight">\(M_0(h)\)</span> should
+select a good value of <span class="math notranslate nohighlight">\(h\)</span> for minimizing the MISE of the estimate.
+The form of <span class="math notranslate nohighlight">\(M_0(h)\)</span> is not computationally efficient; simplifications are possible,
+especially if <span class="math notranslate nohighlight">\(K(\cdot)\)</span> is symmetric.
+Moreover, if we use <span class="math notranslate nohighlight">\(n\)</span> in place of <span class="math notranslate nohighlight">\(n-1\)</span> in the denominators, we get a
+similar score function <span class="math notranslate nohighlight">\(M_1(h)\)</span> that is easier to compute:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-20997742-5f5f-4f2f-9420-17214df4d09f">
+<span class="eqno">()<a class="headerlink" href="#equation-20997742-5f5f-4f2f-9420-17214df4d09f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    M_1(h) = \frac{1}{n^2h} \sum_i \sum_j K^*\left ( \frac{X_i - X_j}{h} \right ) +
+        \frac{2}{nh} K(0),
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(K^*(u) = (K \star K)(u) - 2 K(u)\)</span> (here <span class="math notranslate nohighlight">\(\star\)</span> denotes convolution).
+The score function <span class="math notranslate nohighlight">\(M_1(h)\)</span> can be computed very efficiently by Fourier methods; see
+\S~3.5 of Silverman  (1990).</p>
+<p>A theorem due to Charles Stone (1984) justifies asymptotically choosing <span class="math notranslate nohighlight">\(h\)</span> by
+cross validation using the score function <span class="math notranslate nohighlight">\(M_1\)</span>.
+Stone’s theorem says that, subject to minor restrictions on <span class="math notranslate nohighlight">\(K\)</span>,
+the ratio of the integrated squared error choosing <span class="math notranslate nohighlight">\(h\)</span> by minimizing <span class="math notranslate nohighlight">\(M_1\)</span> to
+the integrated squared error for the best choice of <span class="math notranslate nohighlight">\(h\)</span> given the sample <span class="math notranslate nohighlight">\(\{X_j\}\)</span>
+converges to 1 with probability 1 as <span class="math notranslate nohighlight">\(n \rightarrow \infty\)</span>.</p>
+<p>Cross validation tends to fail when the data have been discretized (binned),
+because the behavior of <span class="math notranslate nohighlight">\(M_1(h)\)</span> at small <span class="math notranslate nohighlight">\(h\)</span> is sensitive to rounding and
+discretization.
+It can be rescued sometimes by restricting the optimization to a range of
+values of <span class="math notranslate nohighlight">\(h\)</span> that excludes very small values.</p>
+<p>The MISE (or an estimate of it) is but one of many possible score functions
+that could be used in a cross validation scheme.
+For example, one could use the log likelihood instead, which leads to
+maximizing the score function</p>
+<div class="amsmath math notranslate nohighlight" id="equation-741401eb-d412-4a57-a40e-b177389c5a66">
+<span class="eqno">()<a class="headerlink" href="#equation-741401eb-d412-4a57-a40e-b177389c5a66" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mbox{CV}(h) = \frac{1}{n} \sum_{i=1}^n \log \hat{f}_{h,(i)} (X_i).
+\end{equation}\]</div>
+<p>It turns out that under strong restrictions on <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(K\)</span>,
+<span class="math notranslate nohighlight">\(-\mbox{CV}(h)\)</span> is (within a constant) an unbiased estimator of the
+Kullback-Leibler distance between
+<span class="math notranslate nohighlight">\(\hat{f}_h\)</span> and <span class="math notranslate nohighlight">\(f\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3308c2bd-c650-4680-a314-2e8e26e8ea8f">
+<span class="eqno">()<a class="headerlink" href="#equation-3308c2bd-c650-4680-a314-2e8e26e8ea8f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    I(f, \hat{f}_h) \equiv \int f(x) \log \frac{f(x)}{\hat{f}_h(x)} dx.
+\end{equation}\]</div>
+<p>The score function <span class="math notranslate nohighlight">\(\mbox{CV}(h)\)</span> is not resistant.</p>
+</section>
+<section id="kernel-estimates-of-multivariate-densities">
+<h2>Kernel estimates of multivariate densities<a class="headerlink" href="#kernel-estimates-of-multivariate-densities" title="Permalink to this headline">#</a></h2>
+<p>This material is drawn from Chapter 4 of Silverman (1990).</p>
+<p>Let <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^n\)</span> each take values in <span class="math notranslate nohighlight">\(\bfR^d\)</span>, <span class="math notranslate nohighlight">\(d \ge 1\)</span>.
+Let <span class="math notranslate nohighlight">\(K: \bfR^d \rightarrow \bfR\)</span> satisfy</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ba4ef7c0-3505-4661-a946-d095508ac9dd">
+<span class="eqno">()<a class="headerlink" href="#equation-ba4ef7c0-3505-4661-a946-d095508ac9dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \int_{\bfR^d} K(x) dx = 1.
+\end{equation}\]</div>
+<p>Typically, the kernel <span class="math notranslate nohighlight">\(K\)</span> is a radially symmetric probability distribution
+such as the standard multivariate normal, or the multivariate Epanechnikov
+kernel</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6d4bf67c-db6a-4e57-9aa3-979c3417af49">
+<span class="eqno">()<a class="headerlink" href="#equation-6d4bf67c-db6a-4e57-9aa3-979c3417af49" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    K_e(x) \equiv \frac{d+2}{2c_d}(1 - \|x\|^2)_+,
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_d\)</span> is the volume of the unit sphere in <span class="math notranslate nohighlight">\(\bfR^d\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9cb9010c-3e53-4f53-930f-769701ced28f">
+<span class="eqno">()<a class="headerlink" href="#equation-9cb9010c-3e53-4f53-930f-769701ced28f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    c_d = \int_{\bfR^d} 1_{\|x\| &lt; 1} dx.
+\end{equation}\]</div>
+<p>The kernels</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4ce3fe5d-deca-4cd2-935f-1704dc444128">
+<span class="eqno">()<a class="headerlink" href="#equation-4ce3fe5d-deca-4cd2-935f-1704dc444128" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    K_2 (x) \equiv \frac{3}{\pi}(1 - \|x\|^2)_+^2
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-138f7419-1a20-440f-b9ca-cfc3395d112d">
+<span class="eqno">()<a class="headerlink" href="#equation-138f7419-1a20-440f-b9ca-cfc3395d112d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    K_3(x) \equiv \frac{4}{\pi}(1 - \|x\|^2)_+^3
+\end{equation}\]</div>
+<p>have more derivatives than the Epanechnikov kernels, and thus produce
+smoother density estimates; also, they are easier to compute than
+the multivariate normal density.</p>
+<p>Given a multivariate kernel function, the multivariate kernel density estimate is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a8e7bed2-8221-427b-bab6-1739375b4cba">
+<span class="eqno">()<a class="headerlink" href="#equation-a8e7bed2-8221-427b-bab6-1739375b4cba" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{f}_h(x) \equiv \frac{1}{nh^d} \sum_{j=1}^n K \left ( \frac{x - X_j}{h} \right ),
+\end{equation}\]</div>
+<p>which is directly analogous to the univariate kernel density estimate.
+The kernel density estimate is a sum of “bumps” centered at the observations,
+each with mass <span class="math notranslate nohighlight">\(1/n\)</span> and a common width that depends on a tuning parameter, the
+bandwidth <span class="math notranslate nohighlight">\(h\)</span>.
+The bandwidth <span class="math notranslate nohighlight">\(h\)</span> is “isotropic” in that all coordinates are scaled in the
+same way.
+If the coordinates are incommensurable (e.g. , if the variances of different
+coordinates are radically different), it can help to transform the coordinate system
+before using the estimator, for example, by transforming so that the covariance
+matrix of the observations is the identity matrix.
+The estimate can then be transformed by the inverse change of variables to get
+the density estimate in the original coordinate system.
+This corresponds to the estimate</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c15af216-2e5c-4968-8f57-c2f455799445">
+<span class="eqno">()<a class="headerlink" href="#equation-c15af216-2e5c-4968-8f57-c2f455799445" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{f}_{h,S}(x) = \frac{1}{\sqrt{|S|} n h^d} \sum_{j=1}^n
+        k \left ( \frac{\|x - X_j \|_{S^{-1}}^2}{h^2} \right ),
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\|x\|_{S^{-1}}^2 \equiv x^T S^{-1} x\)</span>, and <span class="math notranslate nohighlight">\(k(\|x\|^2) = K(x)\)</span>.</p>
+<p>Most of the treatment of univariate kernel density estimates carries over,
+{\em mutatis mutandis/}, to the multivariate case.
+For example, there is an optimal window width for minimizing the (approximate) MISE;
+it depends on the smoothness of the underlying density (through <span class="math notranslate nohighlight">\(\int (\nabla^2 f)^2\)</span>)
+and on the norm of the kernel and on the second moment of the kernel.
+Stone’s theorem shows that choosing the bandwidth by cross validation using the
+score function</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2b7db971-0c91-4b27-aeb1-6e8411d4aa72">
+<span class="eqno">()<a class="headerlink" href="#equation-2b7db971-0c91-4b27-aeb1-6e8411d4aa72" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    M_1(h) = \frac{1}{n^2 h^d} \sum_i \sum_j K^* \left ( \frac{X_i - X_j}{h} \right )
+    + \frac{2}{n h^d}K(0)
+\end{equation}\]</div>
+<p>is asymptotically optimal for MISE.</p>
+<section id="the-em-curse-of-dimensionality">
+<h3>{The {\em Curse of Dimensionality/}}<a class="headerlink" href="#the-em-curse-of-dimensionality" title="Permalink to this headline">#</a></h3>
+<p>The difficulty of density estimation grows very rapidly as the dimension of the
+sample space, <span class="math notranslate nohighlight">\(d\)</span>, increases.
+For example, to get relative mean squared error at 0 to be less than 0.1
+in estimating a multivariate normal density at zero using the optimal
+kernel requires <span class="math notranslate nohighlight">\(n = 4\)</span> for <span class="math notranslate nohighlight">\(d=1\)</span>, <span class="math notranslate nohighlight">\(n=19\)</span> for <span class="math notranslate nohighlight">\(d=2\)</span>,
+<span class="math notranslate nohighlight">\(n=768\)</span> for <span class="math notranslate nohighlight">\(d=5\)</span>, and <span class="math notranslate nohighlight">\(n = 842,000\)</span> for <span class="math notranslate nohighlight">\(d=10\)</span>
+(see Table~4.2 of Silverman , 1990).
+Partly, this is because of the behavior of the volume element in high dimensional
+spaces.</p>
+<p>Consider the unit sphere in dimension <span class="math notranslate nohighlight">\(d\)</span>.
+As <span class="math notranslate nohighlight">\(d\)</span> grows, the volume of the sphere is increasingly concentrated in
+a thin shell near radius <span class="math notranslate nohighlight">\(r=1\)</span>.
+As a result, regions of low density can contribute substantially to the
+probability in higher dimensions, and regions of high density can
+remain unsampled even for relatively large sample sizes when <span class="math notranslate nohighlight">\(d\)</span> is large.
+This makes details of the estimate matter increasingly as <span class="math notranslate nohighlight">\(d\)</span> grows, and
+makes it harder to estimate the density even where it is large as <span class="math notranslate nohighlight">\(d\)</span> grows.</p>
+</section>
+</section>
+<section id="nearest-neighbor-estimates">
+<h2>{Nearest neighbor estimates}<a class="headerlink" href="#nearest-neighbor-estimates" title="Permalink to this headline">#</a></h2>
+<p>This section follows Silverman  (1990), \S~5.2.
+We start with the <span class="math notranslate nohighlight">\(d\)</span>-dimensional case.
+For any point <span class="math notranslate nohighlight">\(t \in \bfR^d\)</span>, define <span class="math notranslate nohighlight">\(r_k(t)\)</span> to be the
+Euclidean distance from <span class="math notranslate nohighlight">\(t\)</span> to the <span class="math notranslate nohighlight">\(k\)</span>th closest datum in
+the set <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^n\)</span>.
+Let <span class="math notranslate nohighlight">\(V_k(t)\)</span> be the volume in <span class="math notranslate nohighlight">\(\bfR^d\)</span> of a sphere of radius <span class="math notranslate nohighlight">\(r_k(t)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c9a1368f-6148-465d-8882-0ceaec1695ab">
+<span class="eqno">()<a class="headerlink" href="#equation-c9a1368f-6148-465d-8882-0ceaec1695ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    V_k(t) = c_d r_k^d(t),
+\end{equation}\]</div>
+<p>where as before <span class="math notranslate nohighlight">\(c_d\)</span> is the volume of the unit ball in <span class="math notranslate nohighlight">\(\bfR^d\)</span>.
+The {\em nearest neighbor density estimate/} is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-87a3d3c4-d6a2-4ea0-9fba-88141d799312">
+<span class="eqno">()<a class="headerlink" href="#equation-87a3d3c4-d6a2-4ea0-9fba-88141d799312" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{f}_k(t) \equiv \frac{k}{n V_k(t)} = \frac{k}{n c_d r_k^d(t)}.
+\end{equation}\]</div>
+<p>Usually <span class="math notranslate nohighlight">\(k\)</span> is chosen to be small compared with <span class="math notranslate nohighlight">\(n\)</span>; <span class="math notranslate nohighlight">\(k \approx \sqrt{n}\)</span>
+is typical in dimension <span class="math notranslate nohighlight">\(d=1\)</span>.
+Larger values of <span class="math notranslate nohighlight">\(k\)</span> produce smoother estimates, but the smoothness
+varies locally: the effective “window” is narrower where the local density
+of data is higher.</p>
+<p>Why does the recipe for the nearest neighbor estimate make sense?
+If the density at <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(f(t)\)</span>, then in a sample of size <span class="math notranslate nohighlight">\(n\)</span>, we would
+expect there to be about <span class="math notranslate nohighlight">\(n f(t) V_k(t)\)</span> observations
+in a small sphere of volume <span class="math notranslate nohighlight">\(V_k(t)\)</span> centered at <span class="math notranslate nohighlight">\(t\)</span>.
+If we set the expected number equal to the observed number and solve for
+<span class="math notranslate nohighlight">\(f\)</span>, we get the nearest neighbor estimate:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5407fed8-6dbe-4996-a902-35e689479f37">
+<span class="eqno">()<a class="headerlink" href="#equation-5407fed8-6dbe-4996-a902-35e689479f37" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \left \{ n \hat{f}(t) V_k(t) = n \hat{f}(t) c_d r_k^d(t) = k \right \} \Rightarrow
+    \left \{ \hat{f}(t) = \frac{k}{n c_d r_k^d(t)} \right \}
+\end{equation}\]</div>
+<p>At the point <span class="math notranslate nohighlight">\(t\)</span>, each datum within a distance <span class="math notranslate nohighlight">\(r_k(t)\)</span> of <span class="math notranslate nohighlight">\(t\)</span> contributes
+<span class="math notranslate nohighlight">\(1/(n c_d r_k^d(t))\)</span> to the density estimate—as if the density estimate
+at <span class="math notranslate nohighlight">\(t\)</span> were a kernel estimate with the kernel equal to the indicator function
+of the unit ball in <span class="math notranslate nohighlight">\(\bfR^d\)</span> divided by the volume of the ball
+(so the kernel integrates to 1), with bandwidth <span class="math notranslate nohighlight">\(r_k(t)\)</span>.
+Of course, this bandwidth depends on <span class="math notranslate nohighlight">\(t\)</span> through <span class="math notranslate nohighlight">\(r_k(t)\)</span>,
+so the nearest neighbor estimate can be thought of as a kernel density
+estimate with spatially varying kernel width.
+(The kernel width depends on the point <span class="math notranslate nohighlight">\(t\)</span> at which the estimate is
+sought, not just on the data <span class="math notranslate nohighlight">\(\{X_j\}\)</span>.
+This leads to some difficulties—see below.)</p>
+<p>Nearest neighbor estimates are not smooth: although <span class="math notranslate nohighlight">\(r_k(t)\)</span> is continuous in
+<span class="math notranslate nohighlight">\(t\)</span>, its derivative fails to exist at points where two or more data
+are at distance <span class="math notranslate nohighlight">\(r_k(t)\)</span> from <span class="math notranslate nohighlight">\(t\)</span>.
+Moreover, the nearest neighbor estimate is not itself a density.
+Consider what happens as <span class="math notranslate nohighlight">\(\|t\|\)</span> grows.
+When <span class="math notranslate nohighlight">\(\|t\|\)</span> is larger than <span class="math notranslate nohighlight">\(\max_j \| X_j \|\)</span>,
+<span class="math notranslate nohighlight">\(r_k(t)\)</span> grows linearly with <span class="math notranslate nohighlight">\(\|t\|\)</span>,
+so the density estimate falls off like <span class="math notranslate nohighlight">\(\|t\|^{-d}\)</span>—which has infinite
+integral.
+This rate of decay does not depend on how the tails of the sample
+fall off.</p>
+<p>Nearest neighbor estimates can be generalized to kernels more complicated
+than indicator functions.
+The generalized nearest neighbor estimate using kernel <span class="math notranslate nohighlight">\(K\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b3b2c1ed-1af7-4a93-9243-45b8fa12e4a0">
+<span class="eqno">()<a class="headerlink" href="#equation-b3b2c1ed-1af7-4a93-9243-45b8fa12e4a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{f}(t) = \frac{1}{n r_k^d(t)} \sum_{j=1}^n K\left ( \frac{t - X_j}{r_k(t)} \right ).
+\end{equation}\]</div>
+<p>This reduces to the simple nearest neighborhood estimate when <span class="math notranslate nohighlight">\(K\)</span> is the indicator
+of the unit ball, scaled to have integral 1.
+The tail behavior of the generalized nearest neighbor estimate depends on
+details of the kernel <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<p>Even though at any fixed point, the nearest neighbor estimate is equivalent to
+a kernel estimate, it is a different kernel estimate at each point.
+The kernel estimate is a density because it is a linear combination of
+densities, with coefficients that sum to one.
+Just one “bump” is centered at each datum.
+In contrast, with the nearest neighbor estimate, a different bump is centered at
+each datum in finding the estimate for different values of <span class="math notranslate nohighlight">\(t\)</span>: the bandwidth
+associated with the
+contribution of the <span class="math notranslate nohighlight">\(j\)</span>th datum is a function of <span class="math notranslate nohighlight">\(t\)</span>, not just of <span class="math notranslate nohighlight">\(X_j\)</span>.</p>
+<section id="variable-kernel-method">
+<h3>Variable Kernel Method<a class="headerlink" href="#variable-kernel-method" title="Permalink to this headline">#</a></h3>
+<p>In contrast, the variable kernel method allows the bandwidth associated with
+each {\em datum/} to be different, but holds those bandwidths fixed as
+<span class="math notranslate nohighlight">\(t\)</span> varies.
+Let <span class="math notranslate nohighlight">\(d_{jk}\)</span> be the distance from the <span class="math notranslate nohighlight">\(X_j\)</span> to its <span class="math notranslate nohighlight">\(k\)</span>th nearest neighbor; {\em i.e./},
+<span class="math notranslate nohighlight">\(d_{jk} = r_{k+1}(X_j)\)</span>.
+Then the variable kernel estimate is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-46abb741-7bb4-4a7c-a077-bf6ce4e6eb77">
+<span class="eqno">()<a class="headerlink" href="#equation-46abb741-7bb4-4a7c-a077-bf6ce4e6eb77" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{f} = \frac{1}{n} \sum_{j=1}^n
+        \frac{K \left ( \frac{t - X_j}{hd_{jk}} \right )}{h^d d_{jk}^d}.
+\end{equation}\]</div>
+<p>As <span class="math notranslate nohighlight">\(h\)</span> or <span class="math notranslate nohighlight">\(k\)</span> grows, the estimate gets smoother.
+This estimate centers one “bump” of mass <span class="math notranslate nohighlight">\(1/n\)</span> at each datum, but the widths of the
+bumps depend on the local density of observations through <span class="math notranslate nohighlight">\(d_{jk}^{-1}\)</span>.
+Because of this, the estimate is itself a density if the basic kernel <span class="math notranslate nohighlight">\(K\)</span> is a density.
+When the distance to the <span class="math notranslate nohighlight">\(k\)</span>th nearest neighbor is large, the width of the bump is large.
+Using <span class="math notranslate nohighlight">\(d_{jk}\)</span> is an attempt to adapt the bandwidth to the height of the underlying
+density.
+However, there are better estimates of the local density to use to adjust the
+bandwidth.
+Of course, one can allow the bandwidth to vary in ways other than through
+<span class="math notranslate nohighlight">\(d_{jk}\)</span>.</p>
+</section>
+<section id="adaptive-kernel-estimates">
+<h3>Adaptive Kernel estimates<a class="headerlink" href="#adaptive-kernel-estimates" title="Permalink to this headline">#</a></h3>
+<p>This material is drawn from Silverman (1990, \S~5.3).
+Instead of using <span class="math notranslate nohighlight">\(d_{jk}^{-1}\)</span> as (proportional to) an estimate of the local
+density for picking the bandwidth for the kernel centered at <span class="math notranslate nohighlight">\(X_j\)</span>, one
+could use a different density estimate.
+This approach leads to adaptive kernel estimates.</p>
+<p>The idea is to make a pilot density estimate, usually highly smoothed,
+and to base the bandwidth choice for the final estimate on the pilot.
+Let <span class="math notranslate nohighlight">\(\tilde{f}(t)\)</span> be a pilot density estimate for which <span class="math notranslate nohighlight">\(\min_j \tilde{f}(X_j) &gt; 0\)</span>.
+Let <span class="math notranslate nohighlight">\(\alpha \in [0, 1]\)</span>.
+Let <span class="math notranslate nohighlight">\(g\)</span> be the geometric mean of the values <span class="math notranslate nohighlight">\(\{\tilde{f}(X_j)\}_{j=1}^n\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bfb8e011-9747-4afc-8002-c37d9bced349">
+<span class="eqno">()<a class="headerlink" href="#equation-bfb8e011-9747-4afc-8002-c37d9bced349" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    g = \left ( \prod_{j=1}^n \tilde{f}(X_j) \right )^{1/n} = \exp \left \{ \frac{1}{n}
+        \sum_{j=1}^n \log \tilde{f}(X_j) \right \}.
+\end{equation}\]</div>
+<p>Define</p>
+<div class="amsmath math notranslate nohighlight" id="equation-190bc506-3fae-4496-986c-1a82771944bd">
+<span class="eqno">()<a class="headerlink" href="#equation-190bc506-3fae-4496-986c-1a82771944bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \lambda_j = \left ( \frac{\tilde{f}(X_j)}{g} \right )^{-\alpha}.
+\end{equation}\]</div>
+<p>The adaptive kernel estimate is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d3c56922-d097-41e8-b88c-e952febb5631">
+<span class="eqno">()<a class="headerlink" href="#equation-d3c56922-d097-41e8-b88c-e952febb5631" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{f}(t) = \frac{1}{n} \sum_{j=1}^n \frac{K
+    \left ( \frac{t-X_j}{h \lambda_j} \right )}{h^d \lambda_j^d}.
+\end{equation}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\lambda_j\)</span> plays the role of <span class="math notranslate nohighlight">\(d_{jk}\)</span> of the variable kernel method.
+The estimate depends on a number of tuning constants: <span class="math notranslate nohighlight">\(h\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, and the
+tuning constants of the method used to derive the pilot estimate.
+The overall bandwidth <span class="math notranslate nohighlight">\(h\)</span> plays the same role as before.
+The {\em sensitivity parameter/} <span class="math notranslate nohighlight">\(\alpha\)</span> controls how much the bandwidth varies
+as the pilot estimate varies—the rapidity of variation with <span class="math notranslate nohighlight">\(\tilde{f}\)</span>.
+For <span class="math notranslate nohighlight">\(\alpha=0\)</span>, the method becomes the ordinary kernel estimate.
+Silverman  (1990) says that “there are good reasons for setting <span class="math notranslate nohighlight">\(\alpha=1/2\)</span>.”
+(See his \S~5.3.3 and reference to Abramson, 1982.)</p>
+<p>Silverman (1990)
+says that the fine details and smoothness of the pilot estimate don’t matter much
+for the final estimate, and recommends using an Epanechnikov kernel estimate
+with bandwidth chosen to perform well for a standard distribution, calibrated to
+have the same variance as the sample.
+He does not advocate using cross validation or other computationally intensive
+schemes for the pilot estimate.</p>
+<p>Silverman  reports simulation studies by Breiman, Meisel and Purcell (1977),
+showing that with the bandwidth chosen optimally, the adaptive
+kernel method performs remarkably better than the fixed kernel method,
+even for tame densities such as the normal.</p>
+<p>The overall smoothing parameter <span class="math notranslate nohighlight">\(h\)</span> for the adaptive kernel estimate
+can be chosen by least squares cross validation.</p>
+</section>
+<section id="maximum-penalized-likelihood">
+<h3>Maximum Penalized Likelihood<a class="headerlink" href="#maximum-penalized-likelihood" title="Permalink to this headline">#</a></h3>
+<p>This section follows \S~5.4 of Silverman  (1990);
+it is connected to an approach to solving
+inverse problems, which we will discuss later in the course.</p>
+<p>Recall that the MLE of the distribution <span class="math notranslate nohighlight">\(F\)</span> is just a sum of point masses
+at the observations, each with mass <span class="math notranslate nohighlight">\(1/n\)</span>.
+This is not very satisfactory as a density estimate because it is so rough.
+The idea of maximum penalized likelihood is to give up some likelihood in
+favor of smoothness.
+We need a functional <span class="math notranslate nohighlight">\(R\)</span> that assigns a finite positive number to some subset
+of all density functions.
+For example, we might take</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f87305d0-33d6-4537-a0e7-198e6206897f">
+<span class="eqno">()<a class="headerlink" href="#equation-f87305d0-33d6-4537-a0e7-198e6206897f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    R(g) = \int (g&quot;)^2 dt.
+\end{equation}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\calF\)</span> be the set of probability density functions for which <span class="math notranslate nohighlight">\(R\)</span> is defined and finite.
+For a fixed positive number <span class="math notranslate nohighlight">\(\lambda\)</span> (the smoothing parameter),
+the penalized log-likelihood function of the density <span class="math notranslate nohighlight">\(g\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dca32899-23a1-4107-9bfe-058b55a9b3df">
+<span class="eqno">()<a class="headerlink" href="#equation-dca32899-23a1-4107-9bfe-058b55a9b3df" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \ell_\lambda (g) =\sum_{j=1}^n \log g(X_j) - \lambda R(g).
+\end{equation}\]</div>
+<p>The maximum penalized likelihood density estimate <span class="math notranslate nohighlight">\(\hat{f}\)</span> is any density in
+<span class="math notranslate nohighlight">\(\calF\)</span> for which</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8980a648-77a1-41d0-a9a8-364d5c811cad">
+<span class="eqno">()<a class="headerlink" href="#equation-8980a648-77a1-41d0-a9a8-364d5c811cad" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \ell_\lambda(\hat{f}) \ge \ell_\lambda(g) \;\; \forall g \in \calF.
+\end{equation}\]</div>
+<p>The maximum penalized log likelihood estimate is an “optimal” compromise
+between maximizing the likelihood and being as smooth as possible
+(in the sense of minimizing
+<span class="math notranslate nohighlight">\(R\)</span>).
+Estimators that optimize a tradeoff between data fit and simplicity
+are quite common in many settings; they are called
+{\em regularized/} estimates.
+The functional <span class="math notranslate nohighlight">\(R\)</span> is called the {\em regularization functional/} or
+{\em penalty functional/}.
+Measures of fidelity to the data other than the likelihood are also common.</p>
+<p>Finding the maximum penalized likelihood estimator
+can be made more tractable numerically in a variety of ways,
+depending on the choice of <span class="math notranslate nohighlight">\(R\)</span>.
+For example, imposing the constraint <span class="math notranslate nohighlight">\(g &gt; 0\)</span> is easier if one works with the square-root
+of the density or with the logarithm of the density, although imposing the
+other part of the constraint <span class="math notranslate nohighlight">\(g \in \calF\)</span>—that the density integrates to one—is
+harder then.
+Discrete approximations
+to the density (such as truncated expansions in orthogonal sets of functions)
+also can simplify the numerics of finding an approximate maximum
+penalized likelihood estimate.
+See Silverman  (1990) for references and more detail.</p>
+<p>The penalized maximum likelihood approach, using roughness penalties
+like those described, treats the underlying density as having homogeneous
+smoothness.
+We will talk more about maximum penalized likelihood in the context of
+nonparametric regression (function estimation).</p>
+</section>
+</section>
+<section id="confidence-sets-for-densities-with-shape-restrictions-lower-confidence-interval">
+<h2>{Confidence sets for densities with shape restrictions; lower confidence interval<a class="headerlink" href="#confidence-sets-for-densities-with-shape-restrictions-lower-confidence-interval" title="Permalink to this headline">#</a></h2>
+<p>for the number of modes}
+Reference: Hengartner and Stark (1995).</p>
+</section>
+<section id="wavelet-shrinkage">
+<h2>{Wavelet shrinkage}<a class="headerlink" href="#wavelet-shrinkage" title="Permalink to this headline">#</a></h2>
+<p>Reference: Kerkyacharian and Picard (1993).</p>
+<section id="time-frequency-localization-windowed-fourier-transform-and-wavelets">
+<h3>Time-frequency localization: windowed Fourier transform and wavelets<a class="headerlink" href="#time-frequency-localization-windowed-fourier-transform-and-wavelets" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="haar-wavelets">
+<h3>Haar wavelets<a class="headerlink" href="#haar-wavelets" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="unconditional-bases">
+<h3>Unconditional bases<a class="headerlink" href="#unconditional-bases" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="hard-and-soft-thresholding">
+<h3>{Hard and soft thresholding}<a class="headerlink" href="#hard-and-soft-thresholding" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<section id="inverse-problems">
+<h2>Inverse Problems<a class="headerlink" href="#inverse-problems" title="Permalink to this headline">#</a></h2>
+<p>Reference: Evans and Stark (2002).</p>
+<section id="nonparametric-regression">
+<h3>Nonparametric regression<a class="headerlink" href="#nonparametric-regression" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="example-abel-s-problem">
+<h3>{Example: Abel’s problem}<a class="headerlink" href="#example-abel-s-problem" title="Permalink to this headline">#</a></h3>
+<p>Given a frictionless bowling ball with mass <span class="math notranslate nohighlight">\(m\)</span>, a stopwatch and the ability to roll the
+ball with any desired initial velocity <span class="math notranslate nohighlight">\(v_j = v_j(0)\)</span>, find
+the shape of a (2-dimensional)
+hill by rolling the ball with different velocities and measuring how long it
+takes the ball to return.
+The measurements have errors.
+You can think of this as a way to survey San Francisco on a foggy day.</p>
+<p>The {\em forward problem/} is to predict how long it takes the ball
+to return, if we know the shape of the hill.
+The {\em inverse problem/} is to use a finite set of measurements to
+learn something about the shape of the hill.</p>
+<p>Let’s solve the forward problem.
+It is convenient to express the shape of the hill as the
+height <span class="math notranslate nohighlight">\(h(s)\)</span> of the hill at an arc distance <span class="math notranslate nohighlight">\(s\)</span> along the
+surface of the hill from where the ball is launched.
+The initial kinetic energy of the ball is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-75a486c2-10ea-405a-8986-31e0b5d370a3">
+<span class="eqno">()<a class="headerlink" href="#equation-75a486c2-10ea-405a-8986-31e0b5d370a3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    E_j = m v_j^2(0)/2.
+\end{equation}\]</div>
+<p>As the ball ascends, its energy is conserved (the ball is frictionless),
+but it is partitioned into a kinetic component and a potential
+component.
+The potential energy component at arc distance <span class="math notranslate nohighlight">\(s\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a11796b6-dd3d-4c7f-9459-58e1fd030630">
+<span class="eqno">()<a class="headerlink" href="#equation-a11796b6-dd3d-4c7f-9459-58e1fd030630" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    E_{Pj}(s) = gmh(s),
+\end{equation}\]</div>
+<p>so, by conservation of energy, the kinetic energy at arc
+distance <span class="math notranslate nohighlight">\(s\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b025ec58-a9cb-40c6-bb53-d729f994385f">
+<span class="eqno">()<a class="headerlink" href="#equation-b025ec58-a9cb-40c6-bb53-d729f994385f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    E_{Kj}(s) = m v_j^2(0)/2 - gmh(s).
+\end{equation}\]</div>
+<p>We can find the velocity of the ball at arc distance <span class="math notranslate nohighlight">\(s\)</span> as follows</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f0ae696f-3cd4-4d9e-9569-800dcddecfce">
+<span class="eqno">()<a class="headerlink" href="#equation-f0ae696f-3cd4-4d9e-9569-800dcddecfce" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+    mv_j^2(s)/2 &amp; = &amp; m v_j^2(0)/2 - gmh(s) \nonumber \\
+    v_j^2(s) &amp; = &amp; v_j^2(0) - 2gh(s) \nonumber \\
+    v_j(s) &amp; = &amp; \sqrt{v_j^2(0) - 2gh(s)}.
+\end{eqnarray}\]</div>
+<p>The velocity of the ball goes to zero (and the ball starts to come back) when
+<span class="math notranslate nohighlight">\(v_j^2(0) = 2gh(s)\)</span>, provided the slope of the hill does not vanish
+there (then the ball would balance and never return).
+Let <span class="math notranslate nohighlight">\(s_j\)</span> satisfy <span class="math notranslate nohighlight">\(v_j^2(0) = 2gh(s_j)\)</span>.
+The time it takes the ball to return is equal to the time it takes
+the ball to ascend.
+The time it takes the ball to come back is thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f994f7e2-7b45-4f74-a384-5e3da63e0f6f">
+<span class="eqno">()<a class="headerlink" href="#equation-f994f7e2-7b45-4f74-a384-5e3da63e0f6f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \tau_j = 2\int_{s=0}^{s_j} \frac{ds}{\sqrt{v_j^2(0) - 2gh(s)}}.
+\end{equation}\]</div>
+<p>This is the solution to the forward problem.
+Each transit time <span class="math notranslate nohighlight">\(\tau_j\)</span> is a nonlinear functional of the
+hill profile <span class="math notranslate nohighlight">\(h(s)\)</span>.
+The inverse problem is to learn something about <span class="math notranslate nohighlight">\(h(s)\)</span> from measurements</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5b335443-4d53-4fa0-b2c2-85c95202405a">
+<span class="eqno">()<a class="headerlink" href="#equation-5b335443-4d53-4fa0-b2c2-85c95202405a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    d_j = \tau_j + \epsilon_j, \;\; j = 1, \ldots, n,
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\{\epsilon_j\}_{j=1}^n\)</span> are stochastic errors whose joint
+distribution is assumed to be known—at least up to a parameter or two.
+(Rarely does anybody allow the joint distribution to be more
+general than a multivariate zero mean Gaussian with independent components
+whose variances are known.)</p>
+<p>It turns out that this stylized surveying problem is related to inverse
+problems in seismology, helioseismology, and stereology.</p>
+</section>
+<section id="general-framework-for-inverse-problems">
+<h3>{General framework for inverse problems}<a class="headerlink" href="#general-framework-for-inverse-problems" title="Permalink to this headline">#</a></h3>
+<p>Observe data <span class="math notranslate nohighlight">\(X\)</span> drawn from a distribution <span class="math notranslate nohighlight">\(\Pr_\theta\)</span> where
+<span class="math notranslate nohighlight">\(\theta\)</span> is unknown, but it is known that <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span>.
+Use <span class="math notranslate nohighlight">\(X\)</span> and the constraint <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span> to learn about
+<span class="math notranslate nohighlight">\(\theta\)</span>.
+For example, we might want to estimate a parameter <span class="math notranslate nohighlight">\(g(\theta)\)</span>.
+Assume that <span class="math notranslate nohighlight">\(\Theta\)</span> contains at least two points; otherwise, we
+know <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(g(\theta)\)</span> perfectly even without data.</p>
+<p>The parameter <span class="math notranslate nohighlight">\(g(\theta)\)</span> is {\em identifiable/} if</p>
+<div class="amsmath math notranslate nohighlight" id="equation-47ec3d46-0785-4bb1-beec-2a1b8a908db8">
+<span class="eqno">()<a class="headerlink" href="#equation-47ec3d46-0785-4bb1-beec-2a1b8a908db8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \{ g(\theta) \ne g(\eta) \} \Leftarrow \{ \Pr_\theta \ne \Pr_\eta\},\;\;
+    \forall \theta, \eta \in \Theta.
+\end{equation}\]</div>
+<p>In most inverse problems, <span class="math notranslate nohighlight">\(\theta\)</span> is not identifiable.
+Little general is known about nonlinear inverse problems,
+although there are particular nonlinear inverse problems, like the
+surveying problem above, that are well understood.</p>
+<p>(The “trick” to solving the surveying problem is to work with
+<span class="math notranslate nohighlight">\(s(h)\)</span> instead of <span class="math notranslate nohighlight">\(h(s)\)</span>, on the assumption that <span class="math notranslate nohighlight">\(h(s)\)</span> is strictly
+monotonic.
+Then the forward mapping <span class="math notranslate nohighlight">\(\tau\)</span> is a linear functional of <span class="math notranslate nohighlight">\(s(h)\)</span>,
+but there are nonlinear constraints–<span class="math notranslate nohighlight">\(s(h)\)</span> must also be monotonic.
+Although hills in San Francisco are not monotonic, in the seismic
+problem, there are thermodynamic arguments that the corresponding
+quantity—seismic velocity as a function of radius, divided by radius—is
+monotonic in Earth’s core.
+See, e.g.
+Stark, P.B., 1992.  Inference in infinite-dimensional inverse problems:
+discretization and duality, {\em J. Geophys. Res./}, {\em 97/},
+14,055–14,082.)</p>
+</section>
+<section id="linear-forward-and-inverse-problems">
+<h3>Linear forward and inverse problems<a class="headerlink" href="#linear-forward-and-inverse-problems" title="Permalink to this headline">#</a></h3>
+<p>When the forward problem has more structure, more can be said.
+The best studied class of inverse problems are linear inverse problems.</p>
+<p>A forward problem is {\em linear/} if the constraint set <span class="math notranslate nohighlight">\(\Theta\)</span> is
+a subset of a separable Banach space <span class="math notranslate nohighlight">\(\calT\)</span> and for some collection <span class="math notranslate nohighlight">\(\{\kappa_j\}_{j=1}^n\)</span>
+of bounded linear functionals on <span class="math notranslate nohighlight">\(\calT\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-fff9110a-5088-42c9-9d60-4f478967ccc3">
+<span class="eqno">()<a class="headerlink" href="#equation-fff9110a-5088-42c9-9d60-4f478967ccc3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    X_j = \kappa_j \theta + \epsilon_j,
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\{\epsilon_j\}_{j=1}^n\)</span> are random errors whose distribution does not depend on
+<span class="math notranslate nohighlight">\(\theta\)</span>.
+Usually, such a forward problem is written</p>
+<div class="amsmath math notranslate nohighlight" id="equation-54f8cb36-36db-4e04-ae9b-32605e55f211">
+<span class="eqno">()<a class="headerlink" href="#equation-54f8cb36-36db-4e04-ae9b-32605e55f211" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    X = K\theta + \epsilon, \;\; \theta \in \Theta.
+\end{equation}\]</div>
+<p>The corresponding {\em linear inverse problem/} is to use the data <span class="math notranslate nohighlight">\(X\)</span> and the constraint
+<span class="math notranslate nohighlight">\(\theta \in \Theta\)</span> to learn about <span class="math notranslate nohighlight">\(g(\theta)\)</span>.
+In a linear inverse problem, the distribution of <span class="math notranslate nohighlight">\(X\)</span> depends on <span class="math notranslate nohighlight">\(\theta\)</span> through
+<span class="math notranslate nohighlight">\(K\theta\)</span>, so if there exist <span class="math notranslate nohighlight">\(\theta, \eta \in \Theta\)</span> such that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4d29d959-96da-4217-b114-3f08f2429082">
+<span class="eqno">()<a class="headerlink" href="#equation-4d29d959-96da-4217-b114-3f08f2429082" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    K\theta = K\eta \;\mbox{ but }\; g(\theta) \ne g(\eta)
+\end{equation}\]</div>
+<p>then <span class="math notranslate nohighlight">\(g(\theta)\)</span> is not identifiable.</p>
+<p>Let’s simplify the setup even further—we assume that <span class="math notranslate nohighlight">\(\calT\)</span> is a Hilbert space,
+that <span class="math notranslate nohighlight">\(\Theta = \calT\)</span>, and that <span class="math notranslate nohighlight">\(g\)</span> is a {\em linear parameter/}; that is,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c673ae8e-456d-4529-b147-d94977d949cf">
+<span class="eqno">()<a class="headerlink" href="#equation-c673ae8e-456d-4529-b147-d94977d949cf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    g(a \theta + b \eta) = a g(\theta) + b g(\eta)
+\end{equation}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(a, b \in \bfR\)</span> and all <span class="math notranslate nohighlight">\(\theta, \eta \in \Theta\)</span>.
+The fundamental theorem of Backus and Gilbert says that then
+<span class="math notranslate nohighlight">\(g(\theta)\)</span> is identifiable if and only if <span class="math notranslate nohighlight">\(g = \sum_{j=1}^n a_j \kappa_j\)</span>
+for some constants <span class="math notranslate nohighlight">\(\{a_j\}\)</span>.
+In that case, if <span class="math notranslate nohighlight">\(\EE \epsilon = 0\)</span>,
+<span class="math notranslate nohighlight">\(\sum_j a_j X_j\)</span> is unbiased for <span class="math notranslate nohighlight">\(g(\theta)\)</span>, and if <span class="math notranslate nohighlight">\(e\)</span> has covariance
+matrix <span class="math notranslate nohighlight">\(\Sigma\)</span>, the MSE of this (linear) estimator is <span class="math notranslate nohighlight">\(a\cdot \Sigma \cdot a^T\)</span>.
+See {\em Evans and Stark/} (2002) for more details and proofs.</p>
+</section>
+</section>
+<section id="methods-for-inverse-problems">
+<h2>Methods for inverse problems<a class="headerlink" href="#methods-for-inverse-problems" title="Permalink to this headline">#</a></h2>
+<p>There is a huge number of methods for “solving” inverse problems, although
+what qualifies as a solution is debatable.
+These solution methods can be analyzed using traditional statistical measures
+of performance, including bias and various loss criteria.
+Perhaps the most important message is that without constraints, little
+can be said.  The issue is finding constraints justified by the science
+of the situation that still are helpful in reducing the uncertainty.</p>
+<ul class="simple">
+<li><p>Backus-Gilbert estimation.  Finding linear functionals close, in some sense,
+to point evaluators.</p></li>
+<li><p>MLE and variants (regularization, maximum penalized likelihood, method of sieves,
+singular value truncation and weighting).
+Trading off fidelity to the data and a measure of complexity or roughness.
+With suitable assumptions, can show consistency and good rates of convergence
+if the tradeoff is tuned appropriately.</p></li>
+<li><p>Bayes estimation.  Difficult to justify in infinite-dimensional problems,
+because prior probability distributions on infinite-dimensional spaces are
+strange—it’s hard to capture constraints without injecting lots of additional
+information.</p></li>
+<li><p>Minimax estimation.  Interesting papers by Donoho and others on estimating
+linear functionals or the entire model in the Hilbert space case.
+Connection between deterministic optimal recovery and minimax statistical
+estimation in the case that the errors are Gaussian, <span class="math notranslate nohighlight">\(\Theta\)</span> is convex,
+and the parameter is a linear functional.</p></li>
+<li><p>Shrinkage estimation.  Shrinkage can improve MSE of estimates of
+high-dimensional means.  Can help with multiple Backus-Gilbert estimates.</p></li>
+<li><p>Wavelet-vaguelette shrinkage estimation. Analogue of wavelet shrinkage
+density estimation we looked at earlier.  Can outperform any linear method
+in some problems.  Papers by Donoho, Johnstone, and others.  Key idea is that
+the wavelet-vaguelette decomposition almost diagonalizes both the prior information
+and the forward problem.</p></li>
+<li><p>Strict bounds.  Analog of the method for confidence bounds on shape-restricted
+densities we looked at earlier in the class. Can get conservative joint confidence
+sets for arbitrarily many parameters of the model by finding upper and lower bounds
+on functionals over a set of models that satisfies the constraints and is in an
+infinite-dimensional confidence set based on fit to the data. Not generally
+optimal for standard measures of misfit to the data.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

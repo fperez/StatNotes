@@ -1,0 +1,1493 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>The Neyman “potential outcomes” model for causal inference &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/causal-inference.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Fcausal-inference.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/causal-inference.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intention-to-treat-itt-versus-per-protocol">
+   Intention-to-treat (ITT) versus per-protocol
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#censoring-and-missing-data">
+   Censoring and missing data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#null-hypotheses-for-the-neyman-model">
+   Null hypotheses for the Neyman model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-the-strong-null-hypothesis">
+   Testing the strong null hypothesis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternative-hypotheses-in-the-neyman-model">
+   Alternative hypotheses in the Neyman model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constant-shift">
+     Constant shift
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-tractable-alternative-hypotheses">
+     Other tractable alternative hypotheses
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binary-treatments">
+   Binary treatments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inference-about-the-average-treatment-effect">
+     Inference about the average treatment effect
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-treatments-binary-responses">
+   Two treatments, binary responses.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-core-question">
+     The core question
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#first-conservative-approach-to-confidence-bounds-for-bar-tau-bonferroni-simultaneous-confidence-intervals">
+       First (conservative) approach to confidence bounds for
+       <span class="math notranslate nohighlight">
+        \(\bar{\tau}\)
+       </span>
+       : Bonferroni simultaneous confidence intervals
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#second-approach-testing-all-tables-of-potential-outcomes">
+       Second approach: testing all tables of potential outcomes
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-measures-of-the-effect-of-treatment">
+     Other measures of the effect of treatment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-s-special-about-binary-outcomes">
+     What’s special about binary outcomes?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>The Neyman “potential outcomes” model for causal inference</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intention-to-treat-itt-versus-per-protocol">
+   Intention-to-treat (ITT) versus per-protocol
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#censoring-and-missing-data">
+   Censoring and missing data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#null-hypotheses-for-the-neyman-model">
+   Null hypotheses for the Neyman model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-the-strong-null-hypothesis">
+   Testing the strong null hypothesis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternative-hypotheses-in-the-neyman-model">
+   Alternative hypotheses in the Neyman model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constant-shift">
+     Constant shift
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-tractable-alternative-hypotheses">
+     Other tractable alternative hypotheses
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binary-treatments">
+   Binary treatments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inference-about-the-average-treatment-effect">
+     Inference about the average treatment effect
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-treatments-binary-responses">
+   Two treatments, binary responses.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-core-question">
+     The core question
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#first-conservative-approach-to-confidence-bounds-for-bar-tau-bonferroni-simultaneous-confidence-intervals">
+       First (conservative) approach to confidence bounds for
+       <span class="math notranslate nohighlight">
+        \(\bar{\tau}\)
+       </span>
+       : Bonferroni simultaneous confidence intervals
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#second-approach-testing-all-tables-of-potential-outcomes">
+       Second approach: testing all tables of potential outcomes
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-measures-of-the-effect-of-treatment">
+     Other measures of the effect of treatment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-s-special-about-binary-outcomes">
+     What’s special about binary outcomes?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="the-neyman-potential-outcomes-model-for-causal-inference">
+<h1>The Neyman “potential outcomes” model for causal inference<a class="headerlink" href="#the-neyman-potential-outcomes-model-for-causal-inference" title="Permalink to this headline">#</a></h1>
+<p>There are <span class="math notranslate nohighlight">\(N\)</span> subjects and <span class="math notranslate nohighlight">\(T\)</span> possible treatments.
+Each subject is represented by a ticket.
+Ticket <span class="math notranslate nohighlight">\(j\)</span> lists <span class="math notranslate nohighlight">\(T\)</span> numbers, <span class="math notranslate nohighlight">\((x_{j0}, \ldots, x_{jT-1})\)</span>.
+The value <span class="math notranslate nohighlight">\(x_{jt}\)</span> is the response subject <span class="math notranslate nohighlight">\(j\)</span> will have if assigned to treatment <span class="math notranslate nohighlight">\(t\)</span>.
+(Treatment <span class="math notranslate nohighlight">\(0\)</span> is commonly <em>control</em> or <em>placebo</em>.)</p>
+<p>This mathematical set up embodies the <em>non-interference</em> assumption:
+subject <span class="math notranslate nohighlight">\(j\)</span>’s response is assumed to depend only on which treatment subject <span class="math notranslate nohighlight">\(j\)</span> receives, and not
+on the treatment any other subject receives.
+(That is not a good assumption in situations like vaccine trials, where whether one subject
+becomes infected may depend on which other subjects are vaccinated, if subjects
+may come in contact with each other.)</p>
+<p>This model is also called the <em>potential outcomes</em> model, because it starts with the
+<em>potential</em> outcomes each subject will have to each treatment.
+Assigning a subject to a
+treatment just reveals the potential outcome that corresponds to that treatment, for that subject.
+This model was introduced by Jerzy Neyman, the founder of the U.C. Berkeley Department of Statistics, in a 1923 paper in Polish <a class="reference external" href="https://projecteuclid.org/journals/statistical-science/volume-5/issue-4/On-the-Application-of-Probability-Theory-to-Agricultural-Experiments-Essay/10.1214/ss/1177012031.full">translated into English in 1990</a>.
+It was popularized by Donald Rubin in the 1970s and 1980s.</p>
+<p>There are generalizations of this model, including one in which the “potential outcomes” are random, rather than deterministic, but their distributions are fixed before assignment to treatment: if subject <span class="math notranslate nohighlight">\(j\)</span> is assigned treatment <span class="math notranslate nohighlight">\(t\)</span>, a draw from the distribution <span class="math notranslate nohighlight">\(\mathbb{P}_{jt}\)</span> is observed.
+Draws for different subjects are independent.
+We shall see an example of this when we discuss <a class="reference internal" href="nuisance.html"><span class="doc std std-doc">nuisance parameters</span></a>.</p>
+<section id="intention-to-treat-itt-versus-per-protocol">
+<h2>Intention-to-treat (ITT) versus per-protocol<a class="headerlink" href="#intention-to-treat-itt-versus-per-protocol" title="Permalink to this headline">#</a></h2>
+<p>An intention-to-treat analysis compares outcomes in the subjects assigned to treatment to the subjects assigned to control, whether or not the subjects assigned to a treatment received it.
+It can be though of as measuring the effect of <em>prescribing</em> treatment, in contrast to the effect of <em>receiving</em> treatment.
+It is common in experiments on humans that some subjects do not receive the treatment they were randomly assigned.
+Such <em>non-compliance</em> may result from subjects breaking the blinding (e.g., noticing that their “treatment” is
+a sugar pill and seeking other treatment rather than receiving only the placebo) or seeking alternative treatments.
+For instance, this was an issue in the TOGETHER study of the effect of ivermectin on COVID-19, in which a substantial
+fraction of patients assigned to receive a placebo bought ivermectin over the counter and took it.
+Non-compliance may also result from subjects simply not doing as they are told.
+In general, ITT is the preferred analysis, but especially when compliance rates are low, <em>per-protocol</em> (PP) analyisis, which compares outcomes for subjects who actually received the treatment to outcomes for subjects who actually received placebo (and no other treatment) may be more informative.</p>
+<p>For instance, in <a class="reference external" href="https://www.nejm.org/doi/full/10.1056/NEJMoa2208375">a randomized study of the effect of colonoscopy screenings on colorectal cancer and cancer deaths published in 2022</a>,
+only 42% of subjects who were “invited” to receive a colonoscopy actually underwent the procedure.
+The apparent effect of “inviting” subjects to receive a colonoscopy was small:
+the risk of death from colorectal cancer at 10 years was 0.28% in the invited group and 0.31% in the control group,
+an ITT relative risk of <span class="math notranslate nohighlight">\(0.28/0.31 = 0.9\)</span>.
+This led <a class="reference external" href="https://www.statnews.com/2022/10/09/in-gold-standard-trial-colonoscopy-fails-to-reduce-rate-of-cancer-deaths/">major news outlets to report</a> that colonoscopies do not prevent
+cancer deaths.
+A better description might be that <em>recommending</em> colonoscopies does not appear to have a large
+effect on deaths.
+In the same study, the 10-year risk of death among subjects who actually received colonoscopies was 0.15%, a
+PP relative risk of <span class="math notranslate nohighlight">\(0.15/0.3 = 0.5\)</span>, substantially stronger evidence that <em>receiving</em> a colonoscopy has value.</p>
+<p>However, for PP it is crucial to know <em>why</em> subjects did not receive their assigned treatment, since self-selection
+and other processes can lead to substantial biases in estimates of the effect of treatment.
+For example, imagine a trial of a treatment for a disease.
+Suppose that treatment is effective, and that subjects who were assigned a placebo and and get worse break
+protocol and take an active treatment instead.
+Then the PP analysis will be biased against finding that the treatment is effective.
+Conversely, suppose that treatment actually makes some people worse, and that those people stop taking
+the treatment.
+Then a PP analysis will tend to hide the fact that treatment hurts some subjects.</p>
+</section>
+<section id="censoring-and-missing-data">
+<h2>Censoring and missing data<a class="headerlink" href="#censoring-and-missing-data" title="Permalink to this headline">#</a></h2>
+<p>It is common in some kinds of experiments that the outcomes for some subjects cannot be observed, or can be observed
+only partially.
+For instance, in experiments on people that involve followup over time, some subjects might simply not show up
+for one or more followup examinations, resulting in <em>missing data</em>.</p>
+<p>In experiments involving how long something takes, for instance, time to “failure” or “death,” some subjects might
+not have experienced “failure” by the time the experiment ends.
+The experimenter knows that such subjects are “still alive” when the experiment ended, but they do not
+know how long it will be until those subjects “die.”
+That is, rather than observing the failure time itself,
+the experimenter observes that the failure time is greater than some value.
+This is an example of <em>(right) censoring</em>.
+There are special techniques for dealing with missing data (including subjects lost to followup) and censoring.</p>
+<p>Below, we assume that compliance is perfect, that no subject drops out of the experiment, and that
+all outcomes can be observed (no missing data and no censoring).</p>
+</section>
+<section id="null-hypotheses-for-the-neyman-model">
+<h2>Null hypotheses for the Neyman model<a class="headerlink" href="#null-hypotheses-for-the-neyman-model" title="Permalink to this headline">#</a></h2>
+<p>The <em>strong</em> null hypothesis is that subject by subject, the effect of
+all <span class="math notranslate nohighlight">\(T\)</span> treatments is the same.
+That is,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-49718d83-6b2a-403c-83e3-83836e360b24">
+<span class="eqno">()<a class="headerlink" href="#equation-49718d83-6b2a-403c-83e3-83836e360b24" title="Permalink to this equation">#</a></span>\[\begin{equation}
+x_{j0} = x_{j1} = \cdots = x_{jT-1}, \;\; j=1, \ldots, N.
+\end{equation}\]</div>
+<p>Different subjects may have different responses (<span class="math notranslate nohighlight">\(x_{jt}\)</span> might not equal <span class="math notranslate nohighlight">\(x_{kt}\)</span> if <span class="math notranslate nohighlight">\(j \ne k\)</span>), but each subject’s response is the same regardless of the treatment assigned
+to that subject.
+This is the null hypothesis Fisher considered in <em>The Design of Experiments</em> and which
+he generally considered the “correct” null in practice.</p>
+<p>The <em>weak</em> null hypothesis is that on average across subjects, all treatments have the same effect.
+That is,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e8732817-da8c-460c-b7f1-f17ac6fdebff">
+<span class="eqno">()<a class="headerlink" href="#equation-e8732817-da8c-460c-b7f1-f17ac6fdebff" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{1}{N} \sum_{j=1}^N x_{j0} = \frac{1}{N} \sum_{j=1}^N x_{j1} = \ldots = \frac{1}{N} \sum_{j=1}^N x_{jT-1}.
+\end{equation}\]</div>
+<p>Much of Neyman’s work on experiments involves this null hypothesis.
+The statistical theory is more complex for the weak null hypothesis than for the strong null,
+and most results about the weak null are asymptotic, while the strong null is more amenable to exact or conservative
+inferences.</p>
+<p>The strong null is indeed a stronger hypothesis than the weak null, because if the strong null is true, the weak null must also be true: if <span class="math notranslate nohighlight">\(T\)</span> lists are equal, element by element, then their means are equal.
+(However, see Ding, P., 2017. A Paradox from Randomization-Based Causal Inference, <em>Statist. Sci. 32</em>, 331-345. 10.1214/16-STS571.)</p>
+<p>The converse is not true: the weak null can be true even if the strong null is false.
+For example, for <span class="math notranslate nohighlight">\(T=2\)</span> and <span class="math notranslate nohighlight">\(N=2\)</span>, we might have potential responses <span class="math notranslate nohighlight">\((0, 1)\)</span> for subject 1 and <span class="math notranslate nohighlight">\((1,0)\)</span> for subject 2.
+The effect of treatment is to increase subject 1’s response from 0 to 1 and to decrease subject 2’s response from 1 to 0.
+The treatment affects both subjects, but the average effect of treatment is the same: the average response across subjects is 1/2, with or without treatment.</p>
+<p>The <em>effect of treatment <span class="math notranslate nohighlight">\(t\)</span> on subject <span class="math notranslate nohighlight">\(j\)</span></em> (compared to control) is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a33e3417-e0aa-4af5-9e8b-52c7f15fbf74">
+<span class="eqno">()<a class="headerlink" href="#equation-a33e3417-e0aa-4af5-9e8b-52c7f15fbf74" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\tau_{jt} := x_{jt} - x_{j0}, \;\;t=1, \ldots, T-1.
+\end{equation}\]</div>
+<p>The <em>average effect of treatment <span class="math notranslate nohighlight">\(t\)</span></em> (compared to control) is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-89daae66-e076-412d-b8cb-38355d8f6f91">
+<span class="eqno">()<a class="headerlink" href="#equation-89daae66-e076-412d-b8cb-38355d8f6f91" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{\tau}_t := \frac{1}{N} \sum_{j=1}^N (x_{jt} - x_{j0}), \;\; t=1, \ldots, T-1.
+\end{equation}\]</div>
+<p>The strong null hypothesis for treatment <span class="math notranslate nohighlight">\(t &gt; 0\)</span> is that <span class="math notranslate nohighlight">\(\tau_{jt} = 0\)</span> for all <span class="math notranslate nohighlight">\(j = 1, \ldots, N\)</span>.
+(Treatment <span class="math notranslate nohighlight">\(t\)</span> has no effect on any subject in the study.)
+The “overall” or “grand” or “omnibus” strong null hypothesis is that
+<span class="math notranslate nohighlight">\(\tau_{jt} = 0\)</span> for all <span class="math notranslate nohighlight">\(j = 1, \ldots, N\)</span> and all <span class="math notranslate nohighlight">\(t = 1, \ldots, T-1\)</span>.
+(No treatment makes any difference to any subject in the study.)
+Equivalently, the omnibus strong null hypothesis is the intersection of the strong null hypotheses for
+all the individual treatments.</p>
+<p>The weak null hypothesis for treatment <span class="math notranslate nohighlight">\(t &gt; 0\)</span> is that <span class="math notranslate nohighlight">\(\bar{\tau}_t = 0\)</span>.
+(On average, treatment <span class="math notranslate nohighlight">\(t\)</span> has no effect on the subjects in the study.)
+The “overall” or “grand” or “omnibus” weak null hypothesis is that
+<span class="math notranslate nohighlight">\(\bar{\tau}_t = 0\)</span> for all <span class="math notranslate nohighlight">\(t=1, \ldots, T-1\)</span>.
+(No treatment affects the average response of the subjects in the study.)
+Equivalently, the omnibus weak null hypothesis is the intersection of the weak null hypotheses for
+all the individual treatments.</p>
+<p>In general we have to make assumptions about how treatment affects responses in order to make rigorous inferences about the average treatment effect.</p>
+</section>
+<section id="testing-the-strong-null-hypothesis">
+<h2>Testing the strong null hypothesis<a class="headerlink" href="#testing-the-strong-null-hypothesis" title="Permalink to this headline">#</a></h2>
+<p>Under the strong null that the treatment makes no difference whatsoever–as if
+the response had been predetermined before assignment to treatment or control–the null distribution of any test statistic is completely determined once the data have
+been observed: we know what the data would have been for any other random assignment, namely, the same.
+And we know the chance that each of those possible datasets would have resulted from
+the experiment, since we know how subjects were assigned at random to treatments.</p>
+<p>For alternatives that allow us to find <span class="math notranslate nohighlight">\(x_{j0}\)</span> from <span class="math notranslate nohighlight">\(x_{jt}\)</span> and vice versa,
+the alternative also completely determines the
+probability distribution of any test statistic, once the data have been observed.</p>
+</section>
+<section id="alternative-hypotheses-in-the-neyman-model">
+<h2>Alternative hypotheses in the Neyman model<a class="headerlink" href="#alternative-hypotheses-in-the-neyman-model" title="Permalink to this headline">#</a></h2>
+<section id="constant-shift">
+<h3>Constant shift<a class="headerlink" href="#constant-shift" title="Permalink to this headline">#</a></h3>
+<p>For example, if we assume that the effect of treatment is to shift every subject’s response by the same amount, then we can use a test of the strong null to make inferences about that constant effect.
+In symbols, this alternative states that there are some numbers <span class="math notranslate nohighlight">\(\{\Delta_t\}_{t=1}^T\)</span>
+such that <span class="math notranslate nohighlight">\(x_{jt} = x_{j0}+\Delta_t\)</span> for all subjects <span class="math notranslate nohighlight">\(j\)</span>.</p>
+<p>Again, once the original data are observed, this hypothesis completely specifies the probability distribution of the data: we know what subject <span class="math notranslate nohighlight">\(j\)</span>’s response would have been had the subject been assigned any other treatment.</p>
+</section>
+<section id="other-tractable-alternative-hypotheses">
+<h3>Other tractable alternative hypotheses<a class="headerlink" href="#other-tractable-alternative-hypotheses" title="Permalink to this headline">#</a></h3>
+<p>Similarly, it is straightforward to test against any fixed alternative set of values
+of <span class="math notranslate nohighlight">\(\{\tau_{jt}\}\)</span> using methods for testing the strong null.
+It is also possible to test against the alternative <span class="math notranslate nohighlight">\(x_{jt} = f_t(x_{j0})\)</span> for some strictly monotonic (and thus invertible) functions <span class="math notranslate nohighlight">\(\{f_t\}\)</span>.
+A simple example is that treatment multiplies the baseline response by a nonzero constant.</p>
+<p>In some contexts, it can be reasonable to assume that treatment can only help, that is that <span class="math notranslate nohighlight">\(x_{jt} \ge x_{j0}\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>, without specifying a functional relationship between them.</p>
+<p>See also
+Caughey, D., A. Dafoe, X. Li, and L. Miratrix, 2021. Randomization Inference beyond the Sharp Null: Bounded Null Hypotheses and Quantiles of Individual Treatment Effects <a class="reference external" href="https://arxiv.org/abs/2101.09195">https://arxiv.org/abs/2101.09195</a> and
+Wu and Ding, 2021. Randomization Tests for Weak Null Hypotheses in Randomized Experiments,
+<em>JASA</em>, <em>116</em>. <a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/01621459.2020.1750415">https://www.tandfonline.com/doi/abs/10.1080/01621459.2020.1750415</a></p>
+</section>
+</section>
+<section id="binary-treatments">
+<h2>Binary treatments<a class="headerlink" href="#binary-treatments" title="Permalink to this headline">#</a></h2>
+<p>Suppose <span class="math notranslate nohighlight">\(T=2\)</span>: we are comparing two treatments (typically, an “active” treatment and a placebo or other control).
+Let <span class="math notranslate nohighlight">\(\boldsymbol{1}_N\)</span> be the <span class="math notranslate nohighlight">\(N\)</span>-dimensional vector of 1s, and let <span class="math notranslate nohighlight">\(\boldsymbol{0}_N\)</span> be the <span class="math notranslate nohighlight">\(N\)</span>-dimensional zero vector.
+We will omit the subscript <span class="math notranslate nohighlight">\(N\)</span> where the dimension is clear from context.</p>
+<p>Recall that the <em>individual treatment effect for subject <span class="math notranslate nohighlight">\(j\)</span></em> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c75f5fd9-cbf4-4516-a2fa-c59e116a7922">
+<span class="eqno">()<a class="headerlink" href="#equation-c75f5fd9-cbf4-4516-a2fa-c59e116a7922" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\tau_j := x_{1j}-x_{0j}.
+\end{equation}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\tau := (\tau_1, \ldots \tau_N)\)</span>.
+The <em>average treatment effect</em> for the subjects in the experiment is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4d137585-7ab9-41f4-acf9-e7896af91e06">
+<span class="eqno">()<a class="headerlink" href="#equation-4d137585-7ab9-41f4-acf9-e7896af91e06" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{\tau} := \frac{1}{N} \sum_{j=1}^N \tau_j = \boldsymbol{1} \cdot \tau/N = \frac{1}{N} \sum_{j=1}^N (x_{1j}-x_{0j}) = \bar{x}_1 - \bar{x}_0.
+\end{equation}\]</div>
+<p>(Whether <span class="math notranslate nohighlight">\(\bar{\tau}\)</span> says anything about any larger population
+depends on how the subjects in the experiment were selected–i.e., on whether the experimental subjects are representative
+of that larger population.)
+The <em>strong</em> null hypothesis is <span class="math notranslate nohighlight">\(\tau = \boldsymbol{0}\)</span>, i.e.,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ec88b37b-2d32-4c52-93d1-d7855348146e">
+<span class="eqno">()<a class="headerlink" href="#equation-ec88b37b-2d32-4c52-93d1-d7855348146e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\tau_1 = \tau_2 = \ldots = \tau_N = 0.
+\end{equation}\]</div>
+<p>This is a composite hypothesis, because it does not specify the “baseline” responses <span class="math notranslate nohighlight">\(\{x_{j0}\}\)</span> of the subjects,
+while the distribution of the data depends on <span class="math notranslate nohighlight">\(\{x_{j0}\}\)</span> in addition to the individual treatment
+effects <span class="math notranslate nohighlight">\(\{\tau_{jt}\}\)</span>.
+The baseline responses are <em>nuisance parameters</em> if the goal is to make inferences about treatment effects.</p>
+<p>For any vector <span class="math notranslate nohighlight">\(\xi \in \mathbb{R}^N\)</span>, let <span class="math notranslate nohighlight">\(H_\xi\)</span> denote the hypothesis that <span class="math notranslate nohighlight">\(\tau = \xi\)</span>.
+For any set <span class="math notranslate nohighlight">\(\Xi \subset \mathbb{R}^N\)</span>, let <span class="math notranslate nohighlight">\(H_\Xi\)</span> denote the hypothesis that <span class="math notranslate nohighlight">\(\tau \in \Xi\)</span>.
+Equivalently, <span class="math notranslate nohighlight">\(H_\Xi = \cup_{\xi \in \Xi} H_\xi\)</span>.
+Then the <em>strong</em> null is <span class="math notranslate nohighlight">\(H_\boldsymbol{0}\)</span> and the
+<em>weak</em> null is <span class="math notranslate nohighlight">\(H_{\Xi_0}\)</span>,
+where</p>
+<div class="amsmath math notranslate nohighlight" id="equation-93ca4b03-4b16-4d8e-aaf7-fdd885fcaca5">
+<span class="eqno">()<a class="headerlink" href="#equation-93ca4b03-4b16-4d8e-aaf7-fdd885fcaca5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\Xi_0 := \left \{ \xi \in \mathbb{R}^N : \boldsymbol{1}_N \cdot \xi/N = 0 \right \}.
+\end{equation}\]</div>
+<section id="inference-about-the-average-treatment-effect">
+<h3>Inference about the average treatment effect<a class="headerlink" href="#inference-about-the-average-treatment-effect" title="Permalink to this headline">#</a></h3>
+<p>Suppose we assign <span class="math notranslate nohighlight">\(n\)</span> subjects at random
+to treatment 0 (<em>control</em> or <em>placebo</em>) and the other <span class="math notranslate nohighlight">\(m = N-n\)</span> to treatment 1 (<em>treatment</em> or <em>active treatment</em>).</p>
+<p>Then testing the strong null hypothesis is identical to the <em>two-sample problem</em>:
+under the strong null, each subject’s response would have been the same, regardless
+of treatment.
+If we know the mechanism for allocating subjects to treatments (e.g., by <em>simple random sampling</em>, by <em>Bernoulli sampling</em>,
+using a <em>blocked</em> design, etc.) we can calculate or simulate the distribution of any test statistic
+whatsoever.
+The question is which test statistic to use.
+The answer depends on the alternatives against which we want to have power:
+if we think a particular set of alternatives is most plausible or most important, we can choose the test statistic to
+maximize some summary of power over that set of alternatives, such as the minimum or a weighted average
+(the weights can be thought of as a prior probability distribution on alternatives).</p>
+<p>We now consider the <em>weak</em> null hypothesis and the average treatment effect.</p>
+<p>Let <span class="math notranslate nohighlight">\(W_j\)</span> denote the treatment assigned to subject <span class="math notranslate nohighlight">\(j\)</span>: <span class="math notranslate nohighlight">\(W_j = 0\)</span> if subject <span class="math notranslate nohighlight">\(j\)</span> is assigned to control
+and <span class="math notranslate nohighlight">\(W_j = 1\)</span> if subject <span class="math notranslate nohighlight">\(j\)</span> is assigned to the active treatment.
+Assume for now that the assignment is by simple random sampling
+or by Bernoulli sampling.
+For Bernoulli sampling, conditioning on the number of subjects assigned to active treatment, <span class="math notranslate nohighlight">\(n\)</span>,
+makes the math the same as it is for simple random sampling, where <span class="math notranslate nohighlight">\(n\)</span> is fixed in advance.</p>
+<p>The random variables <span class="math notranslate nohighlight">\(\{W_j\}\)</span> are identically distributed but not independent (given <span class="math notranslate nohighlight">\(n\)</span>),
+because <span class="math notranslate nohighlight">\(\sum_{j=1}^N W_j = n\)</span>.
+Because <span class="math notranslate nohighlight">\(\{W_j\}\)</span> are identically distributed, they share the same expected value, and
+thus <span class="math notranslate nohighlight">\(\mathbb{E} \sum_{j=1}^N W_j = N \mathbb{E} W_j\)</span> for each <span class="math notranslate nohighlight">\(j\)</span>.
+Since <span class="math notranslate nohighlight">\(\sum_{j=1}^N W_j = n\)</span> is constant, <span class="math notranslate nohighlight">\(\mathbb{E} \sum_{j=1}^N W_j = n\)</span>.
+Hence, <span class="math notranslate nohighlight">\(\mathbb{E} W_j = n/N\)</span>, <span class="math notranslate nohighlight">\(j = 1, \ldots, N\)</span>.</p>
+<p>Here is a bit more notation:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b0f2a42d-042f-4e07-b635-264b14c1f1de">
+<span class="eqno">()<a class="headerlink" href="#equation-b0f2a42d-042f-4e07-b635-264b14c1f1de" title="Permalink to this equation">#</a></span>\[\begin{equation}
+X_0^* := \sum_{j=1}^N (1-W_j)x_{j0}
+\end{equation}\]</div>
+<p>is the sum of the responses of the subjects assigned to treatment 0
+and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ff269366-b79a-4438-bb53-f25cb34a9bbf">
+<span class="eqno">()<a class="headerlink" href="#equation-ff269366-b79a-4438-bb53-f25cb34a9bbf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{X}_0 := X_0^*/m
+\end{equation}\]</div>
+<p>is their mean response.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1390250d-cf12-4a01-b214-2992fe2b5c40">
+<span class="eqno">()<a class="headerlink" href="#equation-1390250d-cf12-4a01-b214-2992fe2b5c40" title="Permalink to this equation">#</a></span>\[\begin{equation}
+X_1^* := \sum_{j=1}^N W_j x_{j1} 
+\end{equation}\]</div>
+<p>is the sum of the responses of the subjects assigned to treatment 1 and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d6eccd0c-e2a8-4157-b490-fc4c30e321e8">
+<span class="eqno">()<a class="headerlink" href="#equation-d6eccd0c-e2a8-4157-b490-fc4c30e321e8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{X}_1 := X_1^*/n,
+\end{equation}\]</div>
+<p>is their mean response.</p>
+<p>The statistics <span class="math notranslate nohighlight">\(\bar{X}_0\)</span> and <span class="math notranslate nohighlight">\(\bar{X}_1\)</span>  are unbiased estimates of
+the corresponding population parameters,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-063907c4-6dc2-48ae-8c0b-f723888f38a4">
+<span class="eqno">()<a class="headerlink" href="#equation-063907c4-6dc2-48ae-8c0b-f723888f38a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{x}_0 := \frac{1}{N} \sum_{j=1}^n x_{j0}
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6f9c00e4-61ac-4f13-bd3d-e50ec6ed16e5">
+<span class="eqno">()<a class="headerlink" href="#equation-6f9c00e4-61ac-4f13-bd3d-e50ec6ed16e5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{x}_1 := \frac{1}{N} \sum_{j=1}^n x_{j1}.
+\end{equation}\]</div>
+<p>Therefore, <span class="math notranslate nohighlight">\(\hat{\tau} := \bar{X}_1 - \bar{X}_0\)</span> is an unbiased estimate of the average treatment effect <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>.
+One could base a permutation test of the strong null using as the test statistic any of <span class="math notranslate nohighlight">\(X_0^*\)</span>, <span class="math notranslate nohighlight">\(X_1^*\)</span>,
+<span class="math notranslate nohighlight">\(\bar{X}_0\)</span>, <span class="math notranslate nohighlight">\(\bar{X}_1\)</span>, or <span class="math notranslate nohighlight">\(\hat{\tau}\)</span>: all lead to equivalent tests, in the sense that
+they reject for the same data.</p>
+</section>
+</section>
+<section id="two-treatments-binary-responses">
+<h2>Two treatments, binary responses.<a class="headerlink" href="#two-treatments-binary-responses" title="Permalink to this headline">#</a></h2>
+<p>Imagine testing whether a vaccine prevents a disease.
+We assign a random sample of <span class="math notranslate nohighlight">\(n\)</span> of the <span class="math notranslate nohighlight">\(N\)</span> subjects to receive treatment 1;
+the other <span class="math notranslate nohighlight">\(m = N-n\)</span> receive a placebo, treatment 0.
+Let <span class="math notranslate nohighlight">\(W_j\)</span> denote the treatment assigned to subject <span class="math notranslate nohighlight">\(j\)</span>.
+We observe</p>
+<div class="amsmath math notranslate nohighlight" id="equation-313b58c3-9d6e-4cc4-89e3-0af1478319fb">
+<span class="eqno">()<a class="headerlink" href="#equation-313b58c3-9d6e-4cc4-89e3-0af1478319fb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+X_j := (1-W_j) x_{j0} + W_j x_{j1}, \;\; j=1, \ldots, N.
+\end{equation}\]</div>
+<p>These are random variables, but (in this model)
+the only source of randomness is <span class="math notranslate nohighlight">\(\{W_j\}\)</span>, the
+treatment assignment variables.</p>
+<p>The total number of infections among the vaccinated is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b2772ab9-cbe9-47fd-b992-c04083271a59">
+<span class="eqno">()<a class="headerlink" href="#equation-b2772ab9-cbe9-47fd-b992-c04083271a59" title="Permalink to this equation">#</a></span>\[\begin{equation}
+   X_1^* := \sum_{j=1}^N W_j x_{j1}
+\end{equation}\]</div>
+<p>and the total among the unvaccinated is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-680e8d5e-0875-4e15-99cd-c03dcfe82d81">
+<span class="eqno">()<a class="headerlink" href="#equation-680e8d5e-0875-4e15-99cd-c03dcfe82d81" title="Permalink to this equation">#</a></span>\[\begin{equation}
+   X_0^* := \sum_{j=1}^N (1-W_j) x_{j0}.
+\end{equation}\]</div>
+<p>Under the strong null that the vaccine makes no difference whatsoever–as if whether a subject would become ill was predetermined before the assignment to treatment or control–the distribution of the number of infections among the vaccinated would have a hypergeometric distribution with parameters <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(G=X_0^*+X_1^*\)</span>, and <span class="math notranslate nohighlight">\(n=n\)</span>.
+Testing the strong null using this hypergeometric distribution yields <a class="reference internal" href="fisher-exact.html"><span class="doc std std-doc">Fisher’s Exact Test</span></a>.</p>
+<p>This approach can be generalized by considering the sample sizes <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> and/or the total number of infections <span class="math notranslate nohighlight">\(X_0^*+X_1^*\)</span> to be random, then conditioning on their observed values to get a conditional test.</p>
+<p>If responses are binary, each <span class="math notranslate nohighlight">\(x_{jt}\)</span> is <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>, and each <span class="math notranslate nohighlight">\(\tau_j\)</span> is either <span class="math notranslate nohighlight">\(-1\)</span>, <span class="math notranslate nohighlight">\(0\)</span>, or <span class="math notranslate nohighlight">\(1\)</span>.
+Thus the only possible values of <span class="math notranslate nohighlight">\(\bar{\tau}\)</span> are multiples of <span class="math notranslate nohighlight">\(1/N\)</span>.
+The largest and smallest possible values are <span class="math notranslate nohighlight">\(\bar{\tau}=-1\)</span> (which
+occurs if <span class="math notranslate nohighlight">\(x_{j1}=0\)</span> and <span class="math notranslate nohighlight">\(x_{j0}=1\)</span> for all <span class="math notranslate nohighlight">\(j\)</span>) and
+<span class="math notranslate nohighlight">\(\bar{\tau}=1\)</span> (which occurs if <span class="math notranslate nohighlight">\(x_{j1}=1\)</span> and <span class="math notranslate nohighlight">\(x_{j0}=0\)</span> for all <span class="math notranslate nohighlight">\(j\)</span>), a range of 2.</p>
+<section id="the-core-question">
+<h3>The core question<a class="headerlink" href="#the-core-question" title="Permalink to this headline">#</a></h3>
+<p>What can we say about the average treatment effect from the data?</p>
+<p>The potential responses of the subjects in the experiment can be summarized by four numbers,
+the number of subjects with each possible combination of potential outcomes.
+Let <span class="math notranslate nohighlight">\(N_{ik}\)</span> be the number of subjects <span class="math notranslate nohighlight">\(j\)</span> for whom
+<span class="math notranslate nohighlight">\(x_{j0} = i\)</span> and <span class="math notranslate nohighlight">\(x_{j1} = k\)</span>, for <span class="math notranslate nohighlight">\(i, k \in \{0, 1\}\)</span>.
+That is, <span class="math notranslate nohighlight">\(N_{00}\)</span> is the number of subjects whose response is “0” whether they are assigned to treatment or to control, while <span class="math notranslate nohighlight">\(N_{01}\)</span> is the number of subjects whose response would be
+“0” if assigned to control and “1” if assigned to treatment, etc.
+Of course, <span class="math notranslate nohighlight">\(N = N_{00} + N_{01} + N_{10} + N_{11}\)</span>.
+(<strong>Note</strong>: this notation has the indices in the opposite order from that in <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.6764">Li and Ding (2016)</a>.)
+These four numbers tell us everything relevant about the study population.
+Let <span class="math notranslate nohighlight">\(\mathbf{N} := (N_{ij})_{i, j \in \{0, 1\}}\)</span> be the 2x2 <em>summary potential outcome table</em>.</p>
+<p>Let <span class="math notranslate nohighlight">\(N_{1+} := N_{10} + N_{11}\)</span> be the number of subjects whose response would be “1” if assigned to control,
+and let <span class="math notranslate nohighlight">\(N_{+1} := N_{01} + N_{11}\)</span> be the number of subjects whose response would be “1” if
+assigned to treatment.
+(<strong>Note</strong>: this notation also has the indices in the opposite order from that in
+<a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.6764">Li and Ding (2016)</a>.)</p>
+<p>Now <span class="math notranslate nohighlight">\(\sum_{j=1}^N x_{j0} = N_{1+}\)</span> and <span class="math notranslate nohighlight">\(\sum_{j=1}^N x_{j1} = N_{+1}\)</span>, so
+the average treatment effect can be written</p>
+<div class="amsmath math notranslate nohighlight" id="equation-27636627-9f30-4d4a-9169-cfac031b2f34">
+<span class="eqno">()<a class="headerlink" href="#equation-27636627-9f30-4d4a-9169-cfac031b2f34" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{\tau} = \frac{1}{N} \sum_{j=1}^N (x_{j1}-x_{j0}) = \frac{1}{N} (N_{+1} - N_{1+}),
+\end{equation}\]</div>
+<p>the average response among the treated minus the average among the controls.</p>
+<p>Once the data have been observed, we know that <span class="math notranslate nohighlight">\(N_{1+}\)</span> is at least <span class="math notranslate nohighlight">\(X_0^*\)</span>
+(it was that big for the control group alone, even if none of the <span class="math notranslate nohighlight">\(n\)</span> treated subjects would have
+had a control response of 1)
+and at most <span class="math notranslate nohighlight">\(X_0^* + n\)</span> (if all <span class="math notranslate nohighlight">\(n\)</span> of the treated subjects would have had a response of 1 if they
+had been assigned to control instead of the active treatment).
+Similarly, we know that <span class="math notranslate nohighlight">\(N_{+1}\)</span> is at least <span class="math notranslate nohighlight">\(X_1^*\)</span>
+(we saw that many 1s in the active treatment group)
+and at most <span class="math notranslate nohighlight">\(X_1^* + m\)</span> (if every subject assigned to control would have responded 1 if they had received the
+active treatment).
+Their difference is thus between</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4d865c09-c374-4a39-8cd2-84cfef8e3f45">
+<span class="eqno">()<a class="headerlink" href="#equation-4d865c09-c374-4a39-8cd2-84cfef8e3f45" title="Permalink to this equation">#</a></span>\[\begin{equation}
+X_1^* - X_0^* - n 
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-12d71706-7c56-44ca-abfe-41e4d9cf7f3b">
+<span class="eqno">()<a class="headerlink" href="#equation-12d71706-7c56-44ca-abfe-41e4d9cf7f3b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+X_1^* - X_0^* + m,
+\end{equation}\]</div>
+<p>a range of <span class="math notranslate nohighlight">\(n+m = N\)</span>.
+Thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-af7432dd-88ed-4247-b2fa-ec9799d06581">
+<span class="eqno">()<a class="headerlink" href="#equation-af7432dd-88ed-4247-b2fa-ec9799d06581" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{\tau} \in \{ (X_1^* - X_0^* - n)/N, (X_1^* - X_0^* - n + 1)/N, \ldots, (X_1^* - X_0^* + m)/N\},
+\end{equation}\]</div>
+<p>which has range <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<section id="first-conservative-approach-to-confidence-bounds-for-bar-tau-bonferroni-simultaneous-confidence-intervals">
+<h4>First (conservative) approach to confidence bounds for <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>: Bonferroni simultaneous confidence intervals<a class="headerlink" href="#first-conservative-approach-to-confidence-bounds-for-bar-tau-bonferroni-simultaneous-confidence-intervals" title="Permalink to this headline">#</a></h4>
+<p>A tuple of confidence set procedures <span class="math notranslate nohighlight">\((\mathcal{I}_i )_{i=1}^C\)</span> for a corresponding tuple of parameters <span class="math notranslate nohighlight">\((\theta_i)_{i=1}^C \in \Theta\)</span> has <em>simultaneous coverage probability</em> <span class="math notranslate nohighlight">\(1-\alpha\)</span> if</p>
+<div class="amsmath math notranslate nohighlight" id="equation-92791b88-06a2-4627-9aec-41137e6b7b70">
+<span class="eqno">()<a class="headerlink" href="#equation-92791b88-06a2-4627-9aec-41137e6b7b70" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{P}_{\theta_1, \ldots, \theta_C} \bigcap_{i=1}^C ( \mathcal{I}_i \ni \theta_i  ) \ge 1-\alpha,
+\end{equation}\]</div>
+<p>whatever the true values <span class="math notranslate nohighlight">\((\theta_i) \in \Theta\)</span> are.</p>
+<p>Bonferroni’s inequality, also called <em>the union bound</em>, says that for any collection of events <span class="math notranslate nohighlight">\(\{A_i\}\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c6818ddc-3d8d-4fae-88c7-681f6b873042">
+<span class="eqno">()<a class="headerlink" href="#equation-c6818ddc-3d8d-4fae-88c7-681f6b873042" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{P} \left ( \bigcup_i A_i \right ) \le \sum_i \mathbb{P}(A_i).
+\end{equation}\]</div>
+<p>It follows that if <span class="math notranslate nohighlight">\(\mathcal{I}_i\)</span> is a confidence interval procedure for <span class="math notranslate nohighlight">\(\theta_i\)</span> with coverage probability <span class="math notranslate nohighlight">\(1-\alpha_i\)</span>, <span class="math notranslate nohighlight">\(i=1, \ldots, C\)</span>, then the tuple of <span class="math notranslate nohighlight">\(C\)</span>
+confidence set procedures <span class="math notranslate nohighlight">\((\mathcal{I}_i)_{i=1}^C\)</span> has simultaneous coverage probability
+not smaller than <span class="math notranslate nohighlight">\(1-\sum_{i=1}^C \alpha_i\)</span>.</p>
+<p>In the current situation, if we had simultaneous confidence sets for both <span class="math notranslate nohighlight">\(N_{1+}\)</span> and <span class="math notranslate nohighlight">\(N_{+1}\)</span>, we could find a confidence set for <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>, because
+<span class="math notranslate nohighlight">\(\bar{\tau} = (N_{+1} - N_{1+})/N\)</span>.</p>
+<p>Now, <span class="math notranslate nohighlight">\(X_1^*\)</span> is the number of “1”s in a random sample of size <span class="math notranslate nohighlight">\(n\)</span> from a population of size <span class="math notranslate nohighlight">\(N\)</span> of which <span class="math notranslate nohighlight">\(N_{+1}\)</span> are labeled “1” and the rest are labeled “0.”
+Similarly, <span class="math notranslate nohighlight">\(X_0^*\)</span> is the number of “1”s in a random sample of size <span class="math notranslate nohighlight">\(m\)</span> from a population of size <span class="math notranslate nohighlight">\(N\)</span> of which <span class="math notranslate nohighlight">\(N_{1+}\)</span> are labeled “1” and the rest are labeled “0.”
+That is, the probability distribution of <span class="math notranslate nohighlight">\(X_1^*\)</span> is
+hypergeometric with parameters <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(G=N_{+1}\)</span>, and <span class="math notranslate nohighlight">\(n\)</span>,
+and the probability distribution of <span class="math notranslate nohighlight">\(X_0^*\)</span> is
+hypergeometric with parameters <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(G=N_{1+}\)</span>, and <span class="math notranslate nohighlight">\(m\)</span>.
+We can thus use <a class="reference internal" href="confidence-sets.html"><span class="doc std std-doc">methods for finding confidence bounds for the hypergeometric <span class="math notranslate nohighlight">\(G\)</span></span></a>
+to find confidence bounds for <span class="math notranslate nohighlight">\(N_{+1}\)</span> and <span class="math notranslate nohighlight">\(N_{1+}\)</span> from <span class="math notranslate nohighlight">\(X_1^*\)</span> and <span class="math notranslate nohighlight">\(X_0^*\)</span>.
+The variables <span class="math notranslate nohighlight">\(X_1^*\)</span> and <span class="math notranslate nohighlight">\(X_0^*\)</span> are dependent, but Bonferroni’s inequality holds for dependent events.</p>
+<p>To construct an <em>upper</em> 1-sided <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence bound for <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>, we can find an <em>upper</em> 1-sided <span class="math notranslate nohighlight">\(1-\alpha/2\)</span> confidence bound for <span class="math notranslate nohighlight">\(N_{+1}\)</span> (using the hypergeometric distribution), subtract a <em>lower</em>
+1-sided <span class="math notranslate nohighlight">\(1-\alpha/2\)</span> confidence bound for <span class="math notranslate nohighlight">\(N_{1+}\)</span>, and divide the result by <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p>To construct a <em>lower</em> 1-sided <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence bound for <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>, we can find a <em>lower</em> 1-sided <span class="math notranslate nohighlight">\(1-\alpha/2\)</span> confidence bound for <span class="math notranslate nohighlight">\(N_{+1}\)</span>, subtract an <em>upper</em> 1-sided <span class="math notranslate nohighlight">\(1-\alpha/2\)</span> confidence bound for <span class="math notranslate nohighlight">\(N_{1+}\)</span>, and divide the result by <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p>To construct a 2-sided confidence interval for <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>, we can find a
+2-sided <span class="math notranslate nohighlight">\(1-\alpha/2\)</span> confidence bound for <span class="math notranslate nohighlight">\(N_{+1}\)</span> and a 2-sided <span class="math notranslate nohighlight">\(1-\alpha/2\)</span> confidence bound for <span class="math notranslate nohighlight">\(N_{1+}\)</span>.
+The lower endpoint of the <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence interval for <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>
+is the lower endpoint of the 2-sided interval for <span class="math notranslate nohighlight">\(N_{+1}\)</span>  minus the upper
+endpoint of the 2-sided interval for <span class="math notranslate nohighlight">\(N_{1+}\)</span>, divided by <span class="math notranslate nohighlight">\(N\)</span>.
+The upper endpoint of the <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence interval for <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>
+is the upper endpoint of the 2-sided interval for <span class="math notranslate nohighlight">\(N_{+1}\)</span>  minus the lower
+endpoint of the 2-sided interval for <span class="math notranslate nohighlight">\(N_{1+}\)</span>, divided by <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p>This approach has a number of advantages: it is conceptually simple, conservative, and
+only requires the ability to compute confidence intervals for <span class="math notranslate nohighlight">\(G\)</span> for
+hypergeometric distributions.
+But the intervals will in general be quite conservative, i.e., unnecessarily wide.
+(See Table 1 of <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.6764">Li and Ding (2016)</a>.)
+We now examine a sharper approach.</p>
+</section>
+<section id="second-approach-testing-all-tables-of-potential-outcomes">
+<h4>Second approach: testing all tables of potential outcomes<a class="headerlink" href="#second-approach-testing-all-tables-of-potential-outcomes" title="Permalink to this headline">#</a></h4>
+<p>After the randomization, for each subject <span class="math notranslate nohighlight">\(j\)</span>, we observe either <span class="math notranslate nohighlight">\(x_{j0}\)</span> or
+<span class="math notranslate nohighlight">\(x_{j1}\)</span>.
+At that point, we know <span class="math notranslate nohighlight">\(N\)</span> of the <span class="math notranslate nohighlight">\(2N\)</span> numbers <span class="math notranslate nohighlight">\(\{x_{jt}\}_{j=1}^N{}_{t=0}^1\)</span>.
+The other <span class="math notranslate nohighlight">\(N\)</span> numbers–the responses that were not observed–can be any combination of 0s and 1s: there are <span class="math notranslate nohighlight">\(2^N\)</span> possibilities in all.
+But not all of those yield distinguishable sets of responses: what matters is how many subjects
+have each possible pattern of potential outcomes: (0, 0), (0, 1), (1, 0), and (1, 1).</p>
+<p>The average treatment effect <span class="math notranslate nohighlight">\(\bar{\tau}\)</span> is determined by
+the summary potential outcome table <span class="math notranslate nohighlight">\(\mathbf{N}\)</span>, i.e., the
+four numbers, <span class="math notranslate nohighlight">\(N_{00}\)</span>, <span class="math notranslate nohighlight">\(N_{01}\)</span>, <span class="math notranslate nohighlight">\(N_{10}\)</span>, and <span class="math notranslate nohighlight">\(N_{11}\)</span>, which to sum to <span class="math notranslate nohighlight">\(N\)</span>.
+How many possible values are there for those four numbers?
+The total number of ways there are of partitioning <span class="math notranslate nohighlight">\(N\)</span> items into 4 groups can be found by Feller’s “bars and stars” argument (see the <a class="reference internal" href="nuisance.html"><span class="doc std std-doc">notes on nuisance parameters</span></a>);
+the answer is <span class="math notranslate nohighlight">\(\binom{N+3}{3} = (N+3)(N+2)(N+1)/6\)</span>.
+This is <span class="math notranslate nohighlight">\(O(N^3)\)</span> tables
+(see <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.6384">Rigdon and Hudgens (2015)</a>).</p>
+<p>But many of those tables are incompatible with the observed data.
+For instance, we know that <span class="math notranslate nohighlight">\( N_{1+} \ge X_0^*\)</span> and <span class="math notranslate nohighlight">\(N_{+1} \ge X_1^*\)</span>.
+<a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.6764">Li and Ding (2016)</a> show that taking into account
+the observed data reduces the number of tables that must be considered to <span class="math notranslate nohighlight">\(O(N^2)\)</span>, greatly speeding the computation.</p>
+<p>More recent work cuts the number of tables from <span class="math notranslate nohighlight">\(O(N^2)\)</span> to <span class="math notranslate nohighlight">\(O(N \ln N)\)</span>
+(Aronow, P.M., H. Chang, and P. Lopatto, 2022?. Fast computation of exact confidence intervals for randomized experiments with binary outcomes. <a class="reference external" href="https://lopat.to/permutation.pdf">https://lopat.to/permutation.pdf</a>).</p>
+<p><strong>A permutation approach</strong></p>
+<p>Here is the Li and Ding (2016) approach.
+Together, <span class="math notranslate nohighlight">\(N_{00}\)</span>, <span class="math notranslate nohighlight">\(N_{01}\)</span>, <span class="math notranslate nohighlight">\(N_{10}\)</span>, and <span class="math notranslate nohighlight">\(N_{11}\)</span> determine the sampling distribution of any statistic,
+through the random allocation of subjects to treatments.
+(This is true whether the allocation to treatment is by simple random sampling or Bernoulli sampling;
+for a blocked design, the distribution also depends on how many subjects of each kind are in each block.)
+To test the null hypothesis <span class="math notranslate nohighlight">\(H_0: \mathbf{N} = \mathbf{N}_0\)</span>,
+we can define some function <span class="math notranslate nohighlight">\(T\)</span> of <span class="math notranslate nohighlight">\(X_0^*\)</span> and <span class="math notranslate nohighlight">\(X_1^*\)</span> and reject <span class="math notranslate nohighlight">\(H_0\)</span> if the observed value of <span class="math notranslate nohighlight">\(T\)</span> is in the
+tail of the probability distribution corresponding to <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+<p>What should we use for <span class="math notranslate nohighlight">\(T\)</span>? Since we are interested in <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>, we might base the test on</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0744bc74-d1d7-4e21-bf10-1aab63a871db">
+<span class="eqno">()<a class="headerlink" href="#equation-0744bc74-d1d7-4e21-bf10-1aab63a871db" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{\tau} := \bar{X}_1 - \bar{X}_0 = \frac{X_1^*}{n} - \frac{X_0^*}{m}.
+\end{equation}\]</div>
+<p>This is an unbiased estimator of <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>: <span class="math notranslate nohighlight">\(X_1^*/n\)</span> is the sample mean of a simple random sample of size <span class="math notranslate nohighlight">\(n\)</span> from <span class="math notranslate nohighlight">\(\{x_{j1}\}_{j=1}^N\)</span>, so it is unbiased for
+<span class="math notranslate nohighlight">\(N_{+1}/N\)</span> and
+<span class="math notranslate nohighlight">\(X_0^*/m\)</span> is the sample mean of a simple random sample of size <span class="math notranslate nohighlight">\(m\)</span> from <span class="math notranslate nohighlight">\(\{x_{j0}\}_{j=1}^N\)</span>, so it is unbiased for
+<span class="math notranslate nohighlight">\(N_{1+}/N\)</span>.
+Their difference is thus unbiased for <span class="math notranslate nohighlight">\(N_{+1}/N - N_{1+}/N = \bar{\tau}\)</span>.</p>
+<p>Rigdon and Hudgens (2015)  and Li and Ding (2016) take the test statistic to be <span class="math notranslate nohighlight">\(T=|\hat{\tau} - \bar{\tau}|\)</span> (they look at other things, too).</p>
+<p>Recall that <span class="math notranslate nohighlight">\(N_{1+} := N_{10} + N_{11}\)</span>, <span class="math notranslate nohighlight">\(N_{+1} := N_{01} + N_{11}\)</span>,
+and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8ae49802-6cac-4310-86ed-24dacd778de1">
+<span class="eqno">()<a class="headerlink" href="#equation-8ae49802-6cac-4310-86ed-24dacd778de1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{\tau} = \frac{N_{+1} - N_{1+}}{N} = \frac{N_{01}-N_{10}}{N}.
+\end{equation}\]</div>
+<p>For any 2x2 summary table <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> of counts of potential outcomes, define</p>
+<div class="amsmath math notranslate nohighlight" id="equation-41600c49-b657-4080-a34c-db6209d9bcf1">
+<span class="eqno">()<a class="headerlink" href="#equation-41600c49-b657-4080-a34c-db6209d9bcf1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{\tau}(\mathbf{M}) := \frac{M_{01} - M_{10}}{\sum_{j,k} M_{jk}}.
+\end{equation}\]</div>
+<p>If we do not reject the simple hypothesis <span class="math notranslate nohighlight">\(\mathbf{N} = \mathbf{N}_0\)</span>, then we cannot reject the hypothesis <span class="math notranslate nohighlight">\(\bar{\tau} = \bar{\tau}(\mathbf{N}_0) := \bar{\tau}_0\)</span>.
+We can reject the composite hypothesis <span class="math notranslate nohighlight">\(\bar{\tau} = \bar{\tau}_0\)</span> if we can reject the simple hypothesis <span class="math notranslate nohighlight">\(\mathbf{N} = \mathbf{M}\)</span>
+for <em>every</em> summary table <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> for which <span class="math notranslate nohighlight">\(\bar{\tau}(\mathbf{M}) = \bar{\tau}_0\)</span>.</p>
+<p>We can calibrate the test of the hypothesis <span class="math notranslate nohighlight">\(\mathbf{N} = \mathbf{N}_0\)</span>
+by finding out the probability distribution of <span class="math notranslate nohighlight">\(T\)</span> under <span class="math notranslate nohighlight">\(H_0\)</span>:
+Given the summary potential outcome table <span class="math notranslate nohighlight">\(\mathbf{N}_0\)</span> (the counts of subjects with each possible combination of potential outcomes),
+we can construct a full table of potential outcomes that is consistent
+with that table.
+For each of the <span class="math notranslate nohighlight">\(\binom{N}{n}\)</span> equally likely possible treatment assignments, we can find
+the corresponding value of <span class="math notranslate nohighlight">\(T\)</span> by allocating the subjects accordingly, finding <span class="math notranslate nohighlight">\(\hat{\tau}\)</span>, subtracting <span class="math notranslate nohighlight">\(\bar{\tau}(\mathbf{N}_0)\)</span>, and
+taking the absolute value.</p>
+<p>When <span class="math notranslate nohighlight">\(N\)</span> is large and <span class="math notranslate nohighlight">\(n\)</span> is not close to <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(N\)</span>, it is impractical to construct all <span class="math notranslate nohighlight">\(\binom{N}{n}\)</span> possible treatment assignments.
+Then, we might approximate the probability distribution by simulation: actually drawing
+pseudo-random samples of size <span class="math notranslate nohighlight">\(n\)</span> from the subjects, considering them to be the treatment group, calculating <span class="math notranslate nohighlight">\(\hat{\tau}\)</span>, etc.
+As discussed in the chapter on <a class="reference internal" href="tests.html"><span class="doc std std-doc">testing</span></a>, that can be viewed as an approximation to a theoretical <span class="math notranslate nohighlight">\(P\)</span>-value or as
+the exact <span class="math notranslate nohighlight">\(P\)</span>-value for a randomized test.</p>
+<p><strong>Enumerating all 2x2 tables arithmetically consistent with the data</strong></p>
+<p>The table <span class="math notranslate nohighlight">\(\mathbf{N}\)</span> summarizing potential outcomes is constrained by the data.
+For instance, <span class="math notranslate nohighlight">\(N_{10} + N_{11} \ge X_0^*\)</span> and <span class="math notranslate nohighlight">\(N_{01} + N_{11} \ge X_1^*\)</span>.
+There are other constraints, too, as we shall see.</p>
+<p>Define</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bc478ceb-d7d1-404c-ab41-64a753d47abe">
+<span class="eqno">()<a class="headerlink" href="#equation-bc478ceb-d7d1-404c-ab41-64a753d47abe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+  n_{wk} := \sum_{j=1}^N 1_{W_j=w, x_{jw}=k}
+\end{equation}\]</div>
+<p>for <span class="math notranslate nohighlight">\(w \in \{0, 1\}\)</span> and <span class="math notranslate nohighlight">\(k \in \{0, 1\}\)</span>.
+That is, <span class="math notranslate nohighlight">\(n_{00} = m-X_0^*\)</span>, <span class="math notranslate nohighlight">\(n_{01} = X_0^*\)</span>, <span class="math notranslate nohighlight">\(n_{10} = n-X_1^*\)</span>, and
+<span class="math notranslate nohighlight">\(n_{11} = X_1^*\)</span>.
+Clearly, <span class="math notranslate nohighlight">\(\sum_{w,k} n_{wk} = N\)</span>: these numbers count the elements in
+a partition of the subjects.
+Using this notation, <span class="math notranslate nohighlight">\(\hat{\tau} = n_{11}/n - n_{01}/m\)</span>.
+Let <span class="math notranslate nohighlight">\(\mathbf{n} := (n_{wk})_{w, k \in \{0, 1\}}\)</span> be these four numbers as a matrix, the <em>observed outcome
+matrix</em>, the number of subjects assigned to treatment <span class="math notranslate nohighlight">\(w\)</span> whose response was <span class="math notranslate nohighlight">\(k\)</span>, for <span class="math notranslate nohighlight">\(w, k \in \{0, 1\}\)</span>.</p>
+<p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.6384">Rigdon and Hudgens (2014)</a> show that it suffices to examine
+<span class="math notranslate nohighlight">\(n_{RH} := (n_{11} + 1)(n_{10} + 1)(n_{01} + 1)(n_{00} + 1)\)</span> 2x2 tables to find confidence bounds
+for <span class="math notranslate nohighlight">\(\bar{\tau}\)</span> using <span class="math notranslate nohighlight">\(\hat{\tau}\)</span> as the test statistic.</p>
+<p>Their argument is as follows:
+Consider the <span class="math notranslate nohighlight">\(n_{11}\)</span> subjects who were assigned to treatment <span class="math notranslate nohighlight">\(w=1\)</span> and whose response was <span class="math notranslate nohighlight">\(x_{j1}=1\)</span>.
+Fix the unobserved values of the remaining <span class="math notranslate nohighlight">\(N-n_{11}\)</span> subjects.
+As the unobserved responses of those <span class="math notranslate nohighlight">\(n_{11}\)</span> vary, the value of <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>
+and the probability distribution of <span class="math notranslate nohighlight">\(T\)</span> depend only on how many of them
+have <span class="math notranslate nohighlight">\(x_{j0}=0\)</span> and how many have <span class="math notranslate nohighlight">\(x_{j0}=1\)</span>.
+The number <span class="math notranslate nohighlight">\(m\)</span> for which <span class="math notranslate nohighlight">\(x_{j0}=0\)</span> could be 0, 1, <span class="math notranslate nohighlight">\(\ldots\)</span>, or <span class="math notranslate nohighlight">\(n_{11}\)</span>;
+the other <span class="math notranslate nohighlight">\(n_{11}-m\)</span> have <span class="math notranslate nohighlight">\(x_{j0}=1\)</span>.
+There are thus only <span class="math notranslate nohighlight">\(n_{11}+1\)</span> tables that need to be examined,
+given the unobserved values in the other three groups.
+By the same argument, as the unobserved values of the <span class="math notranslate nohighlight">\(n_{01}\)</span>
+subjects vary, holding constant the unobserved values for the rest, there are at
+most <span class="math notranslate nohighlight">\(n_{01}+1\)</span> distinct values of <span class="math notranslate nohighlight">\(\bar{\tau}\)</span> and distinct probability distributions for
+<span class="math notranslate nohighlight">\(T\)</span>.
+The same goes for <span class="math notranslate nohighlight">\(n_{10}\)</span> and <span class="math notranslate nohighlight">\(n_{11}\)</span>.
+By the <em>fundamental rule of counting</em>,
+the total number of tables that give rise to distinguishable probability distributions
+for <span class="math notranslate nohighlight">\(T\)</span> is thus at most <span class="math notranslate nohighlight">\(n_{RH}\)</span>.</p>
+<p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.6764">Li and Ding (2016)</a> improve on that result.
+They prove that
+a table <span class="math notranslate nohighlight">\(\mathbf{N} = (N_{00}, N_{01}, N_{10}, N_{11})\)</span> is consistent with the observed values <span class="math notranslate nohighlight">\((n_{wk})\)</span> iff</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5f78f36a-d4f7-4f55-b270-d229778dad4c">
+<span class="eqno">()<a class="headerlink" href="#equation-5f78f36a-d4f7-4f55-b270-d229778dad4c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\max \{0,n_{11}-N_{01}, N_{11}-n_{01}, N_{10}+N_{11} - n_{10} - n_{01} \}
+  \le
+\min \{N_{11}, n_{11}, N_{10}+N_{11}-n_{01}, N - N_{01} - n_{01} - n_{10} \}.
+\end{equation}\]</div>
+<p><strong>The algorithm</strong></p>
+<p>The overall approach of Li and Ding (2016) is as follows:</p>
+<p>The values <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\((n_{wk})\)</span>, and <span class="math notranslate nohighlight">\(\alpha\)</span> are given.
+Set</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d41d70d1-02ca-4dce-a062-64772d4656bd">
+<span class="eqno">()<a class="headerlink" href="#equation-d41d70d1-02ca-4dce-a062-64772d4656bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{\tau}^* := \frac{n_{11}}{n} - \frac{n_{01}}{m},
+\end{equation}\]</div>
+<p>the observed value of the unbiased estimate of <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>.</p>
+<ul class="simple">
+<li><p>for each table <span class="math notranslate nohighlight">\(\mathbf{N}\)</span> that is algebraically consistent with the observed values <span class="math notranslate nohighlight">\((n_{wk})\)</span>:</p>
+<ul>
+<li><p>find <span class="math notranslate nohighlight">\(\bar{\tau}(\mathbf{N}) = \frac{N_{01}-N_{10}}{N}\)</span>.</p></li>
+<li><p>calculate <span class="math notranslate nohighlight">\(t = |\hat{\tau}^* - \bar{\tau}(\mathbf{N})|\)</span></p></li>
+<li><p>create a “full” list of potential outcomes <span class="math notranslate nohighlight">\((x_{ik})\)</span> consistent with the summary table <span class="math notranslate nohighlight">\(\mathbf{N}\)</span>.</p></li>
+<li><p>find or simulate the sampling distribution of <span class="math notranslate nohighlight">\(|\hat{\tau} - \bar{\tau}|\)</span> using <span class="math notranslate nohighlight">\((x_{ik})\)</span></p></li>
+<li><p>if <span class="math notranslate nohighlight">\(t\)</span> is above the <span class="math notranslate nohighlight">\(1-\alpha\)</span> percentile of the sampling distribution, pass; otherwise include <span class="math notranslate nohighlight">\(\bar{\tau}(\mathbf{N})\)</span> in the confidence set</p></li>
+</ul>
+</li>
+<li><p>report the smallest and largest values of <span class="math notranslate nohighlight">\(\bar{\tau}\)</span> in the confidence set as the endpoints of the confidence interval</p></li>
+</ul>
+<p>Below, the main step–generating tables that are algebraically consistent with the data–is implemented in python
+(<code class="docutils literal notranslate"><span class="pre">N_generator()</span></code>), as is the step of
+creating a table of potential outcomes consistent with <span class="math notranslate nohighlight">\(\mathbf{N}\)</span> (<code class="docutils literal notranslate"><span class="pre">potential_outcomes()</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">filterfalse</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">N_generator</span><span class="p">(</span><span class="n">N</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n00</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n01</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n10</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n11</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    generate tables algebraically consistent with data from an experiment with binary outcomes</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    N : int</span>
+<span class="sd">        number of subjects</span>
+<span class="sd">    n00 : int</span>
+<span class="sd">        number of subjects assigned to treatment 0 who had outcome 0</span>
+<span class="sd">    n01 : int</span>
+<span class="sd">        number of subjects assigned to treatment 0 who had outcome 0</span>
+<span class="sd">    n10 : int</span>
+<span class="sd">        number of subjects assigned to treatment 1 who had outcome 0</span>
+<span class="sd">    n11 : int</span>
+<span class="sd">        number of subjects assigned to treatment 1 who had outcome 1</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Nt : list of 4 ints </span>
+<span class="sd">        N00, subjects with potential outcome 0 under treatments 0 and 1</span>
+<span class="sd">        N01, subjects with potential outcome 0 under treatment 0 and 1 under treatment 1</span>
+<span class="sd">        N10, subjects with potential outcome 1 under treatment 0 and 0 under treatment 1</span>
+<span class="sd">        N11, subjects with potential outcome 1 under treatments 0 and 1</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">n00</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="n">n10</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>               <span class="c1"># allocate space for the observed 0 outcomes, n00 and n10</span>
+        <span class="n">N11</span> <span class="o">=</span> <span class="n">i</span>                                           
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n01</span><span class="o">-</span><span class="n">N11</span><span class="p">),</span> <span class="n">N</span><span class="o">-</span><span class="n">n00</span><span class="o">-</span><span class="n">N11</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>    <span class="c1"># N11+N10 &gt;= n01; N11+N10+n00 &lt;= N</span>
+            <span class="n">N10</span> <span class="o">=</span> <span class="n">j</span>                                        
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n11</span><span class="o">-</span><span class="n">N11</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">n10</span><span class="o">-</span><span class="n">N11</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="n">N11</span><span class="o">-</span><span class="n">N10</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> 
+                                                       <span class="c1"># N11+N01 &gt;= n11; N11+N01+n10 &lt;= N; no more than N subjects</span>
+                <span class="n">N01</span> <span class="o">=</span> <span class="n">k</span>                                  
+                <span class="n">N00</span> <span class="o">=</span> <span class="n">N</span><span class="o">-</span><span class="n">N11</span><span class="o">-</span><span class="n">N10</span><span class="o">-</span><span class="n">N01</span>                  
+                <span class="k">if</span> <span class="n">filter_table</span><span class="p">([</span><span class="n">N00</span><span class="p">,</span> <span class="n">N01</span><span class="p">,</span> <span class="n">N10</span><span class="p">,</span> <span class="n">N11</span><span class="p">],</span> <span class="n">n00</span><span class="p">,</span> <span class="n">n01</span><span class="p">,</span> <span class="n">n10</span><span class="p">,</span> <span class="n">n11</span><span class="p">):</span>
+                    <span class="k">yield</span> <span class="p">[</span><span class="n">N00</span><span class="p">,</span> <span class="n">N01</span><span class="p">,</span> <span class="n">N10</span><span class="p">,</span> <span class="n">N11</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filter_table</span><span class="p">(</span><span class="n">Nt</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">n00</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n01</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n10</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n11</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    check whether summary table Nt of binary outcomes is consistent with observed counts</span>
+<span class="sd">    </span>
+<span class="sd">    implements the test in Theorem 1 of Li and Ding (2016):</span>
+<span class="sd">    </span>
+<span class="sd">       \max \{0,n_{11}-N_{01}, N_{11}-n_{01}, N_{10}+N_{11}-n_{10}-n_{01} \}</span>
+<span class="sd">           \le</span>
+<span class="sd">       \min \{N_{11}, n_{11}, N_{10}+N_{11}-n_{01}, N-N_{01}-n_{01}-n_{10} \}</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Nt : list of four ints</span>
+<span class="sd">        the table of counts of subjects with each combination of potential outcomes, in the order</span>
+<span class="sd">        N_00, N_01, N_10, N_11</span>
+<span class="sd">       </span>
+<span class="sd">    n01 : int</span>
+<span class="sd">        number of subjects assigned to control whose observed response was 1</span>
+
+<span class="sd">    n11 : int</span>
+<span class="sd">        number of subjects assigned to treatment whose observed response was 1</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    ok : bool</span>
+<span class="sd">        True if table is consistent with the data</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Nt</span><span class="p">)</span>   <span class="c1"># total subjects</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n11</span><span class="o">-</span><span class="n">Nt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Nt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="n">n01</span><span class="p">,</span> <span class="n">Nt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Nt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="n">n10</span><span class="o">-</span><span class="n">n01</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">min</span><span class="p">(</span><span class="n">Nt</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">n11</span><span class="p">,</span> <span class="n">Nt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Nt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="n">n01</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="n">Nt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">n01</span><span class="o">-</span><span class="n">n10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">potential_outcomes</span><span class="p">(</span><span class="n">Nt</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    make a 2xN table of potential outcomes from the 2x2 summary table Nt</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------   </span>
+<span class="sd">    Nt : list of 4 ints</span>
+<span class="sd">        N00, N01, N10, N11</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    po : Nx2 table of potential outcomes consistent with Nt</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">Nt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">Nt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">Nt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">Nt</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="n">Nt</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">potential_outcomes</span><span class="p">(</span><span class="n">Nt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 1],
+       [0, 1],
+       [0, 1],
+       [0, 1],
+       [1, 0],
+       [1, 0],
+       [1, 0],
+       [1, 1],
+       [1, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hypothetical experiment</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">n00</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">n01</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n10</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">n11</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Nt</span> <span class="k">for</span> <span class="n">Nt</span> <span class="ow">in</span> <span class="n">N_generator</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">n00</span><span class="p">,</span> <span class="n">n01</span><span class="p">,</span> <span class="n">n10</span><span class="p">,</span> <span class="n">n11</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[4, 4, 2, 0],
+ [3, 5, 2, 0],
+ [2, 6, 2, 0],
+ [1, 7, 2, 0],
+ [3, 4, 3, 0],
+ [2, 5, 3, 0],
+ [1, 6, 3, 0],
+ [0, 7, 3, 0],
+ [4, 4, 1, 1],
+ [3, 5, 1, 1],
+ [2, 6, 1, 1],
+ [1, 7, 1, 1],
+ [4, 3, 2, 1],
+ [3, 4, 2, 1],
+ [2, 5, 2, 1],
+ [1, 6, 2, 1],
+ [0, 7, 2, 1],
+ [3, 3, 3, 1],
+ [2, 4, 3, 1],
+ [1, 5, 3, 1],
+ [0, 6, 3, 1],
+ [4, 4, 0, 2],
+ [3, 5, 0, 2],
+ [2, 6, 0, 2],
+ [1, 7, 0, 2],
+ [4, 3, 1, 2],
+ [3, 4, 1, 2],
+ [2, 5, 1, 2],
+ [1, 6, 1, 2],
+ [0, 7, 1, 2],
+ [4, 2, 2, 2],
+ [3, 3, 2, 2],
+ [2, 4, 2, 2],
+ [1, 5, 2, 2],
+ [0, 6, 2, 2],
+ [3, 2, 3, 2],
+ [2, 3, 3, 2],
+ [1, 4, 3, 2],
+ [0, 5, 3, 2],
+ [4, 3, 0, 3],
+ [3, 4, 0, 3],
+ [2, 5, 0, 3],
+ [1, 6, 0, 3],
+ [4, 2, 1, 3],
+ [3, 3, 1, 3],
+ [2, 4, 1, 3],
+ [1, 5, 1, 3],
+ [0, 6, 1, 3],
+ [4, 1, 2, 3],
+ [3, 2, 2, 3],
+ [2, 3, 2, 3],
+ [1, 4, 2, 3],
+ [0, 5, 2, 3],
+ [3, 1, 3, 3],
+ [2, 2, 3, 3],
+ [1, 3, 3, 3],
+ [0, 4, 3, 3],
+ [4, 2, 0, 4],
+ [3, 3, 0, 4],
+ [2, 4, 0, 4],
+ [1, 5, 0, 4],
+ [4, 1, 1, 4],
+ [3, 2, 1, 4],
+ [2, 3, 1, 4],
+ [1, 4, 1, 4],
+ [0, 5, 1, 4],
+ [4, 0, 2, 4],
+ [3, 1, 2, 4],
+ [2, 2, 2, 4],
+ [1, 3, 2, 4],
+ [0, 4, 2, 4],
+ [3, 0, 3, 4],
+ [2, 1, 3, 4],
+ [1, 2, 3, 4],
+ [0, 3, 3, 4],
+ [4, 1, 0, 5],
+ [3, 2, 0, 5],
+ [2, 3, 0, 5],
+ [1, 4, 0, 5],
+ [4, 0, 1, 5],
+ [3, 1, 1, 5],
+ [2, 2, 1, 5],
+ [1, 3, 1, 5],
+ [0, 4, 1, 5],
+ [3, 0, 2, 5],
+ [2, 1, 2, 5],
+ [1, 2, 2, 5],
+ [0, 3, 2, 5],
+ [4, 0, 0, 6],
+ [3, 1, 0, 6],
+ [2, 2, 0, 6],
+ [1, 3, 0, 6],
+ [3, 0, 1, 6],
+ [2, 1, 1, 6],
+ [1, 2, 1, 6],
+ [0, 3, 1, 6]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regeneron data from </span>
+<span class="c1"># https://investor.regeneron.com/news-releases/news-release-details/phase-3-prevention-trial-showed-81-reduced-risk-symptomatic-sars</span>
+<span class="n">n</span><span class="o">=</span><span class="mi">753</span>
+<span class="n">m</span><span class="o">=</span><span class="mi">752</span>
+<span class="n">N</span><span class="o">=</span><span class="n">n</span><span class="o">+</span><span class="n">m</span>
+<span class="n">n01</span> <span class="o">=</span> <span class="mi">59</span>
+<span class="n">n11</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">n00</span> <span class="o">=</span> <span class="n">m</span><span class="o">-</span><span class="n">n01</span>
+<span class="n">n10</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="n">n11</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="other-measures-of-the-effect-of-treatment">
+<h3>Other measures of the effect of treatment<a class="headerlink" href="#other-measures-of-the-effect-of-treatment" title="Permalink to this headline">#</a></h3>
+<p>The average treatment effect is one of many ways of quantifying the effect of treatment.
+For vaccines, a common measure of effect size is <em>vaccine efficacy</em>, defined as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-06e2250b-227d-499c-a6fc-0e8e5950574e">
+<span class="eqno">()<a class="headerlink" href="#equation-06e2250b-227d-499c-a6fc-0e8e5950574e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mbox{VE} := \frac{\mbox{risk among unvaccinated} - \mbox{risk among vaccinated}}{\mbox{risk among unvaccinated}}
+= 1 - \frac{\mbox{risk among vaccinated}}{\mbox{risk among unvaccinated}}.
+\end{equation}\]</div>
+<p>This is the naive estimate of the fraction of infections that vaccinating everyone would prevent.</p>
+<p>Here, <em>risk</em> is the fraction of subjects who become infected.
+In the notation we’ve been using,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7dcbcc53-fdc3-438f-b1b8-f25767bbf552">
+<span class="eqno">()<a class="headerlink" href="#equation-7dcbcc53-fdc3-438f-b1b8-f25767bbf552" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mbox{VE}(\mathbf{N}) = \frac{N_{1+}/N - N_{+1}/N}{N_{1+}/N} = \frac{N_{1+} - N_{+1}}{N_{1+}} = 1 - \frac{ N_{+1}}{N_{1+}}
+\end{equation}\]</div>
+<p>if <span class="math notranslate nohighlight">\(N_{1+} &gt; 0\)</span>.</p>
+<p>We can make confidence intervals for vaccine efficiacy in the same way as for the average treatment effect:</p>
+<ul class="simple">
+<li><p>Choose a reasonable test statistic <span class="math notranslate nohighlight">\(T\)</span>. Here, we might use the <em>plug-in estimator</em> of VE, which is biased, but
+still a sensible choice:</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-e355a097-8edb-4996-a645-b2b5352e6a13">
+<span class="eqno">()<a class="headerlink" href="#equation-e355a097-8edb-4996-a645-b2b5352e6a13" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\widehat{\mbox{VE}} := \left \{ \begin{array}{ll}
+    1 - \bar{X}_1^*/\bar{X}_0^*, &amp; \bar{X}_0^* &gt; 0 \\
+    0, &amp; \bar{X}_0^* = 0.
+    \end{array}
+    \right .
+\end{equation}\]</div>
+<ul class="simple">
+<li><p>For each summary table of potential outcomes, <span class="math notranslate nohighlight">\(\mathbf{N}\)</span>, test the hypothesis that the observations came from that table using the randomization distribution of <span class="math notranslate nohighlight">\(T\)</span>: reject if the observed value of <span class="math notranslate nohighlight">\(T\)</span> exceeds the <span class="math notranslate nohighlight">\(1-\alpha\)</span> percentile of that distribution.</p></li>
+<li><p>If the hypothesis is not rejected, include <span class="math notranslate nohighlight">\(\mbox{VE}(\mathbf{N})\)</span> in the confidence set.</p></li>
+</ul>
+<p>A similar approach works with any measure of effect size in a randomized experiment with binary outcomes.</p>
+</section>
+<section id="what-s-special-about-binary-outcomes">
+<h3>What’s special about binary outcomes?<a class="headerlink" href="#what-s-special-about-binary-outcomes" title="Permalink to this headline">#</a></h3>
+<p>The approach above uses the assumption that the potential outcomes can be only 0 or 1.
+If the potential outcomes take values in a known finite set, a similar approach works, but if there are more than 2 possible values, constructing all tables algebraically consistent with the data is in general harder, and the number of such tables will be larger.</p>
+<p>If the potential outcomes are bounded with known bounds (but not necessarily discrete with known support), the approach can be generalized using nonparametric methods for estimating the mean of bounded, finite populations (see other chapters in the notes for such methods, including <a class="reference internal" href="hoeffding.html"><span class="doc std std-doc">Confidence bounds via the Chebychev and Hoeffding Inequalities</span></a>, <a class="reference internal" href="markov.html"><span class="doc std std-doc">Lower confidence bounds for the mean via Markov’s Inequality and methods based on the Empirical Distribution</span></a>, <a class="reference internal" href="pennySampling.html"><span class="doc std std-doc">Penny sampling</span></a>, <a class="reference internal" href="sprt.html"><span class="doc std std-doc">Wald’s Sequential Probability Ratio Test (SPRT)</span></a>, <a class="reference internal" href="kaplanWald.html"><span class="doc std std-doc">Kaplan-Wald Confidence Bound for a Nonnegative Mean</span></a>, and <a class="reference internal" href="shootout.html"><span class="doc std std-doc">Method shootout</span></a>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

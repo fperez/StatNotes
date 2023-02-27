@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Wald’s Sequential Probability Ratio Test &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/sprt.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Fsprt.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/sprt.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequential-test-make-a-decision-after-each-draw-from-the-population">
+   Sequential test: make a decision after each draw from the population
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sprt-miracle">
+   SPRT miracle
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#connection-to-gambler-s-ruin">
+   Connection to Gambler’s ruin
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iid-bernoulli-trials-sampling-with-replacement-from-binary-populations">
+   IID Bernoulli trials: sampling with replacement from binary populations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wald-s-sprt-for-p-in-iid-bernoulli-trials">
+   Wald’s SPRT for
+   <span class="math notranslate nohighlight">
+    \(p\)
+   </span>
+   in iid Bernoulli trials
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulation-of-sprt-for-binomial">
+   Simulation of SPRT for Binomial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#behavior">
+   Behavior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#it-works-for-beta-0-too-p-values">
+   It works for
+   <span class="math notranslate nohighlight">
+    \(\beta = 0\)
+   </span>
+   too:
+   <span class="math notranslate nohighlight">
+    \(P\)
+   </span>
+   -values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dependent-observations">
+   Dependent observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nuisance-parameters">
+   Nuisance parameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-s-next">
+   What’s next?
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Wald’s Sequential Probability Ratio Test</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequential-test-make-a-decision-after-each-draw-from-the-population">
+   Sequential test: make a decision after each draw from the population
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sprt-miracle">
+   SPRT miracle
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#connection-to-gambler-s-ruin">
+   Connection to Gambler’s ruin
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iid-bernoulli-trials-sampling-with-replacement-from-binary-populations">
+   IID Bernoulli trials: sampling with replacement from binary populations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wald-s-sprt-for-p-in-iid-bernoulli-trials">
+   Wald’s SPRT for
+   <span class="math notranslate nohighlight">
+    \(p\)
+   </span>
+   in iid Bernoulli trials
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulation-of-sprt-for-binomial">
+   Simulation of SPRT for Binomial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#behavior">
+   Behavior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#it-works-for-beta-0-too-p-values">
+   It works for
+   <span class="math notranslate nohighlight">
+    \(\beta = 0\)
+   </span>
+   too:
+   <span class="math notranslate nohighlight">
+    \(P\)
+   </span>
+   -values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dependent-observations">
+   Dependent observations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nuisance-parameters">
+   Nuisance parameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-s-next">
+   What’s next?
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="wald-s-sequential-probability-ratio-test">
+<h1>Wald’s Sequential Probability Ratio Test<a class="headerlink" href="#wald-s-sequential-probability-ratio-test" title="Permalink to this headline">#</a></h1>
+<section id="sequential-test-make-a-decision-after-each-draw-from-the-population">
+<h2>Sequential test: make a decision after each draw from the population<a class="headerlink" href="#sequential-test-make-a-decision-after-each-draw-from-the-population" title="Permalink to this headline">#</a></h2>
+<p>Sequence of data <span class="math notranslate nohighlight">\(X_1, X_2, \ldots\)</span>.</p>
+<p>Two hypotheses, <span class="math notranslate nohighlight">\(H_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span>, each of which completely specifies the joint distribution of the data.
+Either <span class="math notranslate nohighlight">\(H_0\)</span> or <span class="math notranslate nohighlight">\(H_1\)</span> is true.</p>
+<p>Assume that the joint distributions of <span class="math notranslate nohighlight">\((X_j)\)</span> under <span class="math notranslate nohighlight">\(H_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span> have densities with respect to the same dominating measure.</p>
+<p>Let <span class="math notranslate nohighlight">\(f_{0m}\)</span> be the likelihood of <span class="math notranslate nohighlight">\(H_0\)</span> for data <span class="math notranslate nohighlight">\((X_j)_{j=1}^m\)</span> and let <span class="math notranslate nohighlight">\(f_{1m}\)</span> be the likelihood of <span class="math notranslate nohighlight">\(H_1\)</span> for data <span class="math notranslate nohighlight">\((X_j)_{j=1}^m\)</span>.</p>
+<p>The likelihood ratio of <span class="math notranslate nohighlight">\(H_1\)</span> to <span class="math notranslate nohighlight">\(H_0\)</span> is <span class="math notranslate nohighlight">\(f_{1m}/f_{0m}\)</span>; this is (speaking informally) the probability of observing <span class="math notranslate nohighlight">\(X_1, \ldots, X_m\)</span> if <span class="math notranslate nohighlight">\(H_1\)</span> is true, divided by the probability of observing <span class="math notranslate nohighlight">\(X_1, \ldots, X_m\)</span> if <span class="math notranslate nohighlight">\(H_0\)</span> is true.</p>
+<p>The probability of observing the data actually observed will tend to be higher for whichever
+hypothesis is in fact true, so this likelihood ratio will tend to be greater than <span class="math notranslate nohighlight">\(1\)</span> if <span class="math notranslate nohighlight">\(H_1\)</span> is true,
+and will tend to be less than <span class="math notranslate nohighlight">\(1\)</span> if <span class="math notranslate nohighlight">\(H_0\)</span> is true.
+The more observations we make, the more probable it is that the
+resulting likelihood ratio will be small if <span class="math notranslate nohighlight">\(H_0\)</span> is true.
+Wald (1945) showed that if <span class="math notranslate nohighlight">\(H_0\)</span> is true, then the probability is at most <span class="math notranslate nohighlight">\(\alpha\)</span>
+that the likelihood ratio
+is ever greater than <span class="math notranslate nohighlight">\(1/\alpha\)</span>, no matter how many observations are made.
+More generally, we have:</p>
+<div class="admonition">
+<p class="admonition-title">Note</p>
+<p>Wald’s SPRT
+Theorem</p>
+</div>
+<p>For any <span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span> and <span class="math notranslate nohighlight">\(\beta \in [0, 1)\)</span>, the following sequential algorithm tests the hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> at level no larger than <span class="math notranslate nohighlight">\(\alpha\)</span> and with power at least <span class="math notranslate nohighlight">\(1-\beta\)</span> against the alternative <span class="math notranslate nohighlight">\(H_1\)</span>.</p>
+<p>Set <span class="math notranslate nohighlight">\(m=0\)</span>.</p>
+<ol class="simple">
+<li><p>Increment <span class="math notranslate nohighlight">\(m\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\frac{f_{1m}}{f_{0m}} \ge \frac{1-\beta}{\alpha}\)</span>, stop and reject <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\frac{f_{1m}}{f_{0m}} \le \frac{\beta}{1-\alpha}\)</span>, stop and do not reject <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\frac{\beta}{1-\alpha} &lt; \frac{f_{1m}}{f_{0m}} &lt; \frac{1-\beta}{\alpha}\)</span>, go to step 1.</p></li>
+</ol>
+</div></section>
+<section id="sprt-miracle">
+<h2>SPRT miracle<a class="headerlink" href="#sprt-miracle" title="Permalink to this headline">#</a></h2>
+<p>Don’t need to know the distribution of the likelihood ratio <span class="math notranslate nohighlight">\(\mbox{LR}=\frac{f_{1m}}{f_{0m}}\)</span> under the null hypothesis
+to find the critical values for the test.</p>
+</section>
+<section id="connection-to-gambler-s-ruin">
+<h2>Connection to Gambler’s ruin<a class="headerlink" href="#connection-to-gambler-s-ruin" title="Permalink to this headline">#</a></h2>
+<p>For IID data, the likelihood ratio is a product of terms. On a log scale, it’s a sum.  Each “trial” produces another term in the sum, positive or negative. But—unlike the classical Gambler’s Ruin problem in which the game is fair—the terms are not equal in magnitude: the steps are not all the same size.</p>
+</section>
+<section id="iid-bernoulli-trials-sampling-with-replacement-from-binary-populations">
+<h2>IID Bernoulli trials: sampling with replacement from binary populations<a class="headerlink" href="#iid-bernoulli-trials-sampling-with-replacement-from-binary-populations" title="Permalink to this headline">#</a></h2>
+<p>Suppose <span class="math notranslate nohighlight">\(X_1, X_2, \ldots,\)</span> are IID <span class="math notranslate nohighlight">\(\mbox{Bernoulli}(p)\)</span> random variables
+and let <span class="math notranslate nohighlight">\(p_1 &gt; p_0\)</span>.</p>
+<p>Set <span class="math notranslate nohighlight">\(\mbox{LR} \leftarrow 1\)</span> and <span class="math notranslate nohighlight">\(j \leftarrow 0\)</span>.</p>
+<ul class="simple">
+<li><p>Increment <span class="math notranslate nohighlight">\(j\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X_j = 1\)</span>, <span class="math notranslate nohighlight">\(\mbox{LR} \leftarrow \mbox{LR} \times p_1/p_0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X_j = 0\)</span>, <span class="math notranslate nohighlight">\(\mbox{LR} \leftarrow \mbox{LR} \times (1-p_1)/(1- p_0)\)</span>.</p></li>
+</ul>
+<p>What’s <span class="math notranslate nohighlight">\(\mbox{LR}\)</span> at stage <span class="math notranslate nohighlight">\(m\)</span>?
+Let <span class="math notranslate nohighlight">\(T_m := \sum_{j=1}^m X_j\)</span>.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+     \frac{p_{1m}}{p_{0m}} := 
+         \frac{p_1^{T_m}(1-p_1)^{m-T_m}}{p_0^{T_m}(1-p_0)^{m-T_m}}.
+\end{equation*}\]</div>
+<p>This is the ratio of binomial probability when <span class="math notranslate nohighlight">\(p = p_1\)</span> to binomial probability when
+<span class="math notranslate nohighlight">\(p = p_0\)</span> (the binomial coefficients in the numerator and denominator cancel).
+It simplifies further to</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+  \frac{p_{1m}}{p_{0m}} = (p_0/p_1)^{T_m} ((1-p_0)/(1-p_1))^{m-T_m}.
+\end{equation*}\]</div>
+</section>
+<section id="wald-s-sprt-for-p-in-iid-bernoulli-trials">
+<h2>Wald’s SPRT for <span class="math notranslate nohighlight">\(p\)</span> in iid Bernoulli trials<a class="headerlink" href="#wald-s-sprt-for-p-in-iid-bernoulli-trials" title="Permalink to this headline">#</a></h2>
+<p>Conclude <span class="math notranslate nohighlight">\(p &gt; p_0\)</span> if</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+     \frac{p_{1m}}{p_{0m}} \ge \frac{1-\beta}{\alpha}.
+\end{equation*}\]</div>
+<p>Conclude <span class="math notranslate nohighlight">\(p \le p_0\)</span> if</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+     \frac{p_{1m}}{p_{0m}} \le \frac{\beta}{1-\alpha}.
+\end{equation*}\]</div>
+<p>Otherwise, draw again.</p>
+<p>The SPRT approximately minimizes the
+expected sample size
+when <span class="math notranslate nohighlight">\(p \le p_0\)</span> or <span class="math notranslate nohighlight">\(p &gt; p_1\)</span>.
+For values in <span class="math notranslate nohighlight">\((p_1, p_0)\)</span>, it can have larger sample sizes than fixed-sample-size tests.</p>
+</section>
+<section id="simulation-of-sprt-for-binomial">
+<h2>Simulation of SPRT for Binomial<a class="headerlink" href="#simulation-of-sprt-for-binomial" title="Permalink to this headline">#</a></h2>
+<p>Let’s watch the SPRT in action for iid Bernoulli trials.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the first cell with code: set up the Python environment</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># For interactive widgets</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plotBinomialSPRT</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">       Plots the progress of the SPR for n iid Bernoulli trials with probabiity p</span>
+<span class="sd">       of success, for testing the hypothesis that p=p0 against the hypothesis p=p1</span>
+<span class="sd">       with significance level alpha and power 1-beta</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">trials</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># leave room to start at 1</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sfac</span> <span class="o">=</span> <span class="n">p1</span><span class="o">/</span><span class="n">p0</span>
+    <span class="n">ffac</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">p1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span>
+    <span class="n">terms</span><span class="p">[</span><span class="n">trials</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sfac</span>
+    <span class="n">terms</span><span class="p">[</span><span class="n">trials</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ffac</span>
+    <span class="n">terms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">logterms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="n">terms</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span><span class="o">/</span><span class="n">alpha</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$(1-\beta)/\alpha$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">beta</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">),</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\beta/(1-\alpha)$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Simulation of Wald</span><span class="se">\&#39;</span><span class="s1">s SPRT&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;LR&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">logterms</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span><span class="o">/</span><span class="n">alpha</span><span class="p">),</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$log((1-\beta)/\alpha)$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">beta</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)),</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$log(\beta/(1-\alpha))$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;log(LR)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;trials&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">interact</span><span class="p">(</span><span class="n">plotBinomialSPRT</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>\
+         <span class="n">p</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">.45</span><span class="p">),</span>\
+         <span class="n">p0</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">.5</span><span class="p">),</span>\
+         <span class="n">p1</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">.6</span><span class="p">),</span>\
+         <span class="n">alpha</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">.05</span><span class="p">),</span>\
+         <span class="n">beta</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">.05</span><span class="p">)</span>
+         <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "28f6e62ba90642a0836a69dbe4f391d5", "version_major": 2, "version_minor": 0}
+</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plotBinomialSPRT(n, p, p0, p1, alpha, beta)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="behavior">
+<h2>Behavior<a class="headerlink" href="#behavior" title="Permalink to this headline">#</a></h2>
+<p>For <span class="math notranslate nohighlight">\(p_0 &lt; p_1\)</span>,</p>
+<ul class="simple">
+<li><p>when <span class="math notranslate nohighlight">\(p \ge p_1\)</span>, the likelihood ratio is likely to cross the upper (green) line eventually and unlikely to cross the lower (red) line.</p></li>
+<li><p>when <span class="math notranslate nohighlight">\(p \le p_0\)</span>, the likelihood ratio is likely to cross the lower (red) line eventually and unlikely to cross the upper (green) line.</p></li>
+<li><p>the SPRT approximately minimizes the expected number of trials before rejecting one or the other hypothesis, provided <span class="math notranslate nohighlight">\(p \notin (p_0, p_1)\)</span>.</p></li>
+</ul>
+<p>For <span class="math notranslate nohighlight">\(p_1 &lt; p_0\)</span>, the directions are reversed.</p>
+</section>
+<section id="it-works-for-beta-0-too-p-values">
+<h2>It works for <span class="math notranslate nohighlight">\(\beta = 0\)</span> too: <span class="math notranslate nohighlight">\(P\)</span>-values<a class="headerlink" href="#it-works-for-beta-0-too-p-values" title="Permalink to this headline">#</a></h2>
+<p>The inequalities hold when <span class="math notranslate nohighlight">\(\beta = 0\)</span> also. Then the likelihood ratio has chance at most <span class="math notranslate nohighlight">\(\alpha\)</span> of ever being greater than <span class="math notranslate nohighlight">\(1/\alpha\)</span>, if in fact <span class="math notranslate nohighlight">\(p &gt; p_0\)</span>.</p>
+<p>Hence, <span class="math notranslate nohighlight">\(1/\mbox{LR}\)</span> is the <span class="math notranslate nohighlight">\(P\)</span>-value of the hypothesis <span class="math notranslate nohighlight">\(p &gt; p_0\)</span>. This can be used to construct one-sided confidence bounds for <span class="math notranslate nohighlight">\(p\)</span> and other parameters. The next chapter does exactly that, to find a lower confidence bound for the mean of a nonnegative population.</p>
+</section>
+<section id="dependent-observations">
+<h2>Dependent observations<a class="headerlink" href="#dependent-observations" title="Permalink to this headline">#</a></h2>
+<p>As an illustration of SPRT in for obervations that are not iid, consider the following problem.</p>
+<p>There is a population of <span class="math notranslate nohighlight">\(B\)</span> items. Item <span class="math notranslate nohighlight">\(b\)</span> has “weight” <span class="math notranslate nohighlight">\(N_b\)</span> and “value” <span class="math notranslate nohighlight">\(a_b \in \{0, 1\}\)</span>. Let <span class="math notranslate nohighlight">\(N = \sum_{b=1}^B N_b\)</span>. (You might think of items as manufacturing lots, where <span class="math notranslate nohighlight">\(a_b = 1\)</span> means the lot is acceptable and <span class="math notranslate nohighlight">\(a_b=0\)</span> means the lot is defective.)</p>
+<p>We want to test the hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> that <span class="math notranslate nohighlight">\(\frac{1}{N}\sum_b N_b a_b = 1/2\)</span> against the
+alternative hypothesis <span class="math notranslate nohighlight">\(H_1\)</span> that <span class="math notranslate nohighlight">\(\frac{1}{N}\sum_b N_b a_b = \gamma \)</span>, for some
+fixed <span class="math notranslate nohighlight">\(\gamma &gt; 1/2\)</span>.</p>
+<p>We will draw items sequentially, without replacement, such that the chance that item <span class="math notranslate nohighlight">\(b\)</span> is selected in draw <span class="math notranslate nohighlight">\(i\)</span>, assuming it has not been selected already, is <span class="math notranslate nohighlight">\(N_b/\sum_{j \notin {\mathcal B_{i-1}}} N_j\)</span>,
+where <span class="math notranslate nohighlight">\({\mathcal B_{i-1}}\)</span> is the sample up to and including the <span class="math notranslate nohighlight">\(i-1\)</span>st draw,
+and <span class="math notranslate nohighlight">\({\mathcal B_0} := \emptyset\)</span>.
+That is, the chance of selecting an item is in proportion to its weight among the items
+that have not yet been selected.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbb B_i\)</span> denote the item selected at random in such a manner in the <span class="math notranslate nohighlight">\(i\)</span>th draw.</p>
+<p>The chance that the first draw <span class="math notranslate nohighlight">\({\mathbb B_1}\)</span> gives an item with value 1, i.e.,
+<span class="math notranslate nohighlight">\(\Pr \{a_{\mathbb B_1} = 1\}\)</span>, is <span class="math notranslate nohighlight">\(\frac{1}{N}\sum_b N_b a_b\)</span>.
+Under <span class="math notranslate nohighlight">\(H_0\)</span>, this chance is <span class="math notranslate nohighlight">\(p_{01} = 1/2\)</span>; under <span class="math notranslate nohighlight">\(H_1\)</span>, this chance is
+<span class="math notranslate nohighlight">\(p_{11} = \gamma\)</span>.</p>
+<p>Given the values of <span class="math notranslate nohighlight">\(\{a_{\mathbb B_k}\}_{k=1}^i\)</span>, the conditional
+probability that the <span class="math notranslate nohighlight">\(i\)</span>th draw gives an item with value 1 is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+   \Pr \{a_{\mathbb B_i} = 1 | {\mathcal B_{i-1}} \} = \frac{ \sum_{b \notin {\mathcal B_{i-1}}} N_b a_b}{\sum_{b \notin {\mathcal B_{i-1}}} N_b}.
+\end{equation*}\]</div>
+<p>Under <span class="math notranslate nohighlight">\(H_0\)</span>, this chance is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+   p_{0i} =  \frac{N/2 - \sum_{b \in {\mathcal B_{i-1}}} N_b a_b}{N - \sum_{b \in {\mathcal B_{i-1}}} N_b}.
+\end{equation*}\]</div>
+<p>Under <span class="math notranslate nohighlight">\(H_1\)</span>, this chance is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+   p_{1i} = \frac{N \gamma - \sum_{b \in {\mathcal B_{i-1}}} N_b a_b}{N - \sum_{b \in {\mathcal B_{i-1}}} N_b}.
+\end{equation*}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(X_k\)</span> be the indicator of the event that the <span class="math notranslate nohighlight">\(k\)</span>th draw gives an item with
+value <span class="math notranslate nohighlight">\(1\)</span>, i.e., the indicator of the event <span class="math notranslate nohighlight">\(a_{\mathbb B_k} = 1\)</span>.
+The likelihood ratio for a given sequence <span class="math notranslate nohighlight">\(\{X_k\}_{k=1}^i\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+    \mbox{LR} = \frac{\prod_{k=1}^i p_{1k}^{X_k}(1-p_{1k})^{1-X_k}}
+         {\prod_{k=1}^i p_{0k}^{X_k}(1-p_{0k})^{1-X_k}}.
+\end{equation*}\]</div>
+<p>This can be simplified: <span class="math notranslate nohighlight">\(p_{0k}\)</span> and <span class="math notranslate nohighlight">\(p_{1k}\)</span> have the same denominator,
+<span class="math notranslate nohighlight">\(N - \sum_{b \in {\mathcal B_{i-1}}} N_b\)</span>,
+and their numerators share a term.
+Define <span class="math notranslate nohighlight">\(N(k) := \sum_{j = 1}^{k-1}N_b\)</span> and
+<span class="math notranslate nohighlight">\(A(k) := \sum_{j = 1}^{k-1}N_b a_b\)</span>.
+Then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+    \mbox{LR} = \prod_{k=1}^i 
+    \left ( \frac{N\gamma - A(k)}{N/2 - A(k)} \right )^{X_k}
+    \left ( \frac{N-N\gamma - (N(k) - A(k))}{N-N/2 - (N(k)-A(k))} \right )^{1-X_k}
+\end{equation*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+   = \prod_{k=1}^i
+\left ( \frac{N\gamma - A(k)}{N/2 - A(k)} \right )^{X_k}
+\left ( \frac{N(1-\gamma) - N(k) + A(k)}{N/2 - N(k) + A(k)} \right )^{1-X_k},
+\end{equation*}\]</div>
+<p>where the products are defined to be infinite if the denominator vanishes anywhere.</p>
+<p>If <span class="math notranslate nohighlight">\(H_0\)</span> is true, the chance that <span class="math notranslate nohighlight">\(\mbox{LR}\)</span> is ever greater than <span class="math notranslate nohighlight">\(1/\alpha\)</span>
+is at most <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+</section>
+<section id="nuisance-parameters">
+<h2>Nuisance parameters<a class="headerlink" href="#nuisance-parameters" title="Permalink to this headline">#</a></h2>
+<p>This example arises in constructing risk-limiting audits using “ballot polling,” which involves selecting
+individual cast ballots and reading voter intent from them manually.</p>
+<p>Consider a population of <span class="math notranslate nohighlight">\(N\)</span> items, each of which has one of three possible labels, <span class="math notranslate nohighlight">\(\{w, \ell, u\}\)</span>.
+Let <span class="math notranslate nohighlight">\(N_w\)</span> denote the number of items labeled <span class="math notranslate nohighlight">\(w\)</span>, <span class="math notranslate nohighlight">\(N_\ell\)</span> denote the number labeled <span class="math notranslate nohighlight">\(\ell\)</span>, and <span class="math notranslate nohighlight">\(N_u\)</span>
+denote the number labeled <span class="math notranslate nohighlight">\(u\)</span>.
+We want to test the compound hypothesis that <span class="math notranslate nohighlight">\(N_\ell \ge N_w\)</span> against the alternative that <span class="math notranslate nohighlight">\(N_w = V_w\)</span>, <span class="math notranslate nohighlight">\(N_\ell = V_\ell\)</span>, and <span class="math notranslate nohighlight">\(N_u = V_u\)</span>, with <span class="math notranslate nohighlight">\(V_w &gt; V_\ell\)</span>.</p>
+<p>In election auditing, the items are ballots and the types are votes: <span class="math notranslate nohighlight">\(w\)</span> means the ballot shows a vote
+for reported a particular reported winner <span class="math notranslate nohighlight">\(w\)</span> and not for particular reported loser <span class="math notranslate nohighlight">\(\ell\)</span>, <span class="math notranslate nohighlight">\(\ell\)</span> is a ballot with vote for <span class="math notranslate nohighlight">\(\ell\)</span> but not for <span class="math notranslate nohighlight">\(w\)</span>, and <span class="math notranslate nohighlight">\(u\)</span> means the ballot shows an undervote or invalid vote or a vote for both <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(\ell\)</span>.
+The values <span class="math notranslate nohighlight">\(V_w\)</span>, <span class="math notranslate nohighlight">\(V_\ell\)</span>, and <span class="math notranslate nohighlight">\(V_u\)</span> are the reported results (or related values); the values <span class="math notranslate nohighlight">\(N_w\)</span>, <span class="math notranslate nohighlight">\(N_\ell\)</span>, and <span class="math notranslate nohighlight">\(N_u\)</span> are what a full manual tally of the paper ballots would show.
+Reported winner <span class="math notranslate nohighlight">\(w\)</span> really beat reported loser <span class="math notranslate nohighlight">\(\ell\)</span> if <span class="math notranslate nohighlight">\(N_w &gt; N_\ell\)</span>.
+The null hypothesis <span class="math notranslate nohighlight">\(N_\ell \ge N_w\)</span> is that the reported out come is wrong: the outcome was a tie or <span class="math notranslate nohighlight">\(\ell\)</span> beat <span class="math notranslate nohighlight">\(w\)</span>.)</p>
+<p>In this problem, <span class="math notranslate nohighlight">\(N_u\)</span> (equivalently, <span class="math notranslate nohighlight">\(N_w + N_\ell\)</span>) is a nuisance parameter: we care about <span class="math notranslate nohighlight">\(N_\ell - N_w\)</span>.</p>
+<p>Suppose we sample sequentially without replacement from the <span class="math notranslate nohighlight">\(N\)</span> items in such a way that in every draw, each of the unselected items is equally likely to be selected.
+Let <span class="math notranslate nohighlight">\(X_k\)</span> be the label of the item selected on the <span class="math notranslate nohighlight">\(k\)</span>th draw; let <span class="math notranslate nohighlight">\(W_n := \sum_{k=1}^n 1_{X_k = w}\)</span>;
+and define <span class="math notranslate nohighlight">\(L_n\)</span> and <span class="math notranslate nohighlight">\(U_n\)</span> analogously.</p>
+<p>The probability of a given data sequence <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> under the alternative hypothesis is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+    \frac{V_w(V_w - 1) \cdots (V_w - W_n+1) \times 
+    V_\ell(V_\ell - 1) \cdots (V_\ell - L_n+1) \times
+    V_u(V_u - 1) \cdots (V_u - U_n+1)}{N(N-1) \cdots (N-n+1)}.
+\end{equation*}\]</div>
+<p>If <span class="math notranslate nohighlight">\(L_n \ge W_n\)</span>, the data obviously do not provide evidence against the null, so we suppose that
+<span class="math notranslate nohighlight">\(L_n &lt; W_n\)</span>, in which case, the element of the null that will maximize the probability of the observed data
+has a tie: <span class="math notranslate nohighlight">\(N_w = N_\ell\)</span>.
+Under the null hypothesis, the probability of <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+    \frac{N_w(N_w - 1) \cdots (N_w - W_n+1) \times 
+    N_w(N_w - 1) \cdots (N_w - L_n+1) \times
+    N_u(N_u - 1) \cdots (N_u - U_n+1)}{N(N-1) \cdots (N-n+1)},
+\end{equation*}\]</div>
+<p>for some value <span class="math notranslate nohighlight">\(N_w\)</span> and the corresponding <span class="math notranslate nohighlight">\(N_u = N - 2N_w\)</span>.</p>
+<p>How large can that probability be under the null?
+Certainly no larger than the likelihood of the maximum likelihood estimate of <span class="math notranslate nohighlight">\(N_w\)</span> when <span class="math notranslate nohighlight">\(N_w\)</span> is constrained to
+equal <span class="math notranslate nohighlight">\(N_\ell\)</span>.
+We thus have a one-dimensional optimization problem.
+The probability under the null is maximized by any integer value <span class="math notranslate nohighlight">\(x \in \{ \max(W_n, L_n), \ldots, (N-U_n)/2 \}\)</span> that maximizes</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} x(x - 1) \cdots (x - W_n+1) \times x(x - 1) \cdots (x - L_n+1) \times (N-2x)(N-2x - 1) \cdots (N-2x - U_n+1).\end{equation*}\]</div>
+<p>The logarithm is monotonic, so any maximizer, <span class="math notranslate nohighlight">\(x^*\)</span>, also maximizes</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  f(x) = \sum_{i=0}^{W_n-1} \ln (x-i) + \sum_{i=0}^{L_n-1} \ln (x-i) + \sum_{i=0}^{U_n-1} \ln (N-2x-i).\end{equation*}\]</div>
+<p>If we treat <span class="math notranslate nohighlight">\(x\)</span> as a continuous variable, we can differentiate <span class="math notranslate nohighlight">\(f\)</span> with respect to <span class="math notranslate nohighlight">\(x\)</span>.
+The second derivative is negative, so the function is convex, and a local maximum is
+a global maximum.
+The optimal value will be the integer value of <span class="math notranslate nohighlight">\(x\)</span> closest to the real value of <span class="math notranslate nohighlight">\(x\)</span> that is
+a stationary point.</p>
+<p>A conservative <span class="math notranslate nohighlight">\(p\)</span> value for the null hypothesis after <span class="math notranslate nohighlight">\(n\)</span> items have been drawn is thus</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+    \frac{\prod_{i=0}^{W_n-1} (x^*-i) \; \prod_{i=0}^{L_n-1}  (x^*-i) \; \prod_{i=0}^{U_n-1} (N-2x^*-i)}{\prod_{i=0}^{W_n-1}(V_w-i) \; \prod_{i=0}^{L_n-1} (V_\ell-i) \; \prod_{i=0}^{U_n-1} (V_u-i)}.
+\end{equation*}\]</div>
+<p>An alternative approach that avoids the need to maximize over a nuisance parameter is given in SHANGRLA:
+Sets of Half-Average Nulls Generate Risk-Limiting Audits
+<a class="reference external" href="https://dl.acm.org/doi/abs/10.1007/978-3-030-54455-3_23">Stark, 2020</a>: in this example, it would encode a vote for
+<span class="math notranslate nohighlight">\(w\)</span> as <span class="math notranslate nohighlight">\(1\)</span>, a vote for <span class="math notranslate nohighlight">\(u\)</span> as <span class="math notranslate nohighlight">\(1/2\)</span>, and a vote for <span class="math notranslate nohighlight">\(\ell\)</span> as zero.
+That yields a finite list of values between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>.
+If the mean of that list is greater than <span class="math notranslate nohighlight">\(1/2\)</span>, <span class="math notranslate nohighlight">\(w\)</span> really got more votes than <span class="math notranslate nohighlight">\(\ell\)</span>.
+This transformation allows any method for testing whether the mean of a finite, bounded population is less
+than or equal to <span class="math notranslate nohighlight">\(1/2\)</span> to be used.
+See also <a class="reference internal" href="martingales.html"><span class="doc std std-doc">the martingales notebook</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## TO DO: implement stationary point calculation</span>
+
+<span class="k">def</span> <span class="nf">f_plus</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Wn</span><span class="p">,</span> <span class="n">Ln</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Wn</span><span class="p">)])</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">([</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Ln</span><span class="p">)])</span>
+
+<span class="k">def</span> <span class="nf">f_minus</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Un</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Un</span><span class="p">)])</span>
+
+<span class="k">def</span> <span class="nf">f_all</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Wn</span><span class="p">,</span> <span class="n">Ln</span><span class="p">,</span> <span class="n">Un</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">f_plus</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Wn</span><span class="p">,</span> <span class="n">Ln</span><span class="p">)</span><span class="o">+</span><span class="n">f_minus</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Un</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">feasible_range</span><span class="p">(</span><span class="n">Wn</span><span class="p">,</span> <span class="n">Ln</span><span class="p">,</span> <span class="n">Un</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns the range of values of Nw consistent with the data</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">Wn</span><span class="p">,</span><span class="n">Ln</span><span class="p">),</span> <span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">Un</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-s-next">
+<h2>What’s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="pSPRTnoReplacement.html"><span class="doc std std-doc">Optional next: The SPRT for the population percentage, sampling without replacement</span></a></p></li>
+<li><p><a class="reference internal" href="kaplanWald.html"><span class="doc std std-doc">Next: The Kaplan-Wald Confidence Bound for a Nonnegative Mean</span></a></p></li>
+<li><p><a class="reference internal" href="markov.html"><span class="doc std std-doc">Lower confidence bounds for the mean of a nonnegative population: Markov’s Inequality &amp; methods based on the empirical distribution</span></a></p></li>
+<li><p><a class="reference internal" href="index.html"><span class="doc std std-doc">Index</span></a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

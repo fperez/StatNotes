@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Problem set: permutation tests, rank-based tests, and simulating \(P\)-values &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/240-spring-2023/Hw/ps03-permute-rank.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2F240-spring-2023/Hw/ps03-permute-rank.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/240-spring-2023/Hw/ps03-permute-rank.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Problem set: permutation tests, rank-based tests, and simulating P-values</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-set-permutation-tests-rank-based-tests-and-simulating-p-values">
+<h1>Problem set: permutation tests, rank-based tests, and simulating <span class="math notranslate nohighlight">\(P\)</span>-values<a class="headerlink" href="#problem-set-permutation-tests-rank-based-tests-and-simulating-p-values" title="Permalink to this headline">#</a></h1>
+<ol class="simple">
+<li><p>Explain the “randomization model” (randomizing an experimental group into different treatments)
+and some of its advantages and limitations.
+State the strong null hypothesis for the randomization model (the Neyman model) and the typical weak null hypothesis.</p></li>
+<li><p>For the randomization model, state some pros and cons of the Wilcoxon rank sum test versus a permutation test based on the sample mean or on the permutation distribution of the <span class="math notranslate nohighlight">\(t\)</span> statistic, compared with the parametric two-sample Student <span class="math notranslate nohighlight">\(t\)</span>-test. For each test, state the null hypothesis under which the nominal <span class="math notranslate nohighlight">\(P\)</span>-value of each test is its true <span class="math notranslate nohighlight">\(P\)</span>-value.</p></li>
+<li><p>Show mathematically that the Wilcoxon rank-sum test (which uses the sum of the ranks of the treatment group as the test statistic) is equivalent to the Mann-Whitney test (which uses the number of (control, treatment) pairs for which the control response is less than the control response as the test statistic), in the sense that they reject the null for the same data sets. (It’s enough to show that their relationship is monotonic.) You may assume that there are no ties in the data, so the (mid-)ranks are <span class="math notranslate nohighlight">\(\{1, \ldots, n\}\)</span>.</p></li>
+<li><p>Consider an experiment involving 9 subjects, 5 assigned at random to treatment and 4 to control. We want to test the null hypothesis that “treatment makes no difference” at significance level 10%. For each individual, we measure a quantitative response. Think about the omnibus alternative, about the one-sided shift alternative that treatment increases the response, and about the two-sided shift alternative that treatment increases or decreases the response. Consider four tests: the Wilcoxon rank-sum test (using mid-ranks for ties), a permutation test based on the difference in the sample means for the control and the treatment groups, the Smirnov test, and a 2-sample <span class="math notranslate nohighlight">\(t\)</span>-test based on the difference in the sample means for the control and treatment groups.</p>
+<ol class="simple">
+<li><p>Explain the assumptions of each test, including a precise statement of the null hypothesis under which the nominal significance level is the true significance level.</p></li>
+<li><p>Which test would you use in this situation, absent any additional information about the nature of the experiment? Why?</p></li>
+<li><p>Find or estimate by simulation the power of each test against the one-sided shift alternative that treatment increases each individual’s response by 1 unit. If the power depends on additional unspecified features of the problem, such as the baseline responses of the subjects, explain what those features are, and estimate the power for a few different values of those features.</p></li>
+<li><p>For one-sided versions of the Wilcoxon rank-sum test, the permutation test using the sample mean, and the <span class="math notranslate nohighlight">\(t\)</span>-test, and for the Smirnov test, find the (nominal) <span class="math notranslate nohighlight">\(P\)</span>-values for the following hypothetical data, and the power against a shift alternative that treatment increases the response by one unit:
+| treatment | 1 | 2 | 3 | 3 | 4 |
+|———-|—:|—-:|—-:|—-:|—-:|
+| control   | 0 | 1.5 | 2.5 | 3.5 |</p></li>
+</ol>
+</li>
+<li><p>Consider the Smirnov test for an experiment involving 5 subjects, 2 assigned at random to treatment and 3 to control.</p>
+<ol class="simple">
+<li><p>Enumerate all possible values of the test statistic and their probabilities under the strong null hypothesis of no treatment effect, assuming no ties among the data.</p></li>
+<li><p>Now suppose that the observed responses are as follows. Treatment: 1, 2. Control: 0, 2, 4. Estimate the probabilities in the previous part by simulation, using 10,000 replications. Implement the simulation two ways: one by taking the first <span class="math notranslate nohighlight">\(n\)</span> elements of a pseudorandom permutations (the PIKK algorithm) and the other by directly constructing pseudorandom samples. Provide unit tests and a coverage report for the functions you write.</p></li>
+<li><p>Calculate the theoretical standard error of the simulated probabilities, on the assumption that the PRNG generates genuine uniform random numbers.</p></li>
+<li><p>If the simulations were truly random and uniform, what would be the joint distribution of the number of times the test statistic takes each of its possible values in the simulation? (Identify the parametric distribution and its parameters.)</p></li>
+<li><p>Sketch how you would test the hypothesis that the true probabilities are equal to the values you calculated in the first part of this question using the empirical frequencies you observed in the second part.</p></li>
+<li><p>What software package did you use for the simulations? What is its default algorithm for calculating pseudo-random numbers? What is the period of that pseudo-random number generator? What is the largest number of objects for which that generator can give you all permutations? Is there an option in the package to use a better pseudo-random number generator?  If so, which one? What algorithm does the package use to generate permutations? What algorithm does the package use to generate random samples?</p></li>
+</ol>
+</li>
+<li><p>Give two statistical interpretations and theoretical justifications for using <span class="math notranslate nohighlight">\(\mbox{hits}/\mbox{reps}\)</span> as the simulation <span class="math notranslate nohighlight">\(P\)</span>-value and two for using <span class="math notranslate nohighlight">\((\mbox{hits}+1)/(\mbox{reps}+1)\)</span> as the simulation <span class="math notranslate nohighlight">\(P\)</span>-value. Which do you prefer? Why?</p></li>
+<li><p>Give three real-world examples of a scientific null hypothesis that can be expressed as the invariance of a probability model for the data under the action of some group. In each case, identify the “scientific” invariance and the corresponding group invariance for the data. Explain how you could use that invariance to test the scientific hypotheses without knowing anything else about the probability model for the data.</p></li>
+</ol>
+<hr class="docutils" />
+<p>Rosenzweig, M.R., E.L. Bennet, and M.C. Diamond, 1972. Brain changes in response to experience, <em>Scientific American</em>, <em>226</em>, 22–29 report an experiment in which 11 triples of male rats, each triple from the same litter, were
+assigned at random to three different environments, “enriched” (E), standard, and “impoverished.”</p>
+<p>After 65 days, they euthanized the rats and measured their cortical masses (mg).
+Here are the results:</p>
+<table>
+<tr>
+<td> enriched </td><td> 689 </td><td> 656 </td><td> 668 </td><td> 660 </td><td> 679 </td><td> 663 </td><td> 664 </td><td> 647 </td><td> 694 </td><td> 633 </td><td>653 </td>
+</tr>
+<tr>
+<td> impoverished </td><td> 657</td><td> 623</td><td> 652</td><td> 654</td><td> 658</td><td> 646</td><td> 600</td><td> 640</td><td> 605</td><td> 635</td><td> 642 </td>
+</tr>
+<tr>
+<td> difference </td><td> 32</td><td>  33</td><td>  16</td><td>   6</td><td>  21</td><td>  17</td><td>  64</td><td>   7</td><td>  89</td><td>  -2</td><td>  11
+</tr>
+</table>
+<ol class="simple">
+<li><p>Code, from scratch, an appropriate 1-sample permutation test in Python using the sum of the 11 differences as the test statistic. The permutation scheme should match the actual randomization in the experiment.
+You may either construct a test that generates permutations at random, or write code that enumerates all permutations (since there are only 2048 possible equally-likely data in this case).
+If you choose to enumerate all permutations, you can use the <code class="docutils literal notranslate"><span class="pre">itertools</span></code> library.
+Provide unit tests and coverate reports for the functions you write.</p></li>
+<li><p>Explain whether a 1-sided or 2-sided test is appropriate.</p></li>
+<li><p>Under the Neyman model, find the <span class="math notranslate nohighlight">\(P\)</span>-value of the strong null hypothesis that the treatment makes no difference whatsoever.
+Use <span class="math notranslate nohighlight">\(10^4\)</span> random assignments or enumerate all possible assignments.
+Your code should work in the general case (different data, different number of litters), not only the particular set of 22 numbers given.
+That said, for reference, the <span class="math notranslate nohighlight">\(P\)</span>-value for a 2-sided test should be <span class="math notranslate nohighlight">\(1/2^9\)</span> for
+these data, so you can check your answer.</p></li>
+<li><p>Find an upper confidence bound for the exact <span class="math notranslate nohighlight">\(P\)</span>-value (the <span class="math notranslate nohighlight">\(P\)</span>-value based on all possible permutations) by inverting Binomial tests. You may re-use code from the class to do this. If you did not use simulations but instead used all possible assignments, explain how you would get an upper confidence bound if you had simulated things instead.</p></li>
+</ol>
+<p>For your convenience, the data are below in tuple of lists</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brain_wts</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">689</span><span class="p">,</span> <span class="mi">656</span><span class="p">,</span> <span class="mi">668</span><span class="p">,</span> <span class="mi">660</span><span class="p">,</span> <span class="mi">679</span><span class="p">,</span> <span class="mi">663</span><span class="p">,</span> <span class="mi">664</span><span class="p">,</span> <span class="mi">647</span><span class="p">,</span> <span class="mi">694</span><span class="p">,</span> <span class="mi">633</span><span class="p">,</span> <span class="mi">653</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">657</span><span class="p">,</span> <span class="mi">623</span><span class="p">,</span> <span class="mi">652</span><span class="p">,</span> <span class="mi">654</span><span class="p">,</span> <span class="mi">658</span><span class="p">,</span> <span class="mi">646</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">605</span><span class="p">,</span> <span class="mi">635</span><span class="p">,</span> <span class="mi">642</span><span class="p">]</span> 
+            <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./240-spring-2023/Hw"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

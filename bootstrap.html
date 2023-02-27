@@ -1,0 +1,1413 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Resampling methods: the Bootstrap and the Jackknife &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/bootstrap.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Fbootstrap.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bootstrap.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-bootstrap">
+   The Bootstrap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-jackknife">
+   The Jackknife
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bootstrap-confidence-sets">
+   Bootstrap Confidence Sets
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-percentile-method">
+     The Percentile Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximating-b-n-1-by-monte-carlo">
+   Approximating
+   <span class="math notranslate nohighlight">
+    \(B_{n,1}\)
+   </span>
+   by Monte Carlo
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-approaches-to-improving-coverage-probability">
+   Other approaches to improving coverage probability
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise">
+     Exercise.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bootstrap-confidence-sets-based-on-stein-shrinkage-estimates">
+     Bootstrap confidence sets based on Stein (shrinkage) estimates
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Resampling methods: the Bootstrap and the Jackknife</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-bootstrap">
+   The Bootstrap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-jackknife">
+   The Jackknife
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bootstrap-confidence-sets">
+   Bootstrap Confidence Sets
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-percentile-method">
+     The Percentile Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximating-b-n-1-by-monte-carlo">
+   Approximating
+   <span class="math notranslate nohighlight">
+    \(B_{n,1}\)
+   </span>
+   by Monte Carlo
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-approaches-to-improving-coverage-probability">
+   Other approaches to improving coverage probability
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise">
+     Exercise.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bootstrap-confidence-sets-based-on-stein-shrinkage-estimates">
+     Bootstrap confidence sets based on Stein (shrinkage) estimates
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="resampling-methods-the-bootstrap-and-the-jackknife">
+<h1>Resampling methods: the Bootstrap and the Jackknife<a class="headerlink" href="#resampling-methods-the-bootstrap-and-the-jackknife" title="Permalink to this headline">#</a></h1>
+<section id="the-bootstrap">
+<h2>The Bootstrap<a class="headerlink" href="#the-bootstrap" title="Permalink to this headline">#</a></h2>
+<p>We observe an IID sample of size <span class="math notranslate nohighlight">\(n\)</span>,
+<span class="math notranslate nohighlight">\(\{X_j \}_{j=1}^n\)</span> IID <span class="math notranslate nohighlight">\(F\)</span>.
+Each observation is real-valued.
+We wish to estimate some parameter of the distribution of
+<span class="math notranslate nohighlight">\(F\)</span> that can be written as a functional of <span class="math notranslate nohighlight">\(F\)</span>, <span class="math notranslate nohighlight">\(T(F)\)</span>.
+Examples include the mean, <span class="math notranslate nohighlight">\(T(F) = \int x dF(x)\)</span>, other moments, <em>etc</em>.</p>
+<p>The (unpenalized) nonparametric maximum likelihood estimator of <span class="math notranslate nohighlight">\(F\)</span> from the data
+<span class="math notranslate nohighlight">\(\{X_j \}\)</span> is
+just the empirical distribution <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>,
+which assigns mass <span class="math notranslate nohighlight">\(1/n\)</span> to each observation:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f86237f7-f6fd-4642-b636-49f155b237b2">
+<span class="eqno">()<a class="headerlink" href="#equation-f86237f7-f6fd-4642-b636-49f155b237b2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\arg \max_{\mbox{distributions }G} \mathbb{P}_G \{ X_j = x_j, \; j=1, \ldots, n \} = \hat{F}_n.
+\end{equation}\]</div>
+<p>(Note, however, that the MLE of <span class="math notranslate nohighlight">\(F\)</span> is not generally consistent in
+problems with an
+infinite number of parameters, such as estimating a density or a
+distribution function.)</p>
+<p>Using the general principle that the maximum likelihood estimator of a
+function of a parameter is that function of the maximum likelihood
+estimator of the parameter, we might be led to consider <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span>
+as an estimator of <span class="math notranslate nohighlight">\(T(F)\)</span>.</p>
+<p>That is exactly what the sample mean does, as an estimator of the mean:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-70f26fdb-43a9-4d6a-a718-e323afe8f430">
+<span class="eqno">()<a class="headerlink" href="#equation-70f26fdb-43a9-4d6a-a718-e323afe8f430" title="Permalink to this equation">#</a></span>\[\begin{equation}
+        T(\hat{F}_n) = \int x d\hat{F}_n(x) = \sum_{j=1}^n\frac{1}{n}X_j =
+        \frac{1}{n} \sum_j X_j.
+\end{equation}\]</div>
+<p>Similarly, the maximum likelihood estimator of</p>
+<div class="amsmath math notranslate nohighlight" id="equation-df466589-735a-481a-bed1-4c23792ca335">
+<span class="eqno">()<a class="headerlink" href="#equation-df466589-735a-481a-bed1-4c23792ca335" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mathrm{Var}(X) = T(F) = \int \left ( x - \int x dF \right )^2dF
+\end{equation}\]</div>
+<p>is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-85fdff4e-58aa-4956-ac13-1693750d958f">
+<span class="eqno">()<a class="headerlink" href="#equation-85fdff4e-58aa-4956-ac13-1693750d958f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+        T(\hat{F}_n) = \int \left ( x - \int x d\hat{F}_n \right )^2 d\hat{F}_n =
+        \frac{1}{n}\sum_j \left (X_j - \frac{1}{n} \sum_k X_k \right )^2.
+\end{equation}\]</div>
+<p>In these cases, we get analytically tractable expressions for <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span>.</p>
+<p>What is often more interesting is to estimate a property of the sampling
+distribution of the estimator <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span>, for example the variance of
+the estimator <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span>.
+The bootstrap approximates the sampling distribution of
+<span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span> by the sampling distribution of  <span class="math notranslate nohighlight">\(T(\hat{F}_n^*)\)</span>,
+where <span class="math notranslate nohighlight">\(\hat{F}_n^*\)</span> is a size-<span class="math notranslate nohighlight">\(n\)</span> IID random sample drawn
+from <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>.
+That is, the bootstrap approximates
+the sampling distribution of an estimator applied to the empirical
+distribution <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> of a random sample of size
+<span class="math notranslate nohighlight">\(n\)</span> from a distribution <span class="math notranslate nohighlight">\(F\)</span> by the sampling distribution of that estimator
+applied to a random sample <span class="math notranslate nohighlight">\(\hat{F}_n^*\)</span> of size <span class="math notranslate nohighlight">\(n\)</span> from a particular
+realization <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> of
+the empirical distribution of a sample of size <span class="math notranslate nohighlight">\(n\)</span> from <span class="math notranslate nohighlight">\(F\)</span>.</p>
+<p>When <span class="math notranslate nohighlight">\(T\)</span> is the mean <span class="math notranslate nohighlight">\(\int x dF\)</span>, so <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span> is the sample mean,
+we could obtain
+the variance of the distribution of <span class="math notranslate nohighlight">\(T( \hat{F}_n^* )\)</span> analytically:
+Let <span class="math notranslate nohighlight">\(\{ X_j^* \}_{j=1}^n\)</span> be an IID sample of size <span class="math notranslate nohighlight">\(n\)</span> from <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>.
+Then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b84503e2-139f-43ae-a15e-952374116c5b">
+<span class="eqno">()<a class="headerlink" href="#equation-b84503e2-139f-43ae-a15e-952374116c5b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+        \mathrm{Var}_{\hat{F}_n} \frac{1}{n}\sum_{j=1}^n X_j^*
+        = \frac{1}{n^2} \sum_{j=1}^n (X_j - \bar{X})^2,
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\{ X_j \}\)</span> are the original data and <span class="math notranslate nohighlight">\(\bar{X}\)</span> is their mean.
+When we do not get a tractable espression
+for the variance of an estimator under resampling from the empirical
+distribution, we could still approximate the distribution of
+<span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span> by generating a large number of
+size-<span class="math notranslate nohighlight">\(n\)</span> IID <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> data sets (drawing samples of
+size <span class="math notranslate nohighlight">\(n\)</span> with replacement from <span class="math notranslate nohighlight">\(\{ x_j \}_{j=1}^n\)</span>), and applying
+<span class="math notranslate nohighlight">\(T\)</span> to each of those sets.</p>
+<p>The idea of the bootstrap is to approximate the distribution (under <span class="math notranslate nohighlight">\(F\)</span>)
+of an estimator
+<span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span> by the distribution of the estimator under <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>,
+and to approximate <em>that</em> distribution by using a computer to
+take a large number of pseudo-random samples of size <span class="math notranslate nohighlight">\(n\)</span> from
+<span class="math notranslate nohighlight">\(\hat{F}_n\)</span>.</p>
+<p>This basic idea is quite flexible, and can be applied to a wide variety of
+testing and estimation problems, including finding confidence sets for
+functional parameters.<br />
+(It is not a panacea, though: we will see later how delicate it can be.)
+It is related to some other “resampling” schemes in which
+one re-weights the data to form other distributions.
+Before doing more theory with the bootstrap, let’s examine the jackknife.</p>
+</section>
+<section id="the-jackknife">
+<h2>The Jackknife<a class="headerlink" href="#the-jackknife" title="Permalink to this headline">#</a></h2>
+<p>The idea behind the jackknife, which is originally due to Tukey and
+Quenouille, is to
+form from the data <span class="math notranslate nohighlight">\(\{ X_j \}_{j=1}^n\)</span>, <span class="math notranslate nohighlight">\(n\)</span> sets of <span class="math notranslate nohighlight">\(n-1\)</span> data,
+leaving each datum out
+in turn.
+The “distribution” of <span class="math notranslate nohighlight">\(T\)</span> applied to these <span class="math notranslate nohighlight">\(n\)</span> sets is used to approximate
+the distribution of <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span>.
+Let <span class="math notranslate nohighlight">\(\hat{F}_{(i)}\)</span> denote  the empirical distribution of the data
+set with the <span class="math notranslate nohighlight">\(i\)</span>th value deleted;
+<span class="math notranslate nohighlight">\(T_{(i)} = T( \hat{F}_{(i)})\)</span> is the corresponding
+estimate of <span class="math notranslate nohighlight">\(T(F)\)</span>.
+An estimate of the expected value of <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ddc6e9e2-7fc4-47bc-89a2-15fb8dc919d5">
+<span class="eqno">()<a class="headerlink" href="#equation-ddc6e9e2-7fc4-47bc-89a2-15fb8dc919d5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{T}_{(\cdot)} = \frac{1}{n} \sum_{i=1}^n T( \hat{F}_{(i)}) .
+\end{equation}\]</div>
+<p>Consider the bias of <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a18fa59c-9dd1-4c33-bcae-b98c026f4c02">
+<span class="eqno">()<a class="headerlink" href="#equation-a18fa59c-9dd1-4c33-bcae-b98c026f4c02" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mathbb{E}_F T(\hat{F}_n) - T(F).
+\end{equation}\]</div>
+<p>Quenouille’s jackknife estimate of the bias is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7cef789e-e055-49bd-bd6e-71e4e705ca42">
+<span class="eqno">()<a class="headerlink" href="#equation-7cef789e-e055-49bd-bd6e-71e4e705ca42" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \widehat{\mbox{BIAS}} = (n-1) (\hat{T}_{(\cdot)} - T(\hat{F}_n) ).
+\end{equation}\]</div>
+<p>It can be shown that if the bias of <span class="math notranslate nohighlight">\(T\)</span> has a homogeneous
+polynomial expansion
+in <span class="math notranslate nohighlight">\(n^{-1}\)</span> whose coefficients do not depend on <span class="math notranslate nohighlight">\(n\)</span>,
+then the bias of the bias-corrected estimate</p>
+<div class="amsmath math notranslate nohighlight" id="equation-208af130-f0fa-44f4-9e3c-079b50fd40a7">
+<span class="eqno">()<a class="headerlink" href="#equation-208af130-f0fa-44f4-9e3c-079b50fd40a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \tilde{T} = nT(\hat{F}_n) - (n-1) T_{(\cdot)}
+\end{equation}\]</div>
+<p>is <span class="math notranslate nohighlight">\(O(n^{-2})\)</span> instead of <span class="math notranslate nohighlight">\(O(n^{-1})\)</span>.</p>
+<p>Applying the jackknife estimate of bias to correct
+the plug-in estimate of
+variance reproduces the formula for the sample variance (with
+<span class="math notranslate nohighlight">\(1/(n-1)\)</span>) from the formula with <span class="math notranslate nohighlight">\(1/n\)</span>:
+Define</p>
+<div class="amsmath math notranslate nohighlight" id="equation-187ee361-e352-4c4e-82d0-68d342ce5d3d">
+<span class="eqno">()<a class="headerlink" href="#equation-187ee361-e352-4c4e-82d0-68d342ce5d3d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \bar{X} = \frac{1}{n} \sum_{j=1}^n X_j,
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-9b8a9e94-eb1c-4d6f-a95a-cb82fd9ba2f3">
+<span class="eqno">()<a class="headerlink" href="#equation-9b8a9e94-eb1c-4d6f-a95a-cb82fd9ba2f3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \bar{X}_{(i)} = \frac{1}{n-1} \sum_{j \ne i} X_j,
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-b8b4be04-f983-4966-b6b2-8847e09bd4fb">
+<span class="eqno">()<a class="headerlink" href="#equation-b8b4be04-f983-4966-b6b2-8847e09bd4fb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    T(\hat{F}_n) = \hat{\sigma}^2 = \frac{1}{n} \sum_{j=1}^n (X_j - \bar{X})^2,
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-fadf0854-3a04-4130-9f94-00cb1c437199">
+<span class="eqno">()<a class="headerlink" href="#equation-fadf0854-3a04-4130-9f94-00cb1c437199" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    T(\hat{F}_{(i)}) = \frac{1}{n-1} \sum_{j \ne i} ( X_j - \bar{X}_{(i)})^2,
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-6d7d3ffb-76ff-4f2d-8f07-7bf0a2bc901c">
+<span class="eqno">()<a class="headerlink" href="#equation-6d7d3ffb-76ff-4f2d-8f07-7bf0a2bc901c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    T(\hat{F}_{(\cdot)}) = \frac{1}{n} \sum_{i=1}^n T(\hat{F}_{(i)}).
+\end{equation}\]</div>
+<p>Now</p>
+<div class="amsmath math notranslate nohighlight" id="equation-82be3c29-1200-45bb-b61f-a964f3e51235">
+<span class="eqno">()<a class="headerlink" href="#equation-82be3c29-1200-45bb-b61f-a964f3e51235" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \bar{X}_{(i)} = \frac{n\bar{X} - X_i}{n-1} = \bar{X} + \frac{1}{n-1} (\bar{X} - X_i),
+\end{equation}\]</div>
+<p>so</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a2f6682a-9ae8-451f-a496-d54b00b651f5">
+<span class="eqno">()<a class="headerlink" href="#equation-a2f6682a-9ae8-451f-a496-d54b00b651f5" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+     ( X_j - \bar{X}_{(i)})^2 &amp;=&amp;
+        \left ( X_j - \bar{X} - \frac{1}{n-1} (\bar{X} - X_i) \right )^2 \nonumber \\
+      &amp;=&amp; (X_j - \bar{X})^2 + \frac{2}{n-1} (X_j - \bar{X})(X_i - \bar{X}) +
+      \frac{1}{(n-1)^2}(X_i - \bar{X})^2.
+\end{eqnarray}\]</div>
+<p>Note also that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c68cd5ea-001f-4a1b-9298-cc2ad2144eef">
+<span class="eqno">()<a class="headerlink" href="#equation-c68cd5ea-001f-4a1b-9298-cc2ad2144eef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \sum_{j \ne i} (X_j - \bar{X}_{(i)})^2 =
+    \sum_{j=1}^n (X_j - \bar{X}_{(i)})^2 - (X_i - \bar{X}_{(i)})^2.
+\end{equation}\]</div>
+<p>Thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-17b0e26e-faee-4f62-82e9-5bdb5a1d598f">
+<span class="eqno">()<a class="headerlink" href="#equation-17b0e26e-faee-4f62-82e9-5bdb5a1d598f" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+    \sum_{i=1}^n \sum_{j \ne i} (X_j - \bar{X}_{(i)})^2 &amp;=&amp;
+    \frac{1}{n-1} \sum_{i=1}^n \left [ \sum_{j=1}^n \left [
+    (X_j - \bar{X})^2 + \frac{2}{n-1}(X_j - \bar{X})(X_i - \bar{X}) \right . \right . + \nonumber \\
+    &amp;&amp; + \left . \left . \frac{1}{(n-1)^2}(X_i - \bar{X})^2
+    \right ]  - (X_i - \bar{X})^2 - \right . \nonumber \\
+    &amp;&amp;  - \left . \left .
+    \frac{2}{n-1}(X_i - \bar{X})^2 - \frac{1}{(n-1)^2}(X_i - \bar{X})^2 \right . \right ].
+\end{eqnarray}\]</div>
+<p>The last three terms all are multiples of <span class="math notranslate nohighlight">\((X_i - \bar{X})^2\)</span>; the sum of the coefficients
+is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0351e6d2-cc7f-417f-ba3b-2b18ed20f8c0">
+<span class="eqno">()<a class="headerlink" href="#equation-0351e6d2-cc7f-417f-ba3b-2b18ed20f8c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    1 + 2/(n-1) + 1/(n-1)^2 = n^2/(n-1)^2.
+\end{equation}\]</div>
+<p>The middle term of the inner sum is a constant times <span class="math notranslate nohighlight">\((X_j - \bar{X})\)</span>, which sums to zero over <span class="math notranslate nohighlight">\(j\)</span>.
+Simplifying the previous displayed equation yields</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ba85e6d9-467f-4c3a-840f-f3cd93743bd2">
+<span class="eqno">()<a class="headerlink" href="#equation-ba85e6d9-467f-4c3a-840f-f3cd93743bd2" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+    \sum_{i=1}^n \sum_{j \ne i} (X_j - \bar{X}_{(i)})^2
+    &amp;=&amp;
+        \frac{1}{n-1} \sum_{i=1}^n \left ( n \hat{\sigma}^2 + \frac{n}{(n-1)^2}(X_i - \bar{X})^2 - \frac{n^2}{(n-1)^2} (X_i - \bar{X})^2 \right ) \nonumber \\
+    &amp;=&amp;
+        \frac{1}{n-1} \sum_{i=1}^n (n \hat{\sigma}^2 - \frac{n}{n-1} (X_i - \bar{X})^2 ) \nonumber \\
+    &amp;=&amp;
+        \frac{1}{n-1} \left [ n^2 \hat{\sigma}^2 - \frac{n^2}{n-1} \hat{\sigma}^2 \right ] \nonumber \\
+    &amp;=&amp;
+        \frac{n(n-2)}{(n-1)^2}\hat{\sigma}^2.
+\end{eqnarray}\]</div>
+<p>The jackknife bias estimate is thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-58a0b1e4-a024-415d-9720-fd738b2e223f">
+<span class="eqno">()<a class="headerlink" href="#equation-58a0b1e4-a024-415d-9720-fd738b2e223f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \widehat{\mbox{BIAS}} = (n-1)\left ( T(\hat{F}_{(\cdot)}) - T(\hat{F}_n) \right )
+    = \hat{\sigma}^2 \frac{n(n-2) - (n-1)^2}{n-1} = \frac{-\hat{\sigma}^2}{n-1}.
+\end{equation}\]</div>
+<p>The bias-corrected MLE variance estimate is therefore</p>
+<div class="amsmath math notranslate nohighlight" id="equation-934ffbe8-fe45-4120-9ce6-d0a686be94e1">
+<span class="eqno">()<a class="headerlink" href="#equation-934ffbe8-fe45-4120-9ce6-d0a686be94e1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{\sigma}^2 \left ( 1 - \frac{1}{n-1} \right ) =
+    \hat{\sigma}^2 \frac{n}{n-1} = \frac{1}{n-1} \sum_{j=1}^n (X_j - \bar{X})^2 = S^2,
+\end{equation}\]</div>
+<p>the usual sample variance.</p>
+<p>The jackknife also can be used to estimate other properties of an
+estimator, such as its variance.
+The jackknife estimate of the variance of <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b806ed78-122d-457e-90a2-b1c8c7475b6f">
+<span class="eqno">()<a class="headerlink" href="#equation-b806ed78-122d-457e-90a2-b1c8c7475b6f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{\mathrm{Var}}(T) = \frac{n-1}{n} \sum_{j=1}^n ( T_{(j)} - T_{(\cdot)} )^2.
+\end{equation}\]</div>
+<p>It is convenient to think of distributions on data sets to compare
+the jackknife and the bootstrap.
+We shall follow the notation in Efron (1982).
+We condition on <span class="math notranslate nohighlight">\((X_i = x_i)\)</span> and treat the data as fixed in what
+follows.
+Let <span class="math notranslate nohighlight">\(\mathcal{S}_n\)</span> be the <span class="math notranslate nohighlight">\(n\)</span>-dimensional simplex</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dc880d02-71ba-4d7d-914c-e68ea42f7c80">
+<span class="eqno">()<a class="headerlink" href="#equation-dc880d02-71ba-4d7d-914c-e68ea42f7c80" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mathcal{S}_n \equiv \{ \mathbb{P}^* = (P_i^*)_{i=1}^n \in \Re^n
+    : P_i^* \ge 0 \mbox{ and } \sum_{i=1}^n P_i^* = 1 \}.
+\end{equation}\]</div>
+<p>A <em>resampling vector</em>
+<span class="math notranslate nohighlight">\(\mathbb{P}^* = (P_k^*)_{k=1}^n \)</span> is any element of <span class="math notranslate nohighlight">\(\mathcal{S}_n\)</span>;
+<em>i.e.</em>, an <span class="math notranslate nohighlight">\(n\)</span>-dimensional discrete probability vector.
+To each <span class="math notranslate nohighlight">\(\mathbb{P}^* = (P_k^*) \in \mathcal{S}_n\)</span> there corresponds
+a re-weighted  empirical measure <span class="math notranslate nohighlight">\(\hat{F}(\mathbb{P}^*)\)</span> which
+puts mass <span class="math notranslate nohighlight">\(P_k^* \)</span> on <span class="math notranslate nohighlight">\(x_k\)</span>, and a value of the estimator
+<span class="math notranslate nohighlight">\(T^* = T(\hat{F}(\mathbb{P}^*)) = T(\mathbb{P}^*)\)</span>.
+The resampling vector <span class="math notranslate nohighlight">\(\mathbb{P}^0 = (1/n)_{j=1}^n\)</span> corresponds to the
+empirical distribution <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> (each datum <span class="math notranslate nohighlight">\(x_j\)</span> has the same
+mass).
+The resampling vector</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4478bc72-b24d-4927-9803-012a51407e73">
+<span class="eqno">()<a class="headerlink" href="#equation-4478bc72-b24d-4927-9803-012a51407e73" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mathbb{P}_i = \frac{1}{n-1}(1, 1, \ldots, 0, 1, \ldots, 1),
+\end{equation}\]</div>
+<p>which has the zero in the <span class="math notranslate nohighlight">\(i\)</span>th place, is one of the <span class="math notranslate nohighlight">\(n\)</span>
+resampling vectors the jackknife visits; denote the
+corresponding value of the estimator <span class="math notranslate nohighlight">\(T\)</span> by <span class="math notranslate nohighlight">\(T_{(i)}\)</span>.
+The bootstrap visits all resampling vectors whose components are
+multiples of <span class="math notranslate nohighlight">\(1/n\)</span>.</p>
+<p>The bootstrap estimate of variance tends to be better than the
+jackknife estimate of variance for nonlinear estimators because of
+the distance between the empirical measure and the resampled measures:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-45ea366c-e878-4e16-a8cb-385419169a37">
+<span class="eqno">()<a class="headerlink" href="#equation-45ea366c-e878-4e16-a8cb-385419169a37" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \| \mathbb{P}^* - \mathbb{P}^0 \| = O_P(n^{-1/2}),
+\end{equation}\]</div>
+<p>while</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f4f968be-6457-4211-a8f0-0723862763eb">
+<span class="eqno">()<a class="headerlink" href="#equation-f4f968be-6457-4211-a8f0-0723862763eb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \| \mathbb{P}_k - \mathbb{P}^0 \| = O(n^{-1}).
+\end{equation}\]</div>
+<p>To see the former, recall that the difference between the
+empirical distribution and the true distribution is <span class="math notranslate nohighlight">\(O_P(n^{-1/2})\)</span>:
+For any two probability distributions <span class="math notranslate nohighlight">\(\mathbb{P}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbb{P}_2\)</span>, on
+<span class="math notranslate nohighlight">\(\Re\)</span>, define the
+Kolmogorov-Smirnov distance</p>
+<div class="amsmath math notranslate nohighlight" id="equation-426d73dd-d3d0-4fd5-b8e5-57068a4c1950">
+<span class="eqno">()<a class="headerlink" href="#equation-426d73dd-d3d0-4fd5-b8e5-57068a4c1950" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    d_{KS}(\mathbb{P}_1, \mathbb{P}_2) \equiv
+    \| \mathbb{P}_1 - \mathbb{P}_2 \|_{KS} \equiv \sup_{x \in \Re} |
+    \mathbb{P}_1\{(-\infty, x]\} - \mathbb{P}_2\{(-\infty, x]\} |.
+\end{equation}\]</div>
+<p>There exist universal constants <span class="math notranslate nohighlight">\(\chi_n(\alpha)\)</span>
+so that for every continuous (w.r.t. Lebesgue measure) distribution
+<span class="math notranslate nohighlight">\(F\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-989bd924-6fb5-446a-931f-2c177a729919">
+<span class="eqno">()<a class="headerlink" href="#equation-989bd924-6fb5-446a-931f-2c177a729919" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mathbb{P}_F
+    \left \{ \| F - \hat{F}_n \|_{KS} \ge \chi_n(\alpha) \right \}
+    = \alpha.
+\end{equation}\]</div>
+<p>This is the Dvoretzky-Kiefer-Wolfowitz inequality.
+Massart (<em>Ann. Prob., 18</em>, 1269–1283, 1990)
+showed that the constant</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a9bd6653-b9d3-4ebf-b3f6-3c99687b6a74">
+<span class="eqno">()<a class="headerlink" href="#equation-a9bd6653-b9d3-4ebf-b3f6-3c99687b6a74" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \chi_n(\alpha) \le \sqrt{\frac{\ln \frac{2}{\alpha}}{2n}}
+\end{equation}\]</div>
+<p>is <em>tight</em>.
+Thinking of the bootstrap distribution (the empirical distribution <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>) as the true
+cdf and the resamples from it as the data gives the result that the distance between
+the cdf of the bootstrap resample and the empirical cdf of the original data
+is <span class="math notranslate nohighlight">\(O_P(n^{-1/2})\)</span>.</p>
+<p>To see that the cdfs of the jackknife samples are <span class="math notranslate nohighlight">\(O(n^{-1})\)</span> from the
+empirical cdf <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>, note that for univariate real-valued data, the difference
+between <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> and the cdf of the jackknife data set that
+leaves out the <span class="math notranslate nohighlight">\(j\)</span>th ranked observation <span class="math notranslate nohighlight">\(X_{(j)}\)</span> is largest either at <span class="math notranslate nohighlight">\(X_{(j-1)}\)</span> or
+at <span class="math notranslate nohighlight">\(X_{(j)}\)</span>.
+For <span class="math notranslate nohighlight">\(j = 1\)</span> or <span class="math notranslate nohighlight">\(j = n\)</span>, the jackknife
+samples that omit the smallest or largest observation, the <span class="math notranslate nohighlight">\(L_1\)</span>
+distance between the jackknife measure and the empirical distribution
+is exactly <span class="math notranslate nohighlight">\(1/n\)</span>.
+Consider the jackknife cdf <span class="math notranslate nohighlight">\(\hat{F}_{n,(j)}\)</span>, the cdf of the sample without <span class="math notranslate nohighlight">\(X_{(j)}\)</span>,
+<span class="math notranslate nohighlight">\(1 &lt; j &lt; n\)</span>.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b4186065-e022-499a-b32d-e05a34eb4610">
+<span class="eqno">()<a class="headerlink" href="#equation-b4186065-e022-499a-b32d-e05a34eb4610" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{F}_{n,(j)}(X_{(j)}) = (j-1)/(n-1),
+\end{equation}\]</div>
+<p>while <span class="math notranslate nohighlight">\(\hat{F}_n((X_{(j)}) = j/n\)</span>; the difference is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e5dc9f43-c96c-4820-a0a9-acd253a06929">
+<span class="eqno">()<a class="headerlink" href="#equation-e5dc9f43-c96c-4820-a0a9-acd253a06929" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \frac{j}{n} - \frac{j-1}{n-1} = \frac{j(n-1) - n(j-1)}{n(n-1)} =
+    \frac{n-j}{n(n-1)} = \frac{1}{n-1} - \frac{j}{n(n-1)}.
+\end{equation}\]</div>
+<p>On the other hand,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-784146c4-f495-4e86-898f-0e1f2be4c723">
+<span class="eqno">()<a class="headerlink" href="#equation-784146c4-f495-4e86-898f-0e1f2be4c723" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{F}_{n,(j)}(X_{(j-1)}) = (j-1)/(n-1),
+\end{equation}\]</div>
+<p>while <span class="math notranslate nohighlight">\(\hat{F}_n((X_{(j-1)})= (j-1)/n\)</span>; the difference is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bca18600-e067-49c7-900c-5babc37b0ca5">
+<span class="eqno">()<a class="headerlink" href="#equation-bca18600-e067-49c7-900c-5babc37b0ca5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \frac{j-1}{n-1} - \frac{j-1}{n} = \frac{n(j-1) - (n-1)(j-1)}{n(n-1)} =
+    \frac{j - 1}{n(n-1)}.
+\end{equation}\]</div>
+<p>Thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ab0c005e-fb93-400c-a10e-bfc473c6cb44">
+<span class="eqno">()<a class="headerlink" href="#equation-ab0c005e-fb93-400c-a10e-bfc473c6cb44" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \| \hat{F}_{n,(j)} - \hat{F}_{n} \| = \frac{1}{n(n-1)} \max\{n-j, j-1\}.
+\end{equation}\]</div>
+<p>But <span class="math notranslate nohighlight">\(n/2 \le \max\{n-j, j-1\} \le n-1\)</span>, so</p>
+<div class="amsmath math notranslate nohighlight" id="equation-78ee852a-3801-4681-bd41-467b76c1ce76">
+<span class="eqno">()<a class="headerlink" href="#equation-78ee852a-3801-4681-bd41-467b76c1ce76" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \| \hat{F}_{n,(j)} - \hat{F}_n\| = O(n^{-1}).
+\end{equation}\]</div>
+<p>The neighborhood that the bootstrap samples is larger, and is
+probabilistically of the right size to correspond to the uncertainty
+of the empirical distribution function as an estimator of the
+underlying distribution function <span class="math notranslate nohighlight">\(F\)</span> (recall the
+Kiefer-Dvoretzky-Wolfowitz inequality—a K-S ball of radius <span class="math notranslate nohighlight">\(O(n^{-1/2})\)</span>
+has fixed coverage probability).
+For linear functionals, this does not matter, but for strongly nonlinear
+functionals, the bootstrap estimate of the variability tends to be more accurate than
+the jackknife estimate of the variability.</p>
+<p>Let us have a quick look at the distribution of the K-S distance between
+a continuous distribution and the empirical distribution of a
+sample <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^n\)</span> IID <span class="math notranslate nohighlight">\(F\)</span>.
+The discussion follows <em>Feller</em> (1971, pp.36ff).
+First we show that for continuous distributions <span class="math notranslate nohighlight">\(F\)</span>, the distribution of
+<span class="math notranslate nohighlight">\(\| \hat{F}_n - F \|_{KS}\)</span> does not depend on <span class="math notranslate nohighlight">\(F\)</span>.
+To see this, note that <span class="math notranslate nohighlight">\(F(X_j) \sim U[0, 1]\)</span>:
+Let <span class="math notranslate nohighlight">\(x_t \equiv \inf \{x \in \Re : F(x_t) = t \}\)</span>.
+Continuity of <span class="math notranslate nohighlight">\(F\)</span> ensures that <span class="math notranslate nohighlight">\(x_t\)</span> exists for all <span class="math notranslate nohighlight">\(t \in [0, 1]\)</span>.
+Now the event <span class="math notranslate nohighlight">\(\{ X_j \le x_t \}\)</span> is equivalent to the
+event <span class="math notranslate nohighlight">\(\{F(X_j) \le F(x_t)\}\)</span> up to a set of <span class="math notranslate nohighlight">\(F\)</span>-measure zero.
+Thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ef13a774-9191-47f7-8653-8eba604f0e08">
+<span class="eqno">()<a class="headerlink" href="#equation-ef13a774-9191-47f7-8653-8eba604f0e08" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    t = \mathbb{P}_F \{ X_j \le x_t \} = \mathbb{P}_F \{ F(X_j) \le F(x_t) \} =
+    \mathbb{P}_F \{ F(X_j) \le t \}, \,\, t \in [0, 1];
+\end{equation}\]</div>
+<p>i.e., <span class="math notranslate nohighlight">\(\{ F(X_j) \}_{j=1}^n\)</span> are IID <span class="math notranslate nohighlight">\(U[0, 1]\)</span>.
+Let</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bd9b8045-ec71-48fd-8670-34798cd97c1a">
+<span class="eqno">()<a class="headerlink" href="#equation-bd9b8045-ec71-48fd-8670-34798cd97c1a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat{G}_n(t) \equiv \#\{F(X_j) \le t\}/n =
+    \#\{X_j \le x_t\}/n = \hat{F}_n (x_t)
+\end{equation}\]</div>
+<p>be the empirical cdf of <span class="math notranslate nohighlight">\(\{ F(X_j) \}_{j=1}^n\)</span>.
+Note that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-25236fd5-f1f1-4de9-a879-4e13ffbbbf23">
+<span class="eqno">()<a class="headerlink" href="#equation-25236fd5-f1f1-4de9-a879-4e13ffbbbf23" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \sup_{x \in \Re} | \hat{F}_n(x) - F(x) | =
+    \sup_{t \in [0, 1]} | \hat{F}_n(x_t) - F(x_t) | =
+    \sup_{t \in [0, 1]} | \hat{G}_n (t) - t |.
+\end{equation}\]</div>
+<p>The probability distribution of <span class="math notranslate nohighlight">\(\hat{G}_n\)</span> is that of the cdf of <span class="math notranslate nohighlight">\(n\)</span> IID
+<span class="math notranslate nohighlight">\(U[0, 1]\)</span> random variables (it does not depend on <span class="math notranslate nohighlight">\(F\)</span>), so the distribution
+of the K-S distance between the empirical cdf and the true cdf is the
+same for every continuous distribution.
+It turns out that for distributions with atoms, the K-S distance between
+the empirical and the true distribution functions is stochastically
+smaller than it is for continuous distributions.</p>
+</section>
+<section id="bootstrap-confidence-sets">
+<h2>Bootstrap Confidence Sets<a class="headerlink" href="#bootstrap-confidence-sets" title="Permalink to this headline">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> be an index set (not necessarily countable).
+Recall that a collection <span class="math notranslate nohighlight">\(\{ \mathcal{I}_u \}_{u \in \mathcal{U}}\)</span> of confidence intervals for
+parameters <span class="math notranslate nohighlight">\(\{\theta_u \}_{u \in \mathcal{U}}\)</span> has simultaneous <span class="math notranslate nohighlight">\(1-\alpha\)</span>
+coverage probability if</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9a9a2299-ff77-49c2-ac46-49238e2f3f38">
+<span class="eqno">()<a class="headerlink" href="#equation-9a9a2299-ff77-49c2-ac46-49238e2f3f38" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{P}_{\theta} \left \{ \cap_{u \in \mathcal{U}} \{\mathcal{I}_u \ni \theta_u \} \right \}
+\ge 1-\alpha.
+\end{equation}\]</div>
+<p>If <span class="math notranslate nohighlight">\(\mathbb{P} \{ \mathcal{I}_u \ni \theta_u\}\)</span> does not depend on <span class="math notranslate nohighlight">\(u\)</span>, the confidence
+intervals are said to be <em>balanced</em>.</p>
+<p>Many of the procedures for forming joint confidence sets we have seen depend on
+<em>pivots</em>, which are functions of the data and the parameter(s) whose
+distribution is known (even though the parameter and the parent distribution are not).
+For example, the Scheff’{e} method relies on the fact that (for samples from
+a multivariate Gaussian with independent components)
+the sum of squared differences between the data and the corresponding parameters,
+divided by the variance estimate, has an <span class="math notranslate nohighlight">\(F\)</span> distribution, regardless of the
+parameter values.
+Similarly, Tukey’s maximum modulus method relies on the fact that
+(again, for independent Gaussian data) the distribution
+of the maximum of the studentized
+absolute differences between the data and the corresponding
+parameters does not depend on the parameters.
+Both of those examples are parametric, but the idea is more general:
+the procedure we looked at for finding bounds on the density function subject
+to shape restrictions just relied on the fact that there are uniform
+bounds on the probability that the K-S distance between the empirical
+distribution and the true distribution exceeds some threshold.</p>
+<p>Even in cases where there is no known exact pivot, one can sometimes show that
+some function of the data and parameters is asymptotically a pivot.
+Working out the distributions of the functions involved is not typically
+straightforward, and a general method of constructing (possibly
+simultaneous) confidence sets  would be nice.</p>
+<p>Efron gives several methods of basing confidence sets on the bootstrap.
+Those methods are substantially improved (in theory, and in my experience)
+by Beran’s pre-pivoting approach, which leads to iterating the bootstrap.</p>
+<p>Let <span class="math notranslate nohighlight">\(X_n\)</span> denote a sample of size <span class="math notranslate nohighlight">\(n\)</span> from <span class="math notranslate nohighlight">\(F\)</span>.
+Let <span class="math notranslate nohighlight">\(R_n(\theta) = R_n(X_n, \theta)\)</span> have cdf
+<span class="math notranslate nohighlight">\(H_n\)</span>, and let <span class="math notranslate nohighlight">\(H_n^{-1}(\alpha)\)</span>
+be the largest <span class="math notranslate nohighlight">\(\alpha\)</span> quantile of the distribution of <span class="math notranslate nohighlight">\(R_n\)</span>.
+Then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8e3f9e29-0557-493c-8f13-e72598dd81d0">
+<span class="eqno">()<a class="headerlink" href="#equation-8e3f9e29-0557-493c-8f13-e72598dd81d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+        \{ \gamma \in \Theta : R_n(\gamma) \le H_n^{-1}(1-\alpha) \}
+\end{equation}\]</div>
+<p>is a <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence set for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<section id="the-percentile-method">
+<h3>The Percentile Method<a class="headerlink" href="#the-percentile-method" title="Permalink to this headline">#</a></h3>
+<p>The idea of the percentile method is to use the empirical bootstrap percentiles of
+some quantity to approximate the true percentiles.
+Consider constructing a confidence interval for a single real parameter <span class="math notranslate nohighlight">\(\theta = T(F)\)</span>.
+We will estimate <span class="math notranslate nohighlight">\(\theta\)</span> by <span class="math notranslate nohighlight">\(\hat{\theta} = T(\hat{F}_n)\)</span>.
+We would like to know the distribution function <span class="math notranslate nohighlight">\(H_n = H_n(\cdot, F)\)</span> of
+<span class="math notranslate nohighlight">\(D_n (\theta) = T(\hat{F}_n) - \theta\)</span>.
+Suppose we did.
+Let <span class="math notranslate nohighlight">\(H_n^{-1}(\cdot) = H_n^{-1}(\cdot, F)\)</span> be the inverse cdf of <span class="math notranslate nohighlight">\(D_n\)</span>.
+Then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-379f805c-608e-4764-9781-386f5cc226ec">
+<span class="eqno">()<a class="headerlink" href="#equation-379f805c-608e-4764-9781-386f5cc226ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mathbb{P}_F \{ H_n^{-1}(\alpha/2) \le T(\hat{F}_n) - \theta  \le  H_n^{-1}(1- \alpha/2)
+    \} = 1-\alpha,
+\end{equation}\]</div>
+<p>so</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c6d3b9ee-3cc8-4764-a7a0-54265e64b37d">
+<span class="eqno">()<a class="headerlink" href="#equation-c6d3b9ee-3cc8-4764-a7a0-54265e64b37d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+        \mathbb{P}_F \{ \theta \le T(\hat{F}_n) -  H_n^{-1}(\alpha/2)  \mbox{ and }
+        \theta \ge T(\hat{F}_n) - H_n^{-1}(1-\alpha/2) \} = 1-\alpha,
+\end{equation}\]</div>
+<p>or, equivalently,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-23c8e3ae-e89a-4532-8f76-43eb15040589">
+<span class="eqno">()<a class="headerlink" href="#equation-23c8e3ae-e89a-4532-8f76-43eb15040589" title="Permalink to this equation">#</a></span>\[\begin{equation}
+        \mathbb{P}_F \{ [T(\hat{F}_n) - H_n^{-1}(1-\alpha/2), T(\hat{F}_n) -  H_n^{-1}(\alpha/2)]
+        \ni \theta \} = 1-\alpha,
+\end{equation}\]</div>
+<p>so the interval
+<span class="math notranslate nohighlight">\([T(\hat{F}_n) - H_n^{-1}(1-\alpha/2), T(\hat{F}_n) -  H_n^{-1}(\alpha/2)]\)</span>
+would be a <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>The idea behind the percentile method is to approximate <span class="math notranslate nohighlight">\(H_n(\cdot, F)\)</span> by
+<span class="math notranslate nohighlight">\(\hat{H}_n = H_n(\cdot, \hat{F}_n)\)</span>, the distribution of <span class="math notranslate nohighlight">\(D_n\)</span>
+under resampling from <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> rather than <span class="math notranslate nohighlight">\(F\)</span>.
+(This tends not to be an approximation for constructing confidence sets.
+See <a class="reference internal" href="confidence-sets.html"><span class="doc std std-doc">confidence sets</span></a>.)</p>
+<p>An alternative approach is to take
+<span class="math notranslate nohighlight">\(D_n (\theta) = |T(\hat{F}_n) - \theta|\)</span>; then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-98153b46-8d62-4f1c-bf89-231b1c5cd2f9">
+<span class="eqno">()<a class="headerlink" href="#equation-98153b46-8d62-4f1c-bf89-231b1c5cd2f9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+        \mathbb{P}_F \{ | T(\hat{F}_n) - \theta | \le  H_n^{-1}(1- \alpha)
+        \} = 1-\alpha,
+\end{equation}\]</div>
+<p>so</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2674ea29-1622-49cc-9c05-dacd2ef343d6">
+<span class="eqno">()<a class="headerlink" href="#equation-2674ea29-1622-49cc-9c05-dacd2ef343d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+        \mathbb{P}_F \{ [ T(\hat{F}_n -  H_n^{-1}(1-\alpha) , T(\hat{F}_n +  H_n^{-1}(1-\alpha)]
+        \ni \theta  \} = 1-\alpha.
+\end{equation}\]</div>
+<p>In either case, the “raw” bootstrap approach is to approximate <span class="math notranslate nohighlight">\(H_n\)</span> by resampling
+under <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>.</p>
+<p>Beran proves a variety of results under the following condition:</p>
+<blockquote>
+<div><p><strong>Condition 1.</strong> (Beran, 1987)<br />
+For any sequence <span class="math notranslate nohighlight">\(\{F_n\}\)</span> that converges to
+<span class="math notranslate nohighlight">\(F\)</span> in a metric <span class="math notranslate nohighlight">\(d\)</span> on
+cdfs, <span class="math notranslate nohighlight">\(H_n(\cdot, F_n)\)</span> converges weakly to a continuous cdf
+<span class="math notranslate nohighlight">\(H = H(\cdot, F)\)</span> that depends only on <span class="math notranslate nohighlight">\(F\)</span>, and not the sequence <span class="math notranslate nohighlight">\(\{F_n\}\)</span>.</p>
+</div></blockquote>
+<p>Suppose Condition 1 holds.
+Then because <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> is consistent for <span class="math notranslate nohighlight">\(F\)</span>, the estimate <span class="math notranslate nohighlight">\(\hat{H}_n\)</span> converges
+in probability to <span class="math notranslate nohighlight">\(H\)</span> in sup norm; moreover, the distribution of
+<span class="math notranslate nohighlight">\(\hat{H}_n(R_n(\theta))\)</span> converges to <span class="math notranslate nohighlight">\(U[0,1]\)</span>.</p>
+<p>Instead of <span class="math notranslate nohighlight">\(D_n\)</span>, consider <span class="math notranslate nohighlight">\(R_n(\theta) = | T(\hat{F}_n) - \theta |\)</span> or some
+other (approximate) pivot.
+Let <span class="math notranslate nohighlight">\(\hat{H}_n(\cdot, \hat{F}_n)\)</span> be the bootstrap estimate of the cdf of <span class="math notranslate nohighlight">\(R_n\)</span>;
+The set</p>
+<div class="amsmath math notranslate nohighlight" id="equation-cc8adf8b-1fba-49a3-8687-8f64db959be9">
+<span class="eqno">()<a class="headerlink" href="#equation-cc8adf8b-1fba-49a3-8687-8f64db959be9" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+        B_n &amp;=&amp; \{ \gamma \in \Theta : \hat{H}_n (R_n(\gamma)) \le 1-\alpha \}
+            \nonumber \\
+        &amp;=&amp; \{ \gamma \in \Theta : R_n(\gamma) \le \hat{H}_n^{-1}(1-\alpha) \}
+\label{eq:BnDef}
+\end{eqnarray}\]</div>
+<p>is (asymptotically) a <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence set for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>The level of this set for finite samples tends to be inaccurate.
+It can be improved in the following way, due to Beran.</p>
+<p>The original root, <span class="math notranslate nohighlight">\(R_n(\theta)\)</span>, whose limiting distribution depends on <span class="math notranslate nohighlight">\(F\)</span>,
+was transformed into a new root <span class="math notranslate nohighlight">\(R_{n,1}(\theta) = \hat{H}_n(R_n(\theta) )\)</span>,
+whose limiting distribution is <span class="math notranslate nohighlight">\(U[0,1]\)</span>.  The distribution of <span class="math notranslate nohighlight">\(R_{n,1}\)</span>
+depends less strongly on <span class="math notranslate nohighlight">\(F\)</span> than does that of <span class="math notranslate nohighlight">\(R_n\)</span>; Beran calls
+mapping <span class="math notranslate nohighlight">\(R_n\)</span> into <span class="math notranslate nohighlight">\(R_{n,1}\)</span>  <em>prepivoting</em>.
+The confidence set acts as if the distribution of <span class="math notranslate nohighlight">\(R_{n,1}\)</span> really is uniform,
+which is not generally true.  One could instead treat <span class="math notranslate nohighlight">\(R_{n,1}\)</span> itself as a root,
+and pivot to reduce the dependence on <span class="math notranslate nohighlight">\(F\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(H_{n,1} = H_{n,1}(\cdot, F)\)</span> be the cdf of the new root <span class="math notranslate nohighlight">\(R_{n,1}(\theta)\)</span>,
+estimate <span class="math notranslate nohighlight">\(H_{n,1}\)</span> by <span class="math notranslate nohighlight">\(\hat{H}_{n,1} = H_{n,1}(\cdot, \hat{F}_n)\)</span>, and define</p>
+<div class="amsmath math notranslate nohighlight" id="equation-68e979f7-b142-4ee0-9253-7b6cb1c9842b">
+<span class="eqno">()<a class="headerlink" href="#equation-68e979f7-b142-4ee0-9253-7b6cb1c9842b" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+        B_{n,1} &amp;=&amp; \{ \gamma \in \Theta : \hat{H}_{n,1}(R_{n,1}(\gamma)) \le 1-\alpha \}
+             \nonumber \\
+        &amp;=&amp; \{ \gamma \in \Theta : \hat{H}_{n,1}(\hat{H}_n(R_n(\gamma))) \le 1-\alpha \}
+        \nonumber \\
+        &amp;=&amp;   \{ \gamma \in \Theta :
+                R_n(\gamma) \le \hat{H}_n^{-1}(\hat{H}_{n,1}^{-1}(1-\alpha)))
+        \}.
+\label{eq:Bn1Def}
+\end{eqnarray}\]</div>
+<p>Beran shows that this confidence set tends to have smaller error in its level than
+does <span class="math notranslate nohighlight">\(B_n\)</span>.
+The transformation can be iterated further, typically
+resulting in additional reductions in the level error.</p>
+</section>
+</section>
+<section id="approximating-b-n-1-by-monte-carlo">
+<h2>Approximating <span class="math notranslate nohighlight">\(B_{n,1}\)</span> by Monte Carlo<a class="headerlink" href="#approximating-b-n-1-by-monte-carlo" title="Permalink to this headline">#</a></h2>
+<p>I follow Beran’s (1987) notation (mostly).</p>
+<p>Let <span class="math notranslate nohighlight">\(x_n\)</span> denote the “real” sample of size <span class="math notranslate nohighlight">\(n\)</span>.
+Let <span class="math notranslate nohighlight">\(x_n^*\)</span> be a bootstrap sample of size <span class="math notranslate nohighlight">\(n\)</span> drawn from the empirical cdf <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>.
+The components of <span class="math notranslate nohighlight">\(x_n^*\)</span> are conditionally IID  given <span class="math notranslate nohighlight">\(x_n\)</span>.
+Let <span class="math notranslate nohighlight">\(\hat{F}_n^*\)</span> denote the “empirical” cdf of the bootstrap sample <span class="math notranslate nohighlight">\(x_n^*\)</span>.
+Let <span class="math notranslate nohighlight">\(x_n^{**}\)</span> denote a sample of size <span class="math notranslate nohighlight">\(n\)</span> drawn from <span class="math notranslate nohighlight">\(\hat{F}_n^*\)</span>; the components of
+<span class="math notranslate nohighlight">\(x_n^{**}\)</span> are conditionally IID given <span class="math notranslate nohighlight">\(x_n\)</span> and <span class="math notranslate nohighlight">\(x_n^*\)</span>.
+Let <span class="math notranslate nohighlight">\(\hat{\theta}_n = T(\hat{F}_n)\)</span>, and <span class="math notranslate nohighlight">\(\hat{\theta}_n^* = T(\hat{F}_n^*)\)</span>.
+Then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9b64c6da-e711-41f8-8df9-986036b79bff">
+<span class="eqno">()<a class="headerlink" href="#equation-9b64c6da-e711-41f8-8df9-986036b79bff" title="Permalink to this equation">#</a></span>\[\begin{equation}
+H_n(s, F) = \mathbb{P}_F \{ R_n (x_n, \theta) \le s \}  ,
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8fdd5452-9969-44ce-a48c-b843f568fdbe">
+<span class="eqno">()<a class="headerlink" href="#equation-8fdd5452-9969-44ce-a48c-b843f568fdbe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+H_{n,1}(s, F) = \mathbb{P}_F \left \{ \mathbb{P}_{\hat{F}_n} \{ R_n ( x_n^*, \hat{\theta}_n )
+&lt;  R_n(x_n, \theta) \} \le s \right \}.
+\end{equation}\]</div>
+<p>The bootstrap estimates of these cdfs are</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b2242590-9997-4336-897c-d55d6c42cc74">
+<span class="eqno">()<a class="headerlink" href="#equation-b2242590-9997-4336-897c-d55d6c42cc74" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{H}_n(s) = H_n(s, \hat{F}_n ) = \mathbb{P}_{\hat{F}_n} \{ R_n ( x_n^*, \hat{\theta}_n ) \le s
+\},
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-70011bc1-8699-457c-ae05-31bdc82f107f">
+<span class="eqno">()<a class="headerlink" href="#equation-70011bc1-8699-457c-ae05-31bdc82f107f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{H}_{n,1}(s) = H_{n,1}(s, \hat{F}_n) = \mathbb{P}_{\hat{F}_n}
+\left \{ \mathbb{P}_{\hat{F}_n^*} \{ R_n(x_n^{**}, \hat{\theta}_n^* )
+&lt; R_n(x_n^*, \hat{\theta}_n) \} \le s \right \}.
+\end{equation}\]</div>
+<p>The Monte Carlo approach is as follows:</p>
+<ol class="simple">
+<li><p>Draw <span class="math notranslate nohighlight">\(\{ y_k^* \}_{k=1}^M\)</span> bootstrap samples of size <span class="math notranslate nohighlight">\(n\)</span> from <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>.
+The ecdf of <span class="math notranslate nohighlight">\(\{ R_n(y_k^*, \hat{\theta}_n) \}_{k=1}^M \)</span> is an approximation to <span class="math notranslate nohighlight">\(\hat{H}_n\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(k = 1, \cdots, M\)</span>, let <span class="math notranslate nohighlight">\(\{ y_{k\ell}^{**} \}_{\ell=1}^N\)</span> be
+<span class="math notranslate nohighlight">\(N\)</span> size <span class="math notranslate nohighlight">\(n\)</span> bootstrap samples from the ecdf of <span class="math notranslate nohighlight">\(y_k^*\)</span>.
+Let <span class="math notranslate nohighlight">\(\hat{\theta}_{n,k}^* = T(\hat{F}_{n,k}^*)\)</span>.
+Let <span class="math notranslate nohighlight">\(Z_k\)</span> be the fraction of the values
+$<span class="math notranslate nohighlight">\( \{ R_n(y_{k,\ell}^{**}, \hat{\theta}_{n,k}^*  ) \}_{\ell=1}^N\)</span><span class="math notranslate nohighlight">\(
+that are less than or equal to \)</span>R_n(y_k^*, \hat{\theta}_n)$.</p></li>
+<li><p>The ecdf of <span class="math notranslate nohighlight">\(\{ Z_k \}\)</span> is an approximation to <span class="math notranslate nohighlight">\(\hat{H}_{n,1}\)</span> that improves
+(in probability) as <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(N\)</span> grow.</p></li>
+</ol>
+<p>Note that this approach is extremely general.<br />
+Beran gives examples for confidence sets for directions, <em>etc</em>.<br />
+The pivot can in principle be
+a function of any number of parameters, which can yield simultaneous confidence
+sets for parameters of any dimension.</p>
+</section>
+<section id="other-approaches-to-improving-coverage-probability">
+<h2>Other approaches to improving coverage probability<a class="headerlink" href="#other-approaches-to-improving-coverage-probability" title="Permalink to this headline">#</a></h2>
+<p>There are other ways of iterating the bootstrap to improve the level accuracy of
+bootstrap confidence sets.
+Efron suggests trying to attain a different coverage probability so that
+the coverage attained in the second generation samples is the nominal coverage probability.
+That is, if one wants a 95% confidence set, one tries different percentiles so that in
+resampling from the sample, the attained coverage probability is 95%.  Typically, the
+percentile one uses in the second generation will be higher than 95%.
+Here is a sketch of the Monte-Carlo approach:</p>
+<ul class="simple">
+<li><p>Set a value of <span class="math notranslate nohighlight">\(\alpha^*\)</span> (initially taking <span class="math notranslate nohighlight">\(\alpha^* = \alpha\)</span> is reasonable)</p></li>
+<li><p>From the sample, draw <span class="math notranslate nohighlight">\(M\)</span> size-<span class="math notranslate nohighlight">\(n\)</span> samples that are each IID
+<span class="math notranslate nohighlight">\(\hat{F}_n\)</span>. Denote the ecdfs of the samples by <span class="math notranslate nohighlight">\(\{ \hat{F}_{n,j}^*\}\)</span>.</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(j = 1, \ldots, M\)</span>, apply the percentile method to make a (nominal) level
+<span class="math notranslate nohighlight">\(1-\alpha^*\)</span> confidence interval for <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span>.
+This gives <span class="math notranslate nohighlight">\(M\)</span> confidence intervals; a fraction <span class="math notranslate nohighlight">\(1-\alpha'\)</span> will cover
+<span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span>. Typically,
+<span class="math notranslate nohighlight">\(1- \alpha' \ne 1-\alpha\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(1-\alpha' &lt; 1 - \alpha\)</span>, decrease <span class="math notranslate nohighlight">\(\alpha^*\)</span> and return to the previous step.
+If <span class="math notranslate nohighlight">\(1-\alpha' &gt; 1 - \alpha\)</span>, increase <span class="math notranslate nohighlight">\(\alpha^*\)</span> and return to the previous step.
+If <span class="math notranslate nohighlight">\(1-\alpha' \approx 1-\alpha\)</span> to the desired level of precision, go to the next
+step.</p></li>
+<li><p>Report as a <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence interval for <span class="math notranslate nohighlight">\(T(F)\)</span> the (first generation)
+bootstrap quantile confidence interval
+that has nominal <span class="math notranslate nohighlight">\(1 - \alpha^*\)</span> coverage probability.</p></li>
+</ul>
+<p>An alternative approach to increasing coverage probability by iterating
+the bootstrap is to use the same root, but to use a quantile
+(among second-generation bootstrap samples) of
+its <span class="math notranslate nohighlight">\(1-\alpha\)</span> quantile rather than  the quantile observed in the first generation.
+The heuristic justification is that we would ideally like to know the <span class="math notranslate nohighlight">\(1-\alpha\)</span> quantile
+of the pivot under sampling from the true distribution <span class="math notranslate nohighlight">\(F\)</span>.
+We don’t.
+The percentile method estimates the <span class="math notranslate nohighlight">\(1-\alpha\)</span> quantile of the pivot under <span class="math notranslate nohighlight">\(F\)</span> by the
+<span class="math notranslate nohighlight">\(1-\alpha\)</span> quantile of the pivot under <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>, but this is subject to sampling variability.
+To try to be conservative, we could use the bootstrap a second time  find an (approximate)
+upper
+<span class="math notranslate nohighlight">\(1-\alpha^*\)</span> confidence interval for the <span class="math notranslate nohighlight">\(1-\alpha\)</span> quantile of the pivot.</p>
+<p>Here is a sketch of the Monte-Carlo approach:</p>
+<ul class="simple">
+<li><p>Pick a value <span class="math notranslate nohighlight">\(\alpha^* \in (0, 1/2)\)</span> (e.g., <span class="math notranslate nohighlight">\(\alpha^* = \alpha\)</span>).  This is a tuning
+parameter.</p></li>
+<li><p>From the sample, draw <span class="math notranslate nohighlight">\(M\)</span> size-<span class="math notranslate nohighlight">\(n\)</span> samples that are each IID
+<span class="math notranslate nohighlight">\(\hat{F}_n\)</span>. Denote the ecdfs of the samples by <span class="math notranslate nohighlight">\(\{ \hat{F}_{n,j}^*\}\)</span>.</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(j = 1, \ldots, M\)</span>, draw <span class="math notranslate nohighlight">\(N\)</span> size-<span class="math notranslate nohighlight">\(n\)</span> samples, each IID
+<span class="math notranslate nohighlight">\(\hat{F}_{n,j}\)</span>. Find the <span class="math notranslate nohighlight">\(1-\alpha\)</span> quantile of the pivot.
+This gives <span class="math notranslate nohighlight">\(M\)</span> values of the <span class="math notranslate nohighlight">\(1-\alpha\)</span> quantile.
+Let <span class="math notranslate nohighlight">\(c\)</span> be the <span class="math notranslate nohighlight">\(1-\alpha^*\)</span> quantile of the <span class="math notranslate nohighlight">\(M\)</span> <span class="math notranslate nohighlight">\(1-\alpha\)</span> quantiles.</p></li>
+<li><p>Report as a <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence interval for  <span class="math notranslate nohighlight">\(T(F)\)</span> the interval one gets
+by taking <span class="math notranslate nohighlight">\(c\)</span> to be the estimate of the <span class="math notranslate nohighlight">\(1-\alpha\)</span> quantile of the pivot.</p></li>
+</ul>
+<p>In a variety of simulations, this tends to be more conservative than Beran’s method, and more
+often attains at least the nominal coverage probability.</p>
+<section id="exercise">
+<h3>Exercise.<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h3>
+<p>Consider forming a two-sided 95% confidence interval for the mean <span class="math notranslate nohighlight">\(\theta\)</span> of
+a distribution <span class="math notranslate nohighlight">\(F\)</span> based on the sample mean,
+using <span class="math notranslate nohighlight">\(| \bar{X} - \theta |\)</span> as a pivot.</p>
+<ul class="simple">
+<li><p>Implement the three “double-bootstrap” approaches to finding a confidence interval
+(Beran’s pre-pivoting, Efron’s  calibrated target percentile, and the
+percentile-of-percentile).</p></li>
+<li><p>Generate 100 synthetic samples of size 100 from the following distributions: normal,
+lognormal, Cauchy,
+mixtures of normals with the same mean but quite different variances (try different
+mixture coefficients), and mixtures of normals with different means and different variances
+(the means should differ enough that the result is bimodal).</p></li>
+<li><p>Apply the three double bootstrap methods to each, resampling 1000 times from each of
+1000 first-generation bootstrap samples.</p></li>
+<li><p>Which method on the average has the lowest level error? Which method tends to be most
+conservative?  Try to provide some intuition about the circumstances under
+which each method fails, and the circumstances under which each method would be expected
+to perform well.</p></li>
+<li><p>How do you interpret coverage for the Cauchy?</p></li>
+</ul>
+<p><em>Warning</em>: You might need to be clever in how you implement this to make it
+a feasible calculation.<br />
+If you try to store all the intermediate results,
+the memory requirement is huge. On the other hand, if you use too many loops, the
+execution time will be long.</p>
+</section>
+<section id="bootstrap-confidence-sets-based-on-stein-shrinkage-estimates">
+<h3>Bootstrap confidence sets based on Stein (shrinkage) estimates<a class="headerlink" href="#bootstrap-confidence-sets-based-on-stein-shrinkage-estimates" title="Permalink to this headline">#</a></h3>
+<p>Beran (1995) discusses finding a confidence region for the mean vector <span class="math notranslate nohighlight">\(\theta \in \Re^q\)</span>,
+<span class="math notranslate nohighlight">\(q \ge 3\)</span>,
+from data <span class="math notranslate nohighlight">\(X \sim N(\theta, I)\)</span>.
+This is an example illustrating that <em>what</em> one bootstraps is important, and that
+naive plug-in bootstrapping doesn’t always work.</p>
+<p>The sets are spheres centered at the shrinkage estimate</p>
+<div class="amsmath math notranslate nohighlight" id="equation-778bed60-a762-420b-acf7-af785b774ee3">
+<span class="eqno">()<a class="headerlink" href="#equation-778bed60-a762-420b-acf7-af785b774ee3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{\theta}_S = \left ( 1 - \frac{q-2}{\|X\|^2} \right ) X,
+\end{equation}\]</div>
+<p>with random diameter <span class="math notranslate nohighlight">\(\hat{d}\)</span>.
+That is, the confidence sets <span class="math notranslate nohighlight">\(C\)</span> are of the form</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ae32a57a-be42-402f-8718-b46b4d676f08">
+<span class="eqno">()<a class="headerlink" href="#equation-ae32a57a-be42-402f-8718-b46b4d676f08" title="Permalink to this equation">#</a></span>\[\begin{equation}
+C(\hat{\theta}_S, \hat{d}) =
+\left \{ \gamma \in \Re^q : \| \hat{\theta}_S - \gamma \| \le \hat{d}
+\right \}.
+\end{equation}\]</div>
+<p>The problem is how to find <span class="math notranslate nohighlight">\(\hat{d} = \hat{d}(X; \alpha)\)</span> such that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0564b544-c067-4239-8872-fabe954dcca7">
+<span class="eqno">()<a class="headerlink" href="#equation-0564b544-c067-4239-8872-fabe954dcca7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{P}_\gamma \{ C(\hat{\theta}_S, \hat{d})  \ni \gamma \} \ge 1-\alpha
+\end{equation}\]</div>
+<p>whatever be <span class="math notranslate nohighlight">\(\gamma \in \Re^q\)</span>.</p>
+<p>This problem is parametric: <span class="math notranslate nohighlight">\(F\)</span> is known up to the <span class="math notranslate nohighlight">\(q\)</span>-dimensional mean vector
+<span class="math notranslate nohighlight">\(\theta\)</span>.
+We can thus use a “parametric bootstrap” to generate data that are approximately from
+<span class="math notranslate nohighlight">\(F\)</span>, instead of drawing directly
+from <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>: if we have an estimate <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> of <span class="math notranslate nohighlight">\(\theta\)</span>,
+we can generate artificial data
+distributed as <span class="math notranslate nohighlight">\(N( \hat{\theta}, I)\)</span>.
+If <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is a good estimator, the artificial data will  be distributed nearly
+as <span class="math notranslate nohighlight">\(F\)</span>.  The issue is in what sense <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> needs to be good.</p>
+<p>Beran shows (somewhat surprisingly) that resampling  from <span class="math notranslate nohighlight">\(N(\hat{\theta}_S,I)\)</span>
+or from <span class="math notranslate nohighlight">\(N(X,I)\)</span>
+do not tend to work well in calibrating <span class="math notranslate nohighlight">\(\hat{d}\)</span>.
+The crucial  thing in using the bootstrap to calibrate the radius of the
+confidence sphere seems to be to estimate <span class="math notranslate nohighlight">\(\| \theta \|\)</span> well.</p>
+<p><strong>Definition.</strong>
+The <em>geometrical risk</em> of a confidence set <span class="math notranslate nohighlight">\(C\)</span> for the parameter <span class="math notranslate nohighlight">\(\theta \in \Re^q\)</span>
+is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5fa2e63f-2d3c-4b1e-bad1-b913ae00729b">
+<span class="eqno">()<a class="headerlink" href="#equation-5fa2e63f-2d3c-4b1e-bad1-b913ae00729b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+G_q(C, \theta) \equiv q^{-1/2} E_\theta \sup_{\gamma \in C} \| \gamma - \theta \|.
+\end{equation}\]</div>
+<p>That is, the geometrical risk is the expected distance to the parameter from the
+most distant point in the confidence set.
+\end{Definition}</p>
+<p>For confidence spheres</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d1b6cc91-acd8-48e9-8b5d-d9916899acd1">
+<span class="eqno">()<a class="headerlink" href="#equation-d1b6cc91-acd8-48e9-8b5d-d9916899acd1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+C = C(\hat{\theta}, \hat{d}) = \{ \gamma \in \Re^q : \| \gamma - \hat{\theta} \| \le
+\hat{d} \},
+\end{equation}\]</div>
+<p>the geometrical risk can be decomposed further: the distance from <span class="math notranslate nohighlight">\(\theta\)</span>
+to the most distant
+point in the confidence set is the distance from <span class="math notranslate nohighlight">\(\theta\)</span> to the center of the sphere,
+plus the radius of the sphere, so</p>
+<div class="amsmath math notranslate nohighlight" id="equation-33a2dd66-18e5-4f09-b6f5-69cd3f944385">
+<span class="eqno">()<a class="headerlink" href="#equation-33a2dd66-18e5-4f09-b6f5-69cd3f944385" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+G_q(C(\hat{\theta}, \hat{r}), \theta) &amp;=&amp;
+q^{-1/2} E_\theta \left (  \| \hat{\theta} - \theta \| + \hat{d} \right )
+\nonumber \\
+&amp;=&amp;
+q^{-1/2} E_\theta \| \hat{\theta} - \theta \| + q^{-1/2} E_\theta \hat{d} .
+\end{eqnarray}\]</div>
+<blockquote>
+<div><p><strong>Lemma</strong>
+(Beran, 1995, Lemma 4.1).
+Define</p>
+</div></blockquote>
+<div class="amsmath math notranslate nohighlight" id="equation-f96ef20c-353d-4768-b3ab-19defed762a5">
+<span class="eqno">()<a class="headerlink" href="#equation-f96ef20c-353d-4768-b3ab-19defed762a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    W_q(X, \gamma) \equiv (q^{-1/2} ( \|X - \gamma \|^2 - q ), q^{-1/2} \gamma'(X - \gamma).
+\end{equation}\]</div>
+<p>Suppose <span class="math notranslate nohighlight">\(\{ \gamma_q \in \Re^q \}\)</span> is any sequence such that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1a4026f3-f359-463c-b801-4d9a50b44e18">
+<span class="eqno">()<a class="headerlink" href="#equation-1a4026f3-f359-463c-b801-4d9a50b44e18" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{eq:gammaqCond}
+    \frac{\| \gamma_q \|^2}{q}  \rightarrow a &lt; \infty \mbox{ as } q \rightarrow \infty .
+\end{equation}\]</div>
+<p>Then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-64ecc46e-a5a2-4e65-90f7-2e05913378b1">
+<span class="eqno">()<a class="headerlink" href="#equation-64ecc46e-a5a2-4e65-90f7-2e05913378b1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    W_q(X, \gamma_q) \overset{W}{\rightarrow} (\sqrt{2} Z_1, \sqrt{a} Z_2 )
+\end{equation}\]</div>
+<p>under <span class="math notranslate nohighlight">\(\mathbb{P}_{\gamma_q}\)</span>, where <span class="math notranslate nohighlight">\(Z_1\)</span> and <span class="math notranslate nohighlight">\(Z_2\)</span> are IID standard normal random variables.
+(The symbol <span class="math notranslate nohighlight">\(\overset{W}{\rightarrow}\)</span> denotes weak convergence of distributions.)</p>
+<p><strong>Proof.</strong>
+Under <span class="math notranslate nohighlight">\( \mathbb{P}_{\gamma_q}\)</span>, the distribution of <span class="math notranslate nohighlight">\(X - \gamma\)</span> is rotationally invariant,
+so the distribution of the components of <span class="math notranslate nohighlight">\(W_q\)</span> depend on <span class="math notranslate nohighlight">\(\gamma\)</span> only through
+<span class="math notranslate nohighlight">\(\| \gamma \|\)</span>. Wlog, we may take each component of <span class="math notranslate nohighlight">\(\gamma_q\)</span> to be
+<span class="math notranslate nohighlight">\(q^{-1/2}\| \gamma_q\|\)</span>.
+The distribution of the first component of <span class="math notranslate nohighlight">\(W_q\)</span> is then that of the sum of squares
+of <span class="math notranslate nohighlight">\(q\)</span> IID standard normals (a chi-square rv with <span class="math notranslate nohighlight">\(q\)</span> df),
+minus the expected value of that sum, times <span class="math notranslate nohighlight">\(q^{-1/2}\)</span>.
+The standard deviation of a chi-square random variable with <span class="math notranslate nohighlight">\(q\)</span> df is <span class="math notranslate nohighlight">\(\sqrt{2q}\)</span>,
+so the first component of <span class="math notranslate nohighlight">\(W_q\)</span> is <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> times a standardized variable whose
+distribution is asymptotically (in <span class="math notranslate nohighlight">\(q\)</span>) normal.
+The second component of <span class="math notranslate nohighlight">\(W_q\)</span> is a linear combination of IID standard normals; by
+symmetry (as argued above), its distribution is that of</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7e740a96-e6c9-4cf8-939e-a268e0f9d363">
+<span class="eqno">()<a class="headerlink" href="#equation-7e740a96-e6c9-4cf8-939e-a268e0f9d363" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+q^{-1/2} \sum_{j=1}^q q^{-1/2}\| \gamma_q\| Z_j &amp;=&amp;
+\| \gamma_q \|\sum_{j=1}^q Z_j
+\nonumber \\
+\rightarrow a^{1/2} Z_2.
+\end{eqnarray}\]</div>
+<p>Recall that the squared-error risk (normalized by <span class="math notranslate nohighlight">\(q^{-1/2}\)</span>)
+of the James-Stein estimator is
+<span class="math notranslate nohighlight">\(1 - q^{-1} E_\theta \{ (q-2)^2/\|X\|^2 \} &lt; 1\)</span>.
+The difference between the loss of <span class="math notranslate nohighlight">\(\hat{\theta}_S\)</span> and an unbiased estimate of
+its risk is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c412af74-3f81-4c52-b4ea-0cba6bc1bf7c">
+<span class="eqno">()<a class="headerlink" href="#equation-c412af74-3f81-4c52-b4ea-0cba6bc1bf7c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+D_q(X, \theta) = q^{-1/2} \{ \| \hat{\theta}_S - \theta \|^2 -
+[q - (q-2)^2/\|X\|^2] \}.
+\end{equation}\]</div>
+<p>By rotational invariance, the distribution of this quantity depends on <span class="math notranslate nohighlight">\(\theta\)</span> only
+through <span class="math notranslate nohighlight">\(\| \theta\|\)</span>; Beran writes the distribution as <span class="math notranslate nohighlight">\(H_q(\| \theta \|^2/q)\)</span>.
+Beran shows that if  <span class="math notranslate nohighlight">\(\{ \gamma_q \in \Re^q \}\)</span> satisfies \ref{eq:gammaqCond},
+then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a9ea8916-858e-4554-8933-432472491afb">
+<span class="eqno">()<a class="headerlink" href="#equation-a9ea8916-858e-4554-8933-432472491afb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+H_q(\|\gamma_q\|^2/q) \overset{W}{\rightarrow} N(0, \sigma^2(a)),
+\end{equation}\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b1fe6f68-b54e-48bb-af18-767a678fbe3f">
+<span class="eqno">()<a class="headerlink" href="#equation-b1fe6f68-b54e-48bb-af18-767a678fbe3f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sigma^2(t) \equiv 2 - 4t/(1+t)^2 \ge 1.
+\end{equation}\]</div>
+<p>Define</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8b4787fc-06c8-4b9a-a4a7-43e6b1c0a112">
+<span class="eqno">()<a class="headerlink" href="#equation-8b4787fc-06c8-4b9a-a4a7-43e6b1c0a112" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{\theta}_{\mbox{CL}} = [ 1 - (q-2)/\|X\|^2]_+^{1/2} X.
+\end{equation}\]</div>
+<blockquote>
+<div><p><strong>Theorem.</strong>
+(Beran, 1995, Theorem 3.1)
+Suppose   <span class="math notranslate nohighlight">\(\{ \gamma_q \in \Re^q \}\)</span> satisfies    \ref{eq:gammaqCond}.
+Then</p>
+</div></blockquote>
+<div class="amsmath math notranslate nohighlight" id="equation-290c862f-1146-4071-a5bb-f34ffda07962">
+<span class="eqno">()<a class="headerlink" href="#equation-290c862f-1146-4071-a5bb-f34ffda07962" title="Permalink to this equation">#</a></span>\[\begin{equation}
+H_q( \|\hat{\theta}_{\mbox{CL}}\|^2/q)   \overset{W}{\rightarrow} N(0, \sigma^2(a))   ,
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-6eef89df-298c-4d34-b916-f348b8524851">
+<span class="eqno">()<a class="headerlink" href="#equation-6eef89df-298c-4d34-b916-f348b8524851" title="Permalink to this equation">#</a></span>\[\begin{equation}
+H_q(\|X\|^2/q) \overset{W}{\rightarrow} N(0, \sigma^2(1+a)),
+\end{equation}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0b393340-60de-4516-a8b8-cb352232ef7d">
+<span class="eqno">()<a class="headerlink" href="#equation-0b393340-60de-4516-a8b8-cb352232ef7d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+H_q(\| \hat{\theta}_S\|^2/q )\rightarrow N(0, \sigma^2(a^2/(1+a))),
+\end{equation}\]</div>
+<p>all in <span class="math notranslate nohighlight">\(P_{\gamma_q}\)</span> probability.</p>
+<p>It follows that to estimate <span class="math notranslate nohighlight">\(H_q\)</span> by the bootstrap consistently,
+one should use</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b6338a46-1f4f-4652-b885-3cfb5c4b3844">
+<span class="eqno">()<a class="headerlink" href="#equation-b6338a46-1f4f-4652-b885-3cfb5c4b3844" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{H}_B = H_q( \|\hat{\theta}_{\mbox{CL}}\|^2/q       )
+\end{equation}\]</div>
+<p>rather than estimating using either the norm of <span class="math notranslate nohighlight">\(X\)</span> or the norm of the
+James-Stein estimate <span class="math notranslate nohighlight">\(\hat{\theta}_{S}\)</span> of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p><strong>Proof.</strong>
+The Lemma implies that under the conditions of the theorem,
+<span class="math notranslate nohighlight">\(\| \hat{\theta}_{\mbox{CL}}\|^2/q \rightarrow a\)</span>,
+<span class="math notranslate nohighlight">\(\|X\|^2/q \rightarrow 1+a\)</span>, and <span class="math notranslate nohighlight">\(\| \hat{\theta}_S \|^2 /q \rightarrow a^2/(1+a)\)</span>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

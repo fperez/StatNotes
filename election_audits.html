@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Auditing Elections &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/election_audits.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Felection_audits.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/election_audits.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#risks-to-elections">
+   Risks to Elections
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#potential-goals-fud-fear-uncertainty-doubt">
+     Potential goals: FUD (fear, uncertainty, doubt)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#election-technology-including-vote-tabulation-is-vulnerable-what-can-we-do">
+   Election technology, including vote tabulation, is vulnerable. What can we do?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#audit-goals">
+   Audit goals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-detection-paradigm">
+     The Detection Paradigm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-evidence-paradigm">
+     The evidence paradigm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aside-compliance-audits">
+     Aside: Compliance Audits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#obstacles">
+     Obstacles
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-strategies">
+   Sampling Strategies
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#auditing-as-a-statistical-hypothesis-test">
+   Auditing as a statistical hypothesis test
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#social-choice-functions">
+   Social choice functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transforming-incorrect-outcome-into-math">
+   Transforming “incorrect outcome” into math
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Auditing Elections</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#risks-to-elections">
+   Risks to Elections
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#potential-goals-fud-fear-uncertainty-doubt">
+     Potential goals: FUD (fear, uncertainty, doubt)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#election-technology-including-vote-tabulation-is-vulnerable-what-can-we-do">
+   Election technology, including vote tabulation, is vulnerable. What can we do?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#audit-goals">
+   Audit goals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-detection-paradigm">
+     The Detection Paradigm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-evidence-paradigm">
+     The evidence paradigm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aside-compliance-audits">
+     Aside: Compliance Audits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#obstacles">
+     Obstacles
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-strategies">
+   Sampling Strategies
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#auditing-as-a-statistical-hypothesis-test">
+   Auditing as a statistical hypothesis test
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#social-choice-functions">
+   Social choice functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transforming-incorrect-outcome-into-math">
+   Transforming “incorrect outcome” into math
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="auditing-elections">
+<h1>Auditing Elections<a class="headerlink" href="#auditing-elections" title="Permalink to this headline">#</a></h1>
+<section id="risks-to-elections">
+<h2>Risks to Elections<a class="headerlink" href="#risks-to-elections" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://www.nytimes.com/interactive/2018/07/16/us/elections/russian-interference-statements-comments.html">https://www.nytimes.com/interactive/2018/07/16/us/elections/russian-interference-statements-comments.html</a></p>
+<p><a class="reference external" href="https://www.usatoday.com/story/news/2018/08/03/russian-us-election-interference-donald-trump/878910002/">https://www.usatoday.com/story/news/2018/08/03/russian-us-election-interference-donald-trump/878910002/</a></p>
+<p><a class="reference external" href="https://www.nbcnews.com/politics/elections/u-s-intel-russia-compromised-seven-states-prior-2016-election-n850296">https://www.nbcnews.com/politics/elections/u-s-intel-russia-compromised-seven-states-prior-2016-election-n850296</a></p>
+<p><a class="reference external" href="https://www.newyorker.com/news/news-desk/america-continues-to-ignore-the-risks-of-election-hacking">https://www.newyorker.com/news/news-desk/america-continues-to-ignore-the-risks-of-election-hacking</a></p>
+<p><a class="reference external" href="https://www.nytimes.com/2018/09/26/magazine/election-security-crisis-midterms.html">https://www.nytimes.com/2018/09/26/magazine/election-security-crisis-midterms.html</a></p>
+<p><a class="reference external" href="https://freedom-to-tinker.com/2018/10/16/design-flaw-in-dominion-imagecast-evolution-voting-machine/">https://freedom-to-tinker.com/2018/10/16/design-flaw-in-dominion-imagecast-evolution-voting-machine/</a></p>
+<p><a class="reference external" href="https://freedom-to-tinker.com/2018/10/22/an-unverifiability-principle-for-voting-machines/">https://freedom-to-tinker.com/2018/10/22/an-unverifiability-principle-for-voting-machines/</a></p>
+<p><a class="reference external" href="https://www.apnews.com/f6876669cb6b4e4c9850844f8e015b4c">https://www.apnews.com/f6876669cb6b4e4c9850844f8e015b4c</a></p>
+<p><a class="reference external" href="http://www8.nationalacademies.org/onpinews/newsitem.aspx?RecordID=25120">http://www8.nationalacademies.org/onpinews/newsitem.aspx?RecordID=25120</a></p>
+<p><a class="reference external" href="http://time.com/5340060/donald-trump-vladimir-putin-summit-russia-meddling/">http://time.com/5340060/donald-trump-vladimir-putin-summit-russia-meddling/</a></p>
+<section id="potential-goals-fud-fear-uncertainty-doubt">
+<h3>Potential goals: FUD (fear, uncertainty, doubt)<a class="headerlink" href="#potential-goals-fud-fear-uncertainty-doubt" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Alter election results through social manipulation, propaganda, etc. “social hacking”</p>
+<ul>
+<li><p>“fake news” propagated through social media, etc.</p></li>
+<li><p>disinformation regarding how to vote, polling-place location, etc. <a class="reference external" href="http://fortune.com/2016/11/03/text-vote-hillary-clinton/">http://fortune.com/2016/11/03/text-vote-hillary-clinton/</a></p></li>
+</ul>
+</li>
+<li><p>Alter election results through election equipment, tabulation, reporting. “computer hacking”</p></li>
+<li><p>Alter election results by removing voters from voter registration lists. “computer hacking”</p></li>
+<li><p>Cast doubt on election results and on the electoral process: clumsy hacks are effective</p></li>
+</ul>
+</section>
+</section>
+<section id="election-technology-including-vote-tabulation-is-vulnerable-what-can-we-do">
+<h2>Election technology, including vote tabulation, is vulnerable. What can we do?<a class="headerlink" href="#election-technology-including-vote-tabulation-is-vulnerable-what-can-we-do" title="Permalink to this headline">#</a></h2>
+<p>If there’s a trustworthy, voter-verified paper trail, that can be used to check the results.</p>
+<p>For instance, could hand count the votes on all the ballots.</p>
+<p>Can we use Statistics to do less work than a full hand count?</p>
+</section>
+<section id="audit-goals">
+<h2>Audit goals<a class="headerlink" href="#audit-goals" title="Permalink to this headline">#</a></h2>
+<p>The basic goal of auditing is to check the electronic results, using the paper trail, which is assumed to be trustworthy (because it passed a <em>compliance audit</em>).</p>
+<ul class="simple">
+<li><p>Precisely what do we want to check? What is the right standard for accuracy?</p></li>
+<li><p>How can Statistics help?</p></li>
+<li><p>State laws <a class="reference external" href="https://www.verifiedvoting.org/verifier/">https://www.verifiedvoting.org/verifier/</a></p>
+<ul>
+<li><p>some states have no voter-verifiable paper trail</p></li>
+<li><p>of those that do, rules governing protecting the paper generally are inadequate</p></li>
+<li><p>many states with paper many do not audit results</p></li>
+<li><p>of those that audit results,</p>
+<ul>
+<li><p>only Colorado currently audits in a rigorous way–but it only audits a few contests</p></li>
+<li><p>Rhode Island will soon conduct good audits</p></li>
+<li><p>New Mexico’s audits have some good features</p></li>
+<li><p>California’s audits got worse in 2017; has had good pilot programs</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="the-detection-paradigm">
+<h3>The Detection Paradigm<a class="headerlink" href="#the-detection-paradigm" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Before 2006, audits generally looked at some fixed percentage of votes or precincts selected “at random” and compared electronic results to manual tabulation</p>
+<ul>
+<li><p>Some even worse, e.g., select 500 ballots and tabulate them by machine, retabulate by hand</p></li>
+</ul>
+</li>
+<li><p>Academic work focused on <em>detection</em>:</p>
+<ul>
+<li><p>Suppose the reported outcome is wrong. How many precincts/ballots need to be checked by hand to have a high probability of finding at least one error?</p></li>
+<li><p>Not the best question to ask: audits of hand-marked ballots likely to find at least one misinterpreted ballot. So what?</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="the-evidence-paradigm">
+<h3>The evidence paradigm<a class="headerlink" href="#the-evidence-paradigm" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>An audit should give strong evidence that the outcome is right (if it is right), or should correct the outcome if it is wrong.</p></li>
+</ul>
+<p>To correct an outcome requires a full manual tally: can’t overturn the result using statistical evidence alone.</p>
+<p>A <em>risk-limiting audit</em> (RLA) is any post-election procedure that offers the following statistical guarantee:</p>
+<blockquote>
+<div><p><em>If a full manual tally of the complete voter-verifiable paper trail would show a different
+electoral outcome, there is a known, pre-determined minimum chance that the procedure
+will lead to a full manual tally.</em></p>
+</div></blockquote>
+<p>If the procedure does lead to a full manual tally, the result of that tally replaces the
+reported result, thereby correcting it.</p>
+<p>The maximum chance that the procedure will <em>not</em> lead to a full manual tally if that tally
+would show a different outcome is called the <em>risk limit</em>.</p>
+<p>The risk limit is the largest chance that the audit will fail to correct
+an outcome that is incorrect, where <em>incorrect</em> means that a full manual tally of the
+voter-verifiable paper trail would find different winner(s).</p>
+<p>A RLA with a risk limit of 5% has at least a 95% chance of requiring a full manual
+tally, if that tally would show a different outcome.</p>
+<p>For an overview of risk-limiting audits, see <a class="reference external" href="https://www.stat.berkeley.edu/~stark/Preprints/lhc18.pdf">https://www.stat.berkeley.edu/~stark/Preprints/lhc18.pdf</a></p>
+<p>For a more technical discussion and example methods, see Lindeman and Stark (2012).</p>
+</section>
+<section id="aside-compliance-audits">
+<h3>Aside: Compliance Audits<a class="headerlink" href="#aside-compliance-audits" title="Permalink to this headline">#</a></h3>
+<p>An audit that relies on an untrustworthy paper trail, or any audit that purports to ascertain voter
+intent from an electronic record or from an artifact that the voter did not have the opportunity
+to check, is “security theater.”</p>
+<p>There is little reason to believe that a full manual tally of such records would reveal the true winner(s).</p>
+<p>It’s crucial to:</p>
+<ul class="simple">
+<li><p>base audits on voter-verifiable paper records</p></li>
+<li><p>ensure that those records include every validly cast vote exactly once, and no others (checking the determination of eligibility, in particular)</p></li>
+<li><p>ensure that those records remain complete and intact from the moment they are cast through the audit</p></li>
+<li><p>assess the evidence that they are trustworthy.</p></li>
+</ul>
+<p>Without evidence that the paper trail is a trustworthy
+record of voter intent–that it accurately reflects the intent of every voter who legitimately cast
+a ballot in the contests under audit, and no others–the audit might simply confirm the incorrect
+outcome.</p>
+<p>The process of assessing the trustworthiness of the paper trail is called a <em>compliance audit</em>.</p>
+<p>Compliance audits should include the following steps, among others:</p>
+<ul class="simple">
+<li><p>Ballot accounting.</p>
+<ul>
+<li><p>Check that the number of ballots sent to polling places equals the number returned
+voted plus the number returned spoiled, plus the number returned unvoted. (For systems that print ballots on demand, check that the paper stock–sheets cast, spoiled, and still blank–adds up to the number of sheets sent to the polling place or vote center.)</p></li>
+<li><p>Check that the number of ballots returned from each polling place does not exceed the
+number of voters registered at that polling place or the number of pollbook signatures at the polling place</p></li>
+<li><p>Check that the number of ballots of each style corresponds to the number of ballots
+of each style reported by the voting system. Ballot counts for this purpose should be based on the physical
+paper, not on the voting system: the audit needs external touchstones to check the voting system.</p></li>
+</ul>
+</li>
+<li><p>Eligibility.</p>
+<ul>
+<li><p>Check signature verification on vote-by-mail ballots, especially if signature verification was automated.</p></li>
+<li><p>Check the disposition of provisional ballots to ensure that all that were validly cast (and no others) were included in the results.</p></li>
+<li><p>Check that each voter received the correct ballot style based on her eligibility. For vote-by-mail ballots, there should be a record of the ballot style mailed to the voter; for in-person voting, this might require recording (e.g., in pollbooks) the ballot style given to the voter. For provisionally cast ballots, this might be more complicated.</p></li>
+</ul>
+</li>
+<li><p>Physical chain of custody.</p>
+<ul>
+<li><p>Record seal numbers whenever a batch of ballots is sealed.</p></li>
+<li><p>Check physical seals for signs of tampering whenever a batch is unsealed. (Good procedure is to photograph each seal after it is applied, check each seal against its photograph before breaking the seal, perhaps taking a second photograph to document the state of the seal, and record any discrepancies.)</p></li>
+<li><p>Use numbered seals that are hard to forge or bypass; check seal numbers against the numbers recorded when the boxes or bags were sealed; and log the result.</p></li>
+<li><p>Review custody logs. Check that at least two staff accompanied the ballots whenever ballots were not locked securely and under surveillance.</p></li>
+<li><p>Review surveillance video of secure ballot storage facility to ensure there was no unauthorized access to ballots.</p></li>
+</ul>
+</li>
+<li><p>Due diligence regarding processes, equipment, etc.</p>
+<ul>
+<li><p>Review voting equipment event logs.</p></li>
+<li><p>Review any complaints made by voters or anomalies or problems noted by pollworkers.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="obstacles">
+<h3>Obstacles<a class="headerlink" href="#obstacles" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Local election officials</p></li>
+<li><p>State laws / legislators</p></li>
+<li><p>Perceived costs</p></li>
+</ul>
+</section>
+</section>
+<section id="sampling-strategies">
+<h2>Sampling Strategies<a class="headerlink" href="#sampling-strategies" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Comparison audits: compare machine tabulation to hand tabulation.</p>
+<ul>
+<li><p>3 stages:</p>
+<ul>
+<li><p>export subtotals from voting system and “commit”</p></li>
+<li><p>check that exported subtotals reproduce reported contest results</p></li>
+<li><p>check random sample of subtotals against hand counts of the paper</p></li>
+</ul>
+</li>
+<li><p>batch-level (precincts, machines, etc.) Requires data export / munging</p></li>
+<li><p>ballot-level. Requires modern equipment</p></li>
+</ul>
+</li>
+<li><p>Polling audits: use paper directly</p>
+<ul>
+<li><p>one stage: look at ballots, not at electronic results</p></li>
+<li><p>batches</p></li>
+<li><p>individual ballots</p></li>
+</ul>
+</li>
+<li><p>Combinations of comparison and polling</p></li>
+<li><p>Sample design: with or without replacement? stratified or unstratified?</p></li>
+<li><p>Comparison audits and polling audits generally require a <em>ballot manifest</em> as a sampling frame (c.f. Bernoulli ballot polling). Ballot manifest describes how the ballots are stored.</p></li>
+</ul>
+</section>
+<section id="auditing-as-a-statistical-hypothesis-test">
+<h2>Auditing as a statistical hypothesis test<a class="headerlink" href="#auditing-as-a-statistical-hypothesis-test" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Null hypothesis: reported outcome is incorrect</p>
+<ul>
+<li><p><em>outcome</em> means winner(s), not exact counts</p></li>
+<li><p><em>incorrect</em> means an accurate, full handcount would find other winner(s)</p></li>
+</ul>
+</li>
+<li><p>Type I error: certifying an incorrect outcome (seating the wrong winner)</p></li>
+</ul>
+</section>
+<section id="social-choice-functions">
+<h2>Social choice functions<a class="headerlink" href="#social-choice-functions" title="Permalink to this headline">#</a></h2>
+<p>Most common in the US are variants of <em>plurality</em>:</p>
+<ul class="simple">
+<li><p>Majority (common for ballot measures)</p></li>
+<li><p>Plurality (“first past the post”)</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span>-plurality</p></li>
+</ul>
+<p>Also in the US: Instant Runoff Voting (IRV), a form of Ranked-Choice Voting (RCV)</p>
+<p>Elsewhere and non-political:</p>
+<ul class="simple">
+<li><p>proportional representation (e.g., D’Hondt for parliamentary elections)</p></li>
+<li><p>single transferrable vote (STV)</p></li>
+<li><p>approval, Borda, many others</p></li>
+</ul>
+</section>
+<section id="transforming-incorrect-outcome-into-math">
+<h2>Transforming “incorrect outcome” into math<a class="headerlink" href="#transforming-incorrect-outcome-into-math" title="Permalink to this headline">#</a></h2>
+<p>Depends on social choice function. Concentrate on plurality-type functions.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathcal{W}\)</span>: the set of reported winners of the contest</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{L}\)</span>: the set of reported losers of the contest</p></li>
+<li><p><span class="math notranslate nohighlight">\(N_s\)</span> ballots were cast in stratum <span class="math notranslate nohighlight">\(s\)</span>. (The contest might not appear on all <span class="math notranslate nohighlight">\(N_s\)</span> ballots.)</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\)</span> “batches” of ballots are in stratum <span class="math notranslate nohighlight">\(s\)</span>. A batch contains one or more ballots. Every ballot in stratum <span class="math notranslate nohighlight">\(s\)</span> is in exactly one batch.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n_p\)</span>: number of ballots in batch <span class="math notranslate nohighlight">\(p\)</span>. <span class="math notranslate nohighlight">\(N_s = \sum_{p=1}^P n_p\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(v_{pi} \in \{0, 1\}\)</span>: reported votes for candidate <span class="math notranslate nohighlight">\(i\)</span> in batch <span class="math notranslate nohighlight">\(p\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(a_{pi} \in \{0, 1\}\)</span>: actual votes for candidate <span class="math notranslate nohighlight">\(i\)</span> in batch <span class="math notranslate nohighlight">\(p\)</span>. If the contest does not appear on any ballot in batch <span class="math notranslate nohighlight">\(p\)</span>, then <span class="math notranslate nohighlight">\(a_{pi} = 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(V_{w\ell,s} \equiv \sum_{p=1}^P (v_{pw} - v_{p\ell})\)</span>:
+Reported margin in stratum <span class="math notranslate nohighlight">\(s\)</span> of reported winner <span class="math notranslate nohighlight">\(w \in \mathcal{W}\)</span> over reported loser
+<span class="math notranslate nohighlight">\(\ell \in \mathcal{L}\)</span>, in votes.</p></li>
+<li><p><span class="math notranslate nohighlight">\(V_{w\ell}\)</span>:
+overall reported margin in votes of reported winner <span class="math notranslate nohighlight">\(w \in \mathcal{W}\)</span> over reported loser
+<span class="math notranslate nohighlight">\(\ell \in \mathcal{L}\)</span> for the entire contest (not just stratum <span class="math notranslate nohighlight">\(s\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(V \equiv \min_{w \in \mathcal{W}, \ell \in \mathcal{L}} V_{w \ell}\)</span>:
+smallest reported overall margin in votes between any reported winner and reported loser</p></li>
+<li><p><span class="math notranslate nohighlight">\(A_{w\ell,s} \equiv \sum_{p=1}^P (a_{pw} - a_{p\ell})\)</span>:
+actual margin in votes in the stratum of reported winner <span class="math notranslate nohighlight">\(w \in \mathcal{W}\)</span> over reported loser
+<span class="math notranslate nohighlight">\(\ell \in \mathcal{L}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A_{w\ell}\)</span>:
+actual margin in votes of reported winner <span class="math notranslate nohighlight">\(w \in \mathcal{W}\)</span> over reported loser
+<span class="math notranslate nohighlight">\(\ell \in \mathcal{L}\)</span> for the entire contest (not just in stratum <span class="math notranslate nohighlight">\(s\)</span>)</p></li>
+</ul>
+<p>Reported winner(s) really won if <span class="math notranslate nohighlight">\(A_{w\ell} &gt; 0\)</span> for all <span class="math notranslate nohighlight">\(w \in \mathcal{W}\)</span>, <span class="math notranslate nohighlight">\(\ell \in \mathcal{L}\)</span>.</p>
+<p>For unstratified polling-based audits, natural to work with proportions: <span class="math notranslate nohighlight">\(w\)</span> really beat <span class="math notranslate nohighlight">\(\ell\)</span> if <span class="math notranslate nohighlight">\(\pi_{w\ell} &gt; 1/2\)</span>, where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+   \pi_{w\ell} \equiv \frac{\# \mbox{ballots with votes for only $w$}}{\# \mbox{ballots with votes for only $w$ or for only $\ell$}}.
+\end{equation*}\]</div>
+<p>Can test using <a class="reference external" href="https://github.com/pbstark/S157F17/blob/master/sprt.ipynb">Wald’s Sequential Probability Ratio Test</a> (also see <a class="reference external" href="https://github.com/pbstark/S157F17/blob/master/pSPRTnoReplacement.ipynb">SPRT without replacement</a>).</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

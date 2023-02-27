@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Goodness of Fit Tests &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/goodness_of_fit.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Fgoodness_of_fit.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/goodness_of_fit.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#models-with-no-free-parameters">
+   Models with no Free Parameters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kolmogorov-smirnov-test">
+     Kolmogorov-Smirnov Test
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-massart-dvoretzky-kiefer-wolfowitz-mdkw-inequality">
+     The Massart-Dvoretzky-Kiefer-Wolfowitz (MDKW) Inequality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-testing-whether-data-come-from-a-uniform-distributution-on-a-b">
+     Example: Testing whether data come from a uniform distributution on
+     <span class="math notranslate nohighlight">
+      \([a, b]\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-testing-whether-data-come-from-a-poisson-process">
+     Example: Testing whether data come from a Poisson process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-testing-whether-data-come-from-a-poisson-distribution-with-known-rate-lambda">
+     Example: Testing whether data come from a Poisson distribution with known rate
+     <span class="math notranslate nohighlight">
+      \(\lambda\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multinomial-models-and-the-chi-square-goodness-of-fit-test">
+   Multinomial Models and the chi-square Goodness-of-Fit Test
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Example: Testing whether data come from a Poisson distribution with known rate
+     <span class="math notranslate nohighlight">
+      \(\lambda\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chi-square-gof-when-there-are-estimated-parameters">
+   Chi-square GOF when there are estimated parameters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-poisson-regression">
+     Example: Poisson Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Goodness of Fit Tests</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#models-with-no-free-parameters">
+   Models with no Free Parameters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kolmogorov-smirnov-test">
+     Kolmogorov-Smirnov Test
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-massart-dvoretzky-kiefer-wolfowitz-mdkw-inequality">
+     The Massart-Dvoretzky-Kiefer-Wolfowitz (MDKW) Inequality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-testing-whether-data-come-from-a-uniform-distributution-on-a-b">
+     Example: Testing whether data come from a uniform distributution on
+     <span class="math notranslate nohighlight">
+      \([a, b]\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-testing-whether-data-come-from-a-poisson-process">
+     Example: Testing whether data come from a Poisson process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-testing-whether-data-come-from-a-poisson-distribution-with-known-rate-lambda">
+     Example: Testing whether data come from a Poisson distribution with known rate
+     <span class="math notranslate nohighlight">
+      \(\lambda\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multinomial-models-and-the-chi-square-goodness-of-fit-test">
+   Multinomial Models and the chi-square Goodness-of-Fit Test
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Example: Testing whether data come from a Poisson distribution with known rate
+     <span class="math notranslate nohighlight">
+      \(\lambda\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chi-square-gof-when-there-are-estimated-parameters">
+   Chi-square GOF when there are estimated parameters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-poisson-regression">
+     Example: Poisson Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="goodness-of-fit-tests">
+<h1>Goodness of Fit Tests<a class="headerlink" href="#goodness-of-fit-tests" title="Permalink to this headline">#</a></h1>
+<p>This notebook explores a few techniques for checking whether a statistical model is “adequate,” i.e., whether it fits the data so poorly that one can reject the hypothesis that the model generated the data.</p>
+<p>We will look at two kinds of models: models with no fitted parameters and models with free parameters fitted to the data. One should expect that a model that is adjusted to fit the data by picking the values of free parameters will fit better than a model in which the values of those parameters are pre-specified without looking at the data.</p>
+<p>It’s very common to fit models to data (e.g., normal, log-normal, linear regression, logistic regression, Poisson regression) without worrying about where the model comes from or even whether it is plausible.</p>
+<p>In general, if you test whether a model fits, and then report the fitted model, <span class="math notranslate nohighlight">\(P\)</span>-values, confidence intervals, etc., only if it does fit, inferences will be “selective inferences.”
+The same thing goes for procedures that select which variables to include in a model, select transformations of the variables, select the functional form of the model, etc.: The <span class="math notranslate nohighlight">\(P\)</span>-values, confidence intervals, and so on will be misleading if you do not adjust appropriately for the selection process.</p>
+<p>For examples, see:</p>
+<ul class="simple">
+<li><p>Benjamini, Y. and D. Yekutieli, 2005. False Discovery Rate-Adjusted Multiple Confidence Intervals for Selected Parameters, <em>Journal of the American Statistical Association, Theory
+and Methods</em>, <em>100</em>(469), DOI 10.1198/016214504000001907</p></li>
+<li><p>Berk, R., L. Brown, and L. Zhao, 2009. Statistical Inference After Model Selection,
+<em>J. Quantitative Criminology</em>, DOI: 10.1007/s10940-009-9077-7</p></li>
+<li><p>Berk, R., L. Brown,  A. Buja, K. Zhang, and L. Zhao, 2013.
+Valid Post-Selection Inference, <em>Annals of Statistics, 41</em>, 802-837</p></li>
+<li><p>Olshen, R., 1974. The Conditional Level of the <span class="math notranslate nohighlight">\(F\)</span> test, <em>Journal of the American
+Statistical Association, Theory and Methods, 68</em>(343), 692-698.</p></li>
+</ul>
+<section id="models-with-no-free-parameters">
+<h2>Models with no Free Parameters<a class="headerlink" href="#models-with-no-free-parameters" title="Permalink to this headline">#</a></h2>
+<section id="kolmogorov-smirnov-test">
+<h3>Kolmogorov-Smirnov Test<a class="headerlink" href="#kolmogorov-smirnov-test" title="Permalink to this headline">#</a></h3>
+<p>One particularly useful test for models for real-valued data is the Kolmogorov-Smirnov test, one of many goodness-of-fit tests based on the cumulative distribution function.</p>
+<p>Suppose <span class="math notranslate nohighlight">\(\{X_j \}_{j=1}^n\)</span> are IID with a continuous distribution.
+Define <span class="math notranslate nohighlight">\(1_A\)</span> = {1, if <span class="math notranslate nohighlight">\(A\)</span>; 0, otherwise}.
+The theoretical cdf of <span class="math notranslate nohighlight">\(X_i\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+	F(x) \equiv \mathbb P \{ X_i \le x \} .
+\end{equation*}\]</div>
+<p>Define the empirical cumulative distribution function</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+    \hat{F}_n (x) \equiv \frac{1}{n} \sum_{i=1}^n 1_{x \ge X_i}
+\end{equation*}\]</div>
+<p>Consider the one-sided Kolmogorov-Smirnov statistics</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+	D_n^+ \equiv \sup_x (\hat{F}_n(x) - F(x) )
+\end{equation*}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+    D_n^- \equiv \sup_x (F(x) - \hat{F}_n(x)),
+\end{equation*}\]</div>
+<p>and the two-sided Kolmogorov-Smirnov statistic</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+	D_n \equiv \sup_x |\hat{F}_n(x) - F(x)|.
+\end{equation*}\]</div>
+<p>Kolmogorov (1933) and Smirnov (1944) seem to have been the first to study these
+statistics, which have the same distribution—a distribution that does not depend on <span class="math notranslate nohighlight">\(F\)</span> if <span class="math notranslate nohighlight">\(F\)</span> is continuous.</p>
+<p>Below is a simulation: we take a random sample of size <span class="math notranslate nohighlight">\(n\)</span> from a Uniform distribution and plot the ecdf and the true cdf. The ecdf is the stair-step function. In places it is above the true cdf, and in places it is below. <span class="math notranslate nohighlight">\(D^-\)</span> measures how far <span class="math notranslate nohighlight">\(F\)</span> ever gets above <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>. Note that as <span class="math notranslate nohighlight">\(n\)</span> increases, the maximum distance between <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> tends to be smaller.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ecdf</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">       calculates the empirical cdf of data x</span>
+<span class="sd">       returns the unique values of x in ascending order and the cumulative probabity at those values</span>
+<span class="sd">       NOTE: This is not an efficient algorithm: it is O(n^2), where n is the length of x. </span>
+<span class="sd">       A better algorithm would rely on the Collections package or something similar and could work</span>
+<span class="sd">       in O(n log n)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">theVals</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">theProbs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">theVals</span><span class="p">])</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">theVals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">):</span>
+        <span class="n">theVals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">theVals</span><span class="p">)</span>
+        <span class="n">theProbs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">theProbs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">theVals</span><span class="p">,</span> <span class="n">theProbs</span>
+
+
+<span class="k">def</span> <span class="nf">plotUniformKolmogorov</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">v</span><span class="p">,</span> <span class="n">pr</span> <span class="o">=</span> <span class="n">ecdf</span><span class="p">(</span><span class="n">sam</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;true cdf&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">pr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ecdf&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+    <span class="n">dLoc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="n">pr</span><span class="p">)</span>
+    <span class="n">dMinus</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="n">pr</span><span class="p">)[</span><span class="n">dLoc</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="n">dLoc</span><span class="p">],</span> <span class="n">ymin</span><span class="o">=</span><span class="n">pr</span><span class="p">[</span><span class="n">dLoc</span><span class="p">],</span> <span class="n">ymax</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="n">dLoc</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;3&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$D_n^-=$&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">dMinus</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;heavy&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">interact</span><span class="p">(</span><span class="n">plotUniformKolmogorov</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Widget Javascript not detected.  It may not be installed or enabled properly.
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "4b0d78c9e6c24a06a248d793173cd5d4"}
+</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plotUniformKolmogorov(n)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-massart-dvoretzky-kiefer-wolfowitz-mdkw-inequality">
+<h3>The Massart-Dvoretzky-Kiefer-Wolfowitz (MDKW) Inequality<a class="headerlink" href="#the-massart-dvoretzky-kiefer-wolfowitz-mdkw-inequality" title="Permalink to this headline">#</a></h3>
+<p>Dvoretsky, Kiefer, and Wolfowitz (1956, DKW) showed that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  
+	\mathbb P \{D_n^- &gt; t\} \le C \exp(- 2 n t^2)
+\end{equation*}\]</div>
+<p>for some constant <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>Massart (1990) showed that <span class="math notranslate nohighlight">\(C = 1\)</span> is the sharp constant in the DKW inequality, provided
+<span class="math notranslate nohighlight">\(\exp(-2 n t^2) \le \frac{1}{2}\)</span>.
+The distribution of <span class="math notranslate nohighlight">\(D_n^-\)</span> is stochastically larger when
+<span class="math notranslate nohighlight">\(F\)</span> is continuous than when <span class="math notranslate nohighlight">\(F\)</span> has jumps (Massart 1990); thus the inequality conservative for IID sampling from discrete or “mixed” distributions.</p>
+<p>Moreover, <span class="math notranslate nohighlight">\(D_n^-\)</span> is stochastically larger for sampling with replacement than for sampling
+without replacement, so the inequality is conservative for sampling from a finite population
+without replacement as well.</p>
+<p>Let’s call the inequality with <span class="math notranslate nohighlight">\(C=1\)</span> the Massart-Dvoretsky-Kiefer-Wolfowitz (MDKW) inequality.
+It follows from the MDKW inequality that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  
+    \mathbb P \left \{\sup_x (F(x) - \hat{F}_n(x)) &gt; \sqrt{-\frac{\ln \alpha}{2n}} \right \} \le \alpha
+\end{equation*}\]</div>
+<p>and (by symmetry) that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  
+    \mathbb P \left \{\sup_x |F(x) - \hat{F}_n(x)| &gt; 2\sqrt{-\frac{\ln \alpha}{2n}} \right \} \le \alpha.
+\end{equation*}\]</div>
+<p>This lets us construct goodness-of-fit tests for models for real-valued data (in contrast, for instance, to models for categorical data or models for multidimensional data–although there are related methods for such models).</p>
+</section>
+<section id="example-testing-whether-data-come-from-a-uniform-distributution-on-a-b">
+<h3>Example: Testing whether data come from a uniform distributution on <span class="math notranslate nohighlight">\([a, b]\)</span><a class="headerlink" href="#example-testing-whether-data-come-from-a-uniform-distributution-on-a-b" title="Permalink to this headline">#</a></h3>
+<p>To find a <span class="math notranslate nohighlight">\(P\)</span>-value for the hypothesis that <span class="math notranslate nohighlight">\(\{X_j \}_{j=1}^n\)</span> are IID <span class="math notranslate nohighlight">\(U[a,b]\)</span>, calculate</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  D_n = \sup_{x \in [a, b]} \left | \frac{x-a}{b-a} - \hat{F}_n(x) \right | .\end{equation*}\]</div>
+<p>(Note that the maximum will be attained at or infinitesimally before some <span class="math notranslate nohighlight">\(X_j\)</span>.)</p>
+<p>The <span class="math notranslate nohighlight">\(P\)</span>-value can be found by solving</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+ D_n = 2\sqrt{-\frac{\ln P}{2n}}
+\end{equation*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+ -2n \left ( D_n/2  \right )^2 = \ln P
+\end{equation*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+  P = \exp(-2n \left ( D_n/2 \right )^2)
+\end{equation*}\]</div>
+<p>(Of course, if <span class="math notranslate nohighlight">\(\min_j X_j &lt; a\)</span> or <span class="math notranslate nohighlight">\(\max_j X_j &gt; b\)</span>, we know with certainty that
+<span class="math notranslate nohighlight">\(\{X_j\}\)</span> are not IID <span class="math notranslate nohighlight">\(U[a,b]\)</span>.)</p>
+</section>
+<section id="example-testing-whether-data-come-from-a-poisson-process">
+<h3>Example: Testing whether data come from a Poisson process<a class="headerlink" href="#example-testing-whether-data-come-from-a-poisson-process" title="Permalink to this headline">#</a></h3>
+<p>This model has a parameter, but that will turn out not to matter, because our inference will be conditional on the observed number of events.</p>
+<p>We observe <span class="math notranslate nohighlight">\(X\)</span> on the interval <span class="math notranslate nohighlight">\([0, T]\)</span>.
+If <span class="math notranslate nohighlight">\(X\)</span> has a Poisson process with rate <span class="math notranslate nohighlight">\(\lambda\)</span>, then, conditional on the number of events that occur between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(T\)</span>, the times of the events have the same distribution as the order statistics of that many IID uniform random variables on <span class="math notranslate nohighlight">\([0, T]\)</span>.
+That is, if <span class="math notranslate nohighlight">\(X(T) = n\)</span>, then the times of the <span class="math notranslate nohighlight">\(n\)</span> events are like
+an IID sample of size <span class="math notranslate nohighlight">\(n\)</span> from a <span class="math notranslate nohighlight">\(U[0, T]\)</span> distribution.
+Thus, to test whether <span class="math notranslate nohighlight">\(X\)</span> is indeed Poisson, we can use the previous test, taking <span class="math notranslate nohighlight">\(a=0\)</span> and <span class="math notranslate nohighlight">\(b=T\)</span>.</p>
+</section>
+<section id="example-testing-whether-data-come-from-a-poisson-distribution-with-known-rate-lambda">
+<h3>Example: Testing whether data come from a Poisson distribution with known rate <span class="math notranslate nohighlight">\(\lambda\)</span><a class="headerlink" href="#example-testing-whether-data-come-from-a-poisson-distribution-with-known-rate-lambda" title="Permalink to this headline">#</a></h3>
+<p>The CDF of the Poisson distribution with mean <span class="math notranslate nohighlight">\(\lambda\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}   e^{-\lambda} \sum_{j=0}^{\lfloor x \rfloor} \lambda^j/j! \end{equation*}\]</div>
+<p>This can be used with the KS test to test whether data come from a Poisson distribution with mean <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+</section>
+</section>
+<section id="multinomial-models-and-the-chi-square-goodness-of-fit-test">
+<h2>Multinomial Models and the chi-square Goodness-of-Fit Test<a class="headerlink" href="#multinomial-models-and-the-chi-square-goodness-of-fit-test" title="Permalink to this headline">#</a></h2>
+<p>A very common test for goodness-of-fit is based on the probability that the data fall in different categories.</p>
+<p>The most natural setting is multinomial models, but (typically by binning the data), the test can be used in many situations–although in its usual form, it is an approximate test, while the KS test is conservative.</p>
+<p>Recall that the joint distribution of the number of values in each of <span class="math notranslate nohighlight">\(k \ge 2\)</span> categories
+for <span class="math notranslate nohighlight">\(n\)</span> IID draws with probability <span class="math notranslate nohighlight">\(\pi_j\)</span> of selecting value <span class="math notranslate nohighlight">\(j\)</span> in each draw is <em>multinomial</em>.
+A random vector <span class="math notranslate nohighlight">\((X_1, \ldots, X_k)\)</span> has a multinomial joint distribution with parameters <span class="math notranslate nohighlight">\(n\)</span>
+and <span class="math notranslate nohighlight">\(\{\pi_j\}_{j=1}^k\)</span> iff</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  \Pr \{X_j = x_j \} = \prod_{j=1}^k \pi_j^{x_j} \frac{n!}{x_1!x_2! \cdots x_j!}, \;\; x_j \ge 0,\;\; \sum_{j=1}^k x_j = n.\end{equation*}\]</div>
+<p>The chi-square statistic for categorical data is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} 
+  \chi^2 \equiv \sum_{j=1}^k \frac{(X_j - E_j)^2}{E_j},
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_j = n \pi_j\)</span> is the expected value of <span class="math notranslate nohighlight">\(X_j\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\((X_1, \ldots, X_k)\)</span> are jointly multinomial with category probabilities <span class="math notranslate nohighlight">\(\{ \pi_j \}_{j=1}^k\)</span>, the probability distribution of
+<span class="math notranslate nohighlight">\(\chi^2\)</span> is asymptotically the chi-square distribution with <span class="math notranslate nohighlight">\(k-1\)</span> degrees of freedom, as <span class="math notranslate nohighlight">\(E_j\)</span> approach infinity.
+The approximation improves as <span class="math notranslate nohighlight">\(E_j\)</span> grows; see <a class="reference external" href="https://www.stat.berkeley.edu/~stark/SticiGui/Text/chiSquare.htm">SticiGui: The Multinomial Distribution and the Chi-Squared Test for Goodness of Fit</a>.</p>
+<p>When <span class="math notranslate nohighlight">\(\{E_j\}\)</span> are not all large (and even when they are), the null distribution of <span class="math notranslate nohighlight">\(\chi^2\)</span> can be approximated by simulation; the theoretical approximation can be pretty bad.</p>
+<p>The chi-square test is often applied to artificial categories created by binning continuous
+data.
+That makes the test results depend on the (arbitrary) choice of bins.
+The <span class="math notranslate nohighlight">\(P\)</span>-values will generally be misleading if the bins are chosen after looking at the data: they should be specified in advance.</p>
+<section id="id1">
+<h3>Example: Testing whether data come from a Poisson distribution with known rate <span class="math notranslate nohighlight">\(\lambda\)</span><a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>A different approach to testing whether data come from a Poisson distribution is to bin the possible outcomes <span class="math notranslate nohighlight">\(\{0, 1, 2, \ldots\}\)</span> into a finite number <span class="math notranslate nohighlight">\(k\)</span> of categories, then rely on the fact that the joint distribution of the number of observations that fall into each of the bins has a multinomial distribution.</p>
+<p>For instance, one might define four bins, with the first bin containing the possible outcomes <span class="math notranslate nohighlight">\(\{0, 1, 2\}\)</span>, the second containing <span class="math notranslate nohighlight">\(\{3, 4, 5, 6\}\)</span>,
+the third containing <span class="math notranslate nohighlight">\(\{7, 8, 9\}\)</span>, and the fourth containing <span class="math notranslate nohighlight">\(\{10, 11, \ldots \}\)</span>. Then <span class="math notranslate nohighlight">\(\pi_1 = e^{-\lambda} \sum_{\ell = 0}^2 \lambda^\ell/\ell!\)</span>, <span class="math notranslate nohighlight">\(\pi_2 = e^{-\lambda} \sum_{\ell = 3}^6 \lambda^\ell/\ell!\)</span>, <span class="math notranslate nohighlight">\(\pi_3 = e^{-\lambda} \sum_{\ell = 7}^9 \lambda^\ell/\ell!\)</span>, and <span class="math notranslate nohighlight">\(\pi_4 = 1 - e^{-\lambda} \sum_{\ell = 0}^9 \lambda^\ell/\ell!\)</span>.</p>
+<p>If you are doing this and intend to use the chi-square approximation to the null distribution of the chi-square statistic, you should define the bins in a way that ensures the expected count in every bin is large. If the sample size and/or some <span class="math notranslate nohighlight">\(\pi_j\)</span> is too small to have <span class="math notranslate nohighlight">\(E_j\)</span> large for all <span class="math notranslate nohighlight">\(j\)</span>, don’t use the chi-square approximation.</p>
+</section>
+</section>
+<section id="chi-square-gof-when-there-are-estimated-parameters">
+<h2>Chi-square GOF when there are estimated parameters<a class="headerlink" href="#chi-square-gof-when-there-are-estimated-parameters" title="Permalink to this headline">#</a></h2>
+<p>If a model has <span class="math notranslate nohighlight">\(p\)</span> free parameters fitted to the data, the distribution of the chi-square statistic is still asymptotically the chi-square distribution, but with <span class="math notranslate nohighlight">\(k-p-1\)</span> degrees of freedom instead of <span class="math notranslate nohighlight">\(k-1\)</span>.</p>
+<section id="example-poisson-regression">
+<h3>Example: Poisson Regression<a class="headerlink" href="#example-poisson-regression" title="Permalink to this headline">#</a></h3>
+<p>TBD</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

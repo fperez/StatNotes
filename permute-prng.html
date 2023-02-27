@@ -1,0 +1,1173 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Algorithms for Pseudo-Random Permutations and Samples &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/permute-prng.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Fpermute-prng.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/permute-prng.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-sampling">
+   Random Sampling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-random-sampling">
+   Simple random sampling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-permutations">
+   Random permutations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-without-replacement">
+   Sampling without replacement
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entropy-bounds">
+     Entropy bounds
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stirling-bounds">
+     Stirling bounds
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-with-replacement">
+   Sampling with replacement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pigeonhole-principle">
+   Pigeonhole principle
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#corollary">
+   Corollary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-pigeon-coops-flocks">
+   Some pigeon coops &amp; flocks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#l-1-bounds">
+   <span class="math notranslate nohighlight">
+    \(L_1\)
+   </span>
+   bounds
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Random sampling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithm-pikk-permute-indices-and-keep-k">
+     Algorithm
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       PIKK
+      </span>
+     </code>
+     (permute indices and keep
+     <span class="math notranslate nohighlight">
+      \(k\)
+     </span>
+     )
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proof-that-the-streaming-fisher-yates-knuth-durstenfeld-algorithm-works">
+     Proof that the streaming Fisher-Yates-Knuth-Durstenfeld algorithm works
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-good-way-to-get-a-bad-shuffle">
+   A good way to get a bad shuffle
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-right-way-the-wrong-way-and-the-microsoft-way">
+     The right way, the wrong way, and the Microsoft way.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cormen-et-al-2009-algorithm-random-sample">
+     Cormen et al. (2009) Algorithm
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Random_Sample
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reservoir-algorithms">
+   Reservoir algorithms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithm-r-waterman-per-knuth-1997">
+   Algorithm
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     R
+    </span>
+   </code>
+   , Waterman (per Knuth, 1997)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithm-z-vitter-1985">
+   Algorithm Z, Vitter (1985)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#best-practices">
+   Best Practices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Algorithms for Pseudo-Random Permutations and Samples</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-sampling">
+   Random Sampling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-random-sampling">
+   Simple random sampling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-permutations">
+   Random permutations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-without-replacement">
+   Sampling without replacement
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entropy-bounds">
+     Entropy bounds
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stirling-bounds">
+     Stirling bounds
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-with-replacement">
+   Sampling with replacement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pigeonhole-principle">
+   Pigeonhole principle
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#corollary">
+   Corollary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-pigeon-coops-flocks">
+   Some pigeon coops &amp; flocks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#l-1-bounds">
+   <span class="math notranslate nohighlight">
+    \(L_1\)
+   </span>
+   bounds
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Random sampling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithm-pikk-permute-indices-and-keep-k">
+     Algorithm
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       PIKK
+      </span>
+     </code>
+     (permute indices and keep
+     <span class="math notranslate nohighlight">
+      \(k\)
+     </span>
+     )
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proof-that-the-streaming-fisher-yates-knuth-durstenfeld-algorithm-works">
+     Proof that the streaming Fisher-Yates-Knuth-Durstenfeld algorithm works
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-good-way-to-get-a-bad-shuffle">
+   A good way to get a bad shuffle
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-right-way-the-wrong-way-and-the-microsoft-way">
+     The right way, the wrong way, and the Microsoft way.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cormen-et-al-2009-algorithm-random-sample">
+     Cormen et al. (2009) Algorithm
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Random_Sample
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reservoir-algorithms">
+   Reservoir algorithms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithm-r-waterman-per-knuth-1997">
+   Algorithm
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     R
+    </span>
+   </code>
+   , Waterman (per Knuth, 1997)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithm-z-vitter-1985">
+   Algorithm Z, Vitter (1985)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#best-practices">
+   Best Practices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="algorithms-for-pseudo-random-permutations-and-samples">
+<h1>Algorithms for Pseudo-Random Permutations and Samples<a class="headerlink" href="#algorithms-for-pseudo-random-permutations-and-samples" title="Permalink to this headline">#</a></h1>
+<hr class="docutils" />
+<section id="random-sampling">
+<h2>Random Sampling<a class="headerlink" href="#random-sampling" title="Permalink to this headline">#</a></h2>
+<p>Random sampling is one of the most fundamental tools in Statistics.</p>
+<p>Used for:</p>
+<ul class="simple">
+<li><p>Surveys and extrapolation</p>
+<ul>
+<li><p>Opinion surveys and polls</p></li>
+<li><p>Census (for some purposes) and Current Population Survey</p></li>
+<li><p>Environmental statistics</p></li>
+<li><p>Litigation, including class actions, discrimination, …</p></li>
+</ul>
+</li>
+<li><p>Experiments</p>
+<ul>
+<li><p>Medicine / clinical trials</p></li>
+<li><p>Agriculture</p></li>
+<li><p>Marketing</p></li>
+<li><p>Product development</p></li>
+</ul>
+</li>
+<li><p>Quality control and auditing</p>
+<ul>
+<li><p>Process control</p></li>
+<li><p>Financial auditing</p></li>
+<li><p>Healthcare auditing</p></li>
+<li><p>Election auditing</p></li>
+</ul>
+</li>
+<li><p>Sampling and resampling methods</p>
+<ul>
+<li><p>Bootstrap</p></li>
+<li><p>Permutation tests</p></li>
+<li><p>MCMC</p></li>
+</ul>
+</li>
+</ul>
+<p>and on and on.</p>
+</section>
+<hr class="docutils" />
+<section id="simple-random-sampling">
+<h2>Simple random sampling<a class="headerlink" href="#simple-random-sampling" title="Permalink to this headline">#</a></h2>
+<p>Draw <span class="math notranslate nohighlight">\(k \le n\)</span> items from a population of <span class="math notranslate nohighlight">\(n\)</span> items, in such a way that
+each of the <span class="math notranslate nohighlight">\(n \choose k\)</span> subsets of size <span class="math notranslate nohighlight">\(k\)</span> is equally likely.</p>
+<p>Many standard statistical methods assume the sample is drawn in this way, or allocated between treatment and control in this way (e.g., <span class="math notranslate nohighlight">\(k\)</span> of <span class="math notranslate nohighlight">\(n\)</span> subjects are assigned to treatment, and the remaining <span class="math notranslate nohighlight">\(n-k\)</span> to control).</p>
+</section>
+<section id="random-permutations">
+<h2>Random permutations<a class="headerlink" href="#random-permutations" title="Permalink to this headline">#</a></h2>
+<p><span class="math notranslate nohighlight">\(n!\)</span> possible permutations of <span class="math notranslate nohighlight">\(n\)</span> distinct objects.</p>
+<p><span class="math notranslate nohighlight">\(n!\)</span> grows quickly with <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  
+n! \sim \sqrt {2\pi n}\left({\frac {n}{e}}\right)^n (\mbox{Stirling's approximation})
+\end{equation*}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-a31ce93e-94d6-4c7e-a2b6-0df8c1f80914">
+<span class="eqno">()<a class="headerlink" href="#equation-a31ce93e-94d6-4c7e-a2b6-0df8c1f80914" title="Permalink to this equation">#</a></span>\[\begin{equation} 
+     e n^{n+1/2} e^{-n} \ge n! \ge \sqrt{2 \pi} n^{n+1/2} e^{-n}.
+\end{equation}\]</div>
+</section>
+<section id="sampling-without-replacement">
+<h2>Sampling without replacement<a class="headerlink" href="#sampling-without-replacement" title="Permalink to this headline">#</a></h2>
+<section id="entropy-bounds">
+<h3>Entropy bounds<a class="headerlink" href="#entropy-bounds" title="Permalink to this headline">#</a></h3>
+<div class="amsmath math notranslate nohighlight" id="equation-1f9baa33-d8d3-4100-ba45-73d724bc8af4">
+<span class="eqno">()<a class="headerlink" href="#equation-1f9baa33-d8d3-4100-ba45-73d724bc8af4" title="Permalink to this equation">#</a></span>\[\begin{equation} \frac{2^{nH(k/n)}}{n+1} \le {n \choose k} \le 2^{nH(k/n)},\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(H(q) \equiv -q \log_2(q) - (1-q) \log_2 (1-q)\)</span>.</p>
+</section>
+<section id="stirling-bounds">
+<h3>Stirling bounds<a class="headerlink" href="#stirling-bounds" title="Permalink to this headline">#</a></h3>
+<p>For <span class="math notranslate nohighlight">\(\ell \ge 1\)</span> and <span class="math notranslate nohighlight">\(m \ge 2\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f81e7977-4d80-4120-9c21-cca3b6729f5c">
+<span class="eqno">()<a class="headerlink" href="#equation-f81e7977-4d80-4120-9c21-cca3b6729f5c" title="Permalink to this equation">#</a></span>\[\begin{equation} { {\ell m } \choose { \ell }} \ge \frac{m^{m(\ell-1)+1}}{\sqrt{\ell} (m-1)^{(m-1)(\ell-1)}}. \end{equation}\]</div>
+</section>
+</section>
+<section id="sampling-with-replacement">
+<h2>Sampling with replacement<a class="headerlink" href="#sampling-with-replacement" title="Permalink to this headline">#</a></h2>
+<p><span class="math notranslate nohighlight">\(n^k\)</span> possible samples of size <span class="math notranslate nohighlight">\(k\)</span> from <span class="math notranslate nohighlight">\(n\)</span> items.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">stirling_lower_bound</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mf">.5</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">stirling_lower_bound_log</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mf">.5</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="n">n</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">stirling_upper_bound_log</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">+</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mf">.5</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="n">n</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">32</span><span class="p">)</span><span class="o">-</span><span class="n">stirling_lower_bound_log</span><span class="p">(</span><span class="mi">7000</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">52</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pigeonhole-principle">
+<h2>Pigeonhole principle<a class="headerlink" href="#pigeonhole-principle" title="Permalink to this headline">#</a></h2>
+<p>If you put <span class="math notranslate nohighlight">\(N&gt;n\)</span> pigeons in <span class="math notranslate nohighlight">\(n\)</span> pigeonholes, then at least one
+pigeonhole must contain more than one pigeon.</p>
+</section>
+<section id="corollary">
+<h2>Corollary<a class="headerlink" href="#corollary" title="Permalink to this headline">#</a></h2>
+<p>At most <span class="math notranslate nohighlight">\(n\)</span> pigeons can be put in <span class="math notranslate nohighlight">\(n\)</span> pigeonholes if at most
+one pigeon is put in each hole.</p>
+</section>
+<section id="some-pigeon-coops-flocks">
+<h2>Some pigeon coops &amp; flocks<a class="headerlink" href="#some-pigeon-coops-flocks" title="Permalink to this headline">#</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Expression</p></th>
+<th class="text-align:right head"><p>full</p></th>
+<th class="text-align:right head"><p>scientific notation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2^{32}\)</span></p></td>
+<td class="text-align:right"><p>4,294,967,296</p></td>
+<td class="text-align:right"><p>4.29e9</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2^{64}\)</span></p></td>
+<td class="text-align:right"><p>18,446,744,073,709,551,616</p></td>
+<td class="text-align:right"><p>1.84e19</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2^{128}\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>3.40e38</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2^{32 \times 624}\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>9.27e6010</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(13!\)</span></p></td>
+<td class="text-align:right"><p>6,227,020,800</p></td>
+<td class="text-align:right"><p>6.23e9</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(21!\)</span></p></td>
+<td class="text-align:right"><p>51,090,942,171,709,440,000</p></td>
+<td class="text-align:right"><p>5.11e19</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(35!\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>1.03e40</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2084!\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>3.73e6013</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\({50 \choose 10}\)</span></p></td>
+<td class="text-align:right"><p>10,272,278,170</p></td>
+<td class="text-align:right"><p>1.03e10</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\({100 \choose 10}\)</span></p></td>
+<td class="text-align:right"><p>17,310,309,456,440</p></td>
+<td class="text-align:right"><p>1.73e13</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\({500 \choose 10}\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>2.4581e20</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{2^{32}}{{50 \choose 10}}\)</span></p></td>
+<td class="text-align:right"><p>0.418</p></td>
+<td class="text-align:right"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{2^{64}}{{500 \choose 10}}\)</span></p></td>
+<td class="text-align:right"><p>0.075</p></td>
+<td class="text-align:right"><p></p></td>
+</tr>
+</tbody>
+</table>
+<p>We will come back to these numbers.</p>
+</section>
+<section id="l-1-bounds">
+<h2><span class="math notranslate nohighlight">\(L_1\)</span> bounds<a class="headerlink" href="#l-1-bounds" title="Permalink to this headline">#</a></h2>
+<p>Suppose <span class="math notranslate nohighlight">\({\mathbb P}_0\)</span> and <span class="math notranslate nohighlight">\({\mathbb P}_1\)</span> are probability distributions on a common measurable space.</p>
+<p>If there is some set <span class="math notranslate nohighlight">\(S\)</span> for which <span class="math notranslate nohighlight">\({\mathbb P}_0(S) = \epsilon\)</span> and <span class="math notranslate nohighlight">\({\mathbb P}_1(S) = 0\)</span>, then <span class="math notranslate nohighlight">\(\|{\mathbb P}_0 - {\mathbb P}_1 \|_1 \ge 2 \epsilon\)</span>.</p>
+<p>Thus there is a function <span class="math notranslate nohighlight">\(f\)</span> with <span class="math notranslate nohighlight">\(|f| \le 1\)</span> such that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a4f4058b-861a-4e68-8bc6-9e179e5679ef">
+<span class="eqno">()<a class="headerlink" href="#equation-a4f4058b-861a-4e68-8bc6-9e179e5679ef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{E}_{{\mathbb P}_0}f -  {\mathbb E}_{{\mathbb P}_1}f \ge 2 \epsilon.
+\end{equation}\]</div>
+<ul class="simple">
+<li><p>If PRNG has <span class="math notranslate nohighlight">\(n\)</span> states and we want to generate <span class="math notranslate nohighlight">\(N&gt;n\)</span> equally likely outcomes, at least <span class="math notranslate nohighlight">\(N-n\)</span> outcomes will have probability zero instead of <span class="math notranslate nohighlight">\(1/N\)</span>.</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\| \mbox{true} - \mbox{desired} \|_1 \ge 2 \times \frac{N-n}{N}\)</span></p></li>
+</ul>
+<hr class="docutils" />
+<section id="id1">
+<h3>Random sampling<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>Given a good source of randomness, many ways to draw a simple random sample.</p>
+<p>One basic approach is like shuffling a deck of <span class="math notranslate nohighlight">\(n\)</span> cards, then dealing the top <span class="math notranslate nohighlight">\(k\)</span>: permute the population at random, then take the first <span class="math notranslate nohighlight">\(k\)</span> elements of the permutation to be the sample.</p>
+<p>There are a number of standard ways to generate a random permutation—i.e., to shuffle the deck.</p>
+</section>
+<section id="algorithm-pikk-permute-indices-and-keep-k">
+<h3>Algorithm <code class="docutils literal notranslate"><span class="pre">PIKK</span></code> (permute indices and keep <span class="math notranslate nohighlight">\(k\)</span>)<a class="headerlink" href="#algorithm-pikk-permute-indices-and-keep-k" title="Permalink to this headline">#</a></h3>
+<p>For instance, if we had a way to generate independent, identically distributed (iid) <span class="math notranslate nohighlight">\(U[0,1]\)</span> random numbers, we could do it as follows:</p>
+<p><strong>Algorithm <code class="docutils literal notranslate"><span class="pre">PIKK</span></code></strong></p>
+<ul class="simple">
+<li><p>assign iid <span class="math notranslate nohighlight">\(U[0,1]\)</span> numbers to the <span class="math notranslate nohighlight">\(n\)</span> elements of the population</p></li>
+<li><p>the sample consists of the <span class="math notranslate nohighlight">\(k\)</span> items assigned the smallest random numbers (break ties randomly)</p></li>
+<li><p>amounts to generating a random permutation of the population, then taking first <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>if the numbers really are iid, every permutation is equally likely, and it follows that the first <span class="math notranslate nohighlight">\(k\)</span> are an SRS</p></li>
+<li><p>requires <span class="math notranslate nohighlight">\(n\)</span> random numbers (and sorting)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">comb</span><span class="p">,</span> <span class="n">factorial</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">brentq</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chisquare</span><span class="p">,</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">scipy.integrate</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">Random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PIKK</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gen</span><span class="p">:</span> <span class="n">callable</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="n">x</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">gen</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="n">k</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are more efficient ways to generate a random permutation than assigning a number to each element and sorting, for instance the “Fisher-Yates shuffle” or “Knuth shuffle” (Knuth attributes it to Durstenfeld).</p>
+<p><strong>Algorithm Fisher-Yates-Knuth-Durstenfeld <code class="docutils literal notranslate"><span class="pre">shuffle</span></code> (backwards version)</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>for i=1, ..., n-1:
+    J &lt;- random integer uniformly distributed on {i, ..., n}
+    (a[J], a[i]) &lt;- (a[i], a[J])
+</pre></div>
+</div>
+<p>This requires the ability to generate independent random integers on various ranges. Doesn’t require sorting.</p>
+<p>There’s a version suitable for streaming, i.e., generating a random permutation of a list that has an (initially) unknown number <span class="math notranslate nohighlight">\(n\)</span> of elements:</p>
+<p><strong>Algorithm Fisher-Yates-Knuth-Durstenfeld <code class="docutils literal notranslate"><span class="pre">shuffle</span></code> (streaming version)</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>i &lt;- 0
+a = []
+while there are records left:
+    i &lt;- i+1
+    J &lt;- random integer uniformly distributed on {1, ..., i}
+    if J &lt; i:
+        a[i] &lt;- a[J]
+        a[J] &lt;- next record
+    else:
+        a[i] &lt;- next record
+</pre></div>
+</div>
+<p>Again, need to be able to generate independent uniformly distributed random integers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fykd</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">gen</span><span class="p">:</span> <span class="n">callable</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    shuffle a list in place</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">J</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">J</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">J</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">fykd</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([8, 3, 4, 7, 0, 9, 5, 1, 2, 6])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="proof-that-the-streaming-fisher-yates-knuth-durstenfeld-algorithm-works">
+<h3>Proof that the streaming Fisher-Yates-Knuth-Durstenfeld algorithm works<a class="headerlink" href="#proof-that-the-streaming-fisher-yates-knuth-durstenfeld-algorithm-works" title="Permalink to this headline">#</a></h3>
+<p>Induction:</p>
+<p>For <span class="math notranslate nohighlight">\(i=1\)</span>, obvious.</p>
+<p>At stage <span class="math notranslate nohighlight">\(i\)</span>, suppose all <span class="math notranslate nohighlight">\(i!\)</span> permutations are equally likely. For each such permutation, there are
+<span class="math notranslate nohighlight">\(i+1\)</span> distinct, equally likely permutations at stage <span class="math notranslate nohighlight">\(i+1\)</span>, resulting from swapping the <span class="math notranslate nohighlight">\(i+1\)</span>st item with one
+of the first <span class="math notranslate nohighlight">\(i\)</span>, or putting it in position <span class="math notranslate nohighlight">\(i+1\)</span>. These possibilities are mutually exclusive of
+the permutations attainable from a different permutation of the first <span class="math notranslate nohighlight">\(i\)</span> items.</p>
+<p>Thus, this enumerates all <span class="math notranslate nohighlight">\((i+1)i! = (i+1)!\)</span> permutations of <span class="math notranslate nohighlight">\((i+1)\)</span> items, and they are equally likely. ■</p>
+</section>
+</section>
+<section id="a-good-way-to-get-a-bad-shuffle">
+<h2>A good way to get a bad shuffle<a class="headerlink" href="#a-good-way-to-get-a-bad-shuffle" title="Permalink to this headline">#</a></h2>
+<p>Sort using a “random” comparison function, e.g.,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def RandomSort(a,b):
+    return (0.5 - np.random.random())
+</pre></div>
+</div>
+<p>But this fails the basic properties of an ordering, e.g., transitivity, reflexiveness, etc. Doesn’t produce random permutation. Output also depends on sorting algorithm.</p>
+<section id="the-right-way-the-wrong-way-and-the-microsoft-way">
+<h3>The right way, the wrong way, and the Microsoft way.<a class="headerlink" href="#the-right-way-the-wrong-way-and-the-microsoft-way" title="Permalink to this headline">#</a></h3>
+<p>Notoriously used by Microsoft to offer a selection of browsers in the EU. Resulted in IE being 5th of 5 about half the time in IE and about 26% of the time in Chrome, but only 6% of the time in Safari (4th about 40% of the time).</p>
+<p>See, e.g., <a class="reference external" href="http://www.computerworld.com/article/2520190/web-apps/microsoft-s-eu-ballot-fails-to-randomize-browser-order.html">http://www.computerworld.com/article/2520190/web-apps/microsoft-s-eu-ballot-fails-to-randomize-browser-order.html</a></p>
+</section>
+<section id="cormen-et-al-2009-algorithm-random-sample">
+<h3>Cormen et al. (2009) Algorithm <code class="docutils literal notranslate"><span class="pre">Random_Sample</span></code><a class="headerlink" href="#cormen-et-al-2009-algorithm-random-sample" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>recursive algorithm</p></li>
+<li><p>requires only <span class="math notranslate nohighlight">\(k\)</span> random numbers (integers)</p></li>
+<li><p>does not require sorting</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Random_Sample</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gen</span><span class="p">:</span> <span class="n">callable</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>  <span class="c1"># from Cormen et al.</span>
+    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">Random_Sample</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">union</span><span class="p">([</span><span class="n">n</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">union</span><span class="p">([</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">S</span>
+
+<span class="n">Random_Sample</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{22, 44, 79, 82, 86}
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Proof.</strong> Recursion.</p>
+</section>
+</section>
+<section id="reservoir-algorithms">
+<h2>Reservoir algorithms<a class="headerlink" href="#reservoir-algorithms" title="Permalink to this headline">#</a></h2>
+<p>The previous algorithms require <span class="math notranslate nohighlight">\(n\)</span> to be known.
+There are <em>reservoir</em> algorithms that do not.
+Moreover, the algorithms are suitable for streaming (aka <em>online</em>) use: items are examined
+sequentially and either enter into the reservoir, or, if not, are never revisited.</p>
+</section>
+<section id="algorithm-r-waterman-per-knuth-1997">
+<h2>Algorithm <code class="docutils literal notranslate"><span class="pre">R</span></code>, Waterman (per Knuth, 1997)<a class="headerlink" href="#algorithm-r-waterman-per-knuth-1997" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Put first <span class="math notranslate nohighlight">\(k\)</span> items into the <em>reservoir</em></p></li>
+<li><p>when item <span class="math notranslate nohighlight">\(k+j\)</span> is examined, either skip it (with probability <span class="math notranslate nohighlight">\(j/(k+j)\)</span>) or swap for a uniformly selected item in the reservoir (with probability <span class="math notranslate nohighlight">\(k/(k+j)\)</span>)</p></li>
+<li><p>naive version requires generating at most <span class="math notranslate nohighlight">\(n-k\)</span> random numbers</p></li>
+<li><p>closely related to FYKD shuffle</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">R</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>  <span class="c1"># Waterman&#39;s algorithm R</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># fill the reservoir</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+
+<span class="n">R</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{15, 16, 20, 42, 55}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Like <code class="docutils literal notranslate"><span class="pre">Random-Sample</span></code>, the proof that algorithm <code class="docutils literal notranslate"><span class="pre">R</span></code> generates an SRS uses the ability to generate independent random integers, uniformly distributed on <span class="math notranslate nohighlight">\(\{1, \ldots, m \}\)</span>.</p>
+</section>
+<section id="algorithm-z-vitter-1985">
+<h2>Algorithm Z, Vitter (1985)<a class="headerlink" href="#algorithm-z-vitter-1985" title="Permalink to this headline">#</a></h2>
+<p>Much more efficient than <code class="docutils literal notranslate"><span class="pre">R</span></code>, using random skips. Works in time essentially linear in <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>Note: Vitter proposes using the (inaccurate) <span class="math notranslate nohighlight">\(J = \lfloor mU \rfloor\)</span> to generate a random integer between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(m\)</span> in both algorithm <code class="docutils literal notranslate"><span class="pre">R</span></code> and algorithm <code class="docutils literal notranslate"><span class="pre">Z</span></code>. The issue is pervasive!</p>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Use a source of real randomness with a substantial amount of entropy to set the seed, e.g., 20 rolls of 10-sided dice.</p></li>
+<li><p>Record the seed so your analysis is reproducible.</p></li>
+<li><p>Use a PRNG at least as good as the Mersenne Twister, and preferably a cryptographic quality PRNG. Consider the PCG family. Avoid standard linear congruential generators and the Wichmann-Hill generator.</p></li>
+<li><p>Use open-source software, and record the version of the software you use.</p></li>
+<li><p>Use a sampling algorithm that does not “waste randomness.” Avoid permuting the entire population.</p></li>
+<li><p>Be aware of discretization issues in the sampling algorithm; many methods assume the PRNG produces <span class="math notranslate nohighlight">\(U[0,1]\)</span> or <span class="math notranslate nohighlight">\(U[0,1)\)</span> random numbers, rather than (an approximation to) numbers that are uniform on <span class="math notranslate nohighlight">\(w\)</span>-bit binary integers.</p></li>
+<li><p>Consider the size of the problem: are your PRNG and sampling algorithm adequate?</p></li>
+<li><p>Avoid “tests of representativeness” and procedures that reject some samples. They alter the distribution of the sample.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>Argyros, G. and A. Kiayias, 2012. PRNG: Pwning Random Number Generators.
+<a class="reference external" href="https://media.blackhat.com/bh-us-12/Briefings/Argyros/BH_US_12_Argyros_PRNG_WP.pdf">https://media.blackhat.com/bh-us-12/Briefings/Argyros/BH_US_12_Argyros_PRNG_WP.pdf</a></p></li>
+<li><p>Bernstein, D.J., T. Lange, and R. Niederhagen, 2016. Dual EC: A Standardized Back Door, in <em>The New Codebreakers, Essays Dedicated to David Kahn on the Occasion of his 85th Birthday</em>, Ryan, P.Y.A., D. Naccache, and J-J Quisquater, eds., Springer, Berlin.</p></li>
+<li><p>Cormen, T.H., C.E. Leiserson, R.L. Rivest and C. Stein, 2009. <em>Introduction to Algorithms, 3rd edition</em>, MIT Press.</p></li>
+<li><p>Fishman, G.S., and L.R. Moore, 1981. In Search of Correlation in Multiplicative Congruential Generators with Modulus 2**31-1, <em>Computer Science and Statistics: Proceedings of the 13 Symposium on the Interface</em>, William F. Eddy, ed., Springer Verlag, New York.</p></li>
+<li><p>Knuth, D., 1997 <em>The Art of Computer Programming, V.II: Seminumerical methods</em>, 3rd edition, Addison-Wesley, Boston.</p></li>
+<li><p>L’Ecuyer, P. and R. Simard, 2007. TestU01: A C Library for Empirical Testing of Random Number Generators, <em>ACM Trans. Math. Softw.</em>, <em>33</em>, <a class="reference external" href="http://doi.acm.org/10.1145/1268776.1268777">http://doi.acm.org/10.1145/1268776.1268777</a></p></li>
+<li><p>Marsaglia, G., 1968. Random Numbers Fall Mainly in the Planes, <em>PNAS</em>, <em>61</em>, 25–28.</p></li>
+<li><p>Marsaglia, G., 2003. Xorshift RNGs. <em>Journal of Statistical Software</em>, <em>8</em>, 1–6.</p></li>
+<li><p>Matsumoto, M., and T. Nishimura, 1998. 8). Mersenne twister: a 623-dimensionally equidistributed uniform pseudo-random number generator, <em>ACM Transactions on Modeling and Computer Simulation</em>, <em>8</em>, 3–30. doi:10.1145/272991.272995</p></li>
+<li><p>McCullough, B.D., 2008. Microsoft’s ‘Not the Wichmann-Hill’ random number generator. <em>Computational Statistics and Data Analysis</em>, <em>52</em> (10), 4587–4593. <a class="reference external" href="http://dx.doi.org/10.1016/j.csda.2008.03.006">http://dx.doi.org/10.1016/j.csda.2008.03.006</a></p></li>
+<li><p>NIST Computer Security Division, <em>Random Number Generation</em> <a class="reference external" href="http://csrc.nist.gov/groups/ST/toolkit/rng/">http://csrc.nist.gov/groups/ST/toolkit/rng/</a></p></li>
+<li><p>O’Neill, M.E., 2015. PCG: A Family of Simple Fast Space-Efficient Statistically Good Algorithms for Random Number Generation, submitted to <em>ACM Transactions on Mathematical Software</em>. <a class="reference external" href="http://www.pcg-random.org/pdf/toms-oneill-pcg-family-v1.02.pdf">http://www.pcg-random.org/pdf/toms-oneill-pcg-family-v1.02.pdf</a></p></li>
+<li><p>Ottoboni, K., and P.B. Stark, 2018. Random problems with R. <a class="reference external" href="https://arxiv.org/abs/1809.06520">https://arxiv.org/abs/1809.06520</a></p></li>
+<li><p><a class="reference external" href="http://www.pcg-random.org/">http://www.pcg-random.org/</a></p></li>
+<li><p>Shannon, C.E., 1948. A Mathematical Theory of Communication, <em>Bell System Technical Journal, 27</em>, 379–423, 623–656.</p></li>
+<li><p>Stark, P.B., and K. Ottoboni, 2018. Random sampling: practice makes imperfect. <a class="reference external" href="https://arxiv.org/abs/1810.10985">https://arxiv.org/abs/1810.10985</a></p></li>
+<li><p>Vitter, J.S., 1985. Random Sampling with a Reservoir, <em>ACM Transactions on Mathematical Software, 11</em>, 37–57.</p></li>
+<li><p>Wikipedia articles, including <a class="reference external" href="https://en.wikipedia.org/wiki/Mersenne_Twister">https://en.wikipedia.org/wiki/Mersenne_Twister</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_congruential_generator">https://en.wikipedia.org/wiki/Linear_congruential_generator</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Comparison_of_hardware_random_number_generators">https://en.wikipedia.org/wiki/Comparison_of_hardware_random_number_generators</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">https://en.wikipedia.org/wiki/Pseudorandom_number_generator</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_random_number_generators">https://en.wikipedia.org/wiki/List_of_random_number_generators</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Random_number_generator_attack">https://en.wikipedia.org/wiki/Random_number_generator_attack</a></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">|</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

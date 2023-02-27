@@ -1,0 +1,1079 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Tests of randomness and independence &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/permute-independence.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Fpermute-independence.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/permute-independence.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tests-of-independence">
+   Tests of independence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-null-hypothesis-models">
+   The null hypothesis; models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tests-for-trend">
+   Tests for Trend
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-spearman-rank-correlation-and-related-statistics">
+     The Spearman rank correlation and related statistics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-run-test">
+     The run test
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#independence-of-two-time-series">
+   Independence of two time series
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#walther-s-examples">
+     Walther’s Examples
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Tests of randomness and independence</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tests-of-independence">
+   Tests of independence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-null-hypothesis-models">
+   The null hypothesis; models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tests-for-trend">
+   Tests for Trend
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-spearman-rank-correlation-and-related-statistics">
+     The Spearman rank correlation and related statistics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-run-test">
+     The run test
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#independence-of-two-time-series">
+   Independence of two time series
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#walther-s-examples">
+     Walther’s Examples
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="tests-of-randomness-and-independence">
+<h1>Tests of randomness and independence<a class="headerlink" href="#tests-of-randomness-and-independence" title="Permalink to this headline">#</a></h1>
+<section id="tests-of-independence">
+<h2>Tests of independence<a class="headerlink" href="#tests-of-independence" title="Permalink to this headline">#</a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>References:
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Lehmann, E.L. (1998). Nonparametrics: Statistical Methods Based on Ranks,
+Prentice Hall, Upper Saddle River, NJ.</p></li>
+<li><p>Walther, G., 1997. Absence of correlation between the solar neutrino flux and the sunspot number, <em>Phys. Rev. Lett.</em>, <em>79</em>, 4522–4524.</p></li>
+<li><p>Walther, G., 1999. On the solar-cycle modulation of the Homestake solar neutrino capture rate and the shuffle test, <em>Astrophys. J.</em>, <em>513</em>, 990–996.</p></li>
+</ul>
+</section>
+<section id="the-null-hypothesis-models">
+<h2>The null hypothesis; models<a class="headerlink" href="#the-null-hypothesis-models" title="Permalink to this headline">#</a></h2>
+<p>Suppose a treatment has <span class="math notranslate nohighlight">\(N\)</span> ordered levels, and one response is
+observed per treatment level, with <span class="math notranslate nohighlight">\(N\)</span> subjects assigned at random,
+one to each treatment level.
+Let <span class="math notranslate nohighlight">\(T_j\)</span> denote the rank among the responses of the
+response of the subject assigned to the treatment level with rank <span class="math notranslate nohighlight">\(j\)</span>.
+Then we have a set of pairs of ranks of treatments and responses:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-91b703f3-117a-4c31-a134-9499e3f93052">
+<span class="eqno">()<a class="headerlink" href="#equation-91b703f3-117a-4c31-a134-9499e3f93052" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \{(j, T_j): j= 1, 2, \ldots N \}
+\end{equation}\]</div>
+<p>There are <span class="math notranslate nohighlight">\(N!\)</span> possible sets of pairs, depending on which treatment
+rank goes with with response rank.
+If treatment has no effect, all <span class="math notranslate nohighlight">\(N\)</span>! pairings are equally likely; each
+has probability <span class="math notranslate nohighlight">\(1/N!\)</span>. This is the <em>Hypothesis of Randomness.</em></p>
+<p>Now consider drawing a random sample of <span class="math notranslate nohighlight">\(N\)</span> subjects from a population,
+and assigning one to each of the <span class="math notranslate nohighlight">\(N\)</span> treatment levels.
+Let <span class="math notranslate nohighlight">\(Z_j\)</span> denote the response of the subject assigned treatment <span class="math notranslate nohighlight">\(j\)</span>,
+and define <span class="math notranslate nohighlight">\(\mathbb{P}\{Z_j \le z \} := F_j(z)\)</span>, <span class="math notranslate nohighlight">\(j= 1, 2, \ldots N\)</span>.
+If treatment has no effect, <span class="math notranslate nohighlight">\(F_1 = F_2 = \cdots = F_N\)</span>.
+If the size of the population is much much larger than <span class="math notranslate nohighlight">\(N\)</span>, we can ignore the
+dependence among the subjects.
+That leads to the <em>population model</em>, in which <span class="math notranslate nohighlight">\(\{Z_j \}_{j=1}^N\)</span> are independent.
+Under the null hypothesis, they are thus IID, and so the null distribution of
+the pairs <span class="math notranslate nohighlight">\(\{(j, T_j)\}\)</span> is the same as it is for the hypothesis of randomness.</p>
+<p>Consider a third statistical model: we make two measurements <span class="math notranslate nohighlight">\((X_j, Y_j)\)</span> for each of <span class="math notranslate nohighlight">\(N\)</span> subjects.
+Under the null hypothesis, the <span class="math notranslate nohighlight">\(\{X_j\}\)</span> are IID, <span class="math notranslate nohighlight">\(\{Y_j\}\)</span> are IID, and <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent.
+Let <span class="math notranslate nohighlight">\(T_j\)</span> be the rank of the <span class="math notranslate nohighlight">\(Y\)</span> measurement for the subject whose <span class="math notranslate nohighlight">\(X\)</span> measurement has rank <span class="math notranslate nohighlight">\(j\)</span> among the <span class="math notranslate nohighlight">\(X\)</span>s.
+Then this experiment also leads to the same joint distribution for the pairs <span class="math notranslate nohighlight">\(\{(j, T_j)\}\)</span> under the null.</p>
+<p>The key to all three models is that one set of measurements is <em>exchangeable</em> given the
+other: all pairings are equally likely.</p>
+</section>
+<section id="tests-for-trend">
+<h2>Tests for Trend<a class="headerlink" href="#tests-for-trend" title="Permalink to this headline">#</a></h2>
+<p>We are going to start with tests for a <em>trend</em>, the alternative hypothesis
+that increasing levels of treatment <span class="math notranslate nohighlight">\(j\)</span> are associated with increasing (or decreasing)
+levels of response <span class="math notranslate nohighlight">\(T_j\)</span>.</p>
+<section id="the-spearman-rank-correlation-and-related-statistics">
+<h3>The Spearman rank correlation and related statistics<a class="headerlink" href="#the-spearman-rank-correlation-and-related-statistics" title="Permalink to this headline">#</a></h3>
+<p>The first statistic we consider counts the pairs <span class="math notranslate nohighlight">\((T_i, T_j)\)</span> with <span class="math notranslate nohighlight">\(i &lt; j \)</span> for which <span class="math notranslate nohighlight">\(T_i &lt; T_j\)</span>.
+Let</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7f95a21b-988f-4635-9325-b8eed6fd4492">
+<span class="eqno">()<a class="headerlink" href="#equation-7f95a21b-988f-4635-9325-b8eed6fd4492" title="Permalink to this equation">#</a></span>\[\begin{equation}
+U_{ij} := \left \{ \begin{array}{lr} 
+                 1, &amp; T_i &lt; T_j \\
+                 0, &amp; T_i \ge T_j 
+            \end{array} 
+          \right .
+\end{equation}\]</div>
+<p>and
+<span class="math notranslate nohighlight">\(B :=  \sum_{i &lt; j} U_{ij}\)</span>.
+Then <span class="math notranslate nohighlight">\(B\)</span> tends to be large when larger responses are associated with larger
+treatment indices <span class="math notranslate nohighlight">\(j\)</span>.
+The statistic <span class="math notranslate nohighlight">\(B\)</span> could be the basis of a test, but one might instead
+weight the “in order” pairs, giving more weight to larger differences in position:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4e1bf3f8-b09d-48b4-87c8-d514902d44eb">
+<span class="eqno">()<a class="headerlink" href="#equation-4e1bf3f8-b09d-48b4-87c8-d514902d44eb" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+D' &amp;:=&amp;  \sum_{i &lt; j} (j-i) U_{ij} \\
+   &amp; = &amp; \sum_{i \le j} (j-i) U_{ij} \\
+   &amp; = &amp; \sum_{j=1}^N \sum_{i=1}^j (jU_{ij} - iU_{ij}) \\
+   &amp; = &amp; \sum_{j=1}^N \left ( j \sum_{i=1}^j U_{ij} - \sum_{i=1}^j iU_{ij} \right ) \\
+\end{eqnarray}\]</div>
+<p>Now, <span class="math notranslate nohighlight">\(T_j\)</span> is the rank of the <span class="math notranslate nohighlight">\(j\)</span>th response, so (ignoring ties) <span class="math notranslate nohighlight">\(T_j-1\)</span> responses are less than the <span class="math notranslate nohighlight">\(j\)</span>th response.
+Hence, since <span class="math notranslate nohighlight">\(U_{ij} = 1 - U_{ji}\)</span> for <span class="math notranslate nohighlight">\(j \ne i\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-18fcf525-9253-4cc0-b08b-a771602f4582">
+<span class="eqno">()<a class="headerlink" href="#equation-18fcf525-9253-4cc0-b08b-a771602f4582" title="Permalink to this equation">#</a></span>\[\begin{equation}
+  T_j-1 =  \sum_{i \ne j} U_{ij} = \sum_{i &lt; j} U_{ij} + \sum_{i &gt; j} U_{ij}.
+\end{equation}\]</div>
+<p>So</p>
+<div class="amsmath math notranslate nohighlight" id="equation-afdce679-4dbf-4a28-b026-2f0136aceb3d">
+<span class="eqno">()<a class="headerlink" href="#equation-afdce679-4dbf-4a28-b026-2f0136aceb3d" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+ \sum_{j=1}^N jT_j - N(N+1)/2 &amp; = &amp; \sum_{j=1}^N j(T_j-1) \\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} j U_{ij} + \sum_{j=1}^N \sum_{i &gt; j} jU_{ij} \\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} j U_{ij} + \sum_{i=1}^N \sum_{j &gt; i} iU_{ji} \mbox{ (exchange roles of $i$ and $j$)}\\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} j U_{ij} + \sum_{i=1}^N \sum_{j &gt; i} i(1-U_{ij}) \mbox{ (since $U_{ji} = 1-U_{ij}$)}\\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} j U_{ij} - \sum_{i=1}^N \sum_{j &gt; i} i U_{ij} + \sum_{i=1}^N \sum_{j &gt; i} i \\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} j U_{ij} - \sum_{i=1}^N \sum_{j &gt; i} i U_{ij} + \sum_{i=1}^N i(N-i) \\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} j U_{ij} - \sum_{i=1}^N \sum_{j &gt; i} i U_{ij} + N^2(N+1)/2 - N(N+1)(2N+1)/6 \\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} j U_{ij} - \sum_{j=1}^N \sum_{i &lt; j} i U_{ij} + N^2(N+1)/2 - N(N+1)(2N+1)/6 \mbox{ (same sum in different order)}\\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + N^2(N+1)/2 - N(N+1)(2N+1)/6
+\end{eqnarray}\]</div>
+<p>Hence,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-31fc3e2b-156b-4d09-895b-f08bbf33a384">
+<span class="eqno">()<a class="headerlink" href="#equation-31fc3e2b-156b-4d09-895b-f08bbf33a384" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+ \sum_{j=1}^N jT_j &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + N^2(N+1)/2 - N(N+1)(2N+1)/6 + N(N+1)/2 \\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + N^3/2 + N^2/2 - N^3/3 - N^2/2 - N/6 + N^2/2 + N/2 \\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + N^3/6 + N^2/2 + N/3 \\
+ &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + N(N+1)(N+2)/6
+\end{eqnarray}\]</div>
+<p>Now</p>
+<div class="amsmath math notranslate nohighlight" id="equation-88e0bddd-66b6-4657-b80f-f4ccac2cfaf0">
+<span class="eqno">()<a class="headerlink" href="#equation-88e0bddd-66b6-4657-b80f-f4ccac2cfaf0" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+\sum_j (T_j-j)^2 &amp; = &amp; \sum_j T_j^2 - 2\sum_j jT_j + \sum_j j^2 \\
+    &amp; = &amp;  2N(N+1)/2 - 2 \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij}  -2  N(N+1)(N+2)/6 \\
+    &amp; = &amp; - 2 \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + \mbox{ constant }.
+\end{eqnarray}\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(D'\)</span> yields an equivalent test to</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1baacffa-968b-4594-ad24-3cf94d0b2cb7">
+<span class="eqno">()<a class="headerlink" href="#equation-1baacffa-968b-4594-ad24-3cf94d0b2cb7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+D :=  \sum_{j=1}^N (T_j - j)^{2}.
+\end{equation}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(D\)</span> takes only even values:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-36e03c59-afc5-42b6-a10b-ae2f738166bf">
+<span class="eqno">()<a class="headerlink" href="#equation-36e03c59-afc5-42b6-a10b-ae2f738166bf" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+D &amp; = &amp;  \sum_{j=1}^N (T_j^2 - 2jT_j + j^2) \\
+  &amp; = &amp; 2 \left ( \sum_{j=1}^N j^2 - \sum_{j=1}^N jT_j \right ) \\
+  &amp; = &amp; N(N+1)(2N+1)/3 - 2 \sum_{i=1}^N iT_i.
+\end{eqnarray}\]</div>
+<p>A test that rejects when <span class="math notranslate nohighlight">\(D\)</span> is small is equivalent to a test that rejects when
+<span class="math notranslate nohighlight">\(\sum_{i=1}^{N}iT_{i}\)</span> is big.
+It is equivalent to a test that rejects when <span class="math notranslate nohighlight">\(\sum_{i=1}^{N}R_{i}T_{i}\)</span>
+is big, where <span class="math notranslate nohighlight">\(R_{i}\)</span> is the rank of the <span class="math notranslate nohighlight">\(i\)</span>th
+treatment and <span class="math notranslate nohighlight">\(S_{i}\)</span> is the rank of the <span class="math notranslate nohighlight">\(i\)</span>th response.
+Now</p>
+<div class="amsmath math notranslate nohighlight" id="equation-48bf20bd-2ab3-477f-993a-44610c47535d">
+<span class="eqno">()<a class="headerlink" href="#equation-48bf20bd-2ab3-477f-993a-44610c47535d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{R} := \frac{1}{N} \sum_{j=1}^N R_j = \bar{S} = (N+1)/2.
+\end{equation}\]</div>
+<p>Hence</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2f663fcd-c3cc-4684-8e81-863789703a56">
+<span class="eqno">()<a class="headerlink" href="#equation-2f663fcd-c3cc-4684-8e81-863789703a56" title="Permalink to this equation">#</a></span>\[\begin{equation}
+(1/N) \sum_j(R_j - \bar{R})^{2} = (1/N) \sum_j(S_j - \bar{S})^{2} =
+(1/N) (N^{3}-N)/12 = (N^{2}-1)/12.
+\end{equation}\]</div>
+<p>Spearman’s rank correlation is the correlation coefficient of the ranks of the treatment and response:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-47f344fc-b3b4-48fb-9e3d-b8c9c50ef0e7">
+<span class="eqno">()<a class="headerlink" href="#equation-47f344fc-b3b4-48fb-9e3d-b8c9c50ef0e7" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+ r_S &amp; :=&amp; \frac{ \frac{1}{N} \sum_j (R_j - \bar{R})(S_j - \bar{S})}{\sqrt{\frac{1}{N} \sum_j (R_j - \bar{R})^2}
+ \sqrt{\frac{1}{N} \sum_j (S_j - \bar{S})^2}} \\
+     &amp; = &amp; \sum_i R_iS_i - \bar{R} S_i - R_i\bar{S} + \bar{R}\bar{S} / ((N^3-N)/12) \\
+     &amp; = &amp; (12/(N^3-N)) \left ( \sum R_iS_i - N(N+1)^2/4 \right ).
+\end{eqnarray}\]</div>
+<p>A bit more algebra shows that
+<span class="math notranslate nohighlight">\(r_S = 1 - 6D/(N^3 - N)\)</span>. If there are ties, we can define analogous test
+statistics using midranks instead of ranks.
+If the null hypothesis is true and there are no ties, <span class="math notranslate nohighlight">\(\mathbb{E}r_S = 0\)</span> and
+<span class="math notranslate nohighlight">\(r_S \sqrt{(N-2)/(1-r_S^2)} \rightarrow t_{N-2}\)</span>, Student’s <span class="math notranslate nohighlight">\(t\)</span> distribution with <span class="math notranslate nohighlight">\(N-2\)</span> degrees
+of freedom.<br />
+This approximation is pretty good for <span class="math notranslate nohighlight">\(N\ge 10\)</span> or so.
+Alternatively, one can simulate critical values for a test based on Spearman’s <span class="math notranslate nohighlight">\(r_S\)</span>
+by computing the usual correlation coefficient between <span class="math notranslate nohighlight">\(\{1, \ldots, N\}\)</span> and pseudo-random permutations
+of <span class="math notranslate nohighlight">\(\{1, \ldots, N\}\)</span>.</p>
+<p>For a bivariate normal distribution of <span class="math notranslate nohighlight">\((X, Y)\)</span>,
+the Pitman efficiency of <span class="math notranslate nohighlight">\(r_S\)</span> compared to the usual Pearson correlation coefficient is
+<span class="math notranslate nohighlight">\((3/\pi )^{2} \approx 0.912\)</span>.
+(Loosely speaking, the Pitman efficiency is the asymptotic ratio of sample sizes the two tests require to have the same power and significance level against a sequence alternatives for which the required sample size approaches infinity for the
+more powerful test.)
+If there is serial correlation, the null distribution of the Pearson and Spearman correlations is quite different.</p>
+<p>Another nonparametric test for association is to use Pearson’s correlation as the test statistic, but to calibrate
+<span class="math notranslate nohighlight">\(P\)</span>-values using the permutation distribution of the test statistic under the null of exchangability,
+instead of the usual parametric assumption that the data are IID bivariate normal.</p>
+</section>
+<section id="the-run-test">
+<h3>The run test<a class="headerlink" href="#the-run-test" title="Permalink to this headline">#</a></h3>
+<p>For many alternatives, high values tend to cluster and low values tend to cluster, leading
+to “runs.”
+We can use this to test the hypothesis of randomness by looking at the lengths and numbers
+of runs.
+For example, suppose we toss a (possibly biased) coin <span class="math notranslate nohighlight">\(N\)</span> times.
+We can think of this as <span class="math notranslate nohighlight">\(N\)</span> trials.
+We consider the outcome of the <span class="math notranslate nohighlight">\(j\)</span>th trial to be 1 if the coin lands heads on
+the <span class="math notranslate nohighlight">\(j\)</span>th toss and 0 otherwise.
+Under the null hypothesis, the <span class="math notranslate nohighlight">\(N\)</span> outcomes are IID Bernoulli(<span class="math notranslate nohighlight">\(p\)</span>)
+random variables, where <span class="math notranslate nohighlight">\(P\)</span> is the chance that the coin lands heads.</p>
+<p>Let <span class="math notranslate nohighlight">\(R\)</span> denote the number of <em>runs</em>.
+For example, the sequence HHTHTTTHTH has 7 runs: HH, T, H, TTT, H, T and H.
+Condition on the number <span class="math notranslate nohighlight">\(n\)</span> of heads in the <span class="math notranslate nohighlight">\(N\)</span> tosses.
+If the null hypothesis is true, each arrangement of the <span class="math notranslate nohighlight">\(n\)</span> heads among
+the <span class="math notranslate nohighlight">\(N\)</span> tosses has probability <span class="math notranslate nohighlight">\({{N}\choose{n}}^{-1}\)</span>.
+We will compute the (conditional) probability distribution of <span class="math notranslate nohighlight">\(R\)</span> given
+<span class="math notranslate nohighlight">\(n\)</span>, under the null hypothesis of independence.</p>
+<p>If <span class="math notranslate nohighlight">\(n=N\)</span> or if <span class="math notranslate nohighlight">\(n = 0\)</span>, then <span class="math notranslate nohighlight">\(R = 1\)</span>.
+If <span class="math notranslate nohighlight">\(R = 2\)</span>, there are only two possibilities: first all the heads,
+then all the tails, or first all the tails, then all the heads.
+I.e., the sequence is either (HH … HTT … T) or (TT … THH … H).
+where there are <span class="math notranslate nohighlight">\(n\)</span> heads and <span class="math notranslate nohighlight">\(m := N-n\)</span> tails in all.
+The probability that <span class="math notranslate nohighlight">\(R=2\)</span> is thus <span class="math notranslate nohighlight">\(2{{N}\choose{n}}^{-1}\)</span>
+if the null hypothesis is true.</p>
+<p>More generally, how can <span class="math notranslate nohighlight">\(R\)</span> be even, i.e., <span class="math notranslate nohighlight">\(R = 2k\)</span> for some integer <span class="math notranslate nohighlight">\(k \ge 1\)</span>?
+If the sequence starts with a head, it has to end with a tail for <span class="math notranslate nohighlight">\(R\)</span> to be even.
+We need to choose where to break the
+sequence of heads to insert tails,
+then where to break that sequence of tails to insert heads, etc.
+If the sequence starts with a tail, it has to end with a head for <span class="math notranslate nohighlight">\(R\)</span> to be even.
+We need to choose where to break the
+sequence of tails to insert heads,
+then where to break that sequence of heads to insert tails, etc.</p>
+<p>We need to break the <span class="math notranslate nohighlight">\(n\)</span> heads into <span class="math notranslate nohighlight">\(k\)</span> groups,
+which means picking <span class="math notranslate nohighlight">\(k - 1\)</span> breakpoints,
+but the first breakpoint needs to come after the first head, and the
+last breakpoint needs to come before the <span class="math notranslate nohighlight">\(n\)</span>th head, so there are only
+<span class="math notranslate nohighlight">\(n - 1\)</span> places those <span class="math notranslate nohighlight">\(k - 1\)</span>
+breakpoints can be.
+And we need to break the <span class="math notranslate nohighlight">\(m\)</span> tails into <span class="math notranslate nohighlight">\(k\)</span> groups,
+which means picking <span class="math notranslate nohighlight">\(k - 1\)</span> breakpoints,
+but the first needs to be after the first tail and the last needs to be
+before the <span class="math notranslate nohighlight">\(m\)</span>th tail, so there are only <span class="math notranslate nohighlight">\(m - 1\)</span>
+places those <span class="math notranslate nohighlight">\(k - 1\)</span> breakpoints can be.
+The number of sequences with <span class="math notranslate nohighlight">\(R = 2k\)</span> that start with heads is thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f2ca7813-e7c5-4d3e-9d9e-2ca79561afcc">
+<span class="eqno">()<a class="headerlink" href="#equation-f2ca7813-e7c5-4d3e-9d9e-2ca79561afcc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ {{n-1}\choose{k-1}}{{m-1}\choose{k-1}}.
+\end{equation}\]</div>
+<p>The number of sequences with <span class="math notranslate nohighlight">\(R = 2k\)</span> that
+start with tails is the same (just read each sequence right-to-left instead of left-to-right).</p>
+<p>Thus, if the null hypothesis is true,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-800f96dc-2624-41a9-bb90-31eed8754e16">
+<span class="eqno">()<a class="headerlink" href="#equation-800f96dc-2624-41a9-bb90-31eed8754e16" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{P}\{R = 2k \} = \frac{2 {{n-1}\choose {k-1}} {{m-1}\choose{k-1}}}{{{N}\choose{n}}}.
+\end{equation}\]</div>
+<p>Of course, there need to be enough heads and enough tails!
+So, there’s an implicit restriction that <span class="math notranslate nohighlight">\(n \ge k\)</span> and <span class="math notranslate nohighlight">\(N-n \ge k\)</span>.
+We will just define <span class="math notranslate nohighlight">\({{N} \choose {k}}\)</span> to be 0 if <span class="math notranslate nohighlight">\(k &gt; n\)</span>.</p>
+<p>How can <span class="math notranslate nohighlight">\(R\)</span> be odd, <span class="math notranslate nohighlight">\(R = 2k+1\)</span>?
+Either the sequence starts and ends with heads or it starts and ends with tails.
+Suppose it starts with heads.
+Then we need to break the string of <span class="math notranslate nohighlight">\(n\)</span> heads in <span class="math notranslate nohighlight">\(k\)</span> places to form
+<span class="math notranslate nohighlight">\(k + 1\)</span> groups using <span class="math notranslate nohighlight">\(k\)</span> groups of tails formed
+by breaking the <span class="math notranslate nohighlight">\(m\)</span> tails in <span class="math notranslate nohighlight">\(k-1\)</span> places.
+If the sequence starts with tails, we need to break the <span class="math notranslate nohighlight">\(m\)</span> tails in <span class="math notranslate nohighlight">\(k\)</span>
+places to form <span class="math notranslate nohighlight">\(k + 1\)</span> groups using <span class="math notranslate nohighlight">\(k\)</span> groups of heads formed
+by breaking the <span class="math notranslate nohighlight">\(n\)</span> heads in <span class="math notranslate nohighlight">\(k-1\)</span> places.
+Thus, under the null hypothesis,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1b33c99a-e067-40bd-b444-0ca104c2bb2d">
+<span class="eqno">()<a class="headerlink" href="#equation-1b33c99a-e067-40bd-b444-0ca104c2bb2d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{P}\{R = 2k+1 \} = 
+      \frac{ {{n-1}\choose{k}} {{m-1}\choose{k-1}} + {{n-1}\choose{k-1}} {{m-1}\choose{k}}}
+          {{{N}\choose {n}}}.
+\end{equation}\]</div>
+<p>Again, there are implicit restrictions on the relative sizes of <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(k\)</span>, and <span class="math notranslate nohighlight">\(N-n\)</span>.</p>
+<p>Nothing in the derivation of the null distribution of <span class="math notranslate nohighlight">\(R\)</span> used the probability of heads.
+The conditional distribution of the test statistic under the null hypothesis depends only
+on the fact that the tosses are IID, not that the coin is fair.</p>
+<p>Let <span class="math notranslate nohighlight">\(I_j\)</span> be the indicator of the event that
+the outcome of the <span class="math notranslate nohighlight">\(j+1\)</span>st toss differs from the outcome of
+the <span class="math notranslate nohighlight">\(j\)</span>th toss, <span class="math notranslate nohighlight">\(j=1, \ldots, N-1\)</span>.
+Then <span class="math notranslate nohighlight">\(R = 1+ \sum_{j=1}^{N-1} I_j\)</span>.
+Under the null, conditional on <span class="math notranslate nohighlight">\(n\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ccc61773-4ebf-4aea-9073-ab57fb036be8">
+<span class="eqno">()<a class="headerlink" href="#equation-ccc61773-4ebf-4aea-9073-ab57fb036be8" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+\mathbb{P}(I_j = 1) 
+   &amp; = &amp; \mathbb{P}(I_j = 1 | \mbox{ $j$th toss lands H}, n)\mathbb{P}( \mbox{ $j$th toss lands H} | n) +
+                       \mathbb{P}(I_j = 1 | \mbox{ $j$th toss lands T}, n)\mathbb{P}(\mbox{ $j$th toss lands T} | n) \\
+   &amp; = &amp;\mathbb{P}(\mbox{ $j+1$st toss lands T }|  \mbox{ $j$th toss lands H}, n)\mathbb{P}( \mbox{ $j$th toss lands H} | n) \\
+   &amp; &amp; + \mathbb{P}(\mbox{ $j+1$st toss lands H } | \mbox{$j$th toss lands T}, n)\mathbb{P}(\mbox{$j$th toss lands T} | n) \\
+   &amp; = &amp; (m/(N-1)) (n/N) + (n/(N-1))(m/N) \\
+   &amp; = &amp; 2nm/(N(N-1)).
+\end{eqnarray}\]</div>
+<p>The indicators <span class="math notranslate nohighlight">\(\{I_j\}\)</span> are identically distributed under the null hypothesis,
+so if the null holds,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-91ab7108-0fe9-4104-a228-6c3d44f1347e">
+<span class="eqno">()<a class="headerlink" href="#equation-91ab7108-0fe9-4104-a228-6c3d44f1347e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{E} R = \mathbb{E} \left ( 1 + \sum_{j=1}^{N-1} I_j \right ) =
+      1 + (N-1)2nm/(N(N-1)) = 1 + 2nm/N.
+\end{equation}\]</div>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h3>
+<p>Air temperature is measured at noon in a climate-controlled room for 20
+days in a row.
+We want to test the null hypothesis that temperatures on different
+days are independent and identically distributed.</p>
+<p>Let <span class="math notranslate nohighlight">\(T_j\)</span> be the temperature on day <span class="math notranslate nohighlight">\(j\)</span>, <span class="math notranslate nohighlight">\(j = 1, \ldots, 20\)</span>.
+If the measurements were IID, whether each day’s temperature is
+above or below a given temperature <span class="math notranslate nohighlight">\(t\)</span> is like a toss of
+a possibly biased coin, with tosses on
+different days independent of each other.
+We could consider a temperature above <span class="math notranslate nohighlight">\(t\)</span> to be a head and
+a temperature below <span class="math notranslate nohighlight">\(t\)</span> to be a tail.</p>
+<p>Let’s take <span class="math notranslate nohighlight">\(t\)</span> to be the median of the 20 measurements.
+In this example, <span class="math notranslate nohighlight">\(n=10\)</span>, <span class="math notranslate nohighlight">\(m=10\)</span>, <span class="math notranslate nohighlight">\(N=20\)</span>.
+We will suppose that there are no ties among the measured temperatures.
+Under the null hypothesis, the expected number of runs is  <span class="math notranslate nohighlight">\(\mathbb{E}R = 1+2mn/N = 11\)</span>.</p>
+<p>The minimum possible number of runs is 2 and the maximum is 20.
+Since we expect temperature on successive days to have positive serial
+correlation (why?), we might expect to see fewer runs than
+if temperatures on different days were independent.
+So, let’s do a one-sided test that rejects if there are too few runs.
+We will aim for a test with significance level <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c3b0e190-7fc5-4e15-abf8-fa074b52db5c">
+<span class="eqno">()<a class="headerlink" href="#equation-c3b0e190-7fc5-4e15-abf8-fa074b52db5c" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+\mathbb{P}_0 \{ R = 2\} &amp; = &amp; \frac{2}{{20} \choose {10}} =  1.082509e-05 \\
+\mathbb{P}_0 \{ R = 3\} &amp; = &amp; \frac{2 {{9} \choose {1}} {{9} \choose {0}}}{{20} \choose {10}} \approx 9.74258e-05 \\
+\mathbb{P}_0 \{R = 4\} &amp; = &amp; \frac{2 {{9} \choose {1}}  {{9} \choose {1}}}{{20} \choose {10}} \approx 8.768321e-04 \\
+\mathbb{P}_0 \{R = 5\} &amp; = &amp; \frac{2  {{9} \choose {2}} {{9} \choose {1}}}{{20} \choose {10}} \approx  0.003507329 \\
+\mathbb{P}_0 \{R = 6\} &amp; = &amp; \frac{ 2 {{9} \choose {2}} {{9} \choose {2}}}{{20} \choose {10}}
+         \approx  0.01402931 \\
+\mathbb{P}_0 \{R = 7\} &amp; = &amp; \frac{2 {{9} \choose {3}} {{9} \choose {2}}}{{20} \choose {10}} \approx  0.03273507 \\
+\mathbb{P}_0 \{ R \le 6\} &amp; = &amp; \frac{2 (2+9+81+324+1296)}{{20} \choose {10}} \approx  0.0185.
+\end{eqnarray}\]</div>
+<p>So, we should reject the null hypothesis if <span class="math notranslate nohighlight">\(R \le 6\)</span>, which gives a
+significance level of 1.9%.
+Including 7 in the rejection region would make the significance level 5.1%, slightly too big.</p>
+<p>When <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are large, the combinatorics can be
+difficult to evaluate numerically.
+There are at least two options: asymptotic approximation and simulation.
+The null distribution of <span class="math notranslate nohighlight">\(R\)</span> is asymptotically normal:
+as <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m \rightarrow \infty\)</span> and <span class="math notranslate nohighlight">\(m/n \rightarrow \gamma\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8c1b14db-093f-4fd1-b51c-44883d02d279">
+<span class="eqno">()<a class="headerlink" href="#equation-8c1b14db-093f-4fd1-b51c-44883d02d279" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{R - 2m/(1+\gamma)}{\sqrt{4 \gamma m/(1+\gamma)^{3}}} \rightarrow N(0, 1)
+\end{equation}\]</div>
+<p>in distribution.</p>
+<p>Below is a python function to simulate the null distribution of the number <span class="math notranslate nohighlight">\(R\)</span> of runs,
+and evaluate the <span class="math notranslate nohighlight">\(P\)</span>-value of the observed value of <span class="math notranslate nohighlight">\(R\)</span> conditional
+on <span class="math notranslate nohighlight">\(n\)</span>, for a one-sided test against the alternative that the distribution
+produces fewer runs than independent trials would tend to produce.
+The input is a vector of length <span class="math notranslate nohighlight">\(N\)</span>; each element is equal to
+either “1” (for heads) or “-1” (for tails).
+The test statistic is calculated by finding
+<span class="math notranslate nohighlight">\(1 + \sum_{j=1}^{N-1} I_j\)</span>,
+as we did above in finding <span class="math notranslate nohighlight">\(\mathbb{E}R\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="n">prng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">12345678</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simRunTest</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">reps</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    simulate the P-value of the runs test, for the alternative of positive serial correlation</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x: np.array</span>
+<span class="sd">        array of +1 and -1</span>
+<span class="sd">    reps: int</span>
+<span class="sd">        number of replications</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float: fraction of reps in which the test statistic was less than or equal to its observed value</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">mis_match</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">mis_match</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">reps</span><span class="p">):</span>
+        <span class="n">prng</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">hits</span> <span class="o">+=</span> <span class="p">(</span><span class="n">mis_match</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">ts</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">hits</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">reps</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">ts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As an example, suppose the observed sequence is
+<span class="math notranslate nohighlight">\(x  = (-1, -1,  1,  1,  1, -1,  1)\)</span>,
+for which <span class="math notranslate nohighlight">\(N = 7\)</span>, <span class="math notranslate nohighlight">\(n = 4\)</span>, <span class="math notranslate nohighlight">\(m = 3\)</span>
+and <span class="math notranslate nohighlight">\(R = 4\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">])</span>
+<span class="n">simRunTest</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.5394846051539485, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tthe simulated
+<span class="math notranslate nohighlight">\(P\)</span>-value using simRunTest was about 0.54.
+Exact calculation gives:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f9158570-103d-42c3-996f-cdc668203149">
+<span class="eqno">()<a class="headerlink" href="#equation-f9158570-103d-42c3-996f-cdc668203149" title="Permalink to this equation">#</a></span>\[\begin{equation}
+P_{0} \{R \le 4 \} = (2 + 5 + 12)/35 = 19/35 \approx  0.5429.
+\end{equation}\]</div>
+<p>The standard error of the estimated probability is thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3adc896b-1e49-4340-9e97-5ecd9948cdf7">
+<span class="eqno">()<a class="headerlink" href="#equation-3adc896b-1e49-4340-9e97-5ecd9948cdf7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+SE = \sqrt{(19/35\times 16/35)/10000} \approx 0.005.
+\end{equation}\]</div>
+<p>The simulation was off by about <span class="math notranslate nohighlight">\((0.54 - 0.5429)/0.005 \approx  -0.58SE\)</span>.</p>
+</section>
+</section>
+<section id="independence-of-two-time-series">
+<h2>Independence of two time series<a class="headerlink" href="#independence-of-two-time-series" title="Permalink to this headline">#</a></h2>
+<p>The crucial element of the null hypothesis for the Spearman rank correlation test is that one of
+the sets of measurements is (conditionally) exchangeable given the other.
+That implies that all <span class="math notranslate nohighlight">\(N!\)</span> pairings
+<span class="math notranslate nohighlight">\((X_i, Y_j)\)</span>  are equally likely.
+However, time series data often have serial correlation, such as trends, which break
+the exchangeability, violating that null hypothesis.</p>
+<p>Suppose we have two independent time series, each of which has a trend.
+For example, we might observe the pairs <span class="math notranslate nohighlight">\((X_j, Y_j)_{j=1}^N\)</span>,
+where</p>
+<div class="amsmath math notranslate nohighlight" id="equation-355246a0-9399-4b5e-a1d2-9ae93d034582">
+<span class="eqno">()<a class="headerlink" href="#equation-355246a0-9399-4b5e-a1d2-9ae93d034582" title="Permalink to this equation">#</a></span>\[\begin{equation}
+X_j = j + \epsilon_j, \;\; j=1, \ldots, N,
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-0bfcbb17-87c8-4b08-9006-212b8cb2ee60">
+<span class="eqno">()<a class="headerlink" href="#equation-0bfcbb17-87c8-4b08-9006-212b8cb2ee60" title="Permalink to this equation">#</a></span>\[\begin{equation}
+Y_j = j + \nu_j, \;\; j=1, \ldots, N,
+\end{equation}\]</div>
+<p>and the <span class="math notranslate nohighlight">\(2N\)</span> “noise” terms <span class="math notranslate nohighlight">\(\{\epsilon_j\}\)</span> and <span class="math notranslate nohighlight">\(\{\nu_j\}\)</span> are IID with zero mean and finite variance.
+Even though the time series <span class="math notranslate nohighlight">\(\{X_j\}\)</span> and <span class="math notranslate nohighlight">\(\{Y_j\}\)</span> are independent,
+neither <span class="math notranslate nohighlight">\(\{X_j\}\)</span> nor <span class="math notranslate nohighlight">\(\{Y_j\}\)</span> is exchangeable.
+As a result, the Spearman rank correlation test will tend to reject the hypothesis
+of independence, not because the two sets of measurements are dependent, but because
+a different feature of the null hypothesis is false.
+The trend makes pairings <span class="math notranslate nohighlight">\((X_i, Y_j)\)</span> with both terms larger than average or both smaller than average
+more likely than pairings where one
+is relatively large and the other is relatively small.</p>
+<section id="walther-s-examples">
+<h3>Walther’s Examples<a class="headerlink" href="#walther-s-examples" title="Permalink to this headline">#</a></h3>
+<p>The following examples are from Walther (1997, 1999).
+Suppose that <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^{100}\)</span> and <span class="math notranslate nohighlight">\(\{Y_j\}_{j=1}^{100}\)</span> are IID N(0,1).
+Define</p>
+<div class="amsmath math notranslate nohighlight" id="equation-cd55e5a8-9bb6-48d1-90f3-f20248e9dc87">
+<span class="eqno">()<a class="headerlink" href="#equation-cd55e5a8-9bb6-48d1-90f3-f20248e9dc87" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+S_k &amp;:=&amp; \sum_{j=1}^k X_j \\
+T_k &amp; := &amp; \sum_{j=1}^k Y_j 
+\end{eqnarray}\]</div>
+<p>Then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a0a055e9-6303-4771-bd9a-37d6f13ca685">
+<span class="eqno">()<a class="headerlink" href="#equation-a0a055e9-6303-4771-bd9a-37d6f13ca685" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{P}\{ r_S(S, T) &gt; c_{0.01} \} \approx 0.67,
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_{0.01}\)</span> is the Spearman critical value for a one-sided
+level 0.01 test against the alternative of positive association.
+That is, even though the two series are independent,
+the probability that the Spearman rank correlation coefficient exceeds
+the 0.01 critical value for the test is over 2/3.
+That is because the two series <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> each have
+serial correlation, so not all pairings <span class="math notranslate nohighlight">\((S_i, T_j)\)</span>
+are equally likely—even though the two series are independent.</p>
+<p>Serial correlation is not the only way that exchangeability can break down.
+For example, if the mean or the noise level varies with time, that violates
+the null hypothesis.
+Here is an example of the latter.
+Take <span class="math notranslate nohighlight">\(X = (1, 2, 3, 4)\)</span> to be fixed.
+Let <span class="math notranslate nohighlight">\((Y_1, \ldots, Y_4)\)</span>
+be independent, jointly Gaussian with zero mean, <span class="math notranslate nohighlight">\(\mbox{SD}(Y_j) = 1\)</span> for
+<span class="math notranslate nohighlight">\(j\)</span> = 1, 2, 3, and <span class="math notranslate nohighlight">\(\mbox{SD}(Y_4) = 4\)</span>.
+Then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8e57e588-94e6-4544-8d4d-7382854227bd">
+<span class="eqno">()<a class="headerlink" href="#equation-8e57e588-94e6-4544-8d4d-7382854227bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{P}_0 \{ r_S(X, Y) = 1 \} = 1/4! \approx 4.17\%.
+\end{equation}\]</div>
+<p>Note that in this example, <span class="math notranslate nohighlight">\(r_S = 1\)</span> whenever <span class="math notranslate nohighlight">\(Y_1 &lt; Y_2 &lt; Y_3 &lt; Y_4\)</span>.
+Simulation shows that in fact <span class="math notranslate nohighlight">\(\mathbb{P}\{ r_S(X, Y)=1 \}\)</span> is about 7%:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># standard deviations</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">12345678</span><span class="p">)</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">reps</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="p">)</span>
+
+<span class="n">is_sorted</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="c1"># True if the values are in increasing order</span>
+<span class="n">hits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">is_sorted</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">hits</span><span class="o">/</span><span class="n">reps</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">% of the realizations are in increasing order&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.97% of the realizations are in increasing order
+</pre></div>
+</div>
+</div>
+</div>
+<p>In a similar vein, take <em>X = (1, 2, 3, 4, 5)</em> to be fixed,
+let <span class="math notranslate nohighlight">\((Y_1, Y_2, Y_3, Y_4, Y_5)\)</span> be
+be independent, jointly Gaussian with zero mean and SDs 1, 1, 1, 3, and 5, respectively.
+Then, under the (false) null hypothesis that every <span class="math notranslate nohighlight">\((X, Y)\)</span> pairing is
+equally likely,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ef1d0b63-2e4e-46ec-8795-57f9a58127ab">
+<span class="eqno">()<a class="headerlink" href="#equation-ef1d0b63-2e4e-46ec-8795-57f9a58127ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{P}_0 \{r_S(X, Y) = 1 \approx 0.83\%,
+\end{equation}\]</div>
+<p>but simulation shows that the actual probability is about 2%:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>          <span class="c1"># the constant X vector (not used)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>    <span class="c1"># standard deviations</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">prng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)),</span> <span class="n">scale</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">reps</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="p">)</span>
+<span class="n">hits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">is_sorted</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">hits</span><span class="o">/</span><span class="n">reps</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">% of the realizations have Spearman correlation 1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.94% of the realizations have Spearman correlation 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>In these examples, the null hypothesis for the Spearman correlation test is false, but not because
+<span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are dependent:
+it is false because not all pairings <span class="math notranslate nohighlight">\((X_i, Y_j)\)</span>
+are equally likely under the null.
+The “identically distributed” part of the null hypothesis fails.</p>
+<p>Walther recommends using the block bootstrap instead of Spearman’s correlation.
+Unfortunately, the bootstrap test is approximate–neither conservative nor exact–and there’s
+no way to tell how far its nominal significance level is from its true level.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

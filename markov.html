@@ -1,0 +1,1041 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Lower confidence bounds for the mean via Markov’s Inequality and methods based on the Empirical Distribution &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/markov.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Fmarkov.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/markov.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Lower confidence bounds for the mean via Markov’s Inequality and methods based on the Empirical Distribution
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#markov-s-inequality">
+   Markov’s Inequality:
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#confidence-bounds-from-markov-s-inequality">
+     Confidence bounds from Markov’s inequality
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-kolmogorov-statistic">
+   The Kolmogorov statistic
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-massart-dvoretzky-kiefer-wolfowitz-mdkw-inequality">
+   The Massart-Dvoretzky-Kiefer-Wolfowitz (MDKW) Inequality
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-kolmogorov-statistic-to-get-a-lower-confidence-bound-for-the-mean-of-a-nonnegative-population">
+   Using the Kolmogorov statistic to get a lower confidence bound for the mean of a nonnegative population
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#among-all-g-in-mathcal-c-x-which-has-smallest-mean">
+     Among all
+     <span class="math notranslate nohighlight">
+      \(G \in \mathcal C(X)\)
+     </span>
+     , which has smallest mean?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-else">
+   What else?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-s-next">
+   What’s next?
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Lower confidence bounds for the mean via Markov’s Inequality and methods based on the Empirical Distribution</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Lower confidence bounds for the mean via Markov’s Inequality and methods based on the Empirical Distribution
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#markov-s-inequality">
+   Markov’s Inequality:
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#confidence-bounds-from-markov-s-inequality">
+     Confidence bounds from Markov’s inequality
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-kolmogorov-statistic">
+   The Kolmogorov statistic
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-massart-dvoretzky-kiefer-wolfowitz-mdkw-inequality">
+   The Massart-Dvoretzky-Kiefer-Wolfowitz (MDKW) Inequality
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-kolmogorov-statistic-to-get-a-lower-confidence-bound-for-the-mean-of-a-nonnegative-population">
+   Using the Kolmogorov statistic to get a lower confidence bound for the mean of a nonnegative population
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#among-all-g-in-mathcal-c-x-which-has-smallest-mean">
+     Among all
+     <span class="math notranslate nohighlight">
+      \(G \in \mathcal C(X)\)
+     </span>
+     , which has smallest mean?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-else">
+   What else?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-s-next">
+   What’s next?
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="lower-confidence-bounds-for-the-mean-via-markov-s-inequality-and-methods-based-on-the-empirical-distribution">
+<h1>Lower confidence bounds for the mean via Markov’s Inequality and methods based on the Empirical Distribution<a class="headerlink" href="#lower-confidence-bounds-for-the-mean-via-markov-s-inequality-and-methods-based-on-the-empirical-distribution" title="Permalink to this headline">#</a></h1>
+<p>Recall the set-up. We have:</p>
+<ol class="simple">
+<li><p>known: <span class="math notranslate nohighlight">\(N &gt; 0\)</span>,  <span class="math notranslate nohighlight">\( \{\ell_j\}_{j=1}^N\)</span>, and <span class="math notranslate nohighlight">\(\{u_j\}_{j=1}^N\)</span>, with <span class="math notranslate nohighlight">\(\ell_j \le u_j, \; \forall j\)</span></p></li>
+<li><p>an unknown population of numbers <span class="math notranslate nohighlight">\(\{x_j\}_{j=1}^N\)</span> that satisfy <span class="math notranslate nohighlight">\(\ell_j \le x_j \le u_j, \; \forall j\)</span></p></li>
+</ol>
+<p>We want to draw inferences about</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} \mu := \frac{1}{N} \sum_{j=1}^N x_j.\end{equation*}\]</div>
+<p>In this section, <span class="math notranslate nohighlight">\(\ell_j = 0\)</span> and <span class="math notranslate nohighlight">\(u_j = \infty\)</span>, <span class="math notranslate nohighlight">\(\forall j\)</span> (the population is known to be nonnegative).</p>
+<p>We seek a <em>lower</em> confidence bound for <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+</section>
+<section id="markov-s-inequality">
+<h1>Markov’s Inequality:<a class="headerlink" href="#markov-s-inequality" title="Permalink to this headline">#</a></h1>
+<p>If <span class="math notranslate nohighlight">\(\mathbb P(X \ge 0) = 1\)</span>, then <span class="math notranslate nohighlight">\(\mathbb P (X \ge a) \le \mathbb E(X)/a\)</span>, <span class="math notranslate nohighlight">\(a &gt; 0\)</span>.</p>
+<section id="confidence-bounds-from-markov-s-inequality">
+<h2>Confidence bounds from Markov’s inequality<a class="headerlink" href="#confidence-bounds-from-markov-s-inequality" title="Permalink to this headline">#</a></h2>
+<p>Suppose we draw a random sample (with or without replacement) of size <span class="math notranslate nohighlight">\(n\)</span>.  Let <span class="math notranslate nohighlight">\(X_j\)</span> be the value of the <span class="math notranslate nohighlight">\(j\)</span>th draw, and let</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} \bar{X} := \frac{1}{n} \sum_{j=1}^n X_j.\end{equation*}\]</div>
+<p>Then:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbb P(\bar{X} \ge 0) = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb E(\bar{X}) = \mu \ge 0\)</span></p></li>
+<li><p>by Markov, for any <span class="math notranslate nohighlight">\(a &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\mathbb P (\bar{X} \ge a) \le \mu/a\)</span></p></li>
+</ul>
+<p>Hence, for <span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span>,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+  \mathbb P (\alpha \bar{X} \ge \mu) \le \alpha;
+\end{equation*}\]</div>
+<p>i.e., <span class="math notranslate nohighlight">\([\alpha \bar{X}, \infty)\)</span> is a lower 1-sided <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence bound for <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p>A lower confidence bound is possible because the support of <span class="math notranslate nohighlight">\(\mathbb P\)</span> is bounded below; no upper confidence bound for the mean is possible without additional assumptions.</p>
+<p>Note that this bound does not involve <span class="math notranslate nohighlight">\(n\)</span> at all!<br />
+It only uses the fact that <span class="math notranslate nohighlight">\(\mathbb P (\bar{X} \ge 0) = 1\)</span>.
+Clearly it has a great deal of slack, getting worse as <span class="math notranslate nohighlight">\(n\)</span> grows.</p>
+</section>
+</section>
+<section id="the-kolmogorov-statistic">
+<h1>The Kolmogorov statistic<a class="headerlink" href="#the-kolmogorov-statistic" title="Permalink to this headline">#</a></h1>
+<p>We now take a completely different approach, based on the empirical cumulative distribution function (ecdf).</p>
+<p>We draw a uniform sample of size <span class="math notranslate nohighlight">\(n\)</span> with replacement from the population <span class="math notranslate nohighlight">\(\{x_j\}_{j=1}^N\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(X_i\)</span> be the <span class="math notranslate nohighlight">\(i\)</span>th item drawn, <span class="math notranslate nohighlight">\(1 \le i \le n\)</span>.
+For uniform sampling with replacement, <span class="math notranslate nohighlight">\(\{X_i \}\)</span> are iid.</p>
+<p>Define <span class="math notranslate nohighlight">\(1_A\)</span> = {1, if <span class="math notranslate nohighlight">\(A\)</span>; 0, otherwise}.
+The theoretical cdf of <span class="math notranslate nohighlight">\(X_i\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+	F(x) := \mathbb P \{ X_i \le x \} .
+\end{equation*}\]</div>
+<p>Define the empirical cumulative distribution function</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \hat{F}_n (x) := \frac{1}{n} \sum_{i=1}^n 1_{x \ge X_i}
+\end{equation*}\]</div>
+<p>We shall use the ecdf to construct a confidence set for <span class="math notranslate nohighlight">\(F\)</span>; from that confidence set we can
+construct a confidence bound for <span class="math notranslate nohighlight">\(\mathbb E X_1\)</span>.</p>
+<p>Consider the one-sided Kolmogorov-Smirnov statistics</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+	D_n^+ := \sup_x (\hat{F}_n(x) - F(x) )
+\end{equation*}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    D_n^- := \sup_x (F(x) - \hat{F}_n(x)),
+\end{equation*}\]</div>
+<p>and the two-sided version</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    D_n := \sup_x |F(x) - \hat{F}_n(x)|.
+\end{equation*}\]</div>
+<p>Kolmogorov (1933) and Smirnov (1944) seem to have been the first to study these
+statistics, which have the same distribution—a distribution that does not depend on <span class="math notranslate nohighlight">\(F\)</span> if <span class="math notranslate nohighlight">\(F\)</span> is continuous.</p>
+<p>Here’s a simulation: we take a random sample from a Uniform distribution and plot the ecdf and the true cdf. The ecdf is the stair-step function. In places it is above the true cdf, and in places it is below. <span class="math notranslate nohighlight">\(D^-\)</span> measures how far <span class="math notranslate nohighlight">\(F\)</span> ever gets above <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>. Note that as <span class="math notranslate nohighlight">\(n\)</span> increases, the maximum distance between <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> tends to be smaller.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the first cell with code: set up the Python environment</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ecdf</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">       calculates the empirical cdf of data x</span>
+<span class="sd">       returns the unique values of x in ascending order and the cumulative probabity at those values</span>
+<span class="sd">       NOTE: This is not an efficient algorithm: it is O(n^2), where n is the length of x. </span>
+<span class="sd">       A better algorithm would rely on the Collections package or something similar and could work</span>
+<span class="sd">       in O(n log n)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">theVals</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">theProbs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">theVals</span><span class="p">])</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">theVals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">):</span>
+        <span class="n">theVals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">theVals</span><span class="p">)</span>
+        <span class="n">theProbs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">theProbs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">theVals</span><span class="p">,</span> <span class="n">theProbs</span>
+
+
+<span class="k">def</span> <span class="nf">plotUniformKolmogorov</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">v</span><span class="p">,</span> <span class="n">pr</span> <span class="o">=</span> <span class="n">ecdf</span><span class="p">(</span><span class="n">sam</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;true cdf&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">pr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ecdf&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+    <span class="n">dLoc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="n">pr</span><span class="p">)</span>
+    <span class="n">dMinus</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="n">pr</span><span class="p">)[</span><span class="n">dLoc</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="n">dLoc</span><span class="p">],</span> <span class="n">ymin</span><span class="o">=</span><span class="n">pr</span><span class="p">[</span><span class="n">dLoc</span><span class="p">],</span> <span class="n">ymax</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="n">dLoc</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;3&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$D_n^-=$&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">dMinus</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;heavy&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">interact</span><span class="p">(</span><span class="n">plotUniformKolmogorov</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "7771d3feb9e8417693deeb1f352389c6", "version_major": 2, "version_minor": 0}
+</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plotUniformKolmogorov(n)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are universal constants <span class="math notranslate nohighlight">\(C_n(\alpha)\)</span> such that for all continuous <span class="math notranslate nohighlight">\(F\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7d95be08-0de8-4c29-98f6-d4ebd402b06c">
+<span class="eqno">()<a class="headerlink" href="#equation-7d95be08-0de8-4c29-98f6-d4ebd402b06c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+   \mathbb{P}_F \{D_n^- &gt; C_n(\alpha)\} = \alpha.
+\end{equation}\]</div>
+<p>The value of <span class="math notranslate nohighlight">\(C_n(\alpha)\)</span> involves the Jacobi theta function, but there are bounds that are easy to compute (see below).
+When <span class="math notranslate nohighlight">\(F\)</span> is not necessarily continuous, <span class="math notranslate nohighlight">\(C_n(\alpha)\)</span> is conservative in the sense that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e350773f-fe22-4679-a1f0-e0cbdc790e8e">
+<span class="eqno">()<a class="headerlink" href="#equation-e350773f-fe22-4679-a1f0-e0cbdc790e8e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+   \mathbb{P}_F \{D_n^- &gt; C_n(\alpha)\} \ge  \alpha.
+\end{equation}\]</div>
+<p>Using the actual value of <span class="math notranslate nohighlight">\(C_n(\alpha\)</span>$ yields <em>Anderson’s method</em>, published as a technical report in 1969.</p>
+</section>
+<section id="the-massart-dvoretzky-kiefer-wolfowitz-mdkw-inequality">
+<h1>The Massart-Dvoretzky-Kiefer-Wolfowitz (MDKW) Inequality<a class="headerlink" href="#the-massart-dvoretzky-kiefer-wolfowitz-mdkw-inequality" title="Permalink to this headline">#</a></h1>
+<p>Dvoretsky, Kiefer and Wolfowitz (1956, DKW) showed that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+	\mathbb P_F \{D_n^- &gt; t\} \le C \exp(- 2 n t^2)
+\end{equation*}\]</div>
+<p>for some constant <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>Massart (1990) showed that <span class="math notranslate nohighlight">\(C = 1\)</span> is the sharp constant in the DKW inequality, provided
+<span class="math notranslate nohighlight">\(\exp(-2 n t^2) \le \frac{1}{2}\)</span>.
+The distribution of <span class="math notranslate nohighlight">\(D_n^-\)</span> is stochastically larger when
+<span class="math notranslate nohighlight">\(F\)</span> is continuous than when <span class="math notranslate nohighlight">\(F\)</span> has jumps (Massart 1990); thus the inequality conservative for iid
+sampling from finite populations.</p>
+<p>Moreover, <span class="math notranslate nohighlight">\(D_n^-\)</span> is stochastically larger for sampling with replacement than for sampling
+without replacement, so the inequality is conservative for sampling from a finite population
+without replacement as well.</p>
+<p>Let’s call the inequality with <span class="math notranslate nohighlight">\(C=1\)</span> the Massart-Dvoretsky-Kiefer-Wolfowitz (MDKW) inequality.
+It follows from the MDKW inequality that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \mathbb P \left \{\sup_x (F(x) - \hat{F}_n(x)) &gt; \sqrt{-\frac{\ln \alpha}{2n}} \right \} \le \alpha.
+\end{equation*}\]</div>
+<p>That is,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \mathcal C(X) := \left \{ \mbox{cdfs } G: \sup_x (G(x) - \hat{F}_n(x)) \le  \sqrt{-\frac{\ln \alpha}{2n}} \right \}
+\end{equation*}\]</div>
+<p>is a nonparametric confidence set for the true population cdf <span class="math notranslate nohighlight">\(F\)</span>.</p>
+</section>
+<section id="using-the-kolmogorov-statistic-to-get-a-lower-confidence-bound-for-the-mean-of-a-nonnegative-population">
+<h1>Using the Kolmogorov statistic to get a lower confidence bound for the mean of a nonnegative population<a class="headerlink" href="#using-the-kolmogorov-statistic-to-get-a-lower-confidence-bound-for-the-mean-of-a-nonnegative-population" title="Permalink to this headline">#</a></h1>
+<p>We now assume all <span class="math notranslate nohighlight">\(\{x_j\}_{j=1}^N\)</span> are nonnegative, so <span class="math notranslate nohighlight">\(F(0^-) = 0\)</span>.
+The population mean is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  
+   \frac{1}{N} \sum_{j=1}^N x_j = \int_0^\infty x dF(x).
+\end{equation*}\]</div>
+<p>But with probability at least <span class="math notranslate nohighlight">\(1-\alpha\)</span>, <span class="math notranslate nohighlight">\(F \in \mathcal C(X)\)</span>.
+Hence</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+   \inf_{G \in \mathcal C(X)} \int_{0}^\infty x dG(x)
+\end{equation*}\]</div>
+<p>is a lower <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence bound for <span class="math notranslate nohighlight">\(\mu = \int_0^\infty x dF(x)\)</span>.</p>
+<p>A little more explanation might help: whenever <span class="math notranslate nohighlight">\(F \in \mathcal C(X)\)</span> (and perhaps more often),</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} \inf_{G \in \mathcal C(X)} \int_{0}^\infty x dG(x) \le \int_0^\infty x dF(x).\end{equation*}\]</div>
+<p>But <span class="math notranslate nohighlight">\(\mathbb P (C(X) \ni F) \ge 1-\alpha\)</span>.</p>
+<p>Moreover, we can find confidence bounds for <em>an arbitrary collection of
+functionals, even an uncountable collection</em> and they will have simultaneous coverage
+probability <span class="math notranslate nohighlight">\(1-\alpha\)</span>: there is no need to adjust for multiplicity, since whenever
+<span class="math notranslate nohighlight">\(F \in C(X)\)</span>, <em>all</em> the bounds hold.</p>
+<p>This general approach—make a confidence set for an entire function, then use that
+confidence set to derive confidence bounds on properties (parameters) of that function—is
+extremely flexible, and gives conservative results.</p>
+<section id="among-all-g-in-mathcal-c-x-which-has-smallest-mean">
+<h2>Among all <span class="math notranslate nohighlight">\(G \in \mathcal C(X)\)</span>, which has smallest mean?<a class="headerlink" href="#among-all-g-in-mathcal-c-x-which-has-smallest-mean" title="Permalink to this headline">#</a></h2>
+<p>It’s the distribution function that has as much mass as possible as far “left” as possible,
+but never exceeds <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> by more than a tolerance that ensures the CDF is in the
+confidence set.
+(We will use the conservative tolerance <span class="math notranslate nohighlight">\(\sqrt{-\frac{\ln \alpha}{2n}}\)</span> from the MDKW inequlity.)</p>
+<p>Let <span class="math notranslate nohighlight">\(G^-\)</span> denote this cdf.</p>
+<p>Then,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+   G^-(x) = \left ( \hat{F}_n(x) +  \sqrt{-\frac{\ln \alpha}{2n}} \right ) \wedge 1,
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(a \wedge b := \min\{a, b\}\)</span>.</p>
+<p>The corresponding lower confidence bound on <span class="math notranslate nohighlight">\(\mu\)</span> is <span class="math notranslate nohighlight">\(\int_0^\infty x dG^-(x)\)</span>.</p>
+<p>The integral is really a sum because <span class="math notranslate nohighlight">\(G^-\)</span> is a step function.
+Note that <span class="math notranslate nohighlight">\(G^-\)</span> might have a jump at <span class="math notranslate nohighlight">\(x=0\)</span> even if <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> does not, but the rest of its jumps are
+at (a subset of) the data.</p>
+<p>Let’s implement this in code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find lower confidence bound on the mean of a non-negative population using the MDKW inequality</span>
+
+<span class="k">def</span> <span class="nf">massartOneSide</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">       tolerable misfit between the cdf and ecdf for a one-sided bound </span>
+<span class="sd">       at significance level alpha for an iid sample of size n</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
+    
+    
+<span class="k">def</span> <span class="nf">ksLowerMean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">       lower confidence bound for the mean of a nonnegative population</span>
+<span class="sd">       x is an iid sample with replacement from the population</span>
+<span class="sd">       c is the Massart constant for the desired coverage</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># find the ecdf</span>
+    <span class="n">vals</span><span class="p">,</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">ecdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fmin</span><span class="p">(</span><span class="n">probs</span><span class="o">+</span><span class="n">c</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># This is G^-</span>
+    <span class="n">gProbs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">probs</span><span class="p">))</span>  <span class="c1"># pre-pend a 0 so that diff does the right thing; </span>
+                                               <span class="c1"># gProbs is the vector of masses</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">vals</span><span class="o">*</span><span class="n">gProbs</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s compare this approach to lower one-sided Student-t intervals in a simulation using a nonstandard mixture of distributions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nonstandard mixture: a pointmass at 1 and a uniform[0,1]</span>
+<span class="n">ns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">400</span><span class="p">])</span>  <span class="c1"># sample sizes</span>
+<span class="n">ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">])</span>    <span class="c1"># mixture fraction, weight of pointmass</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># 1- (confidence level)</span>
+<span class="n">reps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1.0e4</span><span class="p">)</span> <span class="c1"># just for demonstration</span>
+
+<span class="n">simTable</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;mass at 1&#39;</span><span class="p">,</span> <span class="s1">&#39;sample size&#39;</span><span class="p">,</span> <span class="s1">&#39;Student-t cov&#39;</span><span class="p">,</span>\
+                                 <span class="s1">&#39;MDKW cov&#39;</span><span class="p">,</span> <span class="s1">&#39;Student-t low&#39;</span><span class="p">,</span> <span class="s1">&#39;MDKW low&#39;</span><span class="p">)</span>
+                       <span class="p">)</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
+    <span class="n">popMean</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">p</span>  <span class="c1"># population is a mixture of uniform with mass (1-p) and</span>
+                             <span class="c1"># pointmass at 1 with mass p</span>
+    
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">:</span>
+        <span class="n">tCrit</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">mCrit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>  <span class="c1"># the 1-sided MDKW constant</span>
+        <span class="n">coverT</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">coverM</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">lowT</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">lowM</span> <span class="o">=</span> <span class="mf">0.0</span>
+        
+        <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">reps</span><span class="p">)):</span>
+            <span class="n">sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># the uniform part of the sample</span>
+            <span class="n">ptMass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># for a bunch of p-coin tosses</span>
+            <span class="n">sam</span><span class="p">[</span><span class="n">ptMass</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c1"># mix in pointmass at 1, with probability p</span>
+            <span class="c1"># t interval</span>
+            <span class="n">samMean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sam</span><span class="p">)</span>
+            <span class="n">samSD</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sam</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">tLo</span> <span class="o">=</span> <span class="n">samMean</span> <span class="o">-</span> <span class="n">tCrit</span><span class="o">*</span><span class="n">samSD</span>  <span class="c1"># lower endpoint of the t interval</span>
+            <span class="n">coverT</span> <span class="o">+=</span> <span class="p">(</span> <span class="n">tLo</span> <span class="o">&lt;=</span> <span class="n">popMean</span> <span class="p">)</span>
+            <span class="n">lowT</span> <span class="o">+=</span> <span class="n">tLo</span>
+            <span class="c1">#  MDKW interval</span>
+            <span class="n">mLo</span> <span class="o">=</span> <span class="n">ksLowerMean</span><span class="p">(</span><span class="n">sam</span><span class="p">,</span> <span class="n">mCrit</span><span class="p">)</span> <span class="c1"># lower endpoint of the MDKW interval</span>
+            <span class="n">coverM</span> <span class="o">+=</span> <span class="p">(</span><span class="n">mLo</span> <span class="o">&lt;=</span> <span class="n">popMean</span> <span class="p">)</span>
+            <span class="n">lowM</span> <span class="o">+=</span> <span class="n">mLo</span>
+
+        <span class="n">simTable</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">simTable</span><span class="p">)]</span> <span class="o">=</span>  <span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span>\
+            <span class="nb">str</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">coverT</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">reps</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span>\
+            <span class="nb">str</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">coverM</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">reps</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span>\
+            <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">lowT</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">reps</span><span class="p">),</span><span class="mi">4</span><span class="p">)),</span>\
+            <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">lowM</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">reps</span><span class="p">),</span><span class="mi">4</span><span class="p">))</span>
+<span class="c1">#</span>
+<span class="n">ansStr</span> <span class="o">=</span>  <span class="s1">&#39;&lt;h3&gt;Simulated coverage probability and expected lower endpoint of &#39;</span> <span class="o">+</span>\
+          <span class="s1">&#39;one-sided Student-t and MDKW confidence intervals for &#39;</span> <span class="o">+</span>\
+          <span class="s1">&#39;mixture of U[0,1] and pointmass at 1 population&lt;/h3&gt;&#39;</span> <span class="o">+</span>\
+          <span class="s1">&#39;&lt;strong&gt;Nominal coverage probability &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">))</span> <span class="o">+</span>\
+          <span class="s1">&#39;%&lt;/strong&gt;.&lt;br /&gt;&lt;strong&gt;Estimated from &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">reps</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; replications.&lt;/strong&gt;&#39;</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">ansStr</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">simTable</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h3>Simulated coverage probability and expected lower endpoint of one-sided Student-t and MDKW confidence intervals for mixture of U[0,1] and pointmass at 1 population</h3><strong>Nominal coverage probability 95.0%</strong>.<br /><strong>Estimated from 10000 replications.</strong></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mass at 1</th>
+      <th>sample size</th>
+      <th>Student-t cov</th>
+      <th>MDKW cov</th>
+      <th>Student-t low</th>
+      <th>MDKW low</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.900</td>
+      <td>25</td>
+      <td>89.69%</td>
+      <td>100.0%</td>
+      <td>0.6823</td>
+      <td>0.7048</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.900</td>
+      <td>50</td>
+      <td>98.85%</td>
+      <td>100.0%</td>
+      <td>0.6692</td>
+      <td>0.7769</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.900</td>
+      <td>100</td>
+      <td>99.99%</td>
+      <td>100.0%</td>
+      <td>0.6643</td>
+      <td>0.8276</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.900</td>
+      <td>400</td>
+      <td>100.0%</td>
+      <td>100.0%</td>
+      <td>0.6623</td>
+      <td>0.8889</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.990</td>
+      <td>25</td>
+      <td>21.61%</td>
+      <td>100.0%</td>
+      <td>0.9548</td>
+      <td>0.7502</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.990</td>
+      <td>50</td>
+      <td>38.74%</td>
+      <td>100.0%</td>
+      <td>0.943</td>
+      <td>0.822</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.990</td>
+      <td>100</td>
+      <td>61.92%</td>
+      <td>100.0%</td>
+      <td>0.9286</td>
+      <td>0.8727</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.990</td>
+      <td>400</td>
+      <td>97.84%</td>
+      <td>100.0%</td>
+      <td>0.9069</td>
+      <td>0.9338</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.999</td>
+      <td>25</td>
+      <td>2.28%</td>
+      <td>100.0%</td>
+      <td>0.9959</td>
+      <td>0.7548</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.999</td>
+      <td>50</td>
+      <td>4.81%</td>
+      <td>100.0%</td>
+      <td>0.9939</td>
+      <td>0.8264</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.999</td>
+      <td>100</td>
+      <td>8.95%</td>
+      <td>100.0%</td>
+      <td>0.9918</td>
+      <td>0.8771</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.999</td>
+      <td>400</td>
+      <td>31.81%</td>
+      <td>100.0%</td>
+      <td>0.9849</td>
+      <td>0.9383</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Note that sometimes the average lower bound for the MDKW interval is <em>larger</em> even though it has better coverage. To some extent, that’s because we have not truncated the Student-t interval below at 0, which would be legitimate.</p>
+<p>Still, the length penalty for conservative coverage is modest, especially given that the nominal 95% Student-t interval has coverage below 2% in some of these scenarios.</p>
+</section>
+</section>
+<section id="what-else">
+<h1>What else?<a class="headerlink" href="#what-else" title="Permalink to this headline">#</a></h1>
+<p>The MDKW inequality is not the only way to construct a confidence set for a cdf. One can also use differences of order statistics, among other things.  I have not compared the relative efficiency of such methods.</p>
+</section>
+<section id="what-s-next">
+<h1>What’s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">#</a></h1>
+<p>Next we consider confidence bounds for bounded populations, using common probability inequalities.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="sprt.html"><span class="doc std std-doc">Next: Wald’s Sequential Probability Ratio Test</span></a></p></li>
+<li><p><a class="reference internal" href="hoeffding.html"><span class="doc std std-doc">Previous: Confidence bounds from the Chebychev and Hoeffding Inequalities</span></a></p></li>
+<li><p><a class="reference internal" href="index.html"><span class="doc std std-doc">Index</span></a></p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

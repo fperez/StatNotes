@@ -1,0 +1,735 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Fisher’s exact test &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/fisher-exact.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Ffisher-exact.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/fisher-exact.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-normal-approximation-to-fisher-s-exact-test">
+   The Normal Approximation to Fisher’s Exact Test
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fisher-s-lady-tasting-tea-experiment">
+   Fisher’s
+   <em>
+    Lady Tasting Tea
+   </em>
+   Experiment
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Fisher’s exact test</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-normal-approximation-to-fisher-s-exact-test">
+   The Normal Approximation to Fisher’s Exact Test
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fisher-s-lady-tasting-tea-experiment">
+   Fisher’s
+   <em>
+    Lady Tasting Tea
+   </em>
+   Experiment
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="fisher-s-exact-test">
+<h1>Fisher’s exact test<a class="headerlink" href="#fisher-s-exact-test" title="Permalink to this headline">#</a></h1>
+<p>A special case of the permutation test based on the sample sum
+occurs when the only possible responses are 0 and 1.
+The distribution of the test statistic under the strong null hypothesis is then
+hypergeometric,  which leads to Fisher’s Exact test.
+The following material is adapted from
+<a class="reference external" href="http://statistics.berkeley.edu/~stark/SticiGui">SticiGui</a>.</p>
+<p>Suppose we own a start-up company that offers e-tailers a service for
+targeting their web advertising.
+Consumers register with our service by filling
+out a form indicating their likes and dislikes, gender, age, etc.
+We put “cookies” on their computers to keep track of who they are.
+When they get to the website of any of our clients, we use their likes
+and dislikes to select (from a collection of the client’s ads)
+the ad we think they are most likely to respond to.
+The service is free to consumers; we charge the e-tailers.</p>
+<p>We can raise venture capital if we can show that targeting makes e-tailers’
+advertisements more effective.
+To measure the effectiveness, we offer our service for free
+to a large e-tailer.
+The e-tailer has a collection of web ads that it usually uses in rotation:
+each time a consumer arrives at the site, the e-tailer’s server selects
+the next ad in the sequence to show to the consumer, then starts over
+when it runs out of ads.</p>
+<p>We install our software on the e-tailer’s server, in the following way:
+each time a consumer arrives at the site, with probability 50% the server shows
+the consumer the ad our targeting software suggests, and with probability 50%
+the server shows the consumer the next ad in the rotation, the way the e-tailer
+used to choose which
+ad to show.
+For each consumer, the software records which strategy was used
+(target or rotation), and whether the consumer buys anything.
+We call the consumers who were shown the targeted ad the _treatment group</em>;
+we call the other consumers the _control group</em>.
+If a consumer visits the site more than once during the trial period, we ignore
+all of that consumer’s visits but the first.</p>
+<p>Suppose that <span class="math notranslate nohighlight">\(N\)</span> consumers visit the site during the trial, that
+<span class="math notranslate nohighlight">\(n\)</span> of them are assigned to the treatment group,
+that <span class="math notranslate nohighlight">\(m\)</span> of them are assigned to the control
+group, and that <span class="math notranslate nohighlight">\(N_S\)</span> of the consumers buy something.
+In essence, we want to know whether there would have been more
+purchases if everyone had been shown the targeted ad than if everyone
+had been shown the control ad.
+Only some of the consumers saw the targeted ad, and only some
+saw the control ad, so answering this question involves extrapolating
+from the data to an hypothetical counterfactual situation.
+Of course, we really want to extrapolate further, to people who have not
+yet visited the site, to decide whether more product would be sold if
+those people are shown the targeted ad.</p>
+<p>We can think of the experiment in the following way: the <span class="math notranslate nohighlight">\(i\)</span>th
+consumer has a ticket with two numbers on it:
+the first number (<span class="math notranslate nohighlight">\(x_i\)</span>) is 1 if the consumer
+would have bought something if shown the control ad, and 0 if not.
+The second number (<span class="math notranslate nohighlight">\(y_i\)</span>)
+is 1 if the consumer would have bought something if shown
+the targeted ad, and 0 if not.
+There are <span class="math notranslate nohighlight">\(N\)</span> tickets in all.</p>
+<p>For each consumer <span class="math notranslate nohighlight">\(i\)</span> who visits the site, we observe either
+<span class="math notranslate nohighlight">\(x_i\)</span> or <span class="math notranslate nohighlight">\(y_i\)</span>, but not both.
+The percentage of consumers who would have made purchases if every consumer
+had been shown the control ads is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ce48ed42-1939-47b0-8172-3ec6deff98ac">
+<span class="eqno">()<a class="headerlink" href="#equation-ce48ed42-1939-47b0-8172-3ec6deff98ac" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    p_c := \frac{1}{n}\sum_{i=1}^N x_i.
+\end{equation}\]</div>
+<p>Similarly, the percentage of consumers who would have made purchases if every
+consumer had been shown the targeted ads is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7896c215-7e88-4f7b-89fd-f20051e492e4">
+<span class="eqno">()<a class="headerlink" href="#equation-7896c215-7e88-4f7b-89fd-f20051e492e4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    p_t :=  \frac{1}{n}\sum_{i=1}^N y_i.
+\end{equation}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\mu := p_t - p_c\)</span> be the difference between the rate at which consumers would have bought had all of them
+been shown the targeted ad, and the rate at which consumers would have bought had
+all of them been in the control group.
+The null hypothesis, that targeting does not make a difference,
+is that <span class="math notranslate nohighlight">\(\mu = 0\)</span>.
+(The strong null hypothesis is that
+<span class="math notranslate nohighlight">\(x_i = y_i\)</span>, for <span class="math notranslate nohighlight">\(i =1, 2, \ldots , N\)</span>.)
+The alternative hypothesis, that targeting helps, is that <span class="math notranslate nohighlight">\(\mu &gt; 0\)</span>.
+We would like to test the null hypothesis at significance level 5%.</p>
+<p>Let <span class="math notranslate nohighlight">\(m\)</span> be the number of consumers in the control
+group, and let <span class="math notranslate nohighlight">\(n\)</span> be the number of consumers in the
+treatment group, so <span class="math notranslate nohighlight">\(N = n+m\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(N_S\)</span> be the total number of sales to the treatment and control
+groups.
+Let <span class="math notranslate nohighlight">\(Y\)</span> be the number of sales to consumers in the treatment group.
+Under the strong null hypothesis (which implies that <span class="math notranslate nohighlight">\(\mu = 0\)</span>),
+for any fixed value of <span class="math notranslate nohighlight">\(N_S\)</span>,
+<span class="math notranslate nohighlight">\(Y\)</span> has an hypergeometric distribution
+with parameters <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(N_S\)</span>, and <span class="math notranslate nohighlight">\(N\)</span>
+(we consider <span class="math notranslate nohighlight">\(n\)</span> to be fixed, i.e., we <em>condition</em> on the attained value of <span class="math notranslate nohighlight">\(n\)</span>):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-88aafb59-bfc3-40d0-82d7-e21673c82042">
+<span class="eqno">()<a class="headerlink" href="#equation-88aafb59-bfc3-40d0-82d7-e21673c82042" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mathbb{P} \{Y=y \} = \frac{{{N_S}\choose{y}} {{N-N_S}\choose{n-y}}}{{N}\choose{n}}.
+\end{equation}\]</div>
+<p>This is a situation with many tied data, because there are only two possible
+responses for each subject: 0 if the subject does not buy anything, and 1 if the
+subject buys something.
+If the alternative hypothesis is true, <span class="math notranslate nohighlight">\(Y\)</span> will tend to be larger than it would
+if the null hypothesis is true,
+so we should design our test to reject the null hypothesis
+for large values of <span class="math notranslate nohighlight">\(Y\)</span>.
+(Technically, it is <em>stochastically larger</em>: for every <span class="math notranslate nohighlight">\(y\)</span>,
+the chance that <span class="math notranslate nohighlight">\(Y &gt; y\)</span> is at least as large if the alternative hypothesis
+is true as if the null hypothesis is true.)
+That is, our rejection region should contain all values above some threshold value <span class="math notranslate nohighlight">\(y\)</span>;
+we will reject the null hypothesis if <span class="math notranslate nohighlight">\(Y &gt; y\)</span>.</p>
+<p>We cannot calculate the critical value <span class="math notranslate nohighlight">\(y\)</span> until we know <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(N\)</span>, and
+<span class="math notranslate nohighlight">\(N_S\)</span>.
+Once we observe them, we can find the smallest value <span class="math notranslate nohighlight">\(y\)</span> so that
+the probability that <span class="math notranslate nohighlight">\(Y\)</span> is larger than <span class="math notranslate nohighlight">\(y\)</span> if the null hypothesis
+be true is at most 5%, the significance level we chose for the test.
+Our rule for testing the null hypothesis then would be to reject the null hypothesis if
+<span class="math notranslate nohighlight">\(Y &gt; y\)</span>, and not to reject the null hypothesis otherwise.
+This is called <em>Fisher’s exact test</em> for
+the equality of two percentages (against the one-sided alternative that treatment
+increases the response).
+It is a permutation test, and it is also essentially a (mid-) rank test, because there are only
+two possible values for each response.</p>
+<section id="the-normal-approximation-to-fisher-s-exact-test">
+<h2>The Normal Approximation to Fisher’s Exact Test<a class="headerlink" href="#the-normal-approximation-to-fisher-s-exact-test" title="Permalink to this headline">#</a></h2>
+<p>If <span class="math notranslate nohighlight">\(N\)</span> is large and <span class="math notranslate nohighlight">\(n\)</span> is neither close to
+zero nor close to <span class="math notranslate nohighlight">\(N\)</span>, computing the hypergeometric probabilities
+may be difficult, but the normal approximation to the hypergeometric
+distribution should be accurate provided <span class="math notranslate nohighlight">\(N_S\)</span> is neither too
+close to zero nor too close to <span class="math notranslate nohighlight">\(N\)</span>.
+To use the normal approximation, we need to convert to
+standard units, which requires that we know the expected value and standard error of <span class="math notranslate nohighlight">\(Y\)</span>.
+The expected value of <span class="math notranslate nohighlight">\(Y\)</span> is  <span class="math notranslate nohighlight">\(\mathbb{E} Y = n \cdot N_S/N\)</span>, and the standard error of <span class="math notranslate nohighlight">\(Y\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e8e70a0c-ced3-46ad-b1df-cd46f8e1a5cf">
+<span class="eqno">()<a class="headerlink" href="#equation-e8e70a0c-ced3-46ad-b1df-cd46f8e1a5cf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    SE(Y) = f n^{1/2} SD,
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is the <em>finite population correction</em></p>
+<div class="amsmath math notranslate nohighlight" id="equation-8fc65dc3-8a82-4a39-a48b-acb0342b2b4d">
+<span class="eqno">()<a class="headerlink" href="#equation-8fc65dc3-8a82-4a39-a48b-acb0342b2b4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    f := \sqrt{\frac{N-n}{N-1}}
+\end{equation}\]</div>
+<p><span class="math notranslate nohighlight">\(SD\)</span> is the standard deviation of a list of <span class="math notranslate nohighlight">\(N\)</span> values of which <span class="math notranslate nohighlight">\(N_S\)</span> equal one and
+<span class="math notranslate nohighlight">\((N - N_S)\)</span> equal zero:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-eb1d2958-87e8-4b6c-89e0-5b1ffb26a49e">
+<span class="eqno">()<a class="headerlink" href="#equation-eb1d2958-87e8-4b6c-89e0-5b1ffb26a49e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    SD = \sqrt{N_S/N \times (1 - N_S/N)}
+\end{equation}\]</div>
+<p>In standard units, <span class="math notranslate nohighlight">\(Y\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3beb30f1-b63b-49de-a539-5f7b6ac057d1">
+<span class="eqno">()<a class="headerlink" href="#equation-3beb30f1-b63b-49de-a539-5f7b6ac057d1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    Z = (Y - \mathbb{E}Y)/SE(Y) = (Y - n N_S/N)/(f N^{1/2} SD).
+\end{equation}\]</div>
+<p>The area under the normal curve to the right of 1.645 standard units is 5%,
+which corresponds to the threshold value</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0d42d0de-c818-4ae9-9f93-c536bdc12b09">
+<span class="eqno">()<a class="headerlink" href="#equation-0d42d0de-c818-4ae9-9f93-c536bdc12b09" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    y = \mathbb{E}Y  + 1.645 SE(Y) = n(N_S/N) + 1.645 f N^{1/2} SD
+\end{equation}\]</div>
+<p>in the original units, so if we reject the null hypothesis when <span class="math notranslate nohighlight">\(Z &gt; 1.645\)</span> or, equivalently,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dfe4d0d4-90b7-4bd4-bb42-d93e8a760560">
+<span class="eqno">()<a class="headerlink" href="#equation-dfe4d0d4-90b7-4bd4-bb42-d93e8a760560" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    Y &gt; n (N_S/N) + 1.645 f N^{1/2} SD,
+\end{equation}\]</div>
+<p>we have an (approximate) 5% significance level test of the null hypothesis that
+ad targeting and ad rotation are equally effective.
+This is <em>the normal approximation to Fisher’s exact test</em>;
+<span class="math notranslate nohighlight">\(Z\)</span> is called the <span class="math notranslate nohighlight">\(Z\)</span> statistic,
+and the observed value of <span class="math notranslate nohighlight">\(Z\)</span> is called the
+<span class="math notranslate nohighlight">\(z\)</span> score.</p>
+</section>
+<section id="fisher-s-lady-tasting-tea-experiment">
+<h2>Fisher’s <em>Lady Tasting Tea</em> Experiment<a class="headerlink" href="#fisher-s-lady-tasting-tea-experiment" title="Permalink to this headline">#</a></h2>
+<p>In his 1935 book, <em>The Design of Experiments</em>
+(London, Oliver and Boyd, 260pp.),
+Sir R.A. Fisher writes:</p>
+<blockquote>
+<div><p>A LADY declares that by tasting a cup of tea made with milk
+she can discriminate whether the milk or the tea infusion was first added to
+the cup.
+We will consider the problem of designing an experiment by means of which this
+assertion can be tested. …<br />
+Our experiment consists in mixing eight cups of tea, four in one way and four in
+the other, and presenting them to the subject for judgment in a
+random order.
+The subject has been told in advance of what the test will consist, namely that
+she will be asked to taste eight cups, that these shall be four of each kind,
+and that they shall be presented to her in a random order, that is in an
+order not determined arbitrarily by human choice, but by the actual manipulation
+of the physical apparatus used in games of chance, cards, dice, roulettes,
+etc., …
+Her task is to divide the 8 cups into two sets of 4, agreeing, if possible,
+with the treatments received.</p>
+</div></blockquote>
+<p>There are <span class="math notranslate nohighlight">\({{8}\choose{4}} = 70\)</span> ways to distribute the four
+“milk-first” cups among the 8.
+Under the null hypothesis that the lady cannot taste any difference, her labeling of the 8 cups—4
+milk-first and 4 tea-infusion-first—can be thought of as fixed in advance.
+The probability that her labeling exactly matches the truth is thus 1/70.
+A test that rejects the null hypothesis only when she matches all 8 cups has significance level
+<span class="math notranslate nohighlight">\(1/70 = 1.4\)</span>%.
+If she misses one cup, she must in fact miss at least two, because she will have
+mislabeled a milk-first as tea-first, and vice versa.
+The possible numbers of “hits” are 0, 2, 4, 6, and 8.
+To get 6 hits, she must label as milk-first three of the four true milk-first cups, and
+must mislabel as milk-first one of the four tea-first cups.
+The number of arrangements that give exactly 6 hits is thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d1a38193-c32e-4d5a-8ec1-fa0465d22c27">
+<span class="eqno">()<a class="headerlink" href="#equation-d1a38193-c32e-4d5a-8ec1-fa0465d22c27" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    {{4}\choose{3}} {{4}\choose{1}} = 16
+\end{equation}\]</div>
+<p>Thus if we reject the null hypothesis when she correctly identifies 6 of the 8 cups or all 8 of the 8
+cups, the significance level of the test is <span class="math notranslate nohighlight">\((16+1)/70 = 24.3\)</span>%.
+Such good performance is pretty likely to occur by chance—about as likely as getting
+two heads in two tosses of a fair coin—even if the lady and the tea are in different
+parlors.</p>
+<p>There are other experiments we might construct to test this hypothesis.
+Lindley (1984, A Bayesian Lady Tasting Tea, in
+<em>Statistics, an Appraisal</em> H.A. David and H.T. David, eds., Iowa
+State Univ. Press) lists two, which he attributes to Jerzy Neyman:</p>
+<ol class="simple">
+<li><p>Present the lady with <span class="math notranslate nohighlight">\(N\)</span> pairs of cups of tea with milk, where one cup in each pair
+(determined randomly) has milk added first and one has tea added first.
+Tell the lady that each pair has one of each kind of cup; ask her to identify which
+member of each pair had the milk added first.
+Count the number of pairs she categorizes correctly.
+(This approach is sometimes called <em>two-alternative forced choice</em> in the
+study of perception in the psychometric literature: each trial has two alternative
+responses, the subject is forced to pick one.)</p></li>
+<li><p>Present the lady with <span class="math notranslate nohighlight">\(N\)</span> cups of tea with milk, each of which has probability 1/2 of
+having the milk added first and probability 1/2 of having the tea added first.
+Do not tell the lady how many of each sort of cup there are.
+Ask her to identify for each cup whether milk or tea was added first.
+Count the number of cups she categorizes correctly.</p></li>
+</ol>
+<p>These experiments lead to different tests.
+A permutation test for the first of them is straightforward; to base a permutation test
+on the second requires conditioning on the number of cups she categorizes each way and
+on the number of cups that had the milk added first.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

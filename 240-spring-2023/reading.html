@@ -1,0 +1,788 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Reading assignments and collected reading list for nonparametric statistics &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Problem set 1: Mathematical Preliminaries" href="Hw/ps01-background.html" />
+    <link rel="prev" title="Assignments" href="assignments.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/240-spring-2023/reading.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2F240-spring-2023/reading.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/240-spring-2023/reading.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#collected-readings">
+   Collected readings
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inequalities-including-some-probability-inequalities">
+     Inequalities (including some probability inequalities)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convexity-convex-analysis-optimization">
+     Convexity, convex analysis, optimization
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#probability-and-stochastic-processes">
+     Probability and stochastic processes
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#permutation-tests">
+     Permutation tests
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-jackknife-and-the-bootstrap">
+     The Jackknife and the Bootstrap
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#e-values">
+     <span class="math notranslate nohighlight">
+      \(E\)
+     </span>
+     -values
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#supermartingale-based-inference-and-sequential-tests">
+     Supermartingale-based inference and sequential tests:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conformal-prediction">
+     Conformal prediction
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-splitting">
+     Data splitting
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#randomized-experiments">
+     Randomized experiments
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#density-estimation-and-inference-about-probability-densities">
+     Density estimation and inference about probability densities
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inverse-problems">
+     Inverse problems
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pseudo-random-number-generation-and-pseudo-random-sampling">
+     Pseudo-random number generation and pseudo-random sampling
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Reading assignments and collected reading list for nonparametric statistics</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#collected-readings">
+   Collected readings
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inequalities-including-some-probability-inequalities">
+     Inequalities (including some probability inequalities)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convexity-convex-analysis-optimization">
+     Convexity, convex analysis, optimization
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#probability-and-stochastic-processes">
+     Probability and stochastic processes
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#permutation-tests">
+     Permutation tests
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-jackknife-and-the-bootstrap">
+     The Jackknife and the Bootstrap
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#e-values">
+     <span class="math notranslate nohighlight">
+      \(E\)
+     </span>
+     -values
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#supermartingale-based-inference-and-sequential-tests">
+     Supermartingale-based inference and sequential tests:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conformal-prediction">
+     Conformal prediction
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-splitting">
+     Data splitting
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#randomized-experiments">
+     Randomized experiments
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#density-estimation-and-inference-about-probability-densities">
+     Density estimation and inference about probability densities
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inverse-problems">
+     Inverse problems
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pseudo-random-number-generation-and-pseudo-random-sampling">
+     Pseudo-random number generation and pseudo-random sampling
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="reading-assignments-and-collected-reading-list-for-nonparametric-statistics">
+<h1>Reading assignments and collected reading list for nonparametric statistics<a class="headerlink" href="#reading-assignments-and-collected-reading-list-for-nonparametric-statistics" title="Permalink to this headline">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="collected-readings">
+<h1>Collected readings<a class="headerlink" href="#collected-readings" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="index.html"><span class="doc std std-doc">Main lecture notes</span></a></p></li>
+</ul>
+<section id="inequalities-including-some-probability-inequalities">
+<h2>Inequalities (including some probability inequalities)<a class="headerlink" href="#inequalities-including-some-probability-inequalities" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Beckenbach, E.F., and R. Bellman, 1983. <em>Inequalities</em>, Springer.</p></li>
+<li><p>Boucheron, S. G. Lugosi, and P. Massart, 2013. <em>Concentration Inequalities: A Nonasymptotic Theory of Independence</em>, Oxford U. Press. 10.1093/acprof:oso/9780199535255.003.0001</p></li>
+<li><p>Hardy, G., J.E. Littlewood, and G. Polya, 1952. <em>Inequalities</em>, 2nd edition, Cambridge.</p></li>
+<li><p>Marshall, A.W., I. Olkin, and B.C. Arnold, 2011. Inequalities: Theory of Majorization and its Applications, Springer.</p></li>
+<li><p>Maurer, A. and M. Pontil, 2009. Empirical Bernstein Bounds and Sample Variance Penalization, COLT. <a class="reference external" href="https://www.cs.mcgill.ca/~colt2009/papers/012.pdf#page=1">https://www.cs.mcgill.ca/~colt2009/papers/012.pdf#page=1</a></p></li>
+</ul>
+</section>
+<section id="convexity-convex-analysis-optimization">
+<h2>Convexity, convex analysis, optimization<a class="headerlink" href="#convexity-convex-analysis-optimization" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Anderson, E.J., and P. Nash, 1987. <em>Linear Programming in Infinite-Dimensional Spaces</em>, Wiley.</p></li>
+<li><p>Luenberger, D.G., 1969. <em>Optimization by Vector Space Methods</em>, Wiley.</p></li>
+<li><p>Rockafellar, R.T., 1970. <em>Convex Analysis</em>, Princeton U. Press.</p></li>
+<li><p>Shor, N.Z., ???? <em>Nondifferentiable Optimization</em>, Springer.</p></li>
+</ul>
+</section>
+<section id="probability-and-stochastic-processes">
+<h2>Probability and stochastic processes<a class="headerlink" href="#probability-and-stochastic-processes" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Breiman, L., 1992. <em>Probability</em>, SIAM.</p></li>
+<li><p>Durrett, R., 2016. <em>Essentials of Stochastic Processes</em>, 3rd edition, Springer.</p></li>
+<li><p>Feller, W., 1971. An Introduction to Probability Theory and Its Applications, v.2, Wiley.</p></li>
+</ul>
+</section>
+<section id="permutation-tests">
+<h2>Permutation tests<a class="headerlink" href="#permutation-tests" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Lehmann, E., 2006. <em>Nonparametrics: Statistical Methods Based on Ranks</em>, Springer.</p></li>
+<li><p>Pesarin, F. and L. Salmaso, 2010. <em>Permutation Tests for Complex Data: Theory, Applications, and Software</em>, Wiley</p></li>
+<li><p>Romano, J.P., 1988. A bootstrap revival of some nonparametric distance tests, <em>J. Amer. Stat. Assoc., 83</em>, 698–708.</p></li>
+<li><p>Romano, J.P., 1989. Bootstrap and randomization tests of some nonparametric hypotheses, <em>Ann. Stat., 17</em>, 141–159.</p></li>
+<li><p>Walther, G., 1997. Absence of correlation between the solar neutrino flux and the sunspot number,
+<em>Phys. Rev. Lett. 79</em>, 4522–4524.</p></li>
+<li><p>Walther, G., 1999. On the solar-cycle modulation of the Homestake solar neutrino capture rate and the shuffle test, <em>Ap. J. 513</em>, 990–996.</p></li>
+<li><p>Phipson, B., and G.K. Smyth, 2010. Permutation P-values Should Never Be Zero: Calculating Exact P-values When Permutations Are Randomly Drawn, <em>Statistical Applications in Genetics and Molecular Biology</em>, <a class="reference external" href="https://doi.org/10.2202/1544-6115.1585">https://doi.org/10.2202/1544-6115.1585</a></p></li>
+</ul>
+</section>
+<section id="the-jackknife-and-the-bootstrap">
+<h2>The Jackknife and the Bootstrap<a class="headerlink" href="#the-jackknife-and-the-bootstrap" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Beran, R., 1995. Stein confidence sets and the bootstrap, <em>Stat. Sinica, 5</em>, 109–127</p></li>
+<li><p>Beran, R., 1990. Calibrating predictions regions, <em>J. Amer. Stat. Assoc., 85</em>, 715–723</p></li>
+<li><p>Beran, R., 1990. Refining bootstrap simultaneous confidence sets, <em>J. Amer. Stat. Assoc., 85</em>, 417-426</p></li>
+<li><p>Beran, R., 1987. Prepivoting to reduce level error of confidence sets, <em>Biometrika, 74</em>, 457–468</p></li>
+<li><p>Efron, B., 1982. <em>The Jackknife, the bootstrap, and other resampling plans</em>, SIAM, Philadelphia.</p></li>
+</ul>
+</section>
+<section id="e-values">
+<h2><span class="math notranslate nohighlight">\(E\)</span>-values<a class="headerlink" href="#e-values" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Vovk, V. and R. Ruodu Wang, 2021. E-values: Calibration, combination and applications, <em>Ann. Statist. 49</em> (3) 1736-1754. <a class="reference external" href="https://doi.org/10.1214/20-AOS2020">https://doi.org/10.1214/20-AOS2020</a></p></li>
+<li><p>Lecture notes by V. Vovk. <a class="reference external" href="https://www.isibang.ac.in/~statmath/pcm2020/talk1.pdf">https://www.isibang.ac.in/~statmath/pcm2020/talk1.pdf</a>, <a class="reference external" href="https://www.isibang.ac.in/~statmath/pcm2020/talk2.pdf">https://www.isibang.ac.in/~statmath/pcm2020/talk2.pdf</a>,</p></li>
+</ul>
+</section>
+<section id="supermartingale-based-inference-and-sequential-tests">
+<h2>Supermartingale-based inference and sequential tests:<a class="headerlink" href="#supermartingale-based-inference-and-sequential-tests" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Kaplan, H., 1987. A Method of One-Sided Nonparametric Inference for the Mean of a Nonnegative Population, <em>The Amer. Statistician</em>, <em>41</em>, 157-158. <a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/00031305.1987.10475470?journalCode=utas20">https://www.tandfonline.com/doi/abs/10.1080/00031305.1987.10475470?journalCode=utas20</a></p></li>
+<li><p>Howard, Steven R., Aaditya Ramdas, Jon McAuliffe, Jasjeet Sekhon, 2021. Time-uniform, nonparametric, nonasymptotic confidence sequences, <em>Ann. Statist. 49(2)</em>, 1055-1080, 10.1214/20-AOS1991</p></li>
+<li><p>Ramdas, A., P. Grunwald, V. Vovk, and G. Shafer, 2022. Game-Theoretic Statistics and Safe Anytime-Valid Inference,
+<a class="reference external" href="https://arxiv.org/pdf/2210.01948v1.pdf">https://arxiv.org/pdf/2210.01948v1.pdf</a></p></li>
+<li><p>Spertus, J. and P.B. Stark, 2023. Sweeter than SUITE, <a class="reference external" href="https://arxiv.org/abs/2207.03379">https://arxiv.org/abs/2207.03379</a></p></li>
+<li><p>Stark, P.B., 2023. ALPHA: Audit that Learns from Previously Hand-Audited ballots,
+<em>Ann. Appl. Stat.</em>, <em>17</em>(1): 641-679. DOI: 10.1214/22-AOAS1646 <a class="reference external" href="https://projecteuclid.org/journalArticle/Download?urlId=10.1214%2F22-AOAS1646">https://projecteuclid.org/journalArticle/Download?urlId=10.1214/22-AOAS1646</a></p></li>
+<li><p>Wald, A., 1945. Sequential Tests of Statistical Hypotheses, <em>Ann. Math. Statist. 16</em>(2), 117-186. 10.1214/aoms/1177731118</p></li>
+<li><p>Waudby-Smith, I. and A. Ramdas, 2022. Estimating means of bounded random variables by betting, <a class="reference external" href="https://arxiv.org/abs/2010.09686">https://arxiv.org/abs/2010.09686</a></p></li>
+</ul>
+</section>
+<section id="conformal-prediction">
+<h2>Conformal prediction<a class="headerlink" href="#conformal-prediction" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Schafer, G., and V. Vovk, 2008. A tutorial on conformal prediction, <em>Journal Machine Learning Res.</em>, <em>9</em>, 371-421.</p></li>
+</ul>
+</section>
+<section id="data-splitting">
+<h2>Data splitting<a class="headerlink" href="#data-splitting" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Fithian, W., D.L. Sun, and J. Taylor, 2017. Optimal inference after model selection, <a class="reference external" href="https://arxiv.org/pdf/1410.2597.pdf">https://arxiv.org/pdf/1410.2597.pdf</a></p></li>
+<li><p>Wasserman, L., Aaditya Ramdas, and Sivaraman Balakrishnan, 2020. Universal Inference. <em>PNAS, 117</em>, 29, 16880-16890 <a class="reference external" href="https://www.pnas.org/doi/10.1073/pnas.1922664117">https://www.pnas.org/doi/10.1073/pnas.1922664117</a></p></li>
+</ul>
+</section>
+<section id="randomized-experiments">
+<h2>Randomized experiments<a class="headerlink" href="#randomized-experiments" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Aronow, P.M., H. Chang, and P. Lopatto, 2022?. Fast computation of exact confidence intervals for randomized experiments with binary outcomes. <a class="reference external" href="https://lopat.to/permutation.pdf">https://lopat.to/permutation.pdf</a></p></li>
+<li><p>Caughey, D., A. Dafoe, X. Li, and L. Miratrix, 2021. Randomization Inference beyond the Sharp Null: Bounded Null Hypotheses and Quantiles of Individual Treatment Effects <a class="reference external" href="https://arxiv.org/abs/2101.09195">https://arxiv.org/abs/2101.09195</a></p></li>
+<li><p>Ding, P., 2017. A Paradox from Randomization-Based Causal Inference, <em>Statist. Sci. 32</em>, 331-345. 10.1214/16-STS571</p></li>
+<li><p>Fisher, R.A., 1935. <em>The Design of Experiments</em>, Hafner.</p></li>
+<li><p>Li, X. and P. Ding, 2016. Exact confidence intervals for the average causal effect on a binary outcome, <em>Statistics in Medicine</em>, <em>35</em>, 6, 957-960.  10.1002/sim.6764</p></li>
+<li><p>Wu and Ding, 2021. Randomization Tests for Weak Null Hypotheses in Randomized Experiments,
+<em>JASA</em>, <em>116</em>. <a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/01621459.2020.1750415">https://www.tandfonline.com/doi/abs/10.1080/01621459.2020.1750415</a></p></li>
+</ul>
+</section>
+<section id="density-estimation-and-inference-about-probability-densities">
+<h2>Density estimation and inference about probability densities<a class="headerlink" href="#density-estimation-and-inference-about-probability-densities" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Daubechies, I. 1992. <em>Ten lectures on wavelets</em>, SIAM, Philadelphia, PA.</p></li>
+<li><p>Donoho, D.L., 1988. One-Sided Inference about Functionals of a Density,
+<em>Ann. Statist. 16(4)</em>: 1390-1420 10.1214/aos/1176351045</p></li>
+<li><p>G. Kerkyacharian, and D. Picard, 1993. Density estimation by kernel and wavelets methods:
+Optimality of Besov spaces, <em>Stat. Prob. Lett.</em>, <em>18</em>, 4, 327-336.
+<a class="reference external" href="https://doi.org/10.1016/0167-7152(93)90024-D">https://doi.org/10.1016/0167-7152(93)90024-D</a></p></li>
+<li><p>Hengartner, N.W., and P.B. Stark, 1995. Finite-Sample Confidence Envelopes for Shape-Restricted Densities
+<em>Ann. Statist. 23(2)</em>: 525-550 10.1214/aos/1176324534</p></li>
+<li><p>Silverman, B.W., 1990. <em>Density Estimation for Statistics and Data Analysis</em>, Chapman and Hall, London.</p></li>
+</ul>
+</section>
+<section id="inverse-problems">
+<h2>Inverse problems<a class="headerlink" href="#inverse-problems" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Donoho, D., 1995. Nonlinear Solution of Linear Inverse Problems by Wavelet–Vaguelette Decomposition, Applied and <em>Computational Harmonic Analysis</em>, <em>2</em>, 101-126. 10.1006/acha.1995.1008</p></li>
+<li><p>Evans, S.N., and P.B. Stark, 2002. Inverse problems as statistics, <em>Inverse Problems, 18</em>, 4 10.1088/0266-5611/18/4/201</p></li>
+<li><p>Kuusela, M. and P.B. Stark, 2017. Shape-constrained uncertainty quantification in unfolding steeply falling elementary particle spectra, <em>Ann. Appl. Stat. 11</em>, 3, 1671-1710. 10.1214/17-AOAS1053</p></li>
+<li><p>Stark, P.B., 1992. Inference in infinite-dimensional inverse problems: duality and discretization, <em>J. Geophys. Res.</em>, <em>97</em>, 14055-14082. <a class="reference external" href="https://doi.org/10.1029/92JB00739">https://doi.org/10.1029/92JB00739</a></p></li>
+<li><p>Stark, P.B., 2008. Generalizing resolution, <em>Inverse Problems</em>, _Inverse Problems, <em>24</em>, 034014. 10.1088/0266-5611/24/3/034014</p></li>
+</ul>
+</section>
+<section id="pseudo-random-number-generation-and-pseudo-random-sampling">
+<h2>Pseudo-random number generation and pseudo-random sampling<a class="headerlink" href="#pseudo-random-number-generation-and-pseudo-random-sampling" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Knuth, D., 1997 <em>The Art of Computer Programming, V.II: Seminumerical methods</em>, 3rd edition, Addison-Wesley, Boston.</p></li>
+<li><p>L’Ecuyer, P. and R. Simard, 2007. TestU01: A C Library for Empirical Testing of Random Number Generators, <em>ACM Trans. Math. Softw.</em>, <em>33</em>, <a class="reference external" href="http://doi.acm.org/10.1145/1268776.1268777">http://doi.acm.org/10.1145/1268776.1268777</a></p></li>
+<li><p>Marsaglia, G., 1968. Random Numbers Fall Mainly in the Planes, <em>PNAS</em>, <em>61</em>, 25–28.</p></li>
+<li><p>Matsumoto, M., and T. Nishimura, 1998. 8). Mersenne twister: a 623-dimensionally equidistributed uniform pseudo-random number generator, <em>ACM Transactions on Modeling and Computer Simulation</em>, <em>8</em>, 3–30. doi:10.1145/272991.272995</p></li>
+<li><p>McCullough, B.D., 2008. Microsoft’s ‘Not the Wichmann-Hill’ random number generator. <em>Computational Statistics and Data Analysis</em>, <em>52</em> (10), 4587–4593. <a class="reference external" href="http://dx.doi.org/10.1016/j.csda.2008.03.006">http://dx.doi.org/10.1016/j.csda.2008.03.006</a></p></li>
+<li><p>NIST Computer Security Division, <em>Random Number Generation</em> <a class="reference external" href="http://csrc.nist.gov/groups/ST/toolkit/rng/">http://csrc.nist.gov/groups/ST/toolkit/rng/</a></p></li>
+<li><p>Ottoboni, K., and P.B. Stark, 2018. Random problems with R. <a class="reference external" href="https://arxiv.org/abs/1809.06520">https://arxiv.org/abs/1809.06520</a></p></li>
+<li><p>Stark, P.B., and K. Ottoboni, 2018. Random sampling: practice makes imperfect. <a class="reference external" href="https://arxiv.org/abs/1810.10985">https://arxiv.org/abs/1810.10985</a></p></li>
+<li><p>Vitter, J.S., 1985. Random Sampling with a Reservoir, <em>ACM Transactions on Mathematical Software, 11</em>, 37–57.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./240-spring-2023"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="assignments.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Assignments</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Hw/ps01-background.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Problem set 1: Mathematical Preliminaries</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

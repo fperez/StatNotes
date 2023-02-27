@@ -1,0 +1,2326 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Pseudo-random number generators and random sampling &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/prngs.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Fprngs.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/prngs.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Pseudo-random number generators and random sampling
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties-of-prngs">
+   Properties of PRNGs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-prngs">
+   Some PRNGs
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#middle-square">
+     Middle Square
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-congruential-generators-lcgs">
+     Linear Congruential Generators (LCGs)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hull-dobell-theorem-the-period-of-an-lcg-is-m-for-all-seeds-x-0-iff">
+       Hull-Dobell Theorem: the period of an LCG is
+       <span class="math notranslate nohighlight">
+        \(m\)
+       </span>
+       for all seeds
+       <span class="math notranslate nohighlight">
+        \(X_0\)
+       </span>
+       iff
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#marsaglia-pnas-1968-random-numbers-fall-mainly-in-the-planes">
+       Marsaglia (PNAS, 1968): Random Numbers Fall Mainly in the Planes
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#randu">
+     RANDU
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wichmann-hill-1982">
+     Wichmann-Hill (1982)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-right-way-the-wrong-way-and-the-microsoft-way">
+       The right way, the wrong way, and the Microsoft way.
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mersenne-twister-mt-matsumoto-nishimura-1997">
+     Mersenne Twister (MT)  Matsumoto &amp; Nishimura (1997)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#xorshift-family">
+     xorshift family
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-non-cryptographic-prngs">
+   Other non-cryptographic PRNGs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prngs-based-on-cryptographic-hash-functions">
+   PRNGs based on cryptographic hash functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-of-sha-256">
+   1 step of SHA-256
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-hash-based-prng">
+     Simple, hash-based PRNG
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variation-to-take-advantage-of-incremental-hashing">
+     Variation to take advantage of incremental hashing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-trainwrecks">
+   Some trainwrecks
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#microsoft-visual-studio-system-random-2011">
+     Microsoft Visual Studio system.random, 2011
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aristocrat-leisure-of-australia-slot-machines">
+     Aristocrat Leisure of Australia Slot Machines
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dual-elliptic-curve">
+     Dual Elliptic Curve
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gnupg-rng-bug-18-years-1998-2016">
+     GnuPG RNG bug (18 years, 1998–2016)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rsa">
+     RSA
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#php">
+     PHP
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bitcoin-on-android-java-nonce-collision">
+     Bitcoin on Android: Java nonce collision
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debian-openssl">
+     Debian OpenSSL
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generating-a-random-integer-uniformly-distributed-on-1-ldots-m">
+       Generating a random integer uniformly distributed on
+       <span class="math notranslate nohighlight">
+        \(\{1, \ldots, m\}\)
+       </span>
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#naive-method">
+         Naive method
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#r-random-integer-generator-sample">
+     R random integer generator / sample()
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#more-accurate-method">
+       More accurate method
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-can-you-tell-whether-a-sequence-is-random">
+     How can you tell whether a sequence is random?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tests-of-prngs">
+     Tests of PRNGS
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#knuth-1969-the-art-of-computer-programming-v-2">
+       Knuth (1969)
+       <em>
+        The Art of Computer Programming
+       </em>
+       , v.2
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#marsaglia-1996-diehard-tests">
+       Marsaglia (1996) DIEHARD tests
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lecuyer-and-simard-2007-testu01-http-dl-acm-org-citation-cfm-doid-1268776-1268777">
+       L’Ecuyer and Simard (2007) TestU01 http://dl.acm.org/citation.cfm?doid=1268776.1268777
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nist-tests">
+       NIST Tests
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pigeonhole-principle">
+     Pigeonhole principle
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#corollary">
+     Corollary
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sizes-of-some-coops-flocks">
+     Sizes of some coops &amp; flocks
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-frequency-of-samples-using-pikk">
+     Example: frequency of samples using PIKK
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hypothesis-tests-for-mt-and-randu">
+     Hypothesis tests for MT and RANDU
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prngs-in-common-packages">
+     PRNGs in Common packages
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#is-mt-adequate-for-statistics">
+     Is MT adequate for statistics?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#best-practices">
+     Best Practices
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recommendations">
+     Recommendations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Pseudo-random number generators and random sampling</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Pseudo-random number generators and random sampling
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties-of-prngs">
+   Properties of PRNGs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-prngs">
+   Some PRNGs
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#middle-square">
+     Middle Square
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-congruential-generators-lcgs">
+     Linear Congruential Generators (LCGs)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hull-dobell-theorem-the-period-of-an-lcg-is-m-for-all-seeds-x-0-iff">
+       Hull-Dobell Theorem: the period of an LCG is
+       <span class="math notranslate nohighlight">
+        \(m\)
+       </span>
+       for all seeds
+       <span class="math notranslate nohighlight">
+        \(X_0\)
+       </span>
+       iff
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#marsaglia-pnas-1968-random-numbers-fall-mainly-in-the-planes">
+       Marsaglia (PNAS, 1968): Random Numbers Fall Mainly in the Planes
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#randu">
+     RANDU
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wichmann-hill-1982">
+     Wichmann-Hill (1982)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-right-way-the-wrong-way-and-the-microsoft-way">
+       The right way, the wrong way, and the Microsoft way.
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mersenne-twister-mt-matsumoto-nishimura-1997">
+     Mersenne Twister (MT)  Matsumoto &amp; Nishimura (1997)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#xorshift-family">
+     xorshift family
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-non-cryptographic-prngs">
+   Other non-cryptographic PRNGs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prngs-based-on-cryptographic-hash-functions">
+   PRNGs based on cryptographic hash functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-of-sha-256">
+   1 step of SHA-256
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-hash-based-prng">
+     Simple, hash-based PRNG
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variation-to-take-advantage-of-incremental-hashing">
+     Variation to take advantage of incremental hashing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-trainwrecks">
+   Some trainwrecks
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#microsoft-visual-studio-system-random-2011">
+     Microsoft Visual Studio system.random, 2011
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aristocrat-leisure-of-australia-slot-machines">
+     Aristocrat Leisure of Australia Slot Machines
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dual-elliptic-curve">
+     Dual Elliptic Curve
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gnupg-rng-bug-18-years-1998-2016">
+     GnuPG RNG bug (18 years, 1998–2016)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rsa">
+     RSA
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#php">
+     PHP
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bitcoin-on-android-java-nonce-collision">
+     Bitcoin on Android: Java nonce collision
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debian-openssl">
+     Debian OpenSSL
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generating-a-random-integer-uniformly-distributed-on-1-ldots-m">
+       Generating a random integer uniformly distributed on
+       <span class="math notranslate nohighlight">
+        \(\{1, \ldots, m\}\)
+       </span>
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#naive-method">
+         Naive method
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#r-random-integer-generator-sample">
+     R random integer generator / sample()
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#more-accurate-method">
+       More accurate method
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-can-you-tell-whether-a-sequence-is-random">
+     How can you tell whether a sequence is random?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tests-of-prngs">
+     Tests of PRNGS
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#knuth-1969-the-art-of-computer-programming-v-2">
+       Knuth (1969)
+       <em>
+        The Art of Computer Programming
+       </em>
+       , v.2
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#marsaglia-1996-diehard-tests">
+       Marsaglia (1996) DIEHARD tests
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lecuyer-and-simard-2007-testu01-http-dl-acm-org-citation-cfm-doid-1268776-1268777">
+       L’Ecuyer and Simard (2007) TestU01 http://dl.acm.org/citation.cfm?doid=1268776.1268777
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nist-tests">
+       NIST Tests
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pigeonhole-principle">
+     Pigeonhole principle
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#corollary">
+     Corollary
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sizes-of-some-coops-flocks">
+     Sizes of some coops &amp; flocks
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-frequency-of-samples-using-pikk">
+     Example: frequency of samples using PIKK
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hypothesis-tests-for-mt-and-randu">
+     Hypothesis tests for MT and RANDU
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prngs-in-common-packages">
+     PRNGs in Common packages
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#is-mt-adequate-for-statistics">
+     Is MT adequate for statistics?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#best-practices">
+     Best Practices
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recommendations">
+     Recommendations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="pseudo-random-number-generators-and-random-sampling">
+<h1>Pseudo-random number generators and random sampling<a class="headerlink" href="#pseudo-random-number-generators-and-random-sampling" title="Permalink to this headline">#</a></h1>
+<blockquote>
+<div><p>Anyone who attempts to generate random numbers by deterministic means is, of course, living in a state of sin. –John von Neumann</p>
+</div></blockquote>
+</section>
+<section id="properties-of-prngs">
+<h1>Properties of PRNGs<a class="headerlink" href="#properties-of-prngs" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>dimension of output</p>
+<ul>
+<li><p>commonly 32 bits, but some have more</p></li>
+</ul>
+</li>
+<li><p>number of states</p>
+<ul>
+<li><p>dimension of state space in bits</p></li>
+<li><p>sometimes state = output, but better generators generally have output = f(state)</p></li>
+</ul>
+</li>
+<li><p>period</p>
+<ul>
+<li><p>maximum over initial states of the number of states visited before repeating</p></li>
+<li><p>period ≤ number of states</p></li>
+<li><p>if state has <span class="math notranslate nohighlight">\(s\)</span> bits, period <span class="math notranslate nohighlight">\(\le 2^s\)</span></p></li>
+<li><p>for some PRNGs, period is much less than number of states</p></li>
+<li><p>for some seeds for some PRNGs, number of states visited is much less than period</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span>-distribution</p>
+<ul>
+<li><p>suppose <span class="math notranslate nohighlight">\(\{X_i\}\)</span> is sequence of <span class="math notranslate nohighlight">\(P\)</span> <span class="math notranslate nohighlight">\(w\)</span>-bit integers</p></li>
+<li><p>define <span class="math notranslate nohighlight">\(t_v(X_i)\)</span> to be the first <span class="math notranslate nohighlight">\(v\)</span> bits of <span class="math notranslate nohighlight">\(X_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\{X_i\}\)</span> is <span class="math notranslate nohighlight">\(k\)</span>-distributed to <span class="math notranslate nohighlight">\(v\)</span>-bit accuracy if each of the <span class="math notranslate nohighlight">\(2^{kv}-1\)</span> possible nonzero <span class="math notranslate nohighlight">\(kv\)</span>-bit vectors occurs equally often among the <span class="math notranslate nohighlight">\(P\)</span> <span class="math notranslate nohighlight">\(kv\)</span>-bit vectors</p></li>
+</ul>
+</li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  (t_v(X_i),\,t_v(X_{i+1}), \ldots ,t_v(X_{i+k-1}))\quad (0\le i&lt;P),\end{equation*}\]</div>
+<p>and the zero vector occurs once less often.
+- amounts to a form of uniformity in <span class="math notranslate nohighlight">\(k\)</span>-dimensional space, over an entire cycle
+- does not measure dependence or other “serial” properties</p>
+<ul class="simple">
+<li><p>sensitivity to initial state; burn-in</p>
+<ul>
+<li><p>many PRNGs don’t do well if the seed has too many zeros</p></li>
+<li><p>some require many iterations before output behaves well</p></li>
+<li><p>for some seeds, some PRNGs repeat very quickly</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="some-prngs">
+<h1>Some PRNGs<a class="headerlink" href="#some-prngs" title="Permalink to this headline">#</a></h1>
+<section id="middle-square">
+<h2>Middle Square<a class="headerlink" href="#middle-square" title="Permalink to this headline">#</a></h2>
+<p>Dates to Franciscan friar ca. 1240 (per <a class="reference external" href="https://en.wikipedia.org/wiki/Middle-square_method">Wikipedia</a>); reinvented by von Neumann ca. 1949.</p>
+<p>Take <span class="math notranslate nohighlight">\(n\)</span>-digit number, square it, use middle <span class="math notranslate nohighlight">\(n\)</span> digits as the “random” and the new seed.</p>
+<p>E.g., for <span class="math notranslate nohighlight">\(n=4\)</span>, take <span class="math notranslate nohighlight">\(X_0 = 1234\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(1234^2 = 1522756\)</span>, so <span class="math notranslate nohighlight">\(X_1 = 2275\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(2275^2 = 5175625\)</span>, so <span class="math notranslate nohighlight">\(X_2 = 7562\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(10^n\)</span> possible states, but not all attainable from a given seed</p></li>
+<li><p>period at most <span class="math notranslate nohighlight">\(8^n\)</span>, but can be very short. E.g., for <span class="math notranslate nohighlight">\(n=4\)</span>,</p>
+<ul>
+<li><p>0000, 0100, 2500, 3792, &amp; 7600 repeat forever</p></li>
+<li><p>0540 → 2916 → 5030 → 3009 → 0540</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="linear-congruential-generators-lcgs">
+<h2>Linear Congruential Generators (LCGs)<a class="headerlink" href="#linear-congruential-generators-lcgs" title="Permalink to this headline">#</a></h2>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  X_{n+1} = (aX_n +c)\mod m.\end{equation*}\]</div>
+<p>LCG period is at most <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<section id="hull-dobell-theorem-the-period-of-an-lcg-is-m-for-all-seeds-x-0-iff">
+<h3>Hull-Dobell Theorem: the period of an LCG is <span class="math notranslate nohighlight">\(m\)</span> for all seeds <span class="math notranslate nohighlight">\(X_0\)</span> iff<a class="headerlink" href="#hull-dobell-theorem-the-period-of-an-lcg-is-m-for-all-seeds-x-0-iff" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(c\)</span> are relatively prime</p></li>
+<li><p><span class="math notranslate nohighlight">\(a-1\)</span>  is divisible by all prime factors of <span class="math notranslate nohighlight">\(m\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(a-1\)</span>  is divisible by 4 if <span class="math notranslate nohighlight">\(m\)</span> is divisible by 4</p></li>
+</ul>
+</section>
+<section id="marsaglia-pnas-1968-random-numbers-fall-mainly-in-the-planes">
+<h3>Marsaglia (PNAS, 1968): Random Numbers Fall Mainly in the Planes<a class="headerlink" href="#marsaglia-pnas-1968-random-numbers-fall-mainly-in-the-planes" title="Permalink to this headline">#</a></h3>
+<p>Multiplicative congruential generators (<span class="math notranslate nohighlight">\(c=0\)</span>), Lehmer (1949).</p>
+<p><img alt="Marsaglia68" src="_images/marsaglia68.png" /></p>
+</section>
+</section>
+<section id="randu">
+<h2>RANDU<a class="headerlink" href="#randu" title="Permalink to this headline">#</a></h2>
+<p>RANDU is a particularly bad <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_congruential_generator">linear congruential generator</a> promulgated in the 1960s and widely copied.</p>
+<p>RANDU is given by the recursion</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  X_{j+1} = 65539 X_j\mod 2^{31}.\end{equation*}\]</div>
+<p>Period is (<span class="math notranslate nohighlight">\(2^{29}\)</span>); all outputs are odd integers.</p>
+<p>Triples of values from RANDU fall on 15 planes in 3-dimensional space, as shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">comb</span><span class="p">,</span> <span class="n">factorial</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">brentq</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chisquare</span><span class="p">,</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">scipy.integrate</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">Random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># LCG; defaults to RANDU, a particularly bad choice</span>
+<span class="k">class</span> <span class="nc">lcgRandom</span><span class="p">:</span> <span class="c1"># defaults to RANDU: BEWARE!</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234567890</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">65539</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">31</span><span class="p">):</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">A</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">B</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">=</span> <span class="n">M</span>
+        
+    <span class="k">def</span> <span class="nf">getState</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span>
+    
+    <span class="k">def</span> <span class="nf">setState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1234567890</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">65539</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">31</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">A</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">B</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">=</span> <span class="n">M</span>
+
+    <span class="k">def</span> <span class="nf">nextRandom</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span>
+
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># vector of rands</span>
+        <span class="k">if</span> <span class="n">size</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nextRandom</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">nextRandom</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">size</span><span class="p">))]),</span> <span class="n">size</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">randint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># integer between low (inclusive) and high (exclusive)</span>
+        <span class="k">if</span> <span class="n">high</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>  <span class="c1"># numpy.random.randint()-like behavior</span>
+            <span class="n">high</span><span class="p">,</span> <span class="n">low</span> <span class="o">=</span> <span class="n">low</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">size</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">low</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nextRandom</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">high</span><span class="o">-</span><span class="n">low</span><span class="p">))</span> <span class="c1"># NOT AN ACCURATE ALGORITHM! See below.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">low</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">high</span><span class="o">-</span><span class="n">low</span><span class="p">))</span>
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate triples using RANDU</span>
+<span class="n">reps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">randu</span> <span class="o">=</span> <span class="n">lcgRandom</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">randu</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">reps</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the triples as points in R^3</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">xs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">18.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">)</span> 
+
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">110</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/prngs_11_0.png" src="_images/prngs_11_0.png" />
+</div>
+</div>
+</section>
+<section id="wichmann-hill-1982">
+<h2>Wichmann-Hill (1982)<a class="headerlink" href="#wichmann-hill-1982" title="Permalink to this headline">#</a></h2>
+<p>Sum of 3 LCGs. Period is 6,953,607,871,644.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def WH(s1, s2, s3):
+    s1 = (171 * s1) % 30269
+    s2 = (172 * s2) % 30307
+    s3 = (170 * s3) % 30323
+    r = (s1/30269 + s2/30307 + s3/30323) %  1
+    return [r, s1, s2, s3]
+</pre></div>
+</div>
+<section id="the-right-way-the-wrong-way-and-the-microsoft-way">
+<h3>The right way, the wrong way, and the Microsoft way.<a class="headerlink" href="#the-right-way-the-wrong-way-and-the-microsoft-way" title="Permalink to this headline">#</a></h3>
+<p>WH generally not considered adequate for statistics, but was (nominally) the PRNG in Excel for several
+generations. Excel did not allow the seed to be set, so analyses were not reproducible.</p>
+<p><img alt="mcCullough" src="_images/notWichmannHill08.png" />
+McCullough, B.D., 2008. Microsoft Excel’s ‘Not The Wichmann–Hill’ random number generators
+<em>Computational Statistics &amp; Data Analysis</em>, <em>52</em>, 4587–4593
+doi:10.1016/j.csda.2008.03.006</p>
+</section>
+</section>
+<section id="mersenne-twister-mt-matsumoto-nishimura-1997">
+<h2>Mersenne Twister (MT)  Matsumoto &amp; Nishimura (1997)<a class="headerlink" href="#mersenne-twister-mt-matsumoto-nishimura-1997" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>example of “twisted generalized feedback shift register”</p></li>
+<li><p>period <span class="math notranslate nohighlight">\(2^{19937}-1\)</span>, a Mersenne Prime</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span>-distributed to 32-bit accuracy for all <span class="math notranslate nohighlight">\(k \in \{1, \ldots, 623\}\)</span>.</p></li>
+<li><p>passes DIEHARD and most of TestU01 (see below)</p></li>
+<li><p>standard in many packages:</p>
+<ul>
+<li><p>GNU Octave, Maple, MATLAB, Mathematica, Python, R, Stata</p></li>
+<li><p>Apache, CMU Common Lisp, Embeddable Common Lisp, Free Pascal, GLib, PHP, GAUSS, IDL, Julia, Ruby, SageMath, Steel Bank Common Lisp, Scilab, Stata, GNU Scientific Library, GNU Multiple Precision Arithmetic Library, Microsoft Visual C++.</p></li>
+<li><p>SPSS and SAS offer MT, as does C++ (v11 and up)</p></li>
+</ul>
+</li>
+<li><p>generally considered adequate for statistics (but not for cryptography); however, will trouble that in this work, esp. for “big data”</p></li>
+<li><p>usual implementation has 624-dimensional state space, but TinyMT uses only 127 bits</p></li>
+<li><p>seeding complicated, since state is an array</p></li>
+<li><p>can take a while to “burn in,” especially for seeds with many zeros</p></li>
+<li><p>output for close seed states can be close</p></li>
+<li><p>2002 update improves seeding</p></li>
+<li><p>completely predictable from 624 successive outputs</p></li>
+<li><p>problems discovered in 2007 (see TestU01, below)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python implementation of MT19937 from Wikipedia </span>
+<span class="c1"># https://en.wikipedia.org/wiki/Mersenne_Twister#Python_implementation</span>
+
+<span class="k">def</span> <span class="nf">_int32</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># Get the 32 least significant bits.</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="mh">0xFFFFFFFF</span> <span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MT19937</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="p">):</span>
+        <span class="c1"># Initialize the index to 0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">624</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mt</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">624</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">seed</span>  <span class="c1"># Initialize the initial state to the seed</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">624</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_int32</span><span class="p">(</span>
+                <span class="mi">1812433253</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">30</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">extract_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">624</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">twist</span><span class="p">()</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+        <span class="c1"># Right shift by 11 bits</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">^</span> <span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="mi">11</span>
+        <span class="c1"># Shift y left by 7 and take the bitwise and of 2636928640</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">^</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span> <span class="o">&amp;</span> <span class="mi">2636928640</span>
+        <span class="c1"># Shift y left by 15 and take the bitwise and of y and 4022730752</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">^</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="mi">15</span> <span class="o">&amp;</span> <span class="mi">4022730752</span>
+        <span class="c1"># Right shift by 18 bits</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">^</span> <span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="mi">18</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">_int32</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">twist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">624</span><span class="p">):</span>
+            <span class="c1"># Get the most significant bit and add it to the less significant</span>
+            <span class="c1"># bits of the next number</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">_int32</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0x80000000</span><span class="p">)</span> <span class="o">+</span>
+                       <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">624</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0x7fffffff</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">397</span><span class="p">)</span> <span class="o">%</span> <span class="mi">624</span><span class="p">]</span> <span class="o">^</span> <span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">y</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="mh">0x9908b0df</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="xorshift-family">
+<h2>xorshift family<a class="headerlink" href="#xorshift-family" title="Permalink to this headline">#</a></h2>
+<p>Originated by Marsaglia, 2003.</p>
+<p>Vigna, S., 2014. Further scramblings of Marsaglia’s xorshift generators. <a class="reference external" href="https://arxiv.org/abs/1404.0390">https://arxiv.org/abs/1404.0390</a></p>
+<p>128-bit xorshift+  Implemented in Python package randomstate <a class="reference external" href="https://pypi.python.org/pypi/randomstate/1.10.1">https://pypi.python.org/pypi/randomstate/1.10.1</a></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint64_t s[2];
+
+uint64_t xorshift128plus(void) {
+    uint64_t x = s[0];
+    uint64_t const y = s[1];
+    s[0] = y;
+    x ^= x &lt;&lt; 23; // a
+    s[1] = x ^ y ^ (x &gt;&gt; 17) ^ (y &gt;&gt; 26); // b, c
+    return s[1] + y;
+}
+</pre></div>
+</div>
+<p>1024-bit xorshift+</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint64_t s[16];
+int p;
+
+uint64_t next(void) {
+    const uint64_t s0 = s[p];
+    uint64_t s1 = s[p = (p + 1) &amp; 15];
+    const uint64_t result = s0 + s1;
+    s1 ^= s1 &lt;&lt; 31; // a
+    s[p] = s1 ^ s0 ^ (s1 &gt;&gt; 11) ^ (s0 &gt;&gt; 30); // b, c
+return result;
+</pre></div>
+</div>
+<p>}</p>
+<p>xorshift+ passes all the tests in BigCrush, has 128-bit state space and period <span class="math notranslate nohighlight">\(2^{128}-1\)</span>, but is
+only <span class="math notranslate nohighlight">\((k-1)\)</span>-dimensionally equidistributed, where <span class="math notranslate nohighlight">\(k\)</span> is the dimension of the distribution of the xorshift
+generator from which it’s derived. E.g., for the 128-bit version, xorshift+ is only 1-dimensionally equidistributed.</p>
+</section>
+</section>
+<section id="other-non-cryptographic-prngs">
+<h1>Other non-cryptographic PRNGs<a class="headerlink" href="#other-non-cryptographic-prngs" title="Permalink to this headline">#</a></h1>
+<p>See <a class="reference external" href="http://www.pcg-random.org/">http://www.pcg-random.org/</a> and the talk <a class="reference external" href="http://www.pcg-random.org/posts/stanford-colloquium-talk.html">http://www.pcg-random.org/posts/stanford-colloquium-talk.html</a></p>
+<p>PCG family permutes the output of a LCG; good statistical properties and very fast and compact. Related to Rivest’s RC5 cipher.</p>
+<p>Seems better than MT, xorshift+, et al.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>// *Really* minimal PCG32 code / (c) 2014 M.E. O&#39;Neill / pcg-random.org
+// Licensed under Apache License 2.0 (NO WARRANTY, etc. see website)
+
+typedef struct { uint64_t state;  uint64_t inc; } pcg32_random_t;
+
+uint32_t pcg32_random_r(pcg32_random_t* rng)
+{
+    uint64_t oldstate = rng-&gt;state;
+    // Advance internal state
+    rng-&gt;state = oldstate * 6364136223846793005ULL + (rng-&gt;inc|1);
+    // Calculate output function (XSH RR), uses old state for max ILP
+    uint32_t xorshifted = ((oldstate &gt;&gt; 18u) ^ oldstate) &gt;&gt; 27u;
+    uint32_t rot = oldstate &gt;&gt; 59u;
+    return (xorshifted &gt;&gt; rot) | (xorshifted &lt;&lt; ((-rot) &amp; 31));
+}
+</pre></div>
+</div>
+</section>
+<section id="prngs-based-on-cryptographic-hash-functions">
+<h1>PRNGs based on cryptographic hash functions<a class="headerlink" href="#prngs-based-on-cryptographic-hash-functions" title="Permalink to this headline">#</a></h1>
+<p>Cryptographic hash functions have several basic properties:</p>
+<ol class="simple">
+<li><p>produce fixed-length “digest” of an arbitrarily long “message”: <span class="math notranslate nohighlight">\(H:\{0, 1\}^* \rightarrow \{0, 1\}^L\)</span>.</p></li>
+<li><p>inexpensive to compute</p></li>
+<li><p>non-invertible (“one-way,” hard to find pre-image of any hash except by exhaustive enumeration)</p></li>
+<li><p>collision-resistant (hard to find <span class="math notranslate nohighlight">\(M_1 \ne M_2\)</span> such that <span class="math notranslate nohighlight">\(H(M_1) = H(M_2)\)</span>)</p></li>
+<li><p>small change to input produces big change to output (“unpredictable,” input and output effectively independent)</p></li>
+<li><p>equidistributed: bits of the hash are essentially random</p></li>
+</ol>
+<p>Summary: <em>as if</em> <span class="math notranslate nohighlight">\(H(M)\)</span> is random <span class="math notranslate nohighlight">\(L\)</span>-bit string is assigned to <span class="math notranslate nohighlight">\(M\)</span> in a way that’s essentially unique.</p>
+</section>
+<section id="step-of-sha-256">
+<h1>1 step of SHA-256<a class="headerlink" href="#step-of-sha-256" title="Permalink to this headline">#</a></h1>
+<p>By User:kockmeyer - Own work, CC BY-SA 3.0, <a class="reference external" href="https://commons.wikimedia.org/w/index.php?curid=1823488">https://commons.wikimedia.org/w/index.php?curid=1823488</a></p>
+<p><img alt="SHA-2" src="_images/SHA-2.svg" /></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  \mbox{Ch} (E,F,G) \equiv (E\land F)\oplus (\neg E\land G) \end{equation*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  \mbox{Ma} (A,B,C) \equiv (A\land B)\oplus (A\land C)\oplus (B\land C) \end{equation*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  \Sigma _0 (A) \equiv (A\!\ggg \!2)\oplus (A\!\ggg \!13)\oplus (A\!\ggg \!22) \end{equation*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  \Sigma _1 (E) \equiv (E\!\ggg \!6)\oplus (E\!\ggg \!11)\oplus (E\!\ggg \!25) \end{equation*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*} \boxplus  \mbox{ is addition mod } 2^{32}\end{equation*}\]</div>
+<section id="simple-hash-based-prng">
+<h2>Simple, hash-based PRNG<a class="headerlink" href="#simple-hash-based-prng" title="Permalink to this headline">#</a></h2>
+<p>Generate a random string <span class="math notranslate nohighlight">\(S\)</span> of reasonable length, e.g., 20 digits.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  
+   X_i = {\mbox{Hash}}(S+i),
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(+\)</span> denotes string concatenation, and the resulting string is interpreted as a (long) hexadecimal number.</p>
+<p><strong>“Counter mode.”  Hash-based generators of this type have unbounded state spaces.</strong></p>
+<p>Implementation in Python by Ron Rivest: <a class="reference external" href="http://people.csail.mit.edu/rivest/sampler.py">http://people.csail.mit.edu/rivest/sampler.py</a></p>
+<p>Implementation in angular-js by Chris Jerdonek: <a class="reference external" href="https://github.com/cjerdonek/quick-sampler">https://github.com/cjerdonek/quick-sampler</a></p>
+<p>Implementation in JavaScript by Philip Stark: <a class="reference external" href="https://www.stat.berkeley.edu/~stark/Java/Html/sha256Rand.htm">https://www.stat.berkeley.edu/~stark/Java/Html/sha256Rand.htm</a></p>
+</section>
+<section id="variation-to-take-advantage-of-incremental-hashing">
+<h2>Variation to take advantage of incremental hashing<a class="headerlink" href="#variation-to-take-advantage-of-incremental-hashing" title="Permalink to this headline">#</a></h2>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}  X_i = {\mbox{Hash}}(S+0*i),
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(+\)</span> denotes string concatenation and <span class="math notranslate nohighlight">\(0*i\)</span> denotes a string of <span class="math notranslate nohighlight">\(i\)</span> zeros.</p>
+<p>This is the method used in the <a class="reference external" href="https://github.com/statlab/cryptorandom"><code class="docutils literal notranslate"><span class="pre">cryptorandom</span></code></a> python package.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="some-trainwrecks">
+<h1>Some trainwrecks<a class="headerlink" href="#some-trainwrecks" title="Permalink to this headline">#</a></h1>
+<section id="microsoft-visual-studio-system-random-2011">
+<h2>Microsoft Visual Studio system.random, 2011<a class="headerlink" href="#microsoft-visual-studio-system-random-2011" title="Permalink to this headline">#</a></h2>
+<p><img alt="Microsoft" src="_images/visualStudiosysRand.png" /></p>
+<p><a class="reference external" href="https://connect.microsoft.com/VisualStudio/feedback/details/634761/system-random-serious-bug">https://connect.microsoft.com/VisualStudio/feedback/details/634761/system-random-serious-bug</a></p>
+<p><img alt="XP2" src="_images/xp2k.png" /></p>
+</section>
+<section id="aristocrat-leisure-of-australia-slot-machines">
+<h2>Aristocrat Leisure of Australia Slot Machines<a class="headerlink" href="#aristocrat-leisure-of-australia-slot-machines" title="Permalink to this headline">#</a></h2>
+<a class="reference internal image-reference" href="_images/wiredRussianSlot.png"><img alt="Wired Slots" src="_images/wiredRussianSlot.png" style="height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/russiaLeisure.png"><img alt="Russian hack" src="_images/russiaLeisure.png" style="height: 600px;" /></a>
+</section>
+<section id="dual-elliptic-curve">
+<h2>Dual Elliptic Curve<a class="headerlink" href="#dual-elliptic-curve" title="Permalink to this headline">#</a></h2>
+<p><img alt="dual EC" src="_images/dualEC-1.png" /></p>
+<hr class="docutils" />
+<p><img alt="dual EC" src="_images/dualEC-2.png" />
+Bernstein, D.J., T. Lange, and R. Niederhagen, 2016. Dual EC: A Standardized Backdoor, in <em>The New Codebreakers, Essays Dedicated to David Kahn on the Occasion of his 85th Birthday</em>, Ryan, P.Y.A., D. Naccache, and J-J Quisquater, eds., Springer, Berlin.</p>
+</section>
+<hr class="docutils" />
+<section id="gnupg-rng-bug-18-years-1998-2016">
+<h2>GnuPG RNG bug (18 years, 1998–2016)<a class="headerlink" href="#gnupg-rng-bug-18-years-1998-2016" title="Permalink to this headline">#</a></h2>
+<p>“An attacker who obtains 4640 bits from the RNG can trivially predict the next 160 bits of output”</p>
+<p><a class="reference external" href="https://threatpost.com/gpg-patches-18-year-old-libgcrypt-rng-bug/119984/">https://threatpost.com/gpg-patches-18-year-old-libgcrypt-rng-bug/119984/</a></p>
+</section>
+<hr class="docutils" />
+<section id="rsa">
+<h2>RSA<a class="headerlink" href="#rsa" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://www.schneier.com/blog/archives/2012/02/lousy_random_nu.html">https://www.schneier.com/blog/archives/2012/02/lousy_random_nu.html</a></p>
+<p><img alt="Lenstra" src="_images/lenstraEtal.png" /></p>
+<p>“An analysis comparing millions of RSA public keys gathered from the Internet was announced in 2012 by Lenstra, Hughes, Augier, Bos, Kleinjung, and Wachter. They were able to factor 0.2% of the keys using only Euclid’s algorithm. They exploited a weakness unique to cryptosystems based on integer factorization. If n = pq is one public key and n′ = p′q′ is another, then if by chance p = p′, then a simple computation of gcd(n,n′) = p factors both n and n′, totally compromising both keys. Nadia Heninger, part of a group that did a similar experiment, said that the bad keys occurred almost entirely in embedded applications, and explains that the one-shared-prime problem uncovered by the two groups results from situations where the pseudorandom number generator is poorly seeded initially and then reseeded between the generation of the first and second primes.”</p>
+</section>
+<hr class="docutils" />
+<section id="php">
+<h2>PHP<a class="headerlink" href="#php" title="Permalink to this headline">#</a></h2>
+<p><img alt="php" src="_images/argyrosKiayias.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="bitcoin-on-android-java-nonce-collision">
+<h2>Bitcoin on Android: Java nonce collision<a class="headerlink" href="#bitcoin-on-android-java-nonce-collision" title="Permalink to this headline">#</a></h2>
+<p>“In August 2013, it was revealed that bugs in the Java class SecureRandom could generate collisions in the k nonce values used for ECDSA in implementations of Bitcoin on Android. When this occurred the private key could be recovered, in turn allowing stealing Bitcoins from the containing wallet.”</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Random_number_generator_attack#Java_nonce_collision">https://en.wikipedia.org/wiki/Random_number_generator_attack#Java_nonce_collision</a></p>
+</section>
+<section id="debian-openssl">
+<h2>Debian OpenSSL<a class="headerlink" href="#debian-openssl" title="Permalink to this headline">#</a></h2>
+<p><img alt="openSSL" src="_images/openSSL.png" /></p>
+<p>Valgrind and Purify warned about uninitialized data.
+Only remaining entropy in seed was the process ID.</p>
+<p>Default maximum process ID is 32,768 in Linux.</p>
+<p>Took 2 years (2006–2008) to notice the bug.</p>
+<p>XKCD
+<img alt="xkcd" src="https://imgs.xkcd.com/comics/security_holes.png" /></p>
+<hr class="docutils" />
+<section id="generating-a-random-integer-uniformly-distributed-on-1-ldots-m">
+<h3>Generating a random integer uniformly distributed on <span class="math notranslate nohighlight">\(\{1, \ldots, m\}\)</span><a class="headerlink" href="#generating-a-random-integer-uniformly-distributed-on-1-ldots-m" title="Permalink to this headline">#</a></h3>
+<section id="naive-method">
+<h4>Naive method<a class="headerlink" href="#naive-method" title="Permalink to this headline">#</a></h4>
+<p>A standard way to generate a random integer is to start with <span class="math notranslate nohighlight">\(X \sim U[0,1)\)</span> and define <span class="math notranslate nohighlight">\(Y \equiv 1 + \lfloor mX \rfloor\)</span>.</p>
+<p>In theory, that’s fine. But in practice, <span class="math notranslate nohighlight">\(X\)</span> is not really <span class="math notranslate nohighlight">\(U[0,1)\)</span> but instead is derived by normalizing a PRN
+that’s uniform on <span class="math notranslate nohighlight">\(w\)</span>-bit integers. Then, unless <span class="math notranslate nohighlight">\(m\)</span> is a power of 2, the distribution of <span class="math notranslate nohighlight">\(Y\)</span> isn’t uniform on <span class="math notranslate nohighlight">\(\{1, \ldots, m\}\)</span>. For <span class="math notranslate nohighlight">\(m &lt; 2^w\)</span>, the ratio of the largest to smallest selection probability
+is, to first order,  <span class="math notranslate nohighlight">\(1+ m 2^{-w}\)</span>. (See, e.g., Knuth v2 3.4.1.A.)</p>
+<p>For <span class="math notranslate nohighlight">\(m = 10^9\)</span> and <span class="math notranslate nohighlight">\(w=32\)</span>, <span class="math notranslate nohighlight">\(1 + m 2^{-w} \approx 1.233\)</span>. That could easily matter.</p>
+<p>For <span class="math notranslate nohighlight">\(m &gt; 2^{w}\)</span>, at least <span class="math notranslate nohighlight">\(m-2^w\)</span> values will have probability 0 instead of probability <span class="math notranslate nohighlight">\(1/m\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(w=32\)</span>, then for <span class="math notranslate nohighlight">\(m&gt;2^{32}=4.24e9\)</span>, some values will have probability 0. Until relatively recently, R did not support 64-bit integers.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="r-random-integer-generator-sample">
+<h2>R random integer generator / sample()<a class="headerlink" href="#r-random-integer-generator-sample" title="Permalink to this headline">#</a></h2>
+<p>From version 3.5.x and earlier</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">dn</span> <span class="o">&gt;</span> <span class="n">INT_MAX</span> <span class="o">||</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">INT_MAX</span><span class="p">)</span> <span class="p">{</span>
+	    <span class="n">PROTECT</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">allocVector</span><span class="p">(</span><span class="n">REALSXP</span><span class="p">,</span> <span class="n">k</span><span class="p">));</span>
+	    <span class="k">if</span> <span class="p">(</span><span class="n">replace</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">double</span> <span class="o">*</span><span class="n">ry</span> <span class="o">=</span> <span class="n">REAL</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+		<span class="k">for</span> <span class="p">(</span><span class="n">R_xlen_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">ry</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">dn</span> <span class="o">*</span> <span class="n">ru</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+ 	    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="c1">#ifdef LONG_VECTOR_SUPPORT</span>
+		<span class="n">R_xlen_t</span> <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_xlen_t</span><span class="p">)</span> <span class="n">dn</span><span class="p">;</span>
+		<span class="n">double</span> <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">double</span> <span class="o">*</span><span class="p">)</span><span class="n">R_alloc</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">double</span><span class="p">));</span>
+		<span class="n">double</span> <span class="o">*</span><span class="n">ry</span> <span class="o">=</span> <span class="n">REAL</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+		<span class="k">for</span> <span class="p">(</span><span class="n">R_xlen_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span> <span class="n">i</span><span class="p">;</span>
+		<span class="k">for</span> <span class="p">(</span><span class="n">R_xlen_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		    <span class="n">R_xlen_t</span> <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_xlen_t</span><span class="p">)</span><span class="n">floor</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">ru</span><span class="p">());</span>
+		    <span class="n">ry</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+		    <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="o">--</span><span class="n">n</span><span class="p">];</span>
+		<span class="p">}</span>
+<span class="c1">#else</span>
+		<span class="n">error</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;n &gt;= 2^31, replace = FALSE is only supported on 64-bit platforms&quot;</span><span class="p">));</span>
+<span class="c1">#endif</span>
+	    <span class="p">}</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	    <span class="nb">int</span> <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="n">dn</span><span class="p">;</span>
+	    <span class="n">PROTECT</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">allocVector</span><span class="p">(</span><span class="n">INTSXP</span><span class="p">,</span> <span class="n">k</span><span class="p">));</span>
+	    <span class="nb">int</span> <span class="o">*</span><span class="n">iy</span> <span class="o">=</span> <span class="n">INTEGER</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+	    <span class="o">/*</span> <span class="n">avoid</span> <span class="n">allocation</span> <span class="k">for</span> <span class="n">a</span> <span class="n">single</span> <span class="n">sample</span> <span class="o">*/</span>
+	    <span class="k">if</span> <span class="p">(</span><span class="n">replace</span> <span class="o">||</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">iy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">)(</span><span class="n">dn</span> <span class="o">*</span> <span class="n">unif_rand</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nb">int</span> <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span> <span class="o">*</span><span class="p">)</span><span class="n">R_alloc</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="nb">int</span><span class="p">));</span>
+		<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+		<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+ 		    <span class="nb">int</span> <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">)(</span><span class="n">n</span> <span class="o">*</span> <span class="n">unif_rand</span><span class="p">());</span>
+ 		    <span class="n">iy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+ 		    <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="o">--</span><span class="n">n</span><span class="p">];</span>
+ 		<span class="p">}</span>
+ 	<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">Our</span> <span class="n">PRNGs</span> <span class="n">have</span> <span class="n">at</span> <span class="n">most</span> <span class="mi">32</span> <span class="n">bit</span> <span class="n">of</span> <span class="n">precision</span><span class="p">,</span> <span class="ow">and</span> <span class="nb">all</span> <span class="n">have</span> <span class="n">at</span> <span class="n">least</span> <span class="mi">25</span> <span class="o">*/</span>
+
+<span class="n">static</span> <span class="n">R_INLINE</span> <span class="n">double</span> <span class="n">ru</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">double</span> <span class="n">U</span> <span class="o">=</span> <span class="mf">33554432.0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">U</span><span class="o">*</span><span class="n">unif_rand</span><span class="p">())</span> <span class="o">+</span> <span class="n">unif_rand</span><span class="p">())</span><span class="o">/</span><span class="n">U</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is a numerical example in R 3.5.1 (h/t <a class="reference external" href="https://stat.ethz.ch/pipermail/r-devel/2018-September/076827.html">Duncan Murdoch</a>):</p>
+<blockquote>
+<div><p>m &lt;- (2/5)*2^32<br />
+x &lt;- sample(m, 1000000, replace = TRUE)<br />
+table(x %% 2)<br />
+0      1<br />
+399850 600150</p>
+</div></blockquote>
+<p>See Ottoboni and Stark, <a class="reference external" href="https://arxiv.org/abs/1809.06520">Random Problems with R</a> and
+Stark and Ottoboni, <a class="reference external" href="https://arxiv.org/abs/1810.10985">Simple Random Sampling: Practice makes imperfect</a>.</p>
+<p>R changed how it generates random integers starting with version 3.6.
+Here’s the corresponding output for R version 4.0:</p>
+<blockquote>
+<div><p>m &lt;- (2/5)*2^32<br />
+x &lt;- sample(m, 1000000, replace = TRUE)<br />
+table(x %% 2)<br />
+0      1<br />
+499958 500042</p>
+</div></blockquote>
+<section id="more-accurate-method">
+<h3>More accurate method<a class="headerlink" href="#more-accurate-method" title="Permalink to this headline">#</a></h3>
+<p>A better way to generate a (pseudo-)random integer on <span class="math notranslate nohighlight">\(\{1, \ldots m\}\)</span> from a (pseudo-random) <span class="math notranslate nohighlight">\(w\)</span>-bit integer in practice is as follows:</p>
+<ol class="simple">
+<li><p>Set <span class="math notranslate nohighlight">\(\mu = \log_2(m-1)\)</span>.</p></li>
+<li><p>Define a <span class="math notranslate nohighlight">\(w\)</span>-bit <em>mask</em> consisting of <span class="math notranslate nohighlight">\(\mu\)</span> bits set to 1 and <span class="math notranslate nohighlight">\((w-\mu)\)</span> bits set to zero.</p></li>
+<li><p>Generate a random <span class="math notranslate nohighlight">\(w\)</span>-bit integer <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+<li><p>Define <span class="math notranslate nohighlight">\(y\)</span> to be the bitwise <code class="docutils literal notranslate"><span class="pre">and</span></code> of <span class="math notranslate nohighlight">\(Y\)</span> and the mask.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(y \le m-1\)</span>, output <span class="math notranslate nohighlight">\(x = y+1\)</span>; otherwise, return to step 3.</p></li>
+</ol>
+<p>This is how random integers are generated in numpy by <code class="docutils literal notranslate"><span class="pre">numpy.random.randint()</span></code>.
+However, <code class="docutils literal notranslate"><span class="pre">numpy.random.choice()</span></code> does something else that’s biased: it finds the closest integer to <span class="math notranslate nohighlight">\(mX\)</span>.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">R</span></code>, one would generally use the function <code class="docutils literal notranslate"><span class="pre">sample(1:m,</span> <span class="pre">k,</span> <span class="pre">replace=FALSE)</span></code> to draw pseudo-random
+integers.
+Before version 3.6, <code class="docutils literal notranslate"><span class="pre">sample()</span></code> used a variant of the faulty <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">floor(m*X)</span></code> approach.</p>
+</section>
+</section>
+<section id="how-can-you-tell-whether-a-sequence-is-random">
+<h2>How can you tell whether a sequence is random?<a class="headerlink" href="#how-can-you-tell-whether-a-sequence-is-random" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="http://dilbert.com/strip/2001-10-25">http://dilbert.com/strip/2001-10-25</a></p>
+</section>
+<section id="tests-of-prngs">
+<h2>Tests of PRNGS<a class="headerlink" href="#tests-of-prngs" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Theoretical analyses, e.g., Knuth (1969), Marsaglia (1968)</p></li>
+<li><p>Statistical tests</p></li>
+</ul>
+<section id="knuth-1969-the-art-of-computer-programming-v-2">
+<h3>Knuth (1969) <em>The Art of Computer Programming</em>, v.2<a class="headerlink" href="#knuth-1969-the-art-of-computer-programming-v-2" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>11 types of behavior: equidistribution, series, gaps, poker, coupon collector, permutation frequency, runs, max of <span class="math notranslate nohighlight">\(t\)</span>, collisions, birthday spacings, serial correlation</p></li>
+<li><p>tests on subsequences, spectral test</p></li>
+<li><p>Many <span class="math notranslate nohighlight">\(\chi^2\)</span>-based tests</p></li>
+<li><p>Kolmogorov-Smirnov test for uniformity</p></li>
+<li><p>Sphere-packing</p></li>
+<li><p><strong>MORE</strong></p></li>
+</ul>
+</section>
+<section id="marsaglia-1996-diehard-tests">
+<h3>Marsaglia (1996) DIEHARD tests<a class="headerlink" href="#marsaglia-1996-diehard-tests" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Birthday spacings</p></li>
+<li><p>Overlapping permutations of 5 random numbers</p></li>
+<li><p>Ranks of binary matrices of various dimensions</p></li>
+<li><p>Monkeys at typewriters: count overlapping “words” in strings of bits</p></li>
+<li><p>Count the 1s in bytes; translate to “words.”</p></li>
+<li><p>Parking lot test, 100 × 100 square lot. Count non-collisions.</p></li>
+<li><p>Minimum distance test: Min distance between 8,000 random points in a 10,000 × 10,000 square.</p></li>
+<li><p>Sphere-packing in a cube at random; diameter of smallest sphere.</p></li>
+<li><p>Squeeze test: Multiply 231 by random floats on (0,1) until hitting 1.</p></li>
+<li><p>Overlapping sums of 100 random (0,1) floats.</p></li>
+<li><p>Runs test for random floats</p></li>
+<li><p>#wins and #rolls in 200,000 games of craps</p></li>
+</ul>
+</section>
+<section id="lecuyer-and-simard-2007-testu01-http-dl-acm-org-citation-cfm-doid-1268776-1268777">
+<h3>L’Ecuyer and Simard (2007) TestU01 <a class="reference external" href="http://dl.acm.org/citation.cfm?doid=1268776.1268777">http://dl.acm.org/citation.cfm?doid=1268776.1268777</a><a class="headerlink" href="#lecuyer-and-simard-2007-testu01-http-dl-acm-org-citation-cfm-doid-1268776-1268777" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Kolmogorov-Smirnov, Crámer-von Mises, Anderson-Darling, clustering, runs, gaps, hits in partition of a hypercube (collisions, empty cells, time between visits, …), birthday spacings, close pairs, coupon collector, sum collector, complexity of bit strings (<strong>linear complexity</strong>, jump complexity, jump size complexity, Lempel-Ziv complexity), spectral tests on bit strings, autocorrelation of bits, runs and gaps in bits, …, ranks of binary matrices, longest runs, Hamming weights, random walks, close pairs of binary sequences,</p></li>
+</ul>
+</section>
+<section id="nist-tests">
+<h3>NIST Tests<a class="headerlink" href="#nist-tests" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="http://csrc.nist.gov/groups/ST/toolkit/rng/stats_tests.html">http://csrc.nist.gov/groups/ST/toolkit/rng/stats_tests.html</a></p></li>
+<li><p><a class="reference external" href="http://csrc.nist.gov/groups/ST/toolkit/rng/documents/SP800-22rev1a.pdf">http://csrc.nist.gov/groups/ST/toolkit/rng/documents/SP800-22rev1a.pdf</a></p></li>
+</ul>
+<p><img alt="NIST" src="_images/NISTTests.png" /></p>
+</section>
+</section>
+<section id="pigeonhole-principle">
+<h2>Pigeonhole principle<a class="headerlink" href="#pigeonhole-principle" title="Permalink to this headline">#</a></h2>
+<p>If you put <span class="math notranslate nohighlight">\(N&gt;n\)</span> pigeons in <span class="math notranslate nohighlight">\(n\)</span> pigeonholes, then at least one
+pigeonhole must contain more than one pigeon.</p>
+</section>
+<section id="corollary">
+<h2>Corollary<a class="headerlink" href="#corollary" title="Permalink to this headline">#</a></h2>
+<p>At most <span class="math notranslate nohighlight">\(n\)</span> pigeons can be put in <span class="math notranslate nohighlight">\(n\)</span> pigeonholes if at most
+one pigeon is put in each hole.</p>
+</section>
+<section id="sizes-of-some-coops-flocks">
+<h2>Sizes of some coops &amp; flocks<a class="headerlink" href="#sizes-of-some-coops-flocks" title="Permalink to this headline">#</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Expression</p></th>
+<th class="text-align:right head"><p>full</p></th>
+<th class="text-align:right head"><p>scientific notation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2^{32}\)</span></p></td>
+<td class="text-align:right"><p>4,294,967,296</p></td>
+<td class="text-align:right"><p>4.29e9</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2^{64}\)</span></p></td>
+<td class="text-align:right"><p>18,446,744,073,709,551,616</p></td>
+<td class="text-align:right"><p>1.84e19</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2^{128}\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>3.40e38</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2^{32 \times 624}\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>9.27e6010</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(13!\)</span></p></td>
+<td class="text-align:right"><p>6,227,020,800</p></td>
+<td class="text-align:right"><p>6.23e9</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(21!\)</span></p></td>
+<td class="text-align:right"><p>51,090,942,171,709,440,000</p></td>
+<td class="text-align:right"><p>5.11e19</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(35!\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>1.03e40</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2084!\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>3.73e6013</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\({50 \choose 10}\)</span></p></td>
+<td class="text-align:right"><p>10,272,278,170</p></td>
+<td class="text-align:right"><p>1.03e10</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\({100 \choose 10}\)</span></p></td>
+<td class="text-align:right"><p>17,310,309,456,440</p></td>
+<td class="text-align:right"><p>1.73e13</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\({500 \choose 10}\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>2.4581e20</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{2^{32}}{{50 \choose 10}}\)</span></p></td>
+<td class="text-align:right"><p>0.418</p></td>
+<td class="text-align:right"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{2^{64}}{{500 \choose 10}}\)</span></p></td>
+<td class="text-align:right"><p>0.075</p></td>
+<td class="text-align:right"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{2^{32}}{7000!}\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p><span class="math notranslate nohighlight">\(&lt;\)</span> 1e-54,958</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{2}{52!}\)</span></p></td>
+<td class="text-align:right"><p></p></td>
+<td class="text-align:right"><p>2.48e-68</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-frequency-of-samples-using-pikk">
+<h2>Example: frequency of samples using PIKK<a class="headerlink" href="#example-frequency-of-samples-using-pikk" title="Permalink to this headline">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">PIKK</span></code> to generate samples using RANDU and MT.</p>
+<p>Tally empirical probability of each sample; test for uniformity by range.</p>
+<p>A (true) simple random sample of size <span class="math notranslate nohighlight">\(k\)</span> from a population of size <span class="math notranslate nohighlight">\(n\)</span> has chance <span class="math notranslate nohighlight">\(1/{n \choose k}\)</span> of
+resulting in each of the <span class="math notranslate nohighlight">\({n \choose k}\)</span> possible subsets.</p>
+<p>The joint distribution of the number of times each <em>possible</em> sample is selected in <span class="math notranslate nohighlight">\(N\)</span>
+independent random samples is multinomial with <span class="math notranslate nohighlight">\({n \choose k}\)</span> categories,
+equal category probabilities <span class="math notranslate nohighlight">\(1/{n \choose k}\)</span>, and <span class="math notranslate nohighlight">\(N\)</span> draws.</p>
+<p>The pidgeonhold arguments prove that the actual distribution cannot be exactly multinomial, but
+how bad is the approximation?</p>
+<p>We can test the hypothesis using as the test statistic the range of category counts.</p>
+<p>Since we can’t trust simulations to give an accurate result (that’s the problem we are studying!), we need to rely on asymptotics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PIKK</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gen</span><span class="p">:</span> <span class="n">callable</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="n">x</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">gen</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="n">k</span><span class="p">])</span>
+
+<span class="c1"># utility function</span>
+
+<span class="k">def</span> <span class="nf">tallySamples</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">prng</span><span class="o">=</span><span class="n">Random</span><span class="o">.</span><span class="n">random</span><span class="p">,</span> <span class="n">reps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">)):</span>
+    <span class="n">uniqueSampleCounts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">reps</span><span class="p">):</span>
+        <span class="n">sam</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">PIKK</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">prng</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">sam</span> <span class="ow">in</span> <span class="n">uniqueSampleCounts</span><span class="p">:</span>
+            <span class="n">uniqueSampleCounts</span><span class="p">[</span><span class="n">sam</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">uniqueSampleCounts</span><span class="p">[</span><span class="n">sam</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">uniqueSampleCounts</span>
+
+<span class="k">def</span> <span class="nf">distrNormalRange</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The CDF of the range of n IID standard normals evaluated at w</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">innerInt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">w</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">innerInt</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span><span class="o">*</span><span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">distrMultinomialRange</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    CDF of the range of multinomial variables, evaluated at w</span>
+<span class="sd">    n draws, k categories each having probability 1/k</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">cutoff</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">distrNormalRange</span><span class="p">(</span><span class="n">cutoff</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">aveSamRange</span><span class="p">(</span><span class="n">sam</span><span class="p">):</span> <span class="c1"># empirical mean of the sample range</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">totCnt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">sam</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span><span class="o">*</span><span class="n">cnt</span>
+        <span class="n">totCnt</span> <span class="o">+=</span> <span class="n">cnt</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">/</span><span class="n">totCnt</span>
+
+<span class="k">def</span> <span class="nf">aveSamVar</span><span class="p">(</span><span class="n">sam</span><span class="p">):</span>  <span class="c1"># empirical mean of the sample variance</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">totCnt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">sam</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">],</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cnt</span>
+        <span class="n">totCnt</span> <span class="o">+=</span> <span class="n">cnt</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">/</span><span class="n">totCnt</span>
+
+<span class="k">def</span> <span class="nf">summarizeSams</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">reps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">obsVals</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+    <span class="n">ect</span> <span class="o">=</span> <span class="n">reps</span><span class="o">/</span><span class="n">vals</span>
+    <span class="n">maxct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+    <span class="n">minct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+    <span class="n">rangect</span> <span class="o">=</span> <span class="n">maxct</span><span class="o">-</span><span class="n">minct</span>
+    <span class="n">pvalueRange</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">distrMultinomialRange</span><span class="p">(</span><span class="n">rangect</span><span class="p">,</span> <span class="n">reps</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
+    <span class="n">pvalueChi2</span> <span class="o">=</span> <span class="n">chisquare</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;reps: </span><span class="si">{</span><span class="n">reps</span><span class="si">}</span><span class="s1"> possible values: </span><span class="si">{</span><span class="n">vals</span><span class="si">}</span><span class="s1"> observed values: </span><span class="si">{</span><span class="n">obsVals</span><span class="si">}</span><span class="s1">&#39;</span> \
+              <span class="sa">f</span><span class="s1">&#39;expected count: </span><span class="si">{</span><span class="n">ect</span><span class="si">}</span><span class="s1"> min count: </span><span class="si">{</span><span class="n">minct</span><span class="si">}</span><span class="s1"> max count: </span><span class="si">{</span><span class="n">maxct</span><span class="si">}</span><span class="s1">&#39;</span> \
+              <span class="sa">f</span><span class="s1">&#39;range: </span><span class="si">{</span><span class="n">rangect</span><span class="si">}</span><span class="s1"> p value for range: </span><span class="si">{</span><span class="n">pvalueRange</span><span class="si">}</span><span class="s1">&#39;</span>\
+              <span class="sa">f</span><span class="s1">&#39;p value for chi-square: </span><span class="si">{</span><span class="n">pvalueChi2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">reps</span><span class="p">,</span> <span class="n">vals</span><span class="p">,</span> <span class="n">obsVals</span><span class="p">,</span> <span class="n">ect</span><span class="p">,</span> <span class="n">maxct</span><span class="p">,</span> <span class="n">minct</span><span class="p">,</span> <span class="n">rangect</span><span class="p">,</span> <span class="n">pvalueRange</span><span class="p">,</span> <span class="n">pvalueChi2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up the simulation</span>
+<span class="n">reps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># RANDU</span>
+<span class="n">lcg</span> <span class="o">=</span> <span class="n">lcgRandom</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># set seed of RANDU to 100</span>
+<span class="n">uniqueSamplesRU</span> <span class="o">=</span> <span class="n">tallySamples</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">lcg</span><span class="p">,</span> <span class="n">reps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">reps2</span><span class="p">,</span> <span class="n">vals</span><span class="p">,</span> <span class="n">obsVals</span><span class="p">,</span> <span class="n">ect</span><span class="p">,</span> <span class="n">maxct</span><span class="p">,</span> <span class="n">minct</span><span class="p">,</span> <span class="n">rangect</span><span class="p">,</span> <span class="n">pvalueRange</span><span class="p">,</span> <span class="n">pvalueChi2</span><span class="p">]</span> <span class="o">=</span>\
+    <span class="n">summarizeSams</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">uniqueSamplesRU</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ns</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">uniqueSamplesRU</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">maxct</span><span class="o">-</span><span class="n">minct</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">18.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>reps: 10000000 possible values: 435.0 observed values: 435expected count: 22988.505747126437 min count: 21235 max count: 23533range: 2298 p value for range: -4.440892098500626e-16p value for chi-square: Power_divergenceResult(statistic=2780.769287, pvalue=0.0)
+</pre></div>
+</div>
+<img alt="_images/prngs_48_1.png" src="_images/prngs_48_1.png" />
+</div>
+</div>
+<p>RANDU with PIKK hits all 435 samples, but not equally often. Based on the chi-square test and the range test, the <span class="math notranslate nohighlight">\(p\)</span>-value for the hypothesis that these <span class="math notranslate nohighlight">\(10^7\)</span> samples are simple random samples is essentially 0.</p>
+</section>
+<section id="hypothesis-tests-for-mt-and-randu">
+<h2>Hypothesis tests for MT and RANDU<a class="headerlink" href="#hypothesis-tests-for-mt-and-randu" title="Permalink to this headline">#</a></h2>
+<p><span class="math notranslate nohighlight">\(5 \times 10^7\)</span> replications, <span class="math notranslate nohighlight">\(n=30\)</span>, <span class="math notranslate nohighlight">\(k=2\)</span>.</p>
+<p>Sample variance of a population
+with 28 zeros, one 1, one -1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.4g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">US</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;uniqueSampleSummary.csv&#39;</span><span class="p">)</span>
+<span class="n">US_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PRNG&#39;</span><span class="p">,</span> <span class="s1">&#39;seed&#39;</span><span class="p">,</span> <span class="s1">&#39;Chi-squared&#39;</span><span class="p">,</span> <span class="s1">&#39;Df&#39;</span><span class="p">,</span> <span class="s1">&#39;P-value&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">,</span> <span class="s1">&#39;Range P-value&#39;</span><span class="p">]</span>
+<span class="n">US</span><span class="p">[</span><span class="n">US_cols</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Range P-value&#39;</span><span class="p">,</span> <span class="s1">&#39;P-value&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PRNG</th>
+      <th>seed</th>
+      <th>Chi-squared</th>
+      <th>Df</th>
+      <th>P-value</th>
+      <th>Range</th>
+      <th>Range P-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RANDU</td>
+      <td>100</td>
+      <td>[ 12155.0519878]</td>
+      <td>434</td>
+      <td>[ 0.]</td>
+      <td>8709</td>
+      <td>-4.441e-16</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>MT_choice</td>
+      <td>100</td>
+      <td>[ 407.4165142]</td>
+      <td>434</td>
+      <td>[ 0.81558425]</td>
+      <td>2286</td>
+      <td>0.08578</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>SHA256</td>
+      <td>100</td>
+      <td>[ 409.6081138]</td>
+      <td>434</td>
+      <td>[ 0.79423828]</td>
+      <td>2196</td>
+      <td>0.171</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SD</td>
+      <td>100</td>
+      <td>[ 355.2852094]</td>
+      <td>434</td>
+      <td>[ 0.99767171]</td>
+      <td>2189</td>
+      <td>0.1798</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MT</td>
+      <td>100</td>
+      <td>[ 454.6745488]</td>
+      <td>434</td>
+      <td>[ 0.23778712]</td>
+      <td>2174</td>
+      <td>0.1996</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>MT</td>
+      <td>429496729</td>
+      <td>[ 493.676701]</td>
+      <td>434</td>
+      <td>[ 0.02488693]</td>
+      <td>2089</td>
+      <td>0.341</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>MT_choice</td>
+      <td>233424280</td>
+      <td>[ 461.0437666]</td>
+      <td>434</td>
+      <td>[ 0.17825415]</td>
+      <td>2026</td>
+      <td>0.4741</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>MT</td>
+      <td>233424280</td>
+      <td>[ 429.9387088]</td>
+      <td>434</td>
+      <td>[ 0.54602838]</td>
+      <td>1965</td>
+      <td>0.6143</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>SHA256</td>
+      <td>429496729</td>
+      <td>[ 482.0878312]</td>
+      <td>434</td>
+      <td>[ 0.05502463]</td>
+      <td>1964</td>
+      <td>0.6166</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SHA256</td>
+      <td>233424280</td>
+      <td>[ 381.5704324]</td>
+      <td>434</td>
+      <td>[ 0.96666455]</td>
+      <td>1846</td>
+      <td>0.8545</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>MT_choice</td>
+      <td>429496729</td>
+      <td>[ 451.5718156]</td>
+      <td>434</td>
+      <td>[ 0.27056103]</td>
+      <td>1792</td>
+      <td>0.9248</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SD</td>
+      <td>233424280</td>
+      <td>[ 289.7548432]</td>
+      <td>434</td>
+      <td>[ 0.99999999]</td>
+      <td>1422</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;statBias.csv&#39;</span><span class="p">)</span>
+<span class="n">biases_lfs</span> <span class="o">=</span> <span class="n">biases</span><span class="p">[</span><span class="n">biases</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;least freq sample&#39;</span><span class="p">]</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PRNG&#39;</span><span class="p">,</span> <span class="s1">&#39;seed&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg Sample Var&#39;</span><span class="p">,</span> <span class="s1">&#39;Var Bias&#39;</span><span class="p">,</span> <span class="s1">&#39;Var Bias/SE&#39;</span><span class="p">]</span>
+<span class="n">biases</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Var Bias/SE&#39;</span><span class="p">,</span> <span class="s1">&#39;PRNG&#39;</span><span class="p">,</span> <span class="s1">&#39;seed&#39;</span><span class="p">],</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PRNG</th>
+      <th>seed</th>
+      <th>Avg Sample Var</th>
+      <th>Var Bias</th>
+      <th>Var Bias/SE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>RANDU</td>
+      <td>100</td>
+      <td>0.06879</td>
+      <td>-0.0001749</td>
+      <td>-6.462</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>MT_choice</td>
+      <td>100</td>
+      <td>0.06888</td>
+      <td>-8.172e-05</td>
+      <td>-3.019</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>SHA256</td>
+      <td>100</td>
+      <td>0.0689</td>
+      <td>-6.341e-05</td>
+      <td>-2.343</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>SHA256</td>
+      <td>233424280</td>
+      <td>0.06892</td>
+      <td>-4.549e-05</td>
+      <td>-1.681</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SD</td>
+      <td>100</td>
+      <td>0.06892</td>
+      <td>-4.337e-05</td>
+      <td>-1.602</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>MT</td>
+      <td>100</td>
+      <td>0.06892</td>
+      <td>-4.176e-05</td>
+      <td>-1.543</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>MT_choice</td>
+      <td>429496729</td>
+      <td>0.06893</td>
+      <td>-3.774e-05</td>
+      <td>-1.394</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>MT</td>
+      <td>233424280</td>
+      <td>0.06893</td>
+      <td>-3.407e-05</td>
+      <td>-1.259</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>SD</td>
+      <td>233424280</td>
+      <td>0.06894</td>
+      <td>-2.605e-05</td>
+      <td>-0.9624</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>MT_choice</td>
+      <td>233424280</td>
+      <td>0.06895</td>
+      <td>-2.036e-05</td>
+      <td>-0.7522</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>MT</td>
+      <td>429496729</td>
+      <td>0.06895</td>
+      <td>-2.012e-05</td>
+      <td>-0.7433</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>MT</td>
+      <td>429496729</td>
+      <td>0.06895</td>
+      <td>-1.746e-05</td>
+      <td>-0.645</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>SHA256</td>
+      <td>429496729</td>
+      <td>0.06895</td>
+      <td>-1.397e-05</td>
+      <td>-0.5161</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>MT_choice</td>
+      <td>233424280</td>
+      <td>0.06896</td>
+      <td>-8.697e-06</td>
+      <td>-0.3214</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>MT_choice</td>
+      <td>429496729</td>
+      <td>0.06896</td>
+      <td>-6.167e-06</td>
+      <td>-0.2279</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SD</td>
+      <td>233424280</td>
+      <td>0.06896</td>
+      <td>-3.447e-06</td>
+      <td>-0.1274</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SD</td>
+      <td>100</td>
+      <td>0.06897</td>
+      <td>-4.472e-07</td>
+      <td>-0.01653</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>MT_choice</td>
+      <td>100</td>
+      <td>0.06897</td>
+      <td>-1.372e-07</td>
+      <td>-0.005071</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>SHA256</td>
+      <td>100</td>
+      <td>0.06897</td>
+      <td>1.453e-06</td>
+      <td>0.05368</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>MT</td>
+      <td>233424280</td>
+      <td>0.06897</td>
+      <td>2.723e-06</td>
+      <td>0.1006</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>SHA256</td>
+      <td>429496729</td>
+      <td>0.06897</td>
+      <td>4.303e-06</td>
+      <td>0.159</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>RANDU</td>
+      <td>100</td>
+      <td>0.06898</td>
+      <td>1.452e-05</td>
+      <td>0.5366</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>MT</td>
+      <td>100</td>
+      <td>0.06898</td>
+      <td>1.768e-05</td>
+      <td>0.6534</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>SHA256</td>
+      <td>233424280</td>
+      <td>0.06898</td>
+      <td>1.849e-05</td>
+      <td>0.6833</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="prngs-in-common-packages">
+<h2>PRNGs in Common packages<a class="headerlink" href="#prngs-in-common-packages" title="Permalink to this headline">#</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Package/Lang</p></th>
+<th class="text-align:center head"><p>default</p></th>
+<th class="text-align:center head"><p>other</p></th>
+<th class="text-align:center head"><p>SRS algorithm</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>SAS 9.2</p></td>
+<td class="text-align:center"><p>MT</p></td>
+<td class="text-align:center"><p>32-bit LCG</p></td>
+<td class="text-align:center"><p>Floyd’s ordered hash or Fan et al. 1962</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>SPSS 20.0</p></td>
+<td class="text-align:center"><p>32-bit LCG</p></td>
+<td class="text-align:center"><p>MT1997ar</p></td>
+<td class="text-align:center"><p>trunc + rand indices</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>SPSS ≤ 12.0</p></td>
+<td class="text-align:center"><p>32-bit LCG</p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>STATA 13</p></td>
+<td class="text-align:center"><p>KISS 32</p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p>PIKK</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>STATA 14</p></td>
+<td class="text-align:center"><p>MT</p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p>PIKK</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>R</p></td>
+<td class="text-align:center"><p>MT</p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p>trunc + rand indices</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>python</p></td>
+<td class="text-align:center"><p>MT</p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p>mask + rand indices</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>MATLAB</p></td>
+<td class="text-align:center"><p>MT</p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p>trunc + PIKK</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key.</strong> MT = Mersenne Twister. LCG = linear congruential generator. PIKK = assign a number to each of the <span class="math notranslate nohighlight">\(n\)</span> items and sort. The KISS generator combines 4 generators of three types: two multiply-with-carry
+generators, the 3-shift register SHR3 and the congruential generator CONG.</p>
+<p>Prior to April 2011, in Stata 10 exhibited predictable behavior:
+95.1% of the <span class="math notranslate nohighlight">\(2^{31}\)</span> possible seed values resulted in the first and second draws from rnormal() having the same sign.</p>
+</section>
+<section id="is-mt-adequate-for-statistics">
+<h2>Is MT adequate for statistics?<a class="headerlink" href="#is-mt-adequate-for-statistics" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Know from pigeonhole argument that <span class="math notranslate nohighlight">\(L_1\)</span> distance between true and desired is big for modest sampling &amp; permutation problems.</p></li>
+<li><p>Know from equidistribution of MT that large ensemble frequencies will be right, but expect dependence issues</p></li>
+<li><p>Looking for problems that occur across seeds, large enough to be visible in <span class="math notranslate nohighlight">\(O(10^5)\)</span> replications</p></li>
+<li><p>Examined simple random sample frequencies, derangements, partial derangements, Spearman correlation, etc.</p></li>
+<li><p><em>Must</em> be problems, but where are they?</p></li>
+</ul>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Use a source of real randomness to set the seed with a substantial amount of entropy, e.g., 20 rolls of 10-sided dice.</p></li>
+<li><p>Record the seed so your analysis is reproducible.</p></li>
+<li><p>Use a PRNG at least as good as the Mersenne Twister, and preferably a cryptographically secure PRNG. Consider the PCG family.</p></li>
+<li><p>Avoid standard linear congruential generators and the Wichmann-Hill generator.</p></li>
+<li><p>Use open-source software, and record the version of the software.</p></li>
+<li><p>Use a sampling algorithm that does not “waste randomness.” Avoid permuting the entire population.</p></li>
+<li><p>Be aware of discretization issues in the sampling algorithm; many methods assume the PRNG produces <span class="math notranslate nohighlight">\(U[0,1]\)</span> or <span class="math notranslate nohighlight">\(U[0,1)\)</span> random numbers, rather than (an approximation to) numbers that are uniform on <span class="math notranslate nohighlight">\(w\)</span>-bit binary integers.</p></li>
+<li><p>Consider the size of the problem: are your PRNG and sampling algorithm adequate?</p></li>
+<li><p>Avoid “tests of representativeness” and procedures that reject some samples. They alter the distribution of the sample.</p></li>
+</ul>
+</section>
+<section id="recommendations">
+<h2>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Replace the standard PRNGs in R and Python with PRNGs with unbounded state spaces, and cryptographic or near-cryptographic quality</p>
+<ul>
+<li><p>Consider using AES in counter mode, since Intel chips have hardware support for AES</p></li>
+</ul>
+</li>
+<li><p>Replace R’s sample() with the mask algorithm <strong>Done in 2019!</strong></p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>Argyros, G. and A. Kiayias, 2012. PRNG: Pwning Random Number Generators.
+<a class="reference external" href="https://media.blackhat.com/bh-us-12/Briefings/Argyros/BH_US_12_Argyros_PRNG_WP.pdf">https://media.blackhat.com/bh-us-12/Briefings/Argyros/BH_US_12_Argyros_PRNG_WP.pdf</a></p></li>
+<li><p>Bernstein, D.J., T. Lange, and R. Niederhagen, 2016. Dual EC: A Standardized Back Door, in <em>The New Codebreakers, Essays Dedicated to David Kahn on the Occasion of his 85th Birthday</em>, Ryan, P.Y.A., D. Naccache, and J-J Quisquater, eds., Springer, Berlin.</p></li>
+<li><p>Cormen, T.H., C.E. Leiserson, R.L. Rivest and C. Stein, 2009. <em>Introduction to Algorithms, 3rd edition</em>, MIT Press.</p></li>
+<li><p>Fishman, G.S., and L.R. Moore, 1981. In Search of Correlation in Multiplicative Congruential Generators with Modulus 2**31-1, <em>Computer Science and Statistics: Proceedings of the 13 Symposium on the Interface</em>, William F. Eddy, ed., Springer Verlag, New York.</p></li>
+<li><p>Knuth, D., 1997 <em>The Art of Computer Programming, V.II: Seminumerical methods</em>, 3rd edition, Addison-Wesley, Boston.</p></li>
+<li><p>L’Ecuyer, P. and R. Simard, 2007. TestU01: A C Library for Empirical Testing of Random Number Generators, <em>ACM Trans. Math. Softw.</em>, <em>33</em>, <a class="reference external" href="http://doi.acm.org/10.1145/1268776.1268777">http://doi.acm.org/10.1145/1268776.1268777</a></p></li>
+<li><p>Marsaglia, G., 1968. Random Numbers Fall Mainly in the Planes, <em>PNAS</em>, <em>61</em>, 25–28.</p></li>
+<li><p>Marsaglia, G., 2003. Xorshift RNGs. <em>Journal of Statistical Software</em>, <em>8</em>, 1–6.</p></li>
+<li><p>Matsumoto, M., and T. Nishimura, 1998. 8). Mersenne twister: a 623-dimensionally equidistributed uniform pseudo-random number generator, <em>ACM Transactions on Modeling and Computer Simulation</em>, <em>8</em>, 3–30. doi:10.1145/272991.272995</p></li>
+<li><p>McCullough, B.D., 2008. Microsoft’s ‘Not the Wichmann-Hill’ random number generator. <em>Computational Statistics and Data Analysis</em>, <em>52</em> (10), 4587–4593. <a class="reference external" href="http://dx.doi.org/10.1016/j.csda.2008.03.006">http://dx.doi.org/10.1016/j.csda.2008.03.006</a></p></li>
+<li><p>NIST Computer Security Division, <em>Random Number Generation</em> <a class="reference external" href="http://csrc.nist.gov/groups/ST/toolkit/rng/">http://csrc.nist.gov/groups/ST/toolkit/rng/</a></p></li>
+<li><p>O’Neill, M.E., 2015. PCG: A Family of Simple Fast Space-Efficient Statistically Good Algorithms for Random Number Generation, submitted to <em>ACM Transactions on Mathematical Software</em>. <a class="reference external" href="http://www.pcg-random.org/pdf/toms-oneill-pcg-family-v1.02.pdf">http://www.pcg-random.org/pdf/toms-oneill-pcg-family-v1.02.pdf</a></p></li>
+<li><p><a class="reference external" href="http://www.pcg-random.org/">http://www.pcg-random.org/</a></p></li>
+<li><p>Shannon, C.E., 1948. A Mathematical Theory of Communication, <em>Bell System Technical Journal, 27</em>, 379–423, 623–656.</p></li>
+<li><p>Vitter, J.S., 1985. Random Sampling with a Reservoir, <em>ACM Transactions on Mathematical Software, 11</em>, 37–57.</p></li>
+<li><p>Wikipedia articles, including <a class="reference external" href="https://en.wikipedia.org/wiki/Mersenne_Twister">https://en.wikipedia.org/wiki/Mersenne_Twister</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_congruential_generator">https://en.wikipedia.org/wiki/Linear_congruential_generator</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Comparison_of_hardware_random_number_generators">https://en.wikipedia.org/wiki/Comparison_of_hardware_random_number_generators</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">https://en.wikipedia.org/wiki/Pseudorandom_number_generator</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_random_number_generators">https://en.wikipedia.org/wiki/List_of_random_number_generators</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Random_number_generator_attack">https://en.wikipedia.org/wiki/Random_number_generator_attack</a></p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

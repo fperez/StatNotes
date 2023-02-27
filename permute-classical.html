@@ -1,0 +1,1342 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Permutation tests based on ranks, and calibrating parametric tests using permutations &#8212; An Idiosyncratic Subset of Statistics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">An Idiosyncratic Subset of Statistics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Notes on Applied Statistics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Index of Lecture Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index-app-stats.html">
+   An Idiosyncratic Sample of Applied Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/index.html">
+   Nonparametric Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Syllabus Statistics 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/syllabus.html">
+   Syllabus for Statistics 240: Nonparametric and Robust Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/assignments.html">
+   Assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/reading.html">
+   Reading assignments and collected reading list for nonparametric statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments for Stat 240, spring 2023
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps01-background.html">
+   1. Problem set 1: Mathematical Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/ps02-binary-experiments.html">
+   2. Problem set: binary experiments with binary outcomes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp01-tests.html">
+   3. Coding project 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="240-spring-2023/Hw/cp02-function.html">
+   4. Coding project 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pbstark/StatNotes/main?urlpath=tree/permute-classical.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pbstark/StatNotes"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pbstark/StatNotes/issues/new?title=Issue%20on%20page%20%2Fpermute-classical.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/permute-classical.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notation">
+   Notation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-use-ranks-instead-of-the-original-data">
+     Why use ranks instead of the original data?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-use-the-original-data-instead-of-ranks">
+     Why use the original data instead of ranks?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notation-review">
+   Notation review
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-two-sample-problem">
+   The two-sample problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-for-a-difference-in-location">
+     Testing for a difference in location
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-wilcoxon-rank-sum-test">
+       The Wilcoxon rank-sum test.
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mann-whitney-statistics">
+     Mann-Whitney Statistics
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#permutation-t-test">
+       Permutation
+       <span class="math notranslate nohighlight">
+        \(t\)
+       </span>
+       -test.
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#confidence-bounds-for-a-shift-in-the-two-sample-problem">
+   Confidence bounds for a shift in the two-sample problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-for-a-difference-in-dispersion-the-siegel-tukey-test">
+     Testing for a difference in dispersion: the Siegel-Tukey test
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-for-a-difference-in-distribution-the-smirnov-test">
+     Testing for a difference in distribution: the Smirnov test
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#wilcoxon-signed-rank-test">
+       Wilcoxon signed rank test
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-k-sample-problem">
+   The
+   <span class="math notranslate nohighlight">
+    \(k\)
+   </span>
+   -sample problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-for-differences-in-location">
+     Testing for differences in location
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-kruskal-wallis-test">
+       The Kruskal-Wallis test
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-permutation-f-test">
+       The permutation
+       <span class="math notranslate nohighlight">
+        \(F\)
+       </span>
+       test
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#confidence-bounds-for-quantiles">
+   Confidence bounds for quantiles
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-sample-tests">
+   One-sample tests
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#when-there-is-no-random-assignment">
+   When there is no random assignment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imaginary-randomization">
+     Imaginary randomization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Permutation tests based on ranks, and calibrating parametric tests using permutations</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notation">
+   Notation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-use-ranks-instead-of-the-original-data">
+     Why use ranks instead of the original data?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-use-the-original-data-instead-of-ranks">
+     Why use the original data instead of ranks?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notation-review">
+   Notation review
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-two-sample-problem">
+   The two-sample problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-for-a-difference-in-location">
+     Testing for a difference in location
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-wilcoxon-rank-sum-test">
+       The Wilcoxon rank-sum test.
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mann-whitney-statistics">
+     Mann-Whitney Statistics
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#permutation-t-test">
+       Permutation
+       <span class="math notranslate nohighlight">
+        \(t\)
+       </span>
+       -test.
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#confidence-bounds-for-a-shift-in-the-two-sample-problem">
+   Confidence bounds for a shift in the two-sample problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-for-a-difference-in-dispersion-the-siegel-tukey-test">
+     Testing for a difference in dispersion: the Siegel-Tukey test
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-for-a-difference-in-distribution-the-smirnov-test">
+     Testing for a difference in distribution: the Smirnov test
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#wilcoxon-signed-rank-test">
+       Wilcoxon signed rank test
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-k-sample-problem">
+   The
+   <span class="math notranslate nohighlight">
+    \(k\)
+   </span>
+   -sample problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-for-differences-in-location">
+     Testing for differences in location
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-kruskal-wallis-test">
+       The Kruskal-Wallis test
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-permutation-f-test">
+       The permutation
+       <span class="math notranslate nohighlight">
+        \(F\)
+       </span>
+       test
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#confidence-bounds-for-quantiles">
+   Confidence bounds for quantiles
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-sample-tests">
+   One-sample tests
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#when-there-is-no-random-assignment">
+   When there is no random assignment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imaginary-randomization">
+     Imaginary randomization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="permutation-tests-based-on-ranks-and-calibrating-parametric-tests-using-permutations">
+<h1>Permutation tests based on ranks, and calibrating parametric tests using permutations<a class="headerlink" href="#permutation-tests-based-on-ranks-and-calibrating-parametric-tests-using-permutations" title="Permalink to this headline">#</a></h1>
+<p>This notebook explores some common nonparametric tests based on ranks, and shows that (depending
+on the null hypothesis) parametric tests can be calibrated nonparametrically to have the correct significance level when the assumptions of the parametric tests fail.</p>
+<section id="notation">
+<h2>Notation<a class="headerlink" href="#notation" title="Permalink to this headline">#</a></h2>
+<p>Given a set of real numbers <span class="math notranslate nohighlight">\(\{x_j\}_{j=1}^N\)</span>, <span class="math notranslate nohighlight">\(x_{(i)}\)</span> denotes the <span class="math notranslate nohighlight">\(i\)</span>th smallest element of the set.
+That is,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f41c8d81-5fa7-4f05-97f0-b15f947e0d52">
+<span class="eqno">()<a class="headerlink" href="#equation-f41c8d81-5fa7-4f05-97f0-b15f947e0d52" title="Permalink to this equation">#</a></span>\[\begin{equation}
+x_{(1)} \le x_{(2)} \le \ldots \le x_{(N)}.
+\end{equation}\]</div>
+<p>The <em>(mid-)rank</em> <span class="math notranslate nohighlight">\(r_j\)</span> of the <span class="math notranslate nohighlight">\(j\)</span>th observation, <span class="math notranslate nohighlight">\(x_j\)</span>, is <span class="math notranslate nohighlight">\(\#\{ k: x_k &lt; x_j \} + (\#\{ k: x_k = x_j \}+1)/2\)</span>.
+This assigns tied observations the average of the ranks they would have had if they had been distinct.</p>
+<p>For example, for the set <span class="math notranslate nohighlight">\(\{1, 4, 2, 6\}\)</span> the corresponding (mid-)ranks are <span class="math notranslate nohighlight">\(1, 3, 2, 4\)</span>; for the set
+<span class="math notranslate nohighlight">\(\{1, 4, 2, 6, 2, 2\}\)</span>, the mid-ranks are  <span class="math notranslate nohighlight">\(1, 5, 3, 6, 3, 3\)</span>;
+and for the set <span class="math notranslate nohighlight">\(\{1, 4, 2, 6, 2, 2, 2\}\)</span>, the mid-ranks are  <span class="math notranslate nohighlight">\(1, 6, 3.5, 7, 3.5, 3.5, 3.5\)</span>.</p>
+<p>The sum of the (mid-)ranks of <span class="math notranslate nohighlight">\(N\)</span> observations is <span class="math notranslate nohighlight">\(N(N+1)/2\)</span>.</p>
+<p>When the data are random variables <span class="math notranslate nohighlight">\(\{X_j \}_{j=1}^N\)</span>, the (random) ranks will be written using uppercase letters, <span class="math notranslate nohighlight">\(\{R_j\}_{j=1}^N\)</span>.
+When there are only two groups, control and treatment, <span class="math notranslate nohighlight">\(\{S_j\}_{j=1}^n\)</span> will denote the ranks of the responses
+in the treatment group.</p>
+<p>Many of the methods described in this notebook can be performed using the original data or using
+the ranks of the data.</p>
+<section id="why-use-ranks-instead-of-the-original-data">
+<h3>Why use ranks instead of the original data?<a class="headerlink" href="#why-use-ranks-instead-of-the-original-data" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>In some problems, only ranks are observed. This is common when it is possible to make comparative judgements about outcomes, but not absolute judgements. For example, a doctor might be able to rank a collection of patients according to the severity with which they suffer from some disease they share, but might <em>not</em> be able to rate the severity on an objective quantitative scale—and certainly not an equal-increment scale, e.g., a scale for which 5 is “better than” 4 by the same amount that 2 is “better than” 1. Similarly, a consumer might be able to order a collection of items by preference: she prefers A to B, B to C and C to D, for example. Yet she might not be able to quantify the strength of her preferences. Having techniques for dealing with ranks is then useful. The same issue occurs with measurements on Likert scales.</p></li>
+<li><p>If the measurements are “contaminated” by outliers, using ranks can decrease the sensitivity to the outliers, potentially increasing power.</p></li>
+<li><p>If the original data have no ties, the null distribution of the rank-based statistic is “universal”: can tabulate it once and for all. (This is less important than it used to be because of increases in computing power.)</p></li>
+<li><p>Often, the normal approximation to the null distribution of the rank-based statistic is more accurate than the normal approximation to the null distribution of the test statistic for raw data. (This is less important than it used to be because of increases in computing power.)</p></li>
+</ul>
+</section>
+<section id="why-use-the-original-data-instead-of-ranks">
+<h3>Why use the original data instead of ranks?<a class="headerlink" href="#why-use-the-original-data-instead-of-ranks" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>The original units are more meaningful for things like treatment effect, estimating shifts, etc.</p></li>
+<li><p>Tests using the original data may have more power.</p></li>
+</ul>
+</section>
+</section>
+<section id="notation-review">
+<h2>Notation review<a class="headerlink" href="#notation-review" title="Permalink to this headline">#</a></h2>
+<p>As in the notebook on <a class="reference internal" href="causal-inference.html"><span class="doc std std-doc">causal inference</span></a>, there are <span class="math notranslate nohighlight">\(T\)</span> possible treatments (or <span class="math notranslate nohighlight">\(T\)</span> groups being compared), numbered 0 to <span class="math notranslate nohighlight">\(T-1\)</span>,
+and <span class="math notranslate nohighlight">\(W_j\)</span> is the treatment that subject <span class="math notranslate nohighlight">\(j\)</span> receives (or the group that subject <span class="math notranslate nohighlight">\(j\)</span> belongs to).
+Subject <span class="math notranslate nohighlight">\(j\)</span>’s response if assigned to treatment <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(x_{jt}\)</span>, <span class="math notranslate nohighlight">\(j=1, \ldots, N\)</span>, <span class="math notranslate nohighlight">\(t=0, \ldots, T-1\)</span>.
+The number of subjects assigned to treatment <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(\sum_{j=1}^N 1(W_j = t)\)</span>.
+(When there are only two treatments, <span class="math notranslate nohighlight">\(t=0\)</span> and <span class="math notranslate nohighlight">\(t=1\)</span>, <span class="math notranslate nohighlight">\(n :=\sum_j W_j\)</span> is the number of subjects
+assigned to treatment 1.)
+The effect of treatment <span class="math notranslate nohighlight">\(t\)</span> on subject <span class="math notranslate nohighlight">\(j\)</span> (compared to control) is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c9eb8de6-2155-41f7-906f-148b317fa902">
+<span class="eqno">()<a class="headerlink" href="#equation-c9eb8de6-2155-41f7-906f-148b317fa902" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\tau_{jt} := x_{jt} - x_{j0}, \;\;t=1, \ldots, T-1.
+\end{equation}\]</div>
+<p>The average effect of treatment <span class="math notranslate nohighlight">\(t\)</span> (compared to control) is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-616dad9f-34d1-43ec-8aff-e3a920fccc4d">
+<span class="eqno">()<a class="headerlink" href="#equation-616dad9f-34d1-43ec-8aff-e3a920fccc4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{\tau}_t := \frac{1}{N} \sum_{j=1}^N (x_{jt} - x_{j0}), \;\; t=1, \ldots, T-1.
+\end{equation}\]</div>
+</section>
+<section id="the-two-sample-problem">
+<h2>The two-sample problem<a class="headerlink" href="#the-two-sample-problem" title="Permalink to this headline">#</a></h2>
+<p>We first specialize to the case of <span class="math notranslate nohighlight">\(T=2\)</span> groups or treatments.
+There are <span class="math notranslate nohighlight">\(N\)</span> items in all, <span class="math notranslate nohighlight">\(n\)</span> in the “treatment” group and <span class="math notranslate nohighlight">\(m := N-n\)</span> in the “control” group.
+Let <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^m\)</span> denote the data for the control group and <span class="math notranslate nohighlight">\(\{Y_j\}_{j=1}^n\)</span> denote the
+data for the treatment group.</p>
+<p>In the <em><strong>randomization</strong></em> version of the two-sample problem, the two groups are provided by nature, and the
+question is whether the groups are “statistically distinguishable,” in the sense that
+they don’t look like a single group that was partitioned randomly.
+In the context of causal inference,
+the groups started as a single group of subjects, randomly partitioned into two groups
+that receive different treatments, and the question is whether their responses are statistically
+distinguishable.</p>
+<p>There is also a <em><strong>population</strong></em> version of the two-sample problem, which asks whether
+the two groups look like IID samples from the same parent population, i.e., whether there is some
+<span class="math notranslate nohighlight">\(F\)</span> for which <span class="math notranslate nohighlight">\(\{X_1, \ldots, X_m, Y_1, \ldots, Y_n \}\)</span> are IID <span class="math notranslate nohighlight">\(F\)</span>.
+If the two groups are IID samples from the same distribution, then, conditional on the set of <span class="math notranslate nohighlight">\(N\)</span> observed values,
+every subset of <span class="math notranslate nohighlight">\(n\)</span> of the
+<span class="math notranslate nohighlight">\(N\)</span> values is equally likely to be the group of size <span class="math notranslate nohighlight">\(n\)</span> and every subset of <span class="math notranslate nohighlight">\(m\)</span>
+of the <span class="math notranslate nohighlight">\(N\)</span> values is equally likely to be the group of size <span class="math notranslate nohighlight">\(m\)</span>, so tests that work for
+the randomization version of the 2-sample problem also work for the population version
+of the 2-sample problem.</p>
+<p>Lehmann (1998, p. 64–65) identifies five models for five problems, all of which lead to the same (conditional) null distribution of ranks:</p>
+<ul class="simple">
+<li><p>Randomization model for comparing two treatments. <span class="math notranslate nohighlight">\(N\)</span> subjects are given and fixed; <span class="math notranslate nohighlight">\(n\)</span> are assigned at random to treatment and <span class="math notranslate nohighlight">\(m= N-n\)</span> to control.</p></li>
+<li><p>Population model for comparing two treatments. <span class="math notranslate nohighlight">\(N\)</span> subjects are a drawn as a
+simple random sample from a much larger population;
+<span class="math notranslate nohighlight">\(n\)</span> are assigned at random to treatment and
+<span class="math notranslate nohighlight">\(m = N-n\)</span> to control.
+Condition on the configuration of ties if there are ties among the data.</p></li>
+<li><p>Comparing two sub-populations using a sample from each.
+A simple random sample of <span class="math notranslate nohighlight">\(n\)</span> subjects is drawn from one much larger population
+with many more than <span class="math notranslate nohighlight">\(N\)</span> members, and
+a simple random sample of <span class="math notranslate nohighlight">\(m\)</span> subjects is drawn from another population with
+many more than <span class="math notranslate nohighlight">\(m\)</span> members.
+Condition on the configuration of ties if there are ties among the data.</p></li>
+<li><p>Comparing two sub-populations using a sample from the pooled population.
+A simple random sample of <span class="math notranslate nohighlight">\(N\)</span> subjects is drawn from the pooled population,
+giving random samples from the two populations but with random sample sizes.
+Condition on the sample sizes and, if there are ties, on the configuration of the ties.</p></li>
+<li><p>Comparing two sets of measurements. Independent sets of <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span>
+measurements come from two sources.
+Condition on the configuration of ties if there are ties among the data.</p></li>
+</ul>
+<section id="testing-for-a-difference-in-location">
+<h3>Testing for a difference in location<a class="headerlink" href="#testing-for-a-difference-in-location" title="Permalink to this headline">#</a></h3>
+<section id="the-wilcoxon-rank-sum-test">
+<h4>The Wilcoxon rank-sum test.<a class="headerlink" href="#the-wilcoxon-rank-sum-test" title="Permalink to this headline">#</a></h4>
+<p>Define the sum of the ranks of the responses in the treatment group, group 1:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3a45f429-17c8-48aa-95ed-0a36910ffb69">
+<span class="eqno">()<a class="headerlink" href="#equation-3a45f429-17c8-48aa-95ed-0a36910ffb69" title="Permalink to this equation">#</a></span>\[\begin{equation}
+W_Y := \sum_j W_j R_j.
+\end{equation}\]</div>
+<p>(Note that <span class="math notranslate nohighlight">\(W\)</span> is being used in two very different ways in the notation.)
+This is the <em>Wilcoxon rank sum statistic</em>.
+Under the null, every subset of <span class="math notranslate nohighlight">\(n\)</span> of the responses is equally likely to be the
+treatment group.
+The expected value of <span class="math notranslate nohighlight">\(W_Y\)</span> under the null is <span class="math notranslate nohighlight">\(n(N+1)/2\)</span>.
+Moreover, under the null, the distribution of <span class="math notranslate nohighlight">\(W_Y\)</span> is symmetric.
+If treatment tends to increase responses, <span class="math notranslate nohighlight">\(W_Y\)</span> will tend to be larger than its median under the null;
+if treatment tends to decrease responses, <span class="math notranslate nohighlight">\(W_Y\)</span> will tend to be smaller than its median under the null.</p>
+<p>To test against the alternative that treatment tends to increase responses,
+we would reject for large values of <span class="math notranslate nohighlight">\(W_Y\)</span>.
+To test against the alternative that treatment tends to decrease responses,
+we would reject for small values of <span class="math notranslate nohighlight">\(W_Y\)</span>.
+The critical value of the test is set using the probability distribution of
+<span class="math notranslate nohighlight">\(W_Y\)</span> on the assumption that the strong null hypothesis is true.
+For a level-alpha test against the alternative that treatment increases
+responses, we would find the smallest <span class="math notranslate nohighlight">\(c\)</span> such that, if the
+strong null is true, <span class="math notranslate nohighlight">\(\mathbb{P}(W_Y \ge c) \le \alpha\)</span>.
+We would then reject the strong null if the observed value of
+<span class="math notranslate nohighlight">\(W_Y\)</span> is <span class="math notranslate nohighlight">\(c\)</span> or greater.
+Recall that <span class="math notranslate nohighlight">\(1 + 2 + \cdots + k = k(k+1)/2\)</span>.</p>
+<p>If the treated subjects have the smallest possible ranks, 1 to <span class="math notranslate nohighlight">\(n\)</span>, then
+<span class="math notranslate nohighlight">\(W_Y = 1 + 2 + \cdots + n = n(n+1)/2\)</span>.
+If the treated subjects have the largest possible ranks, <span class="math notranslate nohighlight">\(N - n+1\)</span> to <span class="math notranslate nohighlight">\(N\)</span>, then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f751f2d8-a354-4051-a9d4-f8fe928c4ca6">
+<span class="eqno">()<a class="headerlink" href="#equation-f751f2d8-a354-4051-a9d4-f8fe928c4ca6" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+W_Y &amp; = &amp; (N-n+1) + (N-n+2) + \cdots + N \\
+    &amp; = &amp; (N-n) + 1 + (N-n) + 2 + \cdots (N-n) + n \\
+    &amp; = &amp; n(N-n) + (1 + 2 + \cdots + n) \\
+    &amp; = &amp; n(N-n) + n(n+1)/2.
+\end{eqnarray}\]</div>
+<p>All the integers between <span class="math notranslate nohighlight">\(n(n+1)/2\)</span> and <span class="math notranslate nohighlight">\(n(N-n) + n(n+1)/2\)</span> are possible values of <span class="math notranslate nohighlight">\(W_Y\)</span>.
+The null distribution of <span class="math notranslate nohighlight">\(W_Y\)</span> under the strong null hypothesis is symmetric about
+<span class="math notranslate nohighlight">\(n(N+1)/2\)</span>.</p>
+<p>(In the randomization model, each subset of <span class="math notranslate nohighlight">\(n\)</span> of the <span class="math notranslate nohighlight">\(N\)</span> ranks is equally likely to be the
+ranks of the treatment group.<br />
+The probability that the treatment ranks are <span class="math notranslate nohighlight">\(\{1, 2, \ldots , n\}\)</span> is equal to the
+probability that the treatment ranks are <span class="math notranslate nohighlight">\(\{N, N-1, \ldots, N-n+1\}\)</span>.<br />
+More generally, consider re-labeling the <span class="math notranslate nohighlight">\(j\)</span>th-ranked observation to be the <span class="math notranslate nohighlight">\(N-j+1\)</span>st-ranked observation.
+The labels of the observations would still be <span class="math notranslate nohighlight">\(\{1, 2, \ldots , N\}\)</span>, so the probability
+distribution of the sum of the labels on the treated subjects would be the same
+as the probability distribution of <span class="math notranslate nohighlight">\(W_Y\)</span> under the strong null  hypothesis.<br />
+However, if the sum of the treatment ranks was <span class="math notranslate nohighlight">\(W_Y\)</span>,
+the sum of the new labels would be <span class="math notranslate nohighlight">\(n(N+1)-W_Y\)</span>.
+Thus <span class="math notranslate nohighlight">\(\mathbb{P}\{W_Y = k\} = \mathbb{P}\{W_Y = n(N+1) - k \}\)</span>.
+That is, the probability distribution of <span class="math notranslate nohighlight">\(W_Y\)</span> is symmetric about <span class="math notranslate nohighlight">\(n(N+1)/2\)</span>.<br />
+This argument is essentially that in Lehmann, E.L., 1998. <em>Nonparametrics: Statistical
+Methods Based on Ranks</em>. Upper Saddle River, N.J.: Prentice Hall, pp 12-13.</p>
+<p>Thus the expected value of <span class="math notranslate nohighlight">\(W_Y\)</span> under the null hypothesis is <span class="math notranslate nohighlight">\(n(N+1)/2\)</span>.
+(This also follows from the fact that the expected value of the sample sum of
+a simple random sample of size <span class="math notranslate nohighlight">\(n\)</span> from a box of <span class="math notranslate nohighlight">\(N\)</span> numbers is
+equal to <span class="math notranslate nohighlight">\(n\)</span> times the mean of the <span class="math notranslate nohighlight">\(N\)</span> numbers; the mean of the
+integers 1 to <span class="math notranslate nohighlight">\(N\)</span> is <span class="math notranslate nohighlight">\((N+1)/2\)</span>.)
+The variance of <span class="math notranslate nohighlight">\(W_Y\)</span> under the strong null hypothesis
+is <span class="math notranslate nohighlight">\(mn(N+1)/12\)</span>.
+(This follows from the fact that the variance of the sample sum of a simple random sample of size <span class="math notranslate nohighlight">\(n\)</span> from a list of <span class="math notranslate nohighlight">\(N\)</span>
+numbers is <span class="math notranslate nohighlight">\((N-n)n(\mbox{variance of list})/(N-1) = mn(\mbox{variance of list})/(N-1)\)</span>.
+The variance of the list of the integers 1 to <span class="math notranslate nohighlight">\(N\)</span> is <span class="math notranslate nohighlight">\((N^2-1)/12 = (N-1)(N+1)/12\)</span>,
+so the variance of <span class="math notranslate nohighlight">\(W_Y\)</span> is <span class="math notranslate nohighlight">\(mn(N-1)(N+1)/(12(N-1)) = mn(N+1)/12\)</span>.)</p>
+<p>Define <span class="math notranslate nohighlight">\(W_X\)</span> to be the sum of the control ranks.
+Because the treatment ranks and control ranks together comprise all the ranks,
+<span class="math notranslate nohighlight">\( W_X + W_Y = 1 + 2 + \cdots + N = N(N+1)/2\)</span>.
+Thus, <span class="math notranslate nohighlight">\(W_X  = N(N+1)/2 - W_Y\)</span>.</p>
+<p>It follows that the (null) expected value of <span class="math notranslate nohighlight">\(W_X\)</span> is
+<span class="math notranslate nohighlight">\(N(N+1)/2 - n(N+1)/2 = m(N+1)/2\)</span>, and that the (null) variance of <span class="math notranslate nohighlight">\(W_X\)</span> is also
+<span class="math notranslate nohighlight">\(mn(N+1)/12\)</span>.
+When <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are both large, the normal approximations to the null distributions of
+<span class="math notranslate nohighlight">\(W_X\)</span> and to <span class="math notranslate nohighlight">\(W_Y\)</span> tend to be accurate.</p>
+<p>The Wilcoxon rank-sum test is exactly what you get if you replace each observation by its
+rank, then do a permutation test using the sum of the (ranks of the) responses in the treatment group.
+Thus, the code in the previous chapter can be used to simulate the null distribution,
+by replacing the raw data with their ranks.
+However, the normal approximation to the null distribution
+of <span class="math notranslate nohighlight">\(W_Y\)</span> can be better than the normal approximation to the null
+distribution of the sample sum of the responses to treatment, because the ranks
+are evenly spread out, whereas the raw responses can be highly skewed or multimodal.</p>
+</section>
+</section>
+<section id="mann-whitney-statistics">
+<h3>Mann-Whitney Statistics<a class="headerlink" href="#mann-whitney-statistics" title="Permalink to this headline">#</a></h3>
+<p>Define <span class="math notranslate nohighlight">\(W_{XY} := W_Y - n(n+1)/2\)</span>.
+This is <span class="math notranslate nohighlight">\(W_Y\)</span> minus its minimum possible value.
+Let <span class="math notranslate nohighlight">\(W_{YX} := W_X - m(m+1)/2\)</span>, <span class="math notranslate nohighlight">\(W_X\)</span> minus its minimum possible value.
+Under the strong null hypothesis, the probability distribution of <span class="math notranslate nohighlight">\(W_{XY}\)</span>
+is the same as the probability distribution of <span class="math notranslate nohighlight">\(W_{YX}\)</span>,
+a consequence of the symmetry of the probability distribution of <span class="math notranslate nohighlight">\(W_Y\)</span>.
+The statistics <span class="math notranslate nohighlight">\(W_{XY}\)</span> and <span class="math notranslate nohighlight">\(W_{YX}\)</span> are called the <em>Mann-Whitney</em> statistics.</p>
+<p>Let <span class="math notranslate nohighlight">\(\{X_1, \ldots, X_m\}\)</span> denote the <span class="math notranslate nohighlight">\(m\)</span> control responses and let
+<span class="math notranslate nohighlight">\(\{Y_1, \ldots, Y_n\}\)</span> denote the <span class="math notranslate nohighlight">\(n\)</span> treatment responses.
+Consider <span class="math notranslate nohighlight">\(\#\{(i, j) : 1 \le i \le m, \; 1 \le j \le n \mbox{ and } X_i &lt; Y_j \}\)</span>.
+This is the number of (control, treatment) pairs such that the control
+response is less than the treatment response.</p>
+<p>Let <span class="math notranslate nohighlight">\(\{S_j: j = 1, \ldots , n\}\)</span> be the ranks of the treatment responses.
+Let <span class="math notranslate nohighlight">\(\{S_{(j)}: j = 1, \ldots , n\}\)</span> be those ranks in increasing order.
+Partition the set of (control, treatment)
+pairs for which the control response is less than the treatment response on the value of the treatment
+response:
+The total number of
+such pairs for which the control response is less than the treatment response
+is the number of pairs where the control response is less than the smallest treatment
+response, plus the number of pairs where the control response is less than the second-smallest
+treatment response, and so on. This will help us count the pairs.</p>
+<p>How many responses are less than <span class="math notranslate nohighlight">\(S_{(1)}\)</span>, the rank of the smallest
+treatment response?
+By definition, there are <span class="math notranslate nohighlight">\(S_{(1)}-1\)</span> of them—all of which are control responses.
+The number of response values that are less than <span class="math notranslate nohighlight">\(S_{(2)}\)</span>  is
+<span class="math notranslate nohighlight">\(S_{(2)}-1\)</span>, one of which is <span class="math notranslate nohighlight">\(S_{(1)}\)</span>, so the
+total number of control responses that are less than <span class="math notranslate nohighlight">\(S_{(2)}\)</span> is
+<span class="math notranslate nohighlight">\(S_{(2)}-2\)</span>.
+The total number of control responses that are less than <span class="math notranslate nohighlight">\(S_{(j)}\)</span>
+is <span class="math notranslate nohighlight">\(S_{(j)} - j\)</span>, so the total number of (control, treatment)
+pairs with the control response less than the treatment response is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f4551c1a-52c5-4c1a-b873-ff2e8283a59a">
+<span class="eqno">()<a class="headerlink" href="#equation-f4551c1a-52c5-4c1a-b873-ff2e8283a59a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+S_{(1)}-1 + S_{(2)} - 2 + \cdots +
+    S_{(n)} - n = W_Y - (1 + 2  + \cdots + n) =
+    W_Y - n(n+1)/2 = W_{XY}.
+\end{equation}\]</div>
+<p>Thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-11e4cab3-3ac7-4b9a-9d39-8984ca731b19">
+<span class="eqno">()<a class="headerlink" href="#equation-11e4cab3-3ac7-4b9a-9d39-8984ca731b19" title="Permalink to this equation">#</a></span>\[\begin{equation}
+W_{XY} = \#\{(i, j) : 1 \le i  \le m, \; 1 \le j \le n \mbox{ and } X_i &lt; Y_j \}.
+\end{equation}\]</div>
+<p>That is, the Mann-Whitney statistic <span class="math notranslate nohighlight">\(W_{XY}\)</span> (and the Wilcoxon rank sum
+<span class="math notranslate nohighlight">\(W_Y\)</span>, up to an additive constant)
+measures the number of (control, treatment) pairs for which the treatment response
+is at least as large as the control response.
+The larger the positive effect of treatment, the larger the Mann-Whitney and Wilcoxon
+rank sum statistics tend to be.</p>
+<p><strong>Equivalent tests.</strong>
+Multiplying the test statistic by a (positive) constant produces an equivalent test (<em>equivalent</em> means
+that the tests reject the null for exactly the same data).
+Hence using <span class="math notranslate nohighlight">\(\bar{W}_Y := W_Y/n\)</span> produces an equivalent test.</p>
+<p>Since <span class="math notranslate nohighlight">\(\sum_j r_j = N(N+1)/2\)</span>, as <span class="math notranslate nohighlight">\(W\)</span> increases, the sum (and the mean) of the control ranks <span class="math notranslate nohighlight">\(W_X := \sum_j (1-W_j) r_j\)</span> decreases monotonically, so the Wilcoxon rank-sum test is equivalent to a test based on the difference between the mean ranks for treatment and control, <span class="math notranslate nohighlight">\(W_Y/n - W_X/m\)</span>.</p>
+<p>The Mann-Whitney test and the Wilcoxon rank-sum test are equivalent.</p>
+<section id="permutation-t-test">
+<h4>Permutation <span class="math notranslate nohighlight">\(t\)</span>-test.<a class="headerlink" href="#permutation-t-test" title="Permalink to this headline">#</a></h4>
+<p>Use the <span class="math notranslate nohighlight">\(t\)</span> statistic as the test statistic, but calibrate it using the permutation distribution
+rather than Student’s t distribution.
+See <a class="reference internal" href="permute-intro.html"><span class="doc std std-doc">introduction to permutation tests</span></a>.</p>
+</section>
+</section>
+</section>
+<section id="confidence-bounds-for-a-shift-in-the-two-sample-problem">
+<h2>Confidence bounds for a shift in the two-sample problem<a class="headerlink" href="#confidence-bounds-for-a-shift-in-the-two-sample-problem" title="Permalink to this headline">#</a></h2>
+<p>The strong null is that each subject would have the same response regardless of the treatment assigned to the
+subject.
+One alternative hypothesis is that the effect of treatment is to shift each subject’s response by the same amount,
+<span class="math notranslate nohighlight">\(\Delta\)</span>.
+In applications, there is generally little reason to belive that treatment will affect every subject by exactly
+the same amount: this is a very artificial alternative.
+But it is a <em>strong</em> alternative, in the sense that it lets us find the sampling distribution of any statistic from the observed data.</p>
+<p>The approach here is based on the duality between tests and confidence sets.
+Suppose we have a family of level <span class="math notranslate nohighlight">\(\alpha\)</span> tests of the null hypotheses
+<span class="math notranslate nohighlight">\(H_{d}\)</span>: <span class="math notranslate nohighlight">\(\Delta=d\)</span> for all real <span class="math notranslate nohighlight">\(d\)</span>.
+Let <span class="math notranslate nohighlight">\(S(Y)\)</span> denote the set of values of <span class="math notranslate nohighlight">\(d\)</span> for which
+the test of the corresponding hypothesis <span class="math notranslate nohighlight">\(\Delta = d\)</span> would not rejected
+the null hypothesis if the data were <span class="math notranslate nohighlight">\(y\)</span> (here <span class="math notranslate nohighlight">\(y\)</span> is generic; in the problems we have been considering,
+<span class="math notranslate nohighlight">\(y\)</span> specifies all the treatment responses and all the control responses).
+Then <span class="math notranslate nohighlight">\(S(Y)\)</span> is a <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence set for <span class="math notranslate nohighlight">\(\Delta\)</span>.</p>
+<p><strong>Proof</strong>.
+If <span class="math notranslate nohighlight">\(d\)</span> is the true value of <span class="math notranslate nohighlight">\(\Delta\)</span>, then the probability (under <span class="math notranslate nohighlight">\(d\)</span>)
+that the corresponding test rejects the hypothesis <span class="math notranslate nohighlight">\(\Delta = d\)</span> is
+at most <span class="math notranslate nohighlight">\(\alpha\)</span>.
+The probability that the test does not reject is at least <span class="math notranslate nohighlight">\(1-\alpha\)</span>, so with probability
+<span class="math notranslate nohighlight">\(1-\alpha\)</span> under <span class="math notranslate nohighlight">\(\Delta\)</span>, the value <span class="math notranslate nohighlight">\(\Delta\)</span> is in <span class="math notranslate nohighlight">\(S(Y)\)</span>.
+That is,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-62af083c-add9-44d0-9d8d-75f4aa165db5">
+<span class="eqno">()<a class="headerlink" href="#equation-62af083c-add9-44d0-9d8d-75f4aa165db5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mathbb{P}_d \{S(Y) \ni \Delta \} \ge 1-\alpha.
+\end{equation}\]</div>
+<p>The shape and size of the confidence set are tied to the family of hypothesis tests
+that are being “inverted.”
+No matter what, the procedure gives a <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence set, but it
+can be large or bizarre (e.g., consist of disjoint pieces) according to the
+nature of the tests.
+The duality between tests and confidence sets can be exploited to produce
+confidence sets with desirable properties; see, for example,
+Benjamini and Stark (1996. Non-equivariant simultaneous confidence intervals
+less likely to contain zero, <em>J. Amer. Stat. Assoc.</em>, <em>91</em>, 329–337);
+Benjamini, Hochberg and Stark (1998. Confidence Intervals with more Power
+to determine the Sign: Two Ends constrain the Means, <em>J. Amer. Stat. Assoc.</em>,
+<em>93</em>, 309–317); or Evans, Hansen and Stark (2005.
+Minimax Expected Measure Confidence Sets for Restricted Location Parameters,
+<em>Bernoulli, 11,</em> 571–590).</p>
+<p>To use this result to find a confidence set for <span class="math notranslate nohighlight">\(\Delta\)</span>, we need a family of level <span class="math notranslate nohighlight">\(\alpha\)</span> tests of the hypotheses <span class="math notranslate nohighlight">\(\Delta = d\)</span>.</p>
+<p>Consider the Mann-Whitney statistic <span class="math notranslate nohighlight">\(W_{XY}\)</span>.
+Under the strong null hypothesis, the expected value of <span class="math notranslate nohighlight">\(W_{XY}\)</span>
+is <span class="math notranslate nohighlight">\(m\)</span><span class="math notranslate nohighlight">\(n\)</span>/2.
+Suppose that the critical values for the two-sided test of the hypothesis
+that <span class="math notranslate nohighlight">\(\Delta=0\)</span> are <span class="math notranslate nohighlight">\(mn/2-c\)</span>  and <span class="math notranslate nohighlight">\(mn/2+c\)</span>.
+Note that under the hypothesis that <span class="math notranslate nohighlight">\(\Delta = d\)</span>, the distribution of
+the Mann-Whitney statistic for the data <span class="math notranslate nohighlight">\(\{X_1, \ldots, X_m, Y_1-d, \ldots, Y_n-d \}\)</span>,
+which we denote <span class="math notranslate nohighlight">\(W_{XY-d}\)</span>, is the same as the distribution of
+<span class="math notranslate nohighlight">\(W_{XY}\)</span> under the original strong null hypothesis.
+A two-sided level-<span class="math notranslate nohighlight">\(\alpha\)</span> test of the hypothesis <span class="math notranslate nohighlight">\(\Delta=d\)</span> thus would reject
+if <span class="math notranslate nohighlight">\(W_{XY-d} \le mn/2-c\)</span> or <span class="math notranslate nohighlight">\(W_{XY-d} \ge mn/2+c\)</span>.
+This is a family of tests on which we can base the confidence set.</p>
+<p>We can find a confidence interval for <span class="math notranslate nohighlight">\(\Delta\)</span> using these tests as follows:
+Let <span class="math notranslate nohighlight">\(d\)</span> be the estimated treatment effect, the median of the <span class="math notranslate nohighlight">\(mn\)</span> differences <span class="math notranslate nohighlight">\(d_{ij}\)</span>.
+Subtract <span class="math notranslate nohighlight">\(d\)</span> from the treatment observations; compute the
+ranks of this new data set; perform a two-sided Wilcoxon rank sum test of
+the null hypothesis of no treatment effect using these new data.
+If the test does not reject, include <span class="math notranslate nohighlight">\(d\)</span> in the confidence set.
+Increase <span class="math notranslate nohighlight">\(d\)</span> systematically until the test rejects to get the
+upper endpoint of the confidence interval; decrease <span class="math notranslate nohighlight">\(d\)</span> systematically
+until the test rejects to get the lower endpoint of the confidence interval.</p>
+<p>It is clear that the only values of <span class="math notranslate nohighlight">\(d\)</span> that could be endpoints of the confidence
+interval are those that cause the ranks of the treatment observations to
+change—only those values
+change the value of <span class="math notranslate nohighlight">\(W_{XY}\)</span>.
+We can exploit this to find a confidence interval for <span class="math notranslate nohighlight">\(\Delta\)</span> with less trial-and-error
+searching.</p>
+<p>To change the value of <span class="math notranslate nohighlight">\(W_{XY-d}\)</span>, we need to change <span class="math notranslate nohighlight">\(d\)</span> by enough to change the number of
+pairs <span class="math notranslate nohighlight">\((i, j)\)</span> such that <span class="math notranslate nohighlight">\(X_i &lt; Y_j-d\)</span>.
+The values of <span class="math notranslate nohighlight">\(d\)</span> that change the ranks are precisely the differences
+<span class="math notranslate nohighlight">\(d_{ij} = Y_j-X_i\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(d_{(1)}, \ldots, d_{(mn)}\)</span>
+denote the order statistics of the <span class="math notranslate nohighlight">\(mn\)</span> differences <span class="math notranslate nohighlight">\(\{d_{ij}\}\)</span>,
+and define <span class="math notranslate nohighlight">\(d_{(0)} := -\infty\)</span> and <span class="math notranslate nohighlight">\(d_{(mn+1)} := \infty\)</span>.
+Then <span class="math notranslate nohighlight">\(d_{(k)}  \le d &lt;  d_{(k+1)}\)</span>
+if and only if <span class="math notranslate nohighlight">\(W_{XY-d} = mn-k\)</span>.</p>
+<p>To see this, note that <span class="math notranslate nohighlight">\(W_{XY-d} \le mn-k\)</span> if <span class="math notranslate nohighlight">\(mn-k\)</span> of the differences
+<span class="math notranslate nohighlight">\(\{(Y_j - d - X_i)\}\)</span> are at least zero, that is, if <span class="math notranslate nohighlight">\(d_{(k)} \le d\)</span>.
+The distribution of <span class="math notranslate nohighlight">\(W_{XY-d}\)</span> when <span class="math notranslate nohighlight">\(d\)</span> is the true shift
+does not depend on <span class="math notranslate nohighlight">\(d\)</span>: it  is the same as the distribution of <span class="math notranslate nohighlight">\(W_{XY}\)</span>
+under the strong null hypothesis.
+Using the symmetry of the null distribution of <span class="math notranslate nohighlight">\(W_{XY}\)</span>, we see that for any <span class="math notranslate nohighlight">\(d\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-795ce498-8ee7-4979-a51a-57c86c192287">
+<span class="eqno">()<a class="headerlink" href="#equation-795ce498-8ee7-4979-a51a-57c86c192287" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbb{P}_d \{ d_{(k)} \le d &lt; d_{(k+1)} \} = \mathbb{P}_0 \{W_{XY} = mn - k \} =
+    \mathbb{P}_0 \{W_{XY} = k \}.
+\end{equation}\]</div>
+<p>Thus the random differences <span class="math notranslate nohighlight">\(d_{ij}\)</span>
+carve the real line into random intervals with known probabilities of containing
+the true value of <span class="math notranslate nohighlight">\(d\)</span> (if the shift alternative is true!).
+To find a confidence interval for <span class="math notranslate nohighlight">\(d\)</span>, we can start with (one of) the interval
+<span class="math notranslate nohighlight">\([d_{(k)}, d_{(k+1)})\)</span>
+with the largest chance of containing <span class="math notranslate nohighlight">\(d\)</span>, then append intervals in
+decreasing order of their probability of containing <span class="math notranslate nohighlight">\(d\)</span> until the
+sum of their probabilities is at least <span class="math notranslate nohighlight">\(1-\alpha\)</span>.
+Because of the unimodality of the distribution,
+these intervals will be contiguous; let
+<span class="math notranslate nohighlight">\([d_{(\ell)}, d_{(u)})\)</span>
+denote the interval.
+Alternatively, we could choose the intervals to try to have symmetric
+non-coverage probabilities; that is, so that
+<span class="math notranslate nohighlight">\(\mathbb{P}_d \{ d_{(\ell)} &gt; d \}\)</span>  is as close as possible to
+<span class="math notranslate nohighlight">\(\mathbb{P}_d \{ d_{(u)} &lt; d \}\)</span>.
+(I don’t know whether these two approaches differ; I think the former corresponds to
+inverting the two-sided Wilcoxon test.)
+All the probability calculations are implicit in calculating the distribution of
+<span class="math notranslate nohighlight">\(W_{XY}\)</span> under the strong null hypothesis.
+In fact, one need not even calculate the entire distribution; see Lehmann
+(1998, pp. 92ff) for shortcuts.</p>
+<section id="testing-for-a-difference-in-dispersion-the-siegel-tukey-test">
+<h3>Testing for a difference in dispersion: the Siegel-Tukey test<a class="headerlink" href="#testing-for-a-difference-in-dispersion-the-siegel-tukey-test" title="Permalink to this headline">#</a></h3>
+<p>Assign “ranks” differently: smallest observation has “rank” 1, largest has “rank” 2, second-smallest has “rank” 3,
+etc. Then apply Wilcoxon the rank-sum test to these “ranks.” The null distribution of the sum is the same, but this
+statistic has power against the alternative that treatment affects dispersion (and not location).
+In contrast, the Wilcoxon rank-sum test has power against the alternative that treatment affects location, not dispersion.</p>
+</section>
+<section id="testing-for-a-difference-in-distribution-the-smirnov-test">
+<h3>Testing for a difference in distribution: the Smirnov test<a class="headerlink" href="#testing-for-a-difference-in-distribution-the-smirnov-test" title="Permalink to this headline">#</a></h3>
+<p>A common measure of the “distance” between two probability distributions <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(G\)</span> is the <em>Smirnov</em> or <em>Kolmogorov-Smirnov</em>
+distance,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bc10822c-f2d8-43a6-83a1-60f6c2600dbb">
+<span class="eqno">()<a class="headerlink" href="#equation-bc10822c-f2d8-43a6-83a1-60f6c2600dbb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\| F-G \|_\infty := \sup_{x \in \mathbb{R}} |F(x)-G(x)|.
+\end{equation}\]</div>
+<p>A two-sample test sensitive to general differences (rather than changes in location and/or spread)
+can be based on that distance.</p>
+<p>Let <span class="math notranslate nohighlight">\(\hat{F}\)</span> be the empirical CDF of the responses to treatment and <span class="math notranslate nohighlight">\(\hat{G}\)</span> be the empirical
+CDF of the responses to control:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-02106284-92f6-4ad9-a810-53d0deb8a9cc">
+<span class="eqno">()<a class="headerlink" href="#equation-02106284-92f6-4ad9-a810-53d0deb8a9cc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{F}(x) := \frac{1}{n} \sum_{j=1}^n 1_{x \ge X_j}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-5dcda4ab-8c80-4257-bc93-1d91c2573e02">
+<span class="eqno">()<a class="headerlink" href="#equation-5dcda4ab-8c80-4257-bc93-1d91c2573e02" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{G}(x) := \frac{1}{m} \sum_{j=1}^n 1_{x \ge Y_j}.
+\end{equation}\]</div>
+<p>The <em>Smirnov</em> test uses <span class="math notranslate nohighlight">\(\|\hat{F} - \hat{G}\|\)</span> as the test statistic.</p>
+<p>Note that the value of <span class="math notranslate nohighlight">\(\|\hat{F} - \hat{G}\|\)</span> depends only on the relative ordering
+of the values <span class="math notranslate nohighlight">\(\{X_j\}\)</span> and <span class="math notranslate nohighlight">\(\{Y_j\}\)</span>, not on their numerical values.
+Thus, replacing the original data by their ranks does not change the test statistic
+(or its distribution under the null hypothesis): the Smirnov test is a rank-based test.
+Moreover, if there are no ties, the null distribution of the test statistic depends only on <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p>Here is a simulation of the Smirnov test statistic under the null hypothesis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ecdf</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">       calculates the empirical cdf of data x</span>
+<span class="sd">       returns the unique values of x in ascending order and the cumulative probabity at those values</span>
+<span class="sd">       NOTE: This is not an efficient algorithm: it is O(n^2), where n is the length of x. </span>
+<span class="sd">       A better algorithm would rely on the Collections package or something similar and could work</span>
+<span class="sd">       in O(n log n)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">theVals</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">theProbs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">theVals</span><span class="p">])</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">theVals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">):</span>
+        <span class="n">theVals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">theVals</span><span class="p">)</span>
+        <span class="n">theProbs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">theProbs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">theVals</span><span class="p">,</span> <span class="n">theProbs</span>
+
+
+<span class="k">def</span> <span class="nf">plotSmirnov</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    plot the ecdfs and Smirnov statistic for samples from a uniform distribution</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">sam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="o">+</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">y</span><span class="p">,</span> <span class="n">pry</span> <span class="o">=</span> <span class="n">ecdf</span><span class="p">(</span><span class="n">sam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">])</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">prx</span> <span class="o">=</span> <span class="n">ecdf</span><span class="p">(</span><span class="n">sam</span><span class="p">[</span><span class="n">n</span><span class="p">:])</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pry</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ecdf(y): </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> data&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prx</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ecdf(x): </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s1"> data&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sam</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span> <span class="o">&lt;=</span> <span class="n">zi</span><span class="p">)</span><span class="o">/</span><span class="n">m</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">zi</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">zi</span> <span class="ow">in</span> <span class="n">sam</span><span class="p">]</span>
+    <span class="n">dLoc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+    <span class="n">zm</span> <span class="o">=</span> <span class="n">sam</span><span class="p">[</span><span class="n">dLoc</span><span class="p">]</span>
+    <span class="n">xd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sam</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span> <span class="o">&lt;=</span> <span class="n">zm</span><span class="p">)</span><span class="o">/</span><span class="n">m</span>
+    <span class="n">yd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">zm</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">yd</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">zm</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">ymax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Smirnov statistic: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;heavy&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">interact</span><span class="p">(</span><span class="n">plotSmirnov</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "5bed697255b8494b8e8754641ee5e608", "version_major": 2, "version_minor": 0}
+</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plotSmirnov(m, n)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="wilcoxon-signed-rank-test">
+<h4>Wilcoxon signed rank test<a class="headerlink" href="#wilcoxon-signed-rank-test" title="Permalink to this headline">#</a></h4>
+<p>The <em>signed (mid)-rank</em> of an observation <span class="math notranslate nohighlight">\(x_k \in \{x_j\}_{j=1}^N\)</span> is <span class="math notranslate nohighlight">\(\mathrm{sgn}(x_k) r_k\)</span>, where
+<span class="math notranslate nohighlight">\(r_k\)</span> is the rank of <span class="math notranslate nohighlight">\(|x_k|\)</span> in the set <span class="math notranslate nohighlight">\(\{|x_j|\}_{j=1}^N\)</span>, and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0203ca86-ca84-4096-9f5c-3e24b495228d">
+<span class="eqno">()<a class="headerlink" href="#equation-0203ca86-ca84-4096-9f5c-3e24b495228d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathrm{sgn}(x) := \left \{ 
+    \begin{array}{lr}  
+    -1, &amp; x &lt; 0 \cr
+    0, &amp; x=0 \cr
+    1, &amp; x &gt; 0. 
+    \end{array}
+    \right .
+\end{equation}\]</div>
+<p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> pairs of subjects; in each pair, one subject is assigned to treatment and one to control, at random,
+with equal probability.
+Look at the differences between the treated and control subject in each pair.
+Add the signed ranks of those differences.
+To test against the alternative that treatment increases (decreases) responses, reject if the sum is sufficiently large
+(small).</p>
+<p>[MORE TO COME]</p>
+</section>
+</section>
+</section>
+<section id="the-k-sample-problem">
+<h2>The <span class="math notranslate nohighlight">\(k\)</span>-sample problem<a class="headerlink" href="#the-k-sample-problem" title="Permalink to this headline">#</a></h2>
+<p>(Calling this <span class="math notranslate nohighlight">\(k\)</span>, but we are using <span class="math notranslate nohighlight">\(T\)</span> to denote the number of groups.)
+Size of group <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(n_t\)</span>, <span class="math notranslate nohighlight">\(t=0, \ldots, T-1\)</span>.</p>
+<section id="testing-for-differences-in-location">
+<h3>Testing for differences in location<a class="headerlink" href="#testing-for-differences-in-location" title="Permalink to this headline">#</a></h3>
+<section id="the-kruskal-wallis-test">
+<h4>The Kruskal-Wallis test<a class="headerlink" href="#the-kruskal-wallis-test" title="Permalink to this headline">#</a></h4>
+<div class="amsmath math notranslate nohighlight" id="equation-2e260f1c-9483-4c0a-b324-32310e77a95f">
+<span class="eqno">()<a class="headerlink" href="#equation-2e260f1c-9483-4c0a-b324-32310e77a95f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    K := \frac{12}{N(N+1)} \sum_{t=0}^{T-1} n_t \left ( \bar{R}_t - (N+1)/2 \right )^2,
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bar{R}_t\)</span> is the mean of the ranks of the observations in group <span class="math notranslate nohighlight">\(t\)</span>.
+(The mean of all <span class="math notranslate nohighlight">\(N\)</span> (mid-)ranks is <span class="math notranslate nohighlight">\((N+1)/2\)</span>.)</p>
+<p>Recall that the <span class="math notranslate nohighlight">\(F\)</span>-statistic is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-74f07181-a10b-4321-aa5a-a8e7951e3d22">
+<span class="eqno">()<a class="headerlink" href="#equation-74f07181-a10b-4321-aa5a-a8e7951e3d22" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ F := \frac{\mbox{ &quot;explained variance&quot; }}{\mbox{&quot;unexplained variance&quot;}} =
+ \frac{\sum_{t=0}^{T-1} n_t({\bar {Y}}_{t\cdot }-{\bar {Y}})^{2}/(T-1)}{\sum_{t=0}^{T-1}\sum _{j=1}^{n_t} \left( Y_{tj}-{\bar {Y}}_{t\cdot } \right)^{2}/(N-T)}.
+\end{equation}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(K\)</span> is essentially the <span class="math notranslate nohighlight">\(F\)</span>-statistic of the ranks, since the overall sum of squared differences
+from the mean rank is constant.</p>
+<p>The asymptotic null distribution (as all the group sizes approach infinity)
+is chi-square with <span class="math notranslate nohighlight">\(T-1\)</span> degrees of freedom.</p>
+</section>
+<section id="the-permutation-f-test">
+<h4>The permutation <span class="math notranslate nohighlight">\(F\)</span> test<a class="headerlink" href="#the-permutation-f-test" title="Permalink to this headline">#</a></h4>
+<p>Apply the usual <span class="math notranslate nohighlight">\(F\)</span> test, but calibrate it using the permutation distribution.</p>
+</section>
+</section>
+</section>
+<section id="confidence-bounds-for-quantiles">
+<h2>Confidence bounds for quantiles<a class="headerlink" href="#confidence-bounds-for-quantiles" title="Permalink to this headline">#</a></h2>
+<p>Suppose <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^N\)</span> are real random variables that are IID <span class="math notranslate nohighlight">\(F\)</span>.
+We want a confidence bound for <span class="math notranslate nohighlight">\(F_\alpha\)</span>, the <span class="math notranslate nohighlight">\(\alpha\)</span> quantile of <span class="math notranslate nohighlight">\(F\)</span>, i.e.,
+the smallest value of <span class="math notranslate nohighlight">\(x\)</span> for which <span class="math notranslate nohighlight">\(F(x) := \mathbb{P} \{X_j \le x \} \ge \alpha\)</span>.</p>
+<p>The approach illustrated above for finding a confidence interval for the
+shift <span class="math notranslate nohighlight">\(d\)</span> is very similar to a nonparametric approach to
+finding confidence intervals for a quantile of a probability distribution.
+Let <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^N\)</span> be IID real-valued random variables with continuous cdf <span class="math notranslate nohighlight">\(F\)</span>.
+For <span class="math notranslate nohighlight">\(0 &lt; q &lt; 1\)</span>, let <span class="math notranslate nohighlight">\(x_q := F^{-1}(q) = \inf \{x: F(x) \ge q \}\)</span> denote the <span class="math notranslate nohighlight">\(q\)</span>th quantile
+of the distribiution.
+We shall find a confidence interval for <span class="math notranslate nohighlight">\(x_q\)</span> that does not depend on
+any other assumptions about <span class="math notranslate nohighlight">\(F\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(x_q=x\)</span>, the probability that <span class="math notranslate nohighlight">\(X_j \le x\)</span> is <span class="math notranslate nohighlight">\(q\)</span>.
+The data are independent, so <span class="math notranslate nohighlight">\(N(x) := \#\{j : X_j \le x\}\)</span>
+has a binomial distribution with parameters <span class="math notranslate nohighlight">\(n=N\)</span> and <span class="math notranslate nohighlight">\(p=q\)</span>.
+Let <span class="math notranslate nohighlight">\(p_{N,q}(k) := {{N} \choose {k}} q^k (1-q)^{N-k} = \mathbb{P}_{x_q=x}\{ N(x) = k \}\)</span>,
+<span class="math notranslate nohighlight">\(k=0, \ldots, N\)</span>.</p>
+<p>Note that <span class="math notranslate nohighlight">\(\mathbb{P}_{x_q=x} \{ N(x) = k \}\)</span> does not depend on <span class="math notranslate nohighlight">\(x_q\)</span>.
+The probability distribution of <span class="math notranslate nohighlight">\(N(x)\)</span> is unimodal; we could build a level <span class="math notranslate nohighlight">\(\alpha\)</span>
+test of the hypothesis that <span class="math notranslate nohighlight">\(x_q=x\)</span> by assigning to the rejection region the values of <span class="math notranslate nohighlight">\(k\)</span> for which
+<span class="math notranslate nohighlight">\(_{n,q}(k)\)</span> is smallest, subject to the constraint that the sum of the probabilities is at most <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<p>To find a confidence interval for <span class="math notranslate nohighlight">\(x_q\)</span>, we could start
+with the <span class="math notranslate nohighlight">\(k\)</span>th order statistic <span class="math notranslate nohighlight">\(X_{(k)}\)</span> as a trial
+value for <span class="math notranslate nohighlight">\(x\)</span>, where <span class="math notranslate nohighlight">\(k\)</span> is as close as possible to <span class="math notranslate nohighlight">\(qn\)</span>, then work
+“outward” as before, increasing and decreasing <span class="math notranslate nohighlight">\(x\)</span> until the
+test of the hypothesis <span class="math notranslate nohighlight">\(x_q = x\)</span>  rejects.</p>
+<p>We can streamline the approach in the same way as we did to find a confidence
+interval for the treatment effect <span class="math notranslate nohighlight">\(\Delta\)</span> in the shift model.
+The values of <span class="math notranslate nohighlight">\(x\)</span> at which <span class="math notranslate nohighlight">\(N(x)\)</span>  changes
+are the order statistics <span class="math notranslate nohighlight">\(X_{(j)}\)</span>, so it suffices to
+consider them when searching for the endpoints of the confidence interval.
+Now <span class="math notranslate nohighlight">\(N(x) = k\)</span> iff <span class="math notranslate nohighlight">\(X_{(k)} \le x &lt; X_{(k+1)}\)</span>, <span class="math notranslate nohighlight">\(k = 0, 1, \ldots, N\)</span>,
+where <span class="math notranslate nohighlight">\(X_{(0)} := -\infty\)</span> and <span class="math notranslate nohighlight">\(X_{(N+1)} := \infty\)</span>.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e6e545e2-ef96-4bb1-aed8-cec0ead2e19d">
+<span class="eqno">()<a class="headerlink" href="#equation-e6e545e2-ef96-4bb1-aed8-cec0ead2e19d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mathbb{P}_{x_q} \{ X_{(k)} \le x_q &lt; X_{(k+1)} \} =  {{N} \choose {k}} q^k (1-q)^{N-k}.
+\end{equation}\]</div>
+<p>The order statistics carve the real line into intervals with known chances of
+containing the true value of <span class="math notranslate nohighlight">\(x_q\)</span>.
+Those chances are determined by the binomial distribution with parameters
+<span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(q\)</span>.
+We can find a confidence interval for <span class="math notranslate nohighlight">\(x_q\)</span>
+by starting with the interval
+<span class="math notranslate nohighlight">\([X_{(k)}, X_{(k+1)})\)</span>
+with the largest chance of containing <span class="math notranslate nohighlight">\(x_q\)</span>, then appending
+intervals in decreasing order of their probability of containing <span class="math notranslate nohighlight">\(x_q\)</span>
+until the sum of their probabilities is at least <span class="math notranslate nohighlight">\(1-\alpha\)</span>.</p>
+<p><strong>Exercise.</strong> Extend this derivation to distributions that are not necessarily continuous
+to obtain a conservative confidence interval for <span class="math notranslate nohighlight">\(x_q\)</span>.</p>
+</section>
+<section id="one-sample-tests">
+<h2>One-sample tests<a class="headerlink" href="#one-sample-tests" title="Permalink to this headline">#</a></h2>
+<p>Typically used to test whether data are a sample from a symmetric distribution or a distribution with
+a specified median.</p>
+</section>
+<section id="when-there-is-no-random-assignment">
+<h2>When there is no random assignment<a class="headerlink" href="#when-there-is-no-random-assignment" title="Permalink to this headline">#</a></h2>
+<section id="imaginary-randomization">
+<h3>Imaginary randomization<a class="headerlink" href="#imaginary-randomization" title="Permalink to this headline">#</a></h3>
+<p>In many situations in which hypothesis tests are used, there is no actual random assignment.
+This happens frequently in observational studies involving humans.
+For instance, the following characteristics are not really assigned at random</p>
+<ul class="simple">
+<li><p>gender</p></li>
+<li><p>ethnicity</p></li>
+<li><p>socio-economic status (SES)</p></li>
+<li><p>educational attainment</p></li>
+<li><p>whether people are housed, and if so, where they live</p></li>
+</ul>
+<p>In such situations, the corresponding null hypothesis is typically that the characteristic/label is assigned “as if” at random, i.e., that the characteristic is an arbitrary label unconnected with anything else.</p>
+<p>For more discussion, see</p>
+<ul class="simple">
+<li><p>Freedman, D.A., and R. Berk, 2012. Statistical Assumptions as Empirical Commitments. <a class="reference external" href="https://www.cambridge.org/core/books/abs/statistical-models-and-causal-inference/statistical-assumptions-as-empirical-commitments/B1879A1919929D5948F6BB539F91D786">https://www.cambridge.org/core/books/abs/statistical-models-and-causal-inference/statistical-assumptions-as-empirical-commitments/B1879A1919929D5948F6BB539F91D786</a></p></li>
+<li><p>Freedman, D.A., and D. Lane, 1983. A Nonstochastic Interpretation of Reported Significance Levels, <em>J. Business and Economic Statistics</em>, <em>1</em>, 292-298. <a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/07350015.1983.10509354">https://www.tandfonline.com/doi/abs/10.1080/07350015.1983.10509354</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Philip B. Stark<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
