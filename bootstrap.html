@@ -523,8 +523,8 @@ Examples include the mean, <span class="math notranslate nohighlight">\(T(F) = \
 <span class="math notranslate nohighlight">\(\{X_j \}\)</span> is
 just the empirical distribution <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>,
 which assigns mass <span class="math notranslate nohighlight">\(1/n\)</span> to each observation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f86237f7-f6fd-4642-b636-49f155b237b2">
-<span class="eqno">()<a class="headerlink" href="#equation-f86237f7-f6fd-4642-b636-49f155b237b2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fb6a02bf-80aa-47e2-b45d-60e09f6b9b92">
+<span class="eqno">()<a class="headerlink" href="#equation-fb6a02bf-80aa-47e2-b45d-60e09f6b9b92" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \arg \max_{\mbox{distributions }G} \mathbb{P}_G \{ X_j = x_j, \; j=1, \ldots, n \} = \hat{F}_n.
 \end{equation}\]</div>
 <p>(Note, however, that the MLE of <span class="math notranslate nohighlight">\(F\)</span> is not generally consistent in
@@ -536,19 +536,19 @@ function of a parameter is that function of the maximum likelihood
 estimator of the parameter, we might be led to consider <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span>
 as an estimator of <span class="math notranslate nohighlight">\(T(F)\)</span>.</p>
 <p>That is exactly what the sample mean does, as an estimator of the mean:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-70f26fdb-43a9-4d6a-a718-e323afe8f430">
-<span class="eqno">()<a class="headerlink" href="#equation-70f26fdb-43a9-4d6a-a718-e323afe8f430" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-20b8d19e-50ff-43b6-91d6-6452a0015fad">
+<span class="eqno">()<a class="headerlink" href="#equation-20b8d19e-50ff-43b6-91d6-6452a0015fad" title="Permalink to this equation">#</a></span>\[\begin{equation}
         T(\hat{F}_n) = \int x d\hat{F}_n(x) = \sum_{j=1}^n\frac{1}{n}X_j =
         \frac{1}{n} \sum_j X_j.
 \end{equation}\]</div>
 <p>Similarly, the maximum likelihood estimator of</p>
-<div class="amsmath math notranslate nohighlight" id="equation-df466589-735a-481a-bed1-4c23792ca335">
-<span class="eqno">()<a class="headerlink" href="#equation-df466589-735a-481a-bed1-4c23792ca335" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dc61e2cd-d6f2-4877-8efd-59bd208aac8a">
+<span class="eqno">()<a class="headerlink" href="#equation-dc61e2cd-d6f2-4877-8efd-59bd208aac8a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathrm{Var}(X) = T(F) = \int \left ( x - \int x dF \right )^2dF
 \end{equation}\]</div>
 <p>is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-85fdff4e-58aa-4956-ac13-1693750d958f">
-<span class="eqno">()<a class="headerlink" href="#equation-85fdff4e-58aa-4956-ac13-1693750d958f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-63b06c99-1f45-4ef6-b251-7cddb80028f5">
+<span class="eqno">()<a class="headerlink" href="#equation-63b06c99-1f45-4ef6-b251-7cddb80028f5" title="Permalink to this equation">#</a></span>\[\begin{equation}
         T(\hat{F}_n) = \int \left ( x - \int x d\hat{F}_n \right )^2 d\hat{F}_n =
         \frac{1}{n}\sum_j \left (X_j - \frac{1}{n} \sum_k X_k \right )^2.
 \end{equation}\]</div>
@@ -572,8 +572,8 @@ we could obtain
 the variance of the distribution of <span class="math notranslate nohighlight">\(T( \hat{F}_n^* )\)</span> analytically:
 Let <span class="math notranslate nohighlight">\(\{ X_j^* \}_{j=1}^n\)</span> be an IID sample of size <span class="math notranslate nohighlight">\(n\)</span> from <span class="math notranslate nohighlight">\(\hat{F}_n\)</span>.
 Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b84503e2-139f-43ae-a15e-952374116c5b">
-<span class="eqno">()<a class="headerlink" href="#equation-b84503e2-139f-43ae-a15e-952374116c5b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3917cf0e-22a9-4af8-bbc0-462fd74b939e">
+<span class="eqno">()<a class="headerlink" href="#equation-3917cf0e-22a9-4af8-bbc0-462fd74b939e" title="Permalink to this equation">#</a></span>\[\begin{equation}
         \mathrm{Var}_{\hat{F}_n} \frac{1}{n}\sum_{j=1}^n X_j^*
         = \frac{1}{n^2} \sum_{j=1}^n (X_j - \bar{X})^2,
 \end{equation}\]</div>
@@ -613,26 +613,26 @@ set with the <span class="math notranslate nohighlight">\(i\)</span>th value del
 <span class="math notranslate nohighlight">\(T_{(i)} = T( \hat{F}_{(i)})\)</span> is the corresponding
 estimate of <span class="math notranslate nohighlight">\(T(F)\)</span>.
 An estimate of the expected value of <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ddc6e9e2-7fc4-47bc-89a2-15fb8dc919d5">
-<span class="eqno">()<a class="headerlink" href="#equation-ddc6e9e2-7fc4-47bc-89a2-15fb8dc919d5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fc12d106-72aa-416f-96bf-3d8bb2a280a9">
+<span class="eqno">()<a class="headerlink" href="#equation-fc12d106-72aa-416f-96bf-3d8bb2a280a9" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{T}_{(\cdot)} = \frac{1}{n} \sum_{i=1}^n T( \hat{F}_{(i)}) .
 \end{equation}\]</div>
 <p>Consider the bias of <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a18fa59c-9dd1-4c33-bcae-b98c026f4c02">
-<span class="eqno">()<a class="headerlink" href="#equation-a18fa59c-9dd1-4c33-bcae-b98c026f4c02" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-caceabf5-f5ff-40dc-ab5c-6d1192f2891c">
+<span class="eqno">()<a class="headerlink" href="#equation-caceabf5-f5ff-40dc-ab5c-6d1192f2891c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathbb{E}_F T(\hat{F}_n) - T(F).
 \end{equation}\]</div>
 <p>Quenouille’s jackknife estimate of the bias is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7cef789e-e055-49bd-bd6e-71e4e705ca42">
-<span class="eqno">()<a class="headerlink" href="#equation-7cef789e-e055-49bd-bd6e-71e4e705ca42" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-93edb9a8-36ae-4516-9d02-b5e7bfd6d754">
+<span class="eqno">()<a class="headerlink" href="#equation-93edb9a8-36ae-4516-9d02-b5e7bfd6d754" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \widehat{\mbox{BIAS}} = (n-1) (\hat{T}_{(\cdot)} - T(\hat{F}_n) ).
 \end{equation}\]</div>
 <p>It can be shown that if the bias of <span class="math notranslate nohighlight">\(T\)</span> has a homogeneous
 polynomial expansion
 in <span class="math notranslate nohighlight">\(n^{-1}\)</span> whose coefficients do not depend on <span class="math notranslate nohighlight">\(n\)</span>,
 then the bias of the bias-corrected estimate</p>
-<div class="amsmath math notranslate nohighlight" id="equation-208af130-f0fa-44f4-9e3c-079b50fd40a7">
-<span class="eqno">()<a class="headerlink" href="#equation-208af130-f0fa-44f4-9e3c-079b50fd40a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-deb4a758-298d-4d86-ba01-8d19749b6d17">
+<span class="eqno">()<a class="headerlink" href="#equation-deb4a758-298d-4d86-ba01-8d19749b6d17" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \tilde{T} = nT(\hat{F}_n) - (n-1) T_{(\cdot)}
 \end{equation}\]</div>
 <p>is <span class="math notranslate nohighlight">\(O(n^{-2})\)</span> instead of <span class="math notranslate nohighlight">\(O(n^{-1})\)</span>.</p>
@@ -641,48 +641,48 @@ the plug-in estimate of
 variance reproduces the formula for the sample variance (with
 <span class="math notranslate nohighlight">\(1/(n-1)\)</span>) from the formula with <span class="math notranslate nohighlight">\(1/n\)</span>:
 Define</p>
-<div class="amsmath math notranslate nohighlight" id="equation-187ee361-e352-4c4e-82d0-68d342ce5d3d">
-<span class="eqno">()<a class="headerlink" href="#equation-187ee361-e352-4c4e-82d0-68d342ce5d3d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-18bd11c0-61b2-4985-9aba-a8d5b53ca2d1">
+<span class="eqno">()<a class="headerlink" href="#equation-18bd11c0-61b2-4985-9aba-a8d5b53ca2d1" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \bar{X} = \frac{1}{n} \sum_{j=1}^n X_j,
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-9b8a9e94-eb1c-4d6f-a95a-cb82fd9ba2f3">
-<span class="eqno">()<a class="headerlink" href="#equation-9b8a9e94-eb1c-4d6f-a95a-cb82fd9ba2f3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6f53df57-bd39-45a7-a80c-1c9b56cb5111">
+<span class="eqno">()<a class="headerlink" href="#equation-6f53df57-bd39-45a7-a80c-1c9b56cb5111" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \bar{X}_{(i)} = \frac{1}{n-1} \sum_{j \ne i} X_j,
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-b8b4be04-f983-4966-b6b2-8847e09bd4fb">
-<span class="eqno">()<a class="headerlink" href="#equation-b8b4be04-f983-4966-b6b2-8847e09bd4fb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5f760300-3530-471f-b88f-dfe9d851d4ef">
+<span class="eqno">()<a class="headerlink" href="#equation-5f760300-3530-471f-b88f-dfe9d851d4ef" title="Permalink to this equation">#</a></span>\[\begin{equation}
     T(\hat{F}_n) = \hat{\sigma}^2 = \frac{1}{n} \sum_{j=1}^n (X_j - \bar{X})^2,
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-fadf0854-3a04-4130-9f94-00cb1c437199">
-<span class="eqno">()<a class="headerlink" href="#equation-fadf0854-3a04-4130-9f94-00cb1c437199" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c4f0bd6f-ef19-4770-8b5e-ad3802a9ea48">
+<span class="eqno">()<a class="headerlink" href="#equation-c4f0bd6f-ef19-4770-8b5e-ad3802a9ea48" title="Permalink to this equation">#</a></span>\[\begin{equation}
     T(\hat{F}_{(i)}) = \frac{1}{n-1} \sum_{j \ne i} ( X_j - \bar{X}_{(i)})^2,
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-6d7d3ffb-76ff-4f2d-8f07-7bf0a2bc901c">
-<span class="eqno">()<a class="headerlink" href="#equation-6d7d3ffb-76ff-4f2d-8f07-7bf0a2bc901c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7ea627ac-1ac3-4cb9-8943-7c53cddf3825">
+<span class="eqno">()<a class="headerlink" href="#equation-7ea627ac-1ac3-4cb9-8943-7c53cddf3825" title="Permalink to this equation">#</a></span>\[\begin{equation}
     T(\hat{F}_{(\cdot)}) = \frac{1}{n} \sum_{i=1}^n T(\hat{F}_{(i)}).
 \end{equation}\]</div>
 <p>Now</p>
-<div class="amsmath math notranslate nohighlight" id="equation-82be3c29-1200-45bb-b61f-a964f3e51235">
-<span class="eqno">()<a class="headerlink" href="#equation-82be3c29-1200-45bb-b61f-a964f3e51235" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-590baf33-1a7e-44b2-aa90-4ff2cc127ea3">
+<span class="eqno">()<a class="headerlink" href="#equation-590baf33-1a7e-44b2-aa90-4ff2cc127ea3" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \bar{X}_{(i)} = \frac{n\bar{X} - X_i}{n-1} = \bar{X} + \frac{1}{n-1} (\bar{X} - X_i),
 \end{equation}\]</div>
 <p>so</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a2f6682a-9ae8-451f-a496-d54b00b651f5">
-<span class="eqno">()<a class="headerlink" href="#equation-a2f6682a-9ae8-451f-a496-d54b00b651f5" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-aad556df-885c-4693-a96d-e4bdc5e1df33">
+<span class="eqno">()<a class="headerlink" href="#equation-aad556df-885c-4693-a96d-e4bdc5e1df33" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
      ( X_j - \bar{X}_{(i)})^2 &amp;=&amp;
         \left ( X_j - \bar{X} - \frac{1}{n-1} (\bar{X} - X_i) \right )^2 \nonumber \\
       &amp;=&amp; (X_j - \bar{X})^2 + \frac{2}{n-1} (X_j - \bar{X})(X_i - \bar{X}) +
       \frac{1}{(n-1)^2}(X_i - \bar{X})^2.
 \end{eqnarray}\]</div>
 <p>Note also that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c68cd5ea-001f-4a1b-9298-cc2ad2144eef">
-<span class="eqno">()<a class="headerlink" href="#equation-c68cd5ea-001f-4a1b-9298-cc2ad2144eef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7bc5f2fd-4d0f-414a-9d28-f44687b3a863">
+<span class="eqno">()<a class="headerlink" href="#equation-7bc5f2fd-4d0f-414a-9d28-f44687b3a863" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \sum_{j \ne i} (X_j - \bar{X}_{(i)})^2 =
     \sum_{j=1}^n (X_j - \bar{X}_{(i)})^2 - (X_i - \bar{X}_{(i)})^2.
 \end{equation}\]</div>
 <p>Thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-17b0e26e-faee-4f62-82e9-5bdb5a1d598f">
-<span class="eqno">()<a class="headerlink" href="#equation-17b0e26e-faee-4f62-82e9-5bdb5a1d598f" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-606d7df9-a3bb-4048-a001-44bc1d660e93">
+<span class="eqno">()<a class="headerlink" href="#equation-606d7df9-a3bb-4048-a001-44bc1d660e93" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
     \sum_{i=1}^n \sum_{j \ne i} (X_j - \bar{X}_{(i)})^2 &amp;=&amp;
     \frac{1}{n-1} \sum_{i=1}^n \left [ \sum_{j=1}^n \left [
     (X_j - \bar{X})^2 + \frac{2}{n-1}(X_j - \bar{X})(X_i - \bar{X}) \right . \right . + \nonumber \\
@@ -693,14 +693,14 @@ Define</p>
 \end{eqnarray}\]</div>
 <p>The last three terms all are multiples of <span class="math notranslate nohighlight">\((X_i - \bar{X})^2\)</span>; the sum of the coefficients
 is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0351e6d2-cc7f-417f-ba3b-2b18ed20f8c0">
-<span class="eqno">()<a class="headerlink" href="#equation-0351e6d2-cc7f-417f-ba3b-2b18ed20f8c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-65cbcde9-dfd4-4504-982e-9c738067ef12">
+<span class="eqno">()<a class="headerlink" href="#equation-65cbcde9-dfd4-4504-982e-9c738067ef12" title="Permalink to this equation">#</a></span>\[\begin{equation}
     1 + 2/(n-1) + 1/(n-1)^2 = n^2/(n-1)^2.
 \end{equation}\]</div>
 <p>The middle term of the inner sum is a constant times <span class="math notranslate nohighlight">\((X_j - \bar{X})\)</span>, which sums to zero over <span class="math notranslate nohighlight">\(j\)</span>.
 Simplifying the previous displayed equation yields</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ba85e6d9-467f-4c3a-840f-f3cd93743bd2">
-<span class="eqno">()<a class="headerlink" href="#equation-ba85e6d9-467f-4c3a-840f-f3cd93743bd2" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-933be70b-fe0e-4542-a1af-d0874d3f3e6c">
+<span class="eqno">()<a class="headerlink" href="#equation-933be70b-fe0e-4542-a1af-d0874d3f3e6c" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
     \sum_{i=1}^n \sum_{j \ne i} (X_j - \bar{X}_{(i)})^2
     &amp;=&amp;
         \frac{1}{n-1} \sum_{i=1}^n \left ( n \hat{\sigma}^2 + \frac{n}{(n-1)^2}(X_i - \bar{X})^2 - \frac{n^2}{(n-1)^2} (X_i - \bar{X})^2 \right ) \nonumber \\
@@ -712,14 +712,14 @@ Simplifying the previous displayed equation yields</p>
         \frac{n(n-2)}{(n-1)^2}\hat{\sigma}^2.
 \end{eqnarray}\]</div>
 <p>The jackknife bias estimate is thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-58a0b1e4-a024-415d-9720-fd738b2e223f">
-<span class="eqno">()<a class="headerlink" href="#equation-58a0b1e4-a024-415d-9720-fd738b2e223f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d40444bf-a3c6-4ad6-93f9-7a6450bcb884">
+<span class="eqno">()<a class="headerlink" href="#equation-d40444bf-a3c6-4ad6-93f9-7a6450bcb884" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \widehat{\mbox{BIAS}} = (n-1)\left ( T(\hat{F}_{(\cdot)}) - T(\hat{F}_n) \right )
     = \hat{\sigma}^2 \frac{n(n-2) - (n-1)^2}{n-1} = \frac{-\hat{\sigma}^2}{n-1}.
 \end{equation}\]</div>
 <p>The bias-corrected MLE variance estimate is therefore</p>
-<div class="amsmath math notranslate nohighlight" id="equation-934ffbe8-fe45-4120-9ce6-d0a686be94e1">
-<span class="eqno">()<a class="headerlink" href="#equation-934ffbe8-fe45-4120-9ce6-d0a686be94e1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5923928a-a642-4161-a3c5-46b8ed45ff3c">
+<span class="eqno">()<a class="headerlink" href="#equation-5923928a-a642-4161-a3c5-46b8ed45ff3c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{\sigma}^2 \left ( 1 - \frac{1}{n-1} \right ) =
     \hat{\sigma}^2 \frac{n}{n-1} = \frac{1}{n-1} \sum_{j=1}^n (X_j - \bar{X})^2 = S^2,
 \end{equation}\]</div>
@@ -727,8 +727,8 @@ Simplifying the previous displayed equation yields</p>
 <p>The jackknife also can be used to estimate other properties of an
 estimator, such as its variance.
 The jackknife estimate of the variance of <span class="math notranslate nohighlight">\(T(\hat{F}_n)\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b806ed78-122d-457e-90a2-b1c8c7475b6f">
-<span class="eqno">()<a class="headerlink" href="#equation-b806ed78-122d-457e-90a2-b1c8c7475b6f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-25ad6714-7d47-4e5e-bfc2-b867d37b28a7">
+<span class="eqno">()<a class="headerlink" href="#equation-25ad6714-7d47-4e5e-bfc2-b867d37b28a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\mathrm{Var}}(T) = \frac{n-1}{n} \sum_{j=1}^n ( T_{(j)} - T_{(\cdot)} )^2.
 \end{equation}\]</div>
 <p>It is convenient to think of distributions on data sets to compare
@@ -737,8 +737,8 @@ We shall follow the notation in Efron (1982).
 We condition on <span class="math notranslate nohighlight">\((X_i = x_i)\)</span> and treat the data as fixed in what
 follows.
 Let <span class="math notranslate nohighlight">\(\mathcal{S}_n\)</span> be the <span class="math notranslate nohighlight">\(n\)</span>-dimensional simplex</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dc880d02-71ba-4d7d-914c-e68ea42f7c80">
-<span class="eqno">()<a class="headerlink" href="#equation-dc880d02-71ba-4d7d-914c-e68ea42f7c80" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d386c0d7-29f0-421f-a625-2d4450006baf">
+<span class="eqno">()<a class="headerlink" href="#equation-d386c0d7-29f0-421f-a625-2d4450006baf" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathcal{S}_n \equiv \{ \mathbb{P}^* = (P_i^*)_{i=1}^n \in \Re^n
     : P_i^* \ge 0 \mbox{ and } \sum_{i=1}^n P_i^* = 1 \}.
 \end{equation}\]</div>
@@ -753,8 +753,8 @@ The resampling vector <span class="math notranslate nohighlight">\(\mathbb{P}^0 
 empirical distribution <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> (each datum <span class="math notranslate nohighlight">\(x_j\)</span> has the same
 mass).
 The resampling vector</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4478bc72-b24d-4927-9803-012a51407e73">
-<span class="eqno">()<a class="headerlink" href="#equation-4478bc72-b24d-4927-9803-012a51407e73" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4912b080-172c-4ceb-b73d-a5459960c4d7">
+<span class="eqno">()<a class="headerlink" href="#equation-4912b080-172c-4ceb-b73d-a5459960c4d7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathbb{P}_i = \frac{1}{n-1}(1, 1, \ldots, 0, 1, \ldots, 1),
 \end{equation}\]</div>
 <p>which has the zero in the <span class="math notranslate nohighlight">\(i\)</span>th place, is one of the <span class="math notranslate nohighlight">\(n\)</span>
@@ -765,13 +765,13 @@ multiples of <span class="math notranslate nohighlight">\(1/n\)</span>.</p>
 <p>The bootstrap estimate of variance tends to be better than the
 jackknife estimate of variance for nonlinear estimators because of
 the distance between the empirical measure and the resampled measures:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-45ea366c-e878-4e16-a8cb-385419169a37">
-<span class="eqno">()<a class="headerlink" href="#equation-45ea366c-e878-4e16-a8cb-385419169a37" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e7efabbb-b449-497f-b5eb-8d4a043054a7">
+<span class="eqno">()<a class="headerlink" href="#equation-e7efabbb-b449-497f-b5eb-8d4a043054a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \| \mathbb{P}^* - \mathbb{P}^0 \| = O_P(n^{-1/2}),
 \end{equation}\]</div>
 <p>while</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f4f968be-6457-4211-a8f0-0723862763eb">
-<span class="eqno">()<a class="headerlink" href="#equation-f4f968be-6457-4211-a8f0-0723862763eb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-491ad22b-971f-4067-a5d9-3f34a522764b">
+<span class="eqno">()<a class="headerlink" href="#equation-491ad22b-971f-4067-a5d9-3f34a522764b" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \| \mathbb{P}_k - \mathbb{P}^0 \| = O(n^{-1}).
 \end{equation}\]</div>
 <p>To see the former, recall that the difference between the
@@ -779,8 +779,8 @@ empirical distribution and the true distribution is <span class="math notranslat
 For any two probability distributions <span class="math notranslate nohighlight">\(\mathbb{P}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbb{P}_2\)</span>, on
 <span class="math notranslate nohighlight">\(\Re\)</span>, define the
 Kolmogorov-Smirnov distance</p>
-<div class="amsmath math notranslate nohighlight" id="equation-426d73dd-d3d0-4fd5-b8e5-57068a4c1950">
-<span class="eqno">()<a class="headerlink" href="#equation-426d73dd-d3d0-4fd5-b8e5-57068a4c1950" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a1c3637c-3c2c-4dbc-85ab-c14ec375dc6d">
+<span class="eqno">()<a class="headerlink" href="#equation-a1c3637c-3c2c-4dbc-85ab-c14ec375dc6d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     d_{KS}(\mathbb{P}_1, \mathbb{P}_2) \equiv
     \| \mathbb{P}_1 - \mathbb{P}_2 \|_{KS} \equiv \sup_{x \in \Re} |
     \mathbb{P}_1\{(-\infty, x]\} - \mathbb{P}_2\{(-\infty, x]\} |.
@@ -788,8 +788,8 @@ Kolmogorov-Smirnov distance</p>
 <p>There exist universal constants <span class="math notranslate nohighlight">\(\chi_n(\alpha)\)</span>
 so that for every continuous (w.r.t. Lebesgue measure) distribution
 <span class="math notranslate nohighlight">\(F\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-989bd924-6fb5-446a-931f-2c177a729919">
-<span class="eqno">()<a class="headerlink" href="#equation-989bd924-6fb5-446a-931f-2c177a729919" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-de692bb7-d1ed-49e0-8858-f5d7910843dd">
+<span class="eqno">()<a class="headerlink" href="#equation-de692bb7-d1ed-49e0-8858-f5d7910843dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathbb{P}_F
     \left \{ \| F - \hat{F}_n \|_{KS} \ge \chi_n(\alpha) \right \}
     = \alpha.
@@ -797,8 +797,8 @@ so that for every continuous (w.r.t. Lebesgue measure) distribution
 <p>This is the Dvoretzky-Kiefer-Wolfowitz inequality.
 Massart (<em>Ann. Prob., 18</em>, 1269–1283, 1990)
 showed that the constant</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a9bd6653-b9d3-4ebf-b3f6-3c99687b6a74">
-<span class="eqno">()<a class="headerlink" href="#equation-a9bd6653-b9d3-4ebf-b3f6-3c99687b6a74" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6b7510d1-152e-4202-a25f-b9d561ec8108">
+<span class="eqno">()<a class="headerlink" href="#equation-6b7510d1-152e-4202-a25f-b9d561ec8108" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \chi_n(\alpha) \le \sqrt{\frac{\ln \frac{2}{\alpha}}{2n}}
 \end{equation}\]</div>
 <p>is <em>tight</em>.
@@ -817,35 +817,35 @@ distance between the jackknife measure and the empirical distribution
 is exactly <span class="math notranslate nohighlight">\(1/n\)</span>.
 Consider the jackknife cdf <span class="math notranslate nohighlight">\(\hat{F}_{n,(j)}\)</span>, the cdf of the sample without <span class="math notranslate nohighlight">\(X_{(j)}\)</span>,
 <span class="math notranslate nohighlight">\(1 &lt; j &lt; n\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b4186065-e022-499a-b32d-e05a34eb4610">
-<span class="eqno">()<a class="headerlink" href="#equation-b4186065-e022-499a-b32d-e05a34eb4610" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f2a062fd-061f-497e-8a2d-b24ce5c19c1b">
+<span class="eqno">()<a class="headerlink" href="#equation-f2a062fd-061f-497e-8a2d-b24ce5c19c1b" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{F}_{n,(j)}(X_{(j)}) = (j-1)/(n-1),
 \end{equation}\]</div>
 <p>while <span class="math notranslate nohighlight">\(\hat{F}_n((X_{(j)}) = j/n\)</span>; the difference is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e5dc9f43-c96c-4820-a0a9-acd253a06929">
-<span class="eqno">()<a class="headerlink" href="#equation-e5dc9f43-c96c-4820-a0a9-acd253a06929" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-22c1b7ef-6462-4578-bd78-767241309a70">
+<span class="eqno">()<a class="headerlink" href="#equation-22c1b7ef-6462-4578-bd78-767241309a70" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{j}{n} - \frac{j-1}{n-1} = \frac{j(n-1) - n(j-1)}{n(n-1)} =
     \frac{n-j}{n(n-1)} = \frac{1}{n-1} - \frac{j}{n(n-1)}.
 \end{equation}\]</div>
 <p>On the other hand,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-784146c4-f495-4e86-898f-0e1f2be4c723">
-<span class="eqno">()<a class="headerlink" href="#equation-784146c4-f495-4e86-898f-0e1f2be4c723" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6caf58ba-db54-48e9-bb7b-9ffd2690805d">
+<span class="eqno">()<a class="headerlink" href="#equation-6caf58ba-db54-48e9-bb7b-9ffd2690805d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{F}_{n,(j)}(X_{(j-1)}) = (j-1)/(n-1),
 \end{equation}\]</div>
 <p>while <span class="math notranslate nohighlight">\(\hat{F}_n((X_{(j-1)})= (j-1)/n\)</span>; the difference is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bca18600-e067-49c7-900c-5babc37b0ca5">
-<span class="eqno">()<a class="headerlink" href="#equation-bca18600-e067-49c7-900c-5babc37b0ca5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8a83c9e0-3e82-45e6-bdb7-c4f01a705607">
+<span class="eqno">()<a class="headerlink" href="#equation-8a83c9e0-3e82-45e6-bdb7-c4f01a705607" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{j-1}{n-1} - \frac{j-1}{n} = \frac{n(j-1) - (n-1)(j-1)}{n(n-1)} =
     \frac{j - 1}{n(n-1)}.
 \end{equation}\]</div>
 <p>Thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ab0c005e-fb93-400c-a10e-bfc473c6cb44">
-<span class="eqno">()<a class="headerlink" href="#equation-ab0c005e-fb93-400c-a10e-bfc473c6cb44" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-61846010-7e08-4aa3-adbb-f7ffbef70c5d">
+<span class="eqno">()<a class="headerlink" href="#equation-61846010-7e08-4aa3-adbb-f7ffbef70c5d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \| \hat{F}_{n,(j)} - \hat{F}_{n} \| = \frac{1}{n(n-1)} \max\{n-j, j-1\}.
 \end{equation}\]</div>
 <p>But <span class="math notranslate nohighlight">\(n/2 \le \max\{n-j, j-1\} \le n-1\)</span>, so</p>
-<div class="amsmath math notranslate nohighlight" id="equation-78ee852a-3801-4681-bd41-467b76c1ce76">
-<span class="eqno">()<a class="headerlink" href="#equation-78ee852a-3801-4681-bd41-467b76c1ce76" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6e7df58b-3986-4e20-ba10-28ddb99b98f0">
+<span class="eqno">()<a class="headerlink" href="#equation-6e7df58b-3986-4e20-ba10-28ddb99b98f0" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \| \hat{F}_{n,(j)} - \hat{F}_n\| = O(n^{-1}).
 \end{equation}\]</div>
 <p>The neighborhood that the bootstrap samples is larger, and is
@@ -869,22 +869,22 @@ Continuity of <span class="math notranslate nohighlight">\(F\)</span> ensures th
 Now the event <span class="math notranslate nohighlight">\(\{ X_j \le x_t \}\)</span> is equivalent to the
 event <span class="math notranslate nohighlight">\(\{F(X_j) \le F(x_t)\}\)</span> up to a set of <span class="math notranslate nohighlight">\(F\)</span>-measure zero.
 Thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ef13a774-9191-47f7-8653-8eba604f0e08">
-<span class="eqno">()<a class="headerlink" href="#equation-ef13a774-9191-47f7-8653-8eba604f0e08" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-22a23ab1-03b7-4309-b0c4-fe5b97a87f3f">
+<span class="eqno">()<a class="headerlink" href="#equation-22a23ab1-03b7-4309-b0c4-fe5b97a87f3f" title="Permalink to this equation">#</a></span>\[\begin{equation}
     t = \mathbb{P}_F \{ X_j \le x_t \} = \mathbb{P}_F \{ F(X_j) \le F(x_t) \} =
     \mathbb{P}_F \{ F(X_j) \le t \}, \,\, t \in [0, 1];
 \end{equation}\]</div>
 <p>i.e., <span class="math notranslate nohighlight">\(\{ F(X_j) \}_{j=1}^n\)</span> are IID <span class="math notranslate nohighlight">\(U[0, 1]\)</span>.
 Let</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bd9b8045-ec71-48fd-8670-34798cd97c1a">
-<span class="eqno">()<a class="headerlink" href="#equation-bd9b8045-ec71-48fd-8670-34798cd97c1a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c97c5f3f-7247-442b-a118-941230cfa392">
+<span class="eqno">()<a class="headerlink" href="#equation-c97c5f3f-7247-442b-a118-941230cfa392" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{G}_n(t) \equiv \#\{F(X_j) \le t\}/n =
     \#\{X_j \le x_t\}/n = \hat{F}_n (x_t)
 \end{equation}\]</div>
 <p>be the empirical cdf of <span class="math notranslate nohighlight">\(\{ F(X_j) \}_{j=1}^n\)</span>.
 Note that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-25236fd5-f1f1-4de9-a879-4e13ffbbbf23">
-<span class="eqno">()<a class="headerlink" href="#equation-25236fd5-f1f1-4de9-a879-4e13ffbbbf23" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dfbf2460-33f9-4c7e-9e7f-0b302f5822a6">
+<span class="eqno">()<a class="headerlink" href="#equation-dfbf2460-33f9-4c7e-9e7f-0b302f5822a6" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \sup_{x \in \Re} | \hat{F}_n(x) - F(x) | =
     \sup_{t \in [0, 1]} | \hat{F}_n(x_t) - F(x_t) | =
     \sup_{t \in [0, 1]} | \hat{G}_n (t) - t |.
@@ -903,8 +903,8 @@ smaller than it is for continuous distributions.</p>
 Recall that a collection <span class="math notranslate nohighlight">\(\{ \mathcal{I}_u \}_{u \in \mathcal{U}}\)</span> of confidence intervals for
 parameters <span class="math notranslate nohighlight">\(\{\theta_u \}_{u \in \mathcal{U}}\)</span> has simultaneous <span class="math notranslate nohighlight">\(1-\alpha\)</span>
 coverage probability if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9a9a2299-ff77-49c2-ac46-49238e2f3f38">
-<span class="eqno">()<a class="headerlink" href="#equation-9a9a2299-ff77-49c2-ac46-49238e2f3f38" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4fc208f7-3778-4df1-88a2-bb447b800fc9">
+<span class="eqno">()<a class="headerlink" href="#equation-4fc208f7-3778-4df1-88a2-bb447b800fc9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P}_{\theta} \left \{ \cap_{u \in \mathcal{U}} \{\mathcal{I}_u \ni \theta_u \} \right \}
 \ge 1-\alpha.
 \end{equation}\]</div>
@@ -941,8 +941,8 @@ Let <span class="math notranslate nohighlight">\(R_n(\theta) = R_n(X_n, \theta)\
 <span class="math notranslate nohighlight">\(H_n\)</span>, and let <span class="math notranslate nohighlight">\(H_n^{-1}(\alpha)\)</span>
 be the largest <span class="math notranslate nohighlight">\(\alpha\)</span> quantile of the distribution of <span class="math notranslate nohighlight">\(R_n\)</span>.
 Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8e3f9e29-0557-493c-8f13-e72598dd81d0">
-<span class="eqno">()<a class="headerlink" href="#equation-8e3f9e29-0557-493c-8f13-e72598dd81d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-40427208-27bc-46e7-8d52-db47987ceb65">
+<span class="eqno">()<a class="headerlink" href="#equation-40427208-27bc-46e7-8d52-db47987ceb65" title="Permalink to this equation">#</a></span>\[\begin{equation}
         \{ \gamma \in \Theta : R_n(\gamma) \le H_n^{-1}(1-\alpha) \}
 \end{equation}\]</div>
 <p>is a <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence set for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
@@ -957,20 +957,20 @@ We would like to know the distribution function <span class="math notranslate no
 Suppose we did.
 Let <span class="math notranslate nohighlight">\(H_n^{-1}(\cdot) = H_n^{-1}(\cdot, F)\)</span> be the inverse cdf of <span class="math notranslate nohighlight">\(D_n\)</span>.
 Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-379f805c-608e-4764-9781-386f5cc226ec">
-<span class="eqno">()<a class="headerlink" href="#equation-379f805c-608e-4764-9781-386f5cc226ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-01798ec4-c64b-4382-bef2-bd0e0b499c52">
+<span class="eqno">()<a class="headerlink" href="#equation-01798ec4-c64b-4382-bef2-bd0e0b499c52" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathbb{P}_F \{ H_n^{-1}(\alpha/2) \le T(\hat{F}_n) - \theta  \le  H_n^{-1}(1- \alpha/2)
     \} = 1-\alpha,
 \end{equation}\]</div>
 <p>so</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c6d3b9ee-3cc8-4764-a7a0-54265e64b37d">
-<span class="eqno">()<a class="headerlink" href="#equation-c6d3b9ee-3cc8-4764-a7a0-54265e64b37d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bdc82e74-b101-4759-9f48-c5c2c0cf732c">
+<span class="eqno">()<a class="headerlink" href="#equation-bdc82e74-b101-4759-9f48-c5c2c0cf732c" title="Permalink to this equation">#</a></span>\[\begin{equation}
         \mathbb{P}_F \{ \theta \le T(\hat{F}_n) -  H_n^{-1}(\alpha/2)  \mbox{ and }
         \theta \ge T(\hat{F}_n) - H_n^{-1}(1-\alpha/2) \} = 1-\alpha,
 \end{equation}\]</div>
 <p>or, equivalently,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-23c8e3ae-e89a-4532-8f76-43eb15040589">
-<span class="eqno">()<a class="headerlink" href="#equation-23c8e3ae-e89a-4532-8f76-43eb15040589" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-175d5b43-767c-4aaf-91ac-eead4a559b17">
+<span class="eqno">()<a class="headerlink" href="#equation-175d5b43-767c-4aaf-91ac-eead4a559b17" title="Permalink to this equation">#</a></span>\[\begin{equation}
         \mathbb{P}_F \{ [T(\hat{F}_n) - H_n^{-1}(1-\alpha/2), T(\hat{F}_n) -  H_n^{-1}(\alpha/2)]
         \ni \theta \} = 1-\alpha,
 \end{equation}\]</div>
@@ -984,14 +984,14 @@ under resampling from <span class="math notranslate nohighlight">\(\hat{F}_n\)</
 See <a class="reference internal" href="confidence-sets.html"><span class="doc std std-doc">confidence sets</span></a>.)</p>
 <p>An alternative approach is to take
 <span class="math notranslate nohighlight">\(D_n (\theta) = |T(\hat{F}_n) - \theta|\)</span>; then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-98153b46-8d62-4f1c-bf89-231b1c5cd2f9">
-<span class="eqno">()<a class="headerlink" href="#equation-98153b46-8d62-4f1c-bf89-231b1c5cd2f9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-083fec38-86b6-4d7d-a12d-4a9957fbe03b">
+<span class="eqno">()<a class="headerlink" href="#equation-083fec38-86b6-4d7d-a12d-4a9957fbe03b" title="Permalink to this equation">#</a></span>\[\begin{equation}
         \mathbb{P}_F \{ | T(\hat{F}_n) - \theta | \le  H_n^{-1}(1- \alpha)
         \} = 1-\alpha,
 \end{equation}\]</div>
 <p>so</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2674ea29-1622-49cc-9c05-dacd2ef343d6">
-<span class="eqno">()<a class="headerlink" href="#equation-2674ea29-1622-49cc-9c05-dacd2ef343d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-31867ffd-94a8-4b73-a8a0-597e32ea7494">
+<span class="eqno">()<a class="headerlink" href="#equation-31867ffd-94a8-4b73-a8a0-597e32ea7494" title="Permalink to this equation">#</a></span>\[\begin{equation}
         \mathbb{P}_F \{ [ T(\hat{F}_n -  H_n^{-1}(1-\alpha) , T(\hat{F}_n +  H_n^{-1}(1-\alpha)]
         \ni \theta  \} = 1-\alpha.
 \end{equation}\]</div>
@@ -1013,8 +1013,8 @@ in probability to <span class="math notranslate nohighlight">\(H\)</span> in sup
 other (approximate) pivot.
 Let <span class="math notranslate nohighlight">\(\hat{H}_n(\cdot, \hat{F}_n)\)</span> be the bootstrap estimate of the cdf of <span class="math notranslate nohighlight">\(R_n\)</span>;
 The set</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cc8adf8b-1fba-49a3-8687-8f64db959be9">
-<span class="eqno">()<a class="headerlink" href="#equation-cc8adf8b-1fba-49a3-8687-8f64db959be9" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-527bff7d-8945-4d76-bfd8-6a410d40d4a5">
+<span class="eqno">()<a class="headerlink" href="#equation-527bff7d-8945-4d76-bfd8-6a410d40d4a5" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
         B_n &amp;=&amp; \{ \gamma \in \Theta : \hat{H}_n (R_n(\gamma)) \le 1-\alpha \}
             \nonumber \\
         &amp;=&amp; \{ \gamma \in \Theta : R_n(\gamma) \le \hat{H}_n^{-1}(1-\alpha) \}
@@ -1033,8 +1033,8 @@ which is not generally true.  One could instead treat <span class="math notransl
 and pivot to reduce the dependence on <span class="math notranslate nohighlight">\(F\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(H_{n,1} = H_{n,1}(\cdot, F)\)</span> be the cdf of the new root <span class="math notranslate nohighlight">\(R_{n,1}(\theta)\)</span>,
 estimate <span class="math notranslate nohighlight">\(H_{n,1}\)</span> by <span class="math notranslate nohighlight">\(\hat{H}_{n,1} = H_{n,1}(\cdot, \hat{F}_n)\)</span>, and define</p>
-<div class="amsmath math notranslate nohighlight" id="equation-68e979f7-b142-4ee0-9253-7b6cb1c9842b">
-<span class="eqno">()<a class="headerlink" href="#equation-68e979f7-b142-4ee0-9253-7b6cb1c9842b" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-2063fac2-fe68-4810-abc1-057270604ac6">
+<span class="eqno">()<a class="headerlink" href="#equation-2063fac2-fe68-4810-abc1-057270604ac6" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
         B_{n,1} &amp;=&amp; \{ \gamma \in \Theta : \hat{H}_{n,1}(R_{n,1}(\gamma)) \le 1-\alpha \}
              \nonumber \\
         &amp;=&amp; \{ \gamma \in \Theta : \hat{H}_{n,1}(\hat{H}_n(R_n(\gamma))) \le 1-\alpha \}
@@ -1061,25 +1061,25 @@ Let <span class="math notranslate nohighlight">\(x_n^{**}\)</span> denote a samp
 <span class="math notranslate nohighlight">\(x_n^{**}\)</span> are conditionally IID given <span class="math notranslate nohighlight">\(x_n\)</span> and <span class="math notranslate nohighlight">\(x_n^*\)</span>.
 Let <span class="math notranslate nohighlight">\(\hat{\theta}_n = T(\hat{F}_n)\)</span>, and <span class="math notranslate nohighlight">\(\hat{\theta}_n^* = T(\hat{F}_n^*)\)</span>.
 Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9b64c6da-e711-41f8-8df9-986036b79bff">
-<span class="eqno">()<a class="headerlink" href="#equation-9b64c6da-e711-41f8-8df9-986036b79bff" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-57f8756c-fae4-45d4-8b25-bcfcb81158f3">
+<span class="eqno">()<a class="headerlink" href="#equation-57f8756c-fae4-45d4-8b25-bcfcb81158f3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_n(s, F) = \mathbb{P}_F \{ R_n (x_n, \theta) \le s \}  ,
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8fdd5452-9969-44ce-a48c-b843f568fdbe">
-<span class="eqno">()<a class="headerlink" href="#equation-8fdd5452-9969-44ce-a48c-b843f568fdbe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-164454aa-ae1d-4e29-a3ea-173e043b3b7f">
+<span class="eqno">()<a class="headerlink" href="#equation-164454aa-ae1d-4e29-a3ea-173e043b3b7f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_{n,1}(s, F) = \mathbb{P}_F \left \{ \mathbb{P}_{\hat{F}_n} \{ R_n ( x_n^*, \hat{\theta}_n )
 &lt;  R_n(x_n, \theta) \} \le s \right \}.
 \end{equation}\]</div>
 <p>The bootstrap estimates of these cdfs are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b2242590-9997-4336-897c-d55d6c42cc74">
-<span class="eqno">()<a class="headerlink" href="#equation-b2242590-9997-4336-897c-d55d6c42cc74" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e78f6fba-89da-4bcc-8b70-4b290fbbf878">
+<span class="eqno">()<a class="headerlink" href="#equation-e78f6fba-89da-4bcc-8b70-4b290fbbf878" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{H}_n(s) = H_n(s, \hat{F}_n ) = \mathbb{P}_{\hat{F}_n} \{ R_n ( x_n^*, \hat{\theta}_n ) \le s
 \},
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-70011bc1-8699-457c-ae05-31bdc82f107f">
-<span class="eqno">()<a class="headerlink" href="#equation-70011bc1-8699-457c-ae05-31bdc82f107f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ede8e8b2-80ff-48d7-9d14-e4af802c3a34">
+<span class="eqno">()<a class="headerlink" href="#equation-ede8e8b2-80ff-48d7-9d14-e4af802c3a34" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{H}_{n,1}(s) = H_{n,1}(s, \hat{F}_n) = \mathbb{P}_{\hat{F}_n}
 \left \{ \mathbb{P}_{\hat{F}_n^*} \{ R_n(x_n^{**}, \hat{\theta}_n^* )
 &lt; R_n(x_n^*, \hat{\theta}_n) \} \le s \right \}.
@@ -1193,21 +1193,21 @@ from data <span class="math notranslate nohighlight">\(X \sim N(\theta, I)\)</sp
 This is an example illustrating that <em>what</em> one bootstraps is important, and that
 naive plug-in bootstrapping doesn’t always work.</p>
 <p>The sets are spheres centered at the shrinkage estimate</p>
-<div class="amsmath math notranslate nohighlight" id="equation-778bed60-a762-420b-acf7-af785b774ee3">
-<span class="eqno">()<a class="headerlink" href="#equation-778bed60-a762-420b-acf7-af785b774ee3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8a8f6e6a-88b0-45b5-a3cc-cb3bdeb7efe3">
+<span class="eqno">()<a class="headerlink" href="#equation-8a8f6e6a-88b0-45b5-a3cc-cb3bdeb7efe3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\theta}_S = \left ( 1 - \frac{q-2}{\|X\|^2} \right ) X,
 \end{equation}\]</div>
 <p>with random diameter <span class="math notranslate nohighlight">\(\hat{d}\)</span>.
 That is, the confidence sets <span class="math notranslate nohighlight">\(C\)</span> are of the form</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ae32a57a-be42-402f-8718-b46b4d676f08">
-<span class="eqno">()<a class="headerlink" href="#equation-ae32a57a-be42-402f-8718-b46b4d676f08" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-70295cbd-4dd9-4283-8ef4-5dd6dfcb1391">
+<span class="eqno">()<a class="headerlink" href="#equation-70295cbd-4dd9-4283-8ef4-5dd6dfcb1391" title="Permalink to this equation">#</a></span>\[\begin{equation}
 C(\hat{\theta}_S, \hat{d}) =
 \left \{ \gamma \in \Re^q : \| \hat{\theta}_S - \gamma \| \le \hat{d}
 \right \}.
 \end{equation}\]</div>
 <p>The problem is how to find <span class="math notranslate nohighlight">\(\hat{d} = \hat{d}(X; \alpha)\)</span> such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0564b544-c067-4239-8872-fabe954dcca7">
-<span class="eqno">()<a class="headerlink" href="#equation-0564b544-c067-4239-8872-fabe954dcca7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b46b4ad8-06f8-4c15-9c00-c1b9cbfb5554">
+<span class="eqno">()<a class="headerlink" href="#equation-b46b4ad8-06f8-4c15-9c00-c1b9cbfb5554" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P}_\gamma \{ C(\hat{\theta}_S, \hat{d})  \ni \gamma \} \ge 1-\alpha
 \end{equation}\]</div>
 <p>whatever be <span class="math notranslate nohighlight">\(\gamma \in \Re^q\)</span>.</p>
@@ -1228,16 +1228,16 @@ confidence sphere seems to be to estimate <span class="math notranslate nohighli
 <p><strong>Definition.</strong>
 The <em>geometrical risk</em> of a confidence set <span class="math notranslate nohighlight">\(C\)</span> for the parameter <span class="math notranslate nohighlight">\(\theta \in \Re^q\)</span>
 is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5fa2e63f-2d3c-4b1e-bad1-b913ae00729b">
-<span class="eqno">()<a class="headerlink" href="#equation-5fa2e63f-2d3c-4b1e-bad1-b913ae00729b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b5e3320b-0ee9-44bb-bf4c-2f7792f95610">
+<span class="eqno">()<a class="headerlink" href="#equation-b5e3320b-0ee9-44bb-bf4c-2f7792f95610" title="Permalink to this equation">#</a></span>\[\begin{equation}
 G_q(C, \theta) \equiv q^{-1/2} E_\theta \sup_{\gamma \in C} \| \gamma - \theta \|.
 \end{equation}\]</div>
 <p>That is, the geometrical risk is the expected distance to the parameter from the
 most distant point in the confidence set.
 \end{Definition}</p>
 <p>For confidence spheres</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d1b6cc91-acd8-48e9-8b5d-d9916899acd1">
-<span class="eqno">()<a class="headerlink" href="#equation-d1b6cc91-acd8-48e9-8b5d-d9916899acd1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-76fa7831-d6b9-437f-b7c4-651af350cc1b">
+<span class="eqno">()<a class="headerlink" href="#equation-76fa7831-d6b9-437f-b7c4-651af350cc1b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 C = C(\hat{\theta}, \hat{d}) = \{ \gamma \in \Re^q : \| \gamma - \hat{\theta} \| \le
 \hat{d} \},
 \end{equation}\]</div>
@@ -1245,8 +1245,8 @@ C = C(\hat{\theta}, \hat{d}) = \{ \gamma \in \Re^q : \| \gamma - \hat{\theta} \|
 to the most distant
 point in the confidence set is the distance from <span class="math notranslate nohighlight">\(\theta\)</span> to the center of the sphere,
 plus the radius of the sphere, so</p>
-<div class="amsmath math notranslate nohighlight" id="equation-33a2dd66-18e5-4f09-b6f5-69cd3f944385">
-<span class="eqno">()<a class="headerlink" href="#equation-33a2dd66-18e5-4f09-b6f5-69cd3f944385" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-d0716a0e-b7c7-4d0c-8375-4cba9ace5904">
+<span class="eqno">()<a class="headerlink" href="#equation-d0716a0e-b7c7-4d0c-8375-4cba9ace5904" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 G_q(C(\hat{\theta}, \hat{r}), \theta) &amp;=&amp;
 q^{-1/2} E_\theta \left (  \| \hat{\theta} - \theta \| + \hat{d} \right )
 \nonumber \\
@@ -1258,18 +1258,18 @@ q^{-1/2} E_\theta \| \hat{\theta} - \theta \| + q^{-1/2} E_\theta \hat{d} .
 (Beran, 1995, Lemma 4.1).
 Define</p>
 </div></blockquote>
-<div class="amsmath math notranslate nohighlight" id="equation-f96ef20c-353d-4768-b3ab-19defed762a5">
-<span class="eqno">()<a class="headerlink" href="#equation-f96ef20c-353d-4768-b3ab-19defed762a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c6062dc1-af30-4e10-8ff7-6525e8c3327d">
+<span class="eqno">()<a class="headerlink" href="#equation-c6062dc1-af30-4e10-8ff7-6525e8c3327d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     W_q(X, \gamma) \equiv (q^{-1/2} ( \|X - \gamma \|^2 - q ), q^{-1/2} \gamma'(X - \gamma).
 \end{equation}\]</div>
 <p>Suppose <span class="math notranslate nohighlight">\(\{ \gamma_q \in \Re^q \}\)</span> is any sequence such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1a4026f3-f359-463c-b801-4d9a50b44e18">
-<span class="eqno">()<a class="headerlink" href="#equation-1a4026f3-f359-463c-b801-4d9a50b44e18" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{eq:gammaqCond}
+<div class="amsmath math notranslate nohighlight" id="equation-18b71fd5-a080-456d-9856-79a446665ce9">
+<span class="eqno">()<a class="headerlink" href="#equation-18b71fd5-a080-456d-9856-79a446665ce9" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{eq:gammaqCond}
     \frac{\| \gamma_q \|^2}{q}  \rightarrow a &lt; \infty \mbox{ as } q \rightarrow \infty .
 \end{equation}\]</div>
 <p>Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-64ecc46e-a5a2-4e65-90f7-2e05913378b1">
-<span class="eqno">()<a class="headerlink" href="#equation-64ecc46e-a5a2-4e65-90f7-2e05913378b1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dd91dd46-ac3f-4f15-843e-0144f060f9bc">
+<span class="eqno">()<a class="headerlink" href="#equation-dd91dd46-ac3f-4f15-843e-0144f060f9bc" title="Permalink to this equation">#</a></span>\[\begin{equation}
     W_q(X, \gamma_q) \overset{W}{\rightarrow} (\sqrt{2} Z_1, \sqrt{a} Z_2 )
 \end{equation}\]</div>
 <p>under <span class="math notranslate nohighlight">\(\mathbb{P}_{\gamma_q}\)</span>, where <span class="math notranslate nohighlight">\(Z_1\)</span> and <span class="math notranslate nohighlight">\(Z_2\)</span> are IID standard normal random variables.
@@ -1287,8 +1287,8 @@ so the first component of <span class="math notranslate nohighlight">\(W_q\)</sp
 distribution is asymptotically (in <span class="math notranslate nohighlight">\(q\)</span>) normal.
 The second component of <span class="math notranslate nohighlight">\(W_q\)</span> is a linear combination of IID standard normals; by
 symmetry (as argued above), its distribution is that of</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7e740a96-e6c9-4cf8-939e-a268e0f9d363">
-<span class="eqno">()<a class="headerlink" href="#equation-7e740a96-e6c9-4cf8-939e-a268e0f9d363" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-92c51732-84cf-4b7c-b05d-9f701cc5f608">
+<span class="eqno">()<a class="headerlink" href="#equation-92c51732-84cf-4b7c-b05d-9f701cc5f608" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 q^{-1/2} \sum_{j=1}^q q^{-1/2}\| \gamma_q\| Z_j &amp;=&amp;
 \| \gamma_q \|\sum_{j=1}^q Z_j
 \nonumber \\
@@ -1299,8 +1299,8 @@ of the James-Stein estimator is
 <span class="math notranslate nohighlight">\(1 - q^{-1} E_\theta \{ (q-2)^2/\|X\|^2 \} &lt; 1\)</span>.
 The difference between the loss of <span class="math notranslate nohighlight">\(\hat{\theta}_S\)</span> and an unbiased estimate of
 its risk is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c412af74-3f81-4c52-b4ea-0cba6bc1bf7c">
-<span class="eqno">()<a class="headerlink" href="#equation-c412af74-3f81-4c52-b4ea-0cba6bc1bf7c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8aeb98bf-5d5f-435e-a08e-ec0c60d03ac6">
+<span class="eqno">()<a class="headerlink" href="#equation-8aeb98bf-5d5f-435e-a08e-ec0c60d03ac6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 D_q(X, \theta) = q^{-1/2} \{ \| \hat{\theta}_S - \theta \|^2 -
 [q - (q-2)^2/\|X\|^2] \}.
 \end{equation}\]</div>
@@ -1308,18 +1308,18 @@ D_q(X, \theta) = q^{-1/2} \{ \| \hat{\theta}_S - \theta \|^2 -
 through <span class="math notranslate nohighlight">\(\| \theta\|\)</span>; Beran writes the distribution as <span class="math notranslate nohighlight">\(H_q(\| \theta \|^2/q)\)</span>.
 Beran shows that if  <span class="math notranslate nohighlight">\(\{ \gamma_q \in \Re^q \}\)</span> satisfies \ref{eq:gammaqCond},
 then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a9ea8916-858e-4554-8933-432472491afb">
-<span class="eqno">()<a class="headerlink" href="#equation-a9ea8916-858e-4554-8933-432472491afb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-285ea335-ba5a-4d67-86be-2f519fdabe44">
+<span class="eqno">()<a class="headerlink" href="#equation-285ea335-ba5a-4d67-86be-2f519fdabe44" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_q(\|\gamma_q\|^2/q) \overset{W}{\rightarrow} N(0, \sigma^2(a)),
 \end{equation}\]</div>
 <p>where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b1fe6f68-b54e-48bb-af18-767a678fbe3f">
-<span class="eqno">()<a class="headerlink" href="#equation-b1fe6f68-b54e-48bb-af18-767a678fbe3f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a8b16994-470e-4751-a02c-ddba6999e0a4">
+<span class="eqno">()<a class="headerlink" href="#equation-a8b16994-470e-4751-a02c-ddba6999e0a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma^2(t) \equiv 2 - 4t/(1+t)^2 \ge 1.
 \end{equation}\]</div>
 <p>Define</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8b4787fc-06c8-4b9a-a4a7-43e6b1c0a112">
-<span class="eqno">()<a class="headerlink" href="#equation-8b4787fc-06c8-4b9a-a4a7-43e6b1c0a112" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ecc38ccf-6593-4b81-8781-3b24aad37487">
+<span class="eqno">()<a class="headerlink" href="#equation-ecc38ccf-6593-4b81-8781-3b24aad37487" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\theta}_{\mbox{CL}} = [ 1 - (q-2)/\|X\|^2]_+^{1/2} X.
 \end{equation}\]</div>
 <blockquote>
@@ -1328,24 +1328,24 @@ H_q(\|\gamma_q\|^2/q) \overset{W}{\rightarrow} N(0, \sigma^2(a)),
 Suppose   <span class="math notranslate nohighlight">\(\{ \gamma_q \in \Re^q \}\)</span> satisfies    \ref{eq:gammaqCond}.
 Then</p>
 </div></blockquote>
-<div class="amsmath math notranslate nohighlight" id="equation-290c862f-1146-4071-a5bb-f34ffda07962">
-<span class="eqno">()<a class="headerlink" href="#equation-290c862f-1146-4071-a5bb-f34ffda07962" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-687c1508-b1f5-4c8e-8db9-a19bd457d28e">
+<span class="eqno">()<a class="headerlink" href="#equation-687c1508-b1f5-4c8e-8db9-a19bd457d28e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_q( \|\hat{\theta}_{\mbox{CL}}\|^2/q)   \overset{W}{\rightarrow} N(0, \sigma^2(a))   ,
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-6eef89df-298c-4d34-b916-f348b8524851">
-<span class="eqno">()<a class="headerlink" href="#equation-6eef89df-298c-4d34-b916-f348b8524851" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b56c3628-a4d3-47d2-974f-337964f32a1b">
+<span class="eqno">()<a class="headerlink" href="#equation-b56c3628-a4d3-47d2-974f-337964f32a1b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_q(\|X\|^2/q) \overset{W}{\rightarrow} N(0, \sigma^2(1+a)),
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0b393340-60de-4516-a8b8-cb352232ef7d">
-<span class="eqno">()<a class="headerlink" href="#equation-0b393340-60de-4516-a8b8-cb352232ef7d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2055651f-e405-40b1-be62-6c5f4897e430">
+<span class="eqno">()<a class="headerlink" href="#equation-2055651f-e405-40b1-be62-6c5f4897e430" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_q(\| \hat{\theta}_S\|^2/q )\rightarrow N(0, \sigma^2(a^2/(1+a))),
 \end{equation}\]</div>
 <p>all in <span class="math notranslate nohighlight">\(P_{\gamma_q}\)</span> probability.</p>
 <p>It follows that to estimate <span class="math notranslate nohighlight">\(H_q\)</span> by the bootstrap consistently,
 one should use</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b6338a46-1f4f-4652-b885-3cfb5c4b3844">
-<span class="eqno">()<a class="headerlink" href="#equation-b6338a46-1f4f-4652-b885-3cfb5c4b3844" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-93344527-4ad4-4640-b34b-bc53e73d4c7e">
+<span class="eqno">()<a class="headerlink" href="#equation-93344527-4ad4-4640-b34b-bc53e73d4c7e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{H}_B = H_q( \|\hat{\theta}_{\mbox{CL}}\|^2/q       )
 \end{equation}\]</div>
 <p>rather than estimating using either the norm of <span class="math notranslate nohighlight">\(X\)</span> or the norm of the

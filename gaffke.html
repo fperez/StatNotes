@@ -432,13 +432,13 @@ new test for the mean of a bounded population.</p>
 Define <span class="math notranslate nohighlight">\(U_{(n+1)} := 1\)</span>.
 Let <span class="math notranslate nohighlight">\(x = (x_j)_{j=1}^n\)</span>.
 Define</p>
-<div class="amsmath math notranslate nohighlight" id="equation-867624e9-ab15-4734-8ce7-402265417c57">
-<span class="eqno">()<a class="headerlink" href="#equation-867624e9-ab15-4734-8ce7-402265417c57" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c425d8af-a0d9-4d21-a550-788b969b6358">
+<span class="eqno">()<a class="headerlink" href="#equation-c425d8af-a0d9-4d21-a550-788b969b6358" title="Permalink to this equation">#</a></span>\[\begin{equation}
 K(x) := \mathbb{P} \left ( \sum_{j=1}^n x_{(j)} (U_{(j+1)} - U_{(j)})  \le \mu \right ) 
 \end{equation}\]</div>
 <p>Gaffke conjectures that when <span class="math notranslate nohighlight">\(X = (X_j)_{j=1}^n\)</span> where <span class="math notranslate nohighlight">\(\{X_j\}\)</span> are IID with mean <span class="math notranslate nohighlight">\(\mu\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-70697468-e0b3-4e58-b1ce-a3a77b5bb43b">
-<span class="eqno">()<a class="headerlink" href="#equation-70697468-e0b3-4e58-b1ce-a3a77b5bb43b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b76f601e-7b25-483a-b537-69c3c7b870de">
+<span class="eqno">()<a class="headerlink" href="#equation-b76f601e-7b25-483a-b537-69c3c7b870de" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P}\{ K(X) \le \alpha \} \le \alpha.
 \end{equation}\]</div>
 <p>Extensive simulations have not found a case where it fails, but the general case has not been
@@ -447,8 +447,8 @@ proved to be valid.</p>
 For arbitrary <span class="math notranslate nohighlight">\(n\)</span>, if the population is binary, the test is equivalent to the usual Binomial test, and
 if the support of <span class="math notranslate nohighlight">\(X_j\)</span> contains only two points, the test is valid.</p>
 <p>Suppose <span class="math notranslate nohighlight">\(X_i \sim \mathrm{Bernoulli}(p)\)</span>, so</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3241dd87-7fae-4749-9226-2821fac81a88">
-<span class="eqno">()<a class="headerlink" href="#equation-3241dd87-7fae-4749-9226-2821fac81a88" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-488e9ea0-8c4b-4566-bb89-8ed8506c53e7">
+<span class="eqno">()<a class="headerlink" href="#equation-488e9ea0-8c4b-4566-bb89-8ed8506c53e7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 F(x) := \left \{ \begin{array}{ll}
      1-p, &amp; x \in [0,1) \\
      1, &amp;  x \ge 1
@@ -456,8 +456,8 @@ F(x) := \left \{ \begin{array}{ll}
      \right .
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-924a2cf3-a899-43e0-98b7-6dd3b88fc97f">
-<span class="eqno">()<a class="headerlink" href="#equation-924a2cf3-a899-43e0-98b7-6dd3b88fc97f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3cec96d1-6d13-4254-90f9-6fb9c530c46d">
+<span class="eqno">()<a class="headerlink" href="#equation-3cec96d1-6d13-4254-90f9-6fb9c530c46d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 F^{-1}(q) = 
 \begin{cases} 
 0, &amp; q \in [0, 1-p) \\
@@ -466,8 +466,8 @@ F^{-1}(q) =
 \end{equation}\]</div>
 <p>Let <span class="math notranslate nohighlight">\(S := \sum_j X_j\)</span> be the sample sum.
 Then <span class="math notranslate nohighlight">\(S \sim \mathrm{Binom}(n,p)\)</span> is independent of <span class="math notranslate nohighlight">\(\mathbf{V}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a4b79f2f-599c-47e8-90e9-29a3560ef5ba">
-<span class="eqno">()<a class="headerlink" href="#equation-a4b79f2f-599c-47e8-90e9-29a3560ef5ba" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-088c4c6a-9b3d-4e44-8cf7-8491a8aa09a1">
+<span class="eqno">()<a class="headerlink" href="#equation-088c4c6a-9b3d-4e44-8cf7-8491a8aa09a1" title="Permalink to this equation">#</a></span>\[\begin{align}
     \sum_{i=1}^n X_{(i)} \left (V_{(i+1)} - V_{(i)} \right ) &amp;= \sum_S^n \left (V_{(i+1)} - V_{(i)} \right ) \nonumber \\
     &amp;= 1 - V_{(S)}.
 \end{align}\]</div>
@@ -477,16 +477,16 @@ We are interested in <span class="math notranslate nohighlight">\(\Pr \{V_{(n-S+
 = \mathbb{E} 1_{V_{(n-S+1)} \le p}\)</span>.</p>
 <p>The event <span class="math notranslate nohighlight">\(V_{(n-s+1)} \le p\)</span> is the event that there are <span class="math notranslate nohighlight">\(n-s+1\)</span> or more “successes” in <span class="math notranslate nohighlight">\(n\)</span> independent <span class="math notranslate nohighlight">\(\mathrm{Bernoulli}(p)\)</span> trials, i.e., the upper tail probability of a <span class="math notranslate nohighlight">\(\mathrm{Binom}(n,p)\)</span> random variable.</p>
 <p>Conditional on <span class="math notranslate nohighlight">\(X\)</span> (and thus on <span class="math notranslate nohighlight">\(S=s\)</span>),</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bfa94d6a-08d1-43fc-90c2-09b8fae224aa">
-<span class="eqno">()<a class="headerlink" href="#equation-bfa94d6a-08d1-43fc-90c2-09b8fae224aa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9df3ed67-09cc-4c19-a298-af52e2bf818d">
+<span class="eqno">()<a class="headerlink" href="#equation-9df3ed67-09cc-4c19-a298-af52e2bf818d" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \Pr_{\mathbf{V}} \{V_{(n-s+1)} \le p \} =
   \sum_{j=s}^{n} \binom{n}{j}p^j(1-p)^{n-j}. 
 \end{equation}\]</div>
 <p>We need
 <span class="math notranslate nohighlight">\(\Pr_S (\sum_{j=S}^{n} \binom{n}{j}p^j(1-p)^{n-j} \le \alpha )\)</span>.
 Partitioning on <span class="math notranslate nohighlight">\(S\)</span> gives</p>
-<div class="amsmath math notranslate nohighlight" id="equation-34c62c7a-c105-4722-9497-7fb97017e7f6">
-<span class="eqno">()<a class="headerlink" href="#equation-34c62c7a-c105-4722-9497-7fb97017e7f6" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-35dc0f50-f90c-4ff5-aec5-b4eefb9c78cc">
+<span class="eqno">()<a class="headerlink" href="#equation-35dc0f50-f90c-4ff5-aec5-b4eefb9c78cc" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 &amp;&amp; \Pr_S \left ( \sum_{j=S}^n \binom{n}{j}p^j(1-p)^{n-j} \le \alpha \right ) =
 \sum_{s=0}^n \mathbf{1}_{\sum_{j=s}^n \binom{n}{j}p^j(1-p)^{n-j} \le \alpha} \Pr_S(S=s) \nonumber \\
 &amp;&amp;= 
@@ -497,8 +497,8 @@ Partitioning on <span class="math notranslate nohighlight">\(S\)</span> gives</p
 The smallest <span class="math notranslate nohighlight">\(s\)</span> for which the indicator is <span class="math notranslate nohighlight">\(1\)</span> is the
 first <span class="math notranslate nohighlight">\(s\)</span> for which the upper tail probability is not greater than <span class="math notranslate nohighlight">\(\alpha\)</span>.
 I.e.,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-61073087-2160-406c-8758-e86703d975f7">
-<span class="eqno">()<a class="headerlink" href="#equation-61073087-2160-406c-8758-e86703d975f7" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-08b42f9e-5d28-4e55-81e9-491c7778257b">
+<span class="eqno">()<a class="headerlink" href="#equation-08b42f9e-5d28-4e55-81e9-491c7778257b" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 \sum_{s=0}^n \mathbf{1}_{\sum_{j=s}^n \binom{n}{j}p^j(1-p)^{n-j} \le \alpha}
 \binom{n}{s} p^s (1-p)^{n-s} &amp;=&amp;
 \sum_{s: \sum_{j=s}^n \binom{n}{j}p^j(1-p)^{n-j} \le \alpha} \binom{n}{s} p^s (1-p)^{n-s} \nonumber \\
@@ -513,8 +513,8 @@ The mass at <span class="math notranslate nohighlight">\(a\)</span> is <span cla
 <span class="math notranslate nohighlight">\(p\)</span>; <span class="math notranslate nohighlight">\(\mathbb{E} X_i := \mu = (1-p)a + pb\)</span>.
 If we knew <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>, we could transform to <span class="math notranslate nohighlight">\(Y_i := \frac{X_i-a}{b-a}\)</span>. These <span class="math notranslate nohighlight">\(Y_i\)</span> are
 IID <span class="math notranslate nohighlight">\(\mathrm{Bernoulli}(p)\)</span>, for which we know Gaffke yields a valid P-value. We now relate the Gaffke P-values for <span class="math notranslate nohighlight">\(X_i\)</span> and <span class="math notranslate nohighlight">\(Y_i\)</span> to show that we do not actually need to transform <span class="math notranslate nohighlight">\(X_i\)</span> in order to obtain a valid P-value from Gaffke:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9240219b-9a18-4815-b6ee-b07e7c7c384c">
-<span class="eqno">()<a class="headerlink" href="#equation-9240219b-9a18-4815-b6ee-b07e7c7c384c" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-86205e9e-7dcf-462e-8ec4-8561661c1a0d">
+<span class="eqno">()<a class="headerlink" href="#equation-86205e9e-7dcf-462e-8ec4-8561661c1a0d" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
  \Pr_\mathbf{V} \left \{ \sum_{i=1}^n X_{(i)} \left (V_{(i+1)} - V_{(i)} \right ) \le \mu \right \}
 &amp; = &amp;
  \Pr_\mathbf{V} \left \{ \frac{\sum_{i=1}^n X_{(i)} \left (V_{(i+1)} - V_{(i)} \right ) - a}{b-a} \le \frac{\mu-a}{b-a} \right \} \nonumber \\
@@ -534,15 +534,15 @@ IID <span class="math notranslate nohighlight">\(\mathrm{Bernoulli}(p)\)</span>,
  &amp;&amp; {}
 \end{eqnarray}\]</div>
 <p>The final inequality implies that Gaffke with <span class="math notranslate nohighlight">\(X_i\)</span> is only less than <span class="math notranslate nohighlight">\(\alpha\)</span> when Gaffke with (Bernoulli) <span class="math notranslate nohighlight">\(Y_i\)</span> is less than <span class="math notranslate nohighlight">\(\alpha\)</span>. In symbols,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dd403ab1-5c2e-4918-aa88-031a7146d255">
-<span class="eqno">()<a class="headerlink" href="#equation-dd403ab1-5c2e-4918-aa88-031a7146d255" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-73a81310-ffe0-4a17-9fca-92590243a9ac">
+<span class="eqno">()<a class="headerlink" href="#equation-73a81310-ffe0-4a17-9fca-92590243a9ac" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \left ( \Pr_\mathbf{V} \left \{ \sum_{i=1}^n X_{(i)} \left (V_{(i+1)} - V_{(i)} \right ) \le \mu \right \} \le \alpha \right )
     \subset
     \left (\Pr_\mathbf{V} \left \{ \sum_{i=1}^n \frac{X_{(i)} -a}{b-a} \left (V_{(i+1)} - V_{(i)} \right ) \le \frac{\mu-a}{b-a} \right \} \le \alpha \right ).
 \end{equation}\]</div>
 <p>Then by the Gaffke result for Bernoulli random variables, we obtain:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9ceb0413-aa8e-420b-ab10-ad98aa0e51dd">
-<span class="eqno">()<a class="headerlink" href="#equation-9ceb0413-aa8e-420b-ab10-ad98aa0e51dd" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-f7356f6d-fd42-4e56-8b83-0773b388fe96">
+<span class="eqno">()<a class="headerlink" href="#equation-f7356f6d-fd42-4e56-8b83-0773b388fe96" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
  \Pr_\mathbf{X} \left ( \Pr_\mathbf{V} \left \{ \sum_{i=1}^n X_{(i)} \left (V_{(i+1)} - V_{(i)} \right ) \le \mu \right \} \le \alpha \right )
 &amp; \le &amp;
    \Pr_\mathbf{X} \left (\Pr_\mathbf{V} \left \{ \sum_{i=1}^n \frac{X_{(i)} -a}{b-a} \left (V_{(i+1)} - V_{(i)} \right ) \le \frac{\mu-a}{b-a} \right \} \le \alpha \right ) \nonumber \\

@@ -663,8 +663,8 @@ all outcomes can be observed (no missing data and no censoring).</p>
 <p>The <em>strong</em> null hypothesis is that subject by subject, the effect of
 all <span class="math notranslate nohighlight">\(T\)</span> treatments is the same.
 That is,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-49718d83-6b2a-403c-83e3-83836e360b24">
-<span class="eqno">()<a class="headerlink" href="#equation-49718d83-6b2a-403c-83e3-83836e360b24" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-de69be3a-5601-491a-98ea-8be9fafffce1">
+<span class="eqno">()<a class="headerlink" href="#equation-de69be3a-5601-491a-98ea-8be9fafffce1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x_{j0} = x_{j1} = \cdots = x_{jT-1}, \;\; j=1, \ldots, N.
 \end{equation}\]</div>
 <p>Different subjects may have different responses (<span class="math notranslate nohighlight">\(x_{jt}\)</span> might not equal <span class="math notranslate nohighlight">\(x_{kt}\)</span> if <span class="math notranslate nohighlight">\(j \ne k\)</span>), but each subject’s response is the same regardless of the treatment assigned
@@ -673,8 +673,8 @@ This is the null hypothesis Fisher considered in <em>The Design of Experiments</
 he generally considered the “correct” null in practice.</p>
 <p>The <em>weak</em> null hypothesis is that on average across subjects, all treatments have the same effect.
 That is,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e8732817-da8c-460c-b7f1-f17ac6fdebff">
-<span class="eqno">()<a class="headerlink" href="#equation-e8732817-da8c-460c-b7f1-f17ac6fdebff" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0077ef64-a4f1-47fb-b7a6-917c6fe05027">
+<span class="eqno">()<a class="headerlink" href="#equation-0077ef64-a4f1-47fb-b7a6-917c6fe05027" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{1}{N} \sum_{j=1}^N x_{j0} = \frac{1}{N} \sum_{j=1}^N x_{j1} = \ldots = \frac{1}{N} \sum_{j=1}^N x_{jT-1}.
 \end{equation}\]</div>
 <p>Much of Neyman’s work on experiments involves this null hypothesis.
@@ -688,13 +688,13 @@ For example, for <span class="math notranslate nohighlight">\(T=2\)</span> and <
 The effect of treatment is to increase subject 1’s response from 0 to 1 and to decrease subject 2’s response from 1 to 0.
 The treatment affects both subjects, but the average effect of treatment is the same: the average response across subjects is 1/2, with or without treatment.</p>
 <p>The <em>effect of treatment <span class="math notranslate nohighlight">\(t\)</span> on subject <span class="math notranslate nohighlight">\(j\)</span></em> (compared to control) is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a33e3417-e0aa-4af5-9e8b-52c7f15fbf74">
-<span class="eqno">()<a class="headerlink" href="#equation-a33e3417-e0aa-4af5-9e8b-52c7f15fbf74" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6887e9d7-d6ff-4184-be26-62f85f0e2473">
+<span class="eqno">()<a class="headerlink" href="#equation-6887e9d7-d6ff-4184-be26-62f85f0e2473" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tau_{jt} := x_{jt} - x_{j0}, \;\;t=1, \ldots, T-1.
 \end{equation}\]</div>
 <p>The <em>average effect of treatment <span class="math notranslate nohighlight">\(t\)</span></em> (compared to control) is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-89daae66-e076-412d-b8cb-38355d8f6f91">
-<span class="eqno">()<a class="headerlink" href="#equation-89daae66-e076-412d-b8cb-38355d8f6f91" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-14bc8c2f-cccd-494e-8b15-4280d9b27c48">
+<span class="eqno">()<a class="headerlink" href="#equation-14bc8c2f-cccd-494e-8b15-4280d9b27c48" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{\tau}_t := \frac{1}{N} \sum_{j=1}^N (x_{jt} - x_{j0}), \;\; t=1, \ldots, T-1.
 \end{equation}\]</div>
 <p>The strong null hypothesis for treatment <span class="math notranslate nohighlight">\(t &gt; 0\)</span> is that <span class="math notranslate nohighlight">\(\tau_{jt} = 0\)</span> for all <span class="math notranslate nohighlight">\(j = 1, \ldots, N\)</span>.
@@ -752,22 +752,22 @@ Wu and Ding, 2021. Randomization Tests for Weak Null Hypotheses in Randomized Ex
 Let <span class="math notranslate nohighlight">\(\boldsymbol{1}_N\)</span> be the <span class="math notranslate nohighlight">\(N\)</span>-dimensional vector of 1s, and let <span class="math notranslate nohighlight">\(\boldsymbol{0}_N\)</span> be the <span class="math notranslate nohighlight">\(N\)</span>-dimensional zero vector.
 We will omit the subscript <span class="math notranslate nohighlight">\(N\)</span> where the dimension is clear from context.</p>
 <p>Recall that the <em>individual treatment effect for subject <span class="math notranslate nohighlight">\(j\)</span></em> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c75f5fd9-cbf4-4516-a2fa-c59e116a7922">
-<span class="eqno">()<a class="headerlink" href="#equation-c75f5fd9-cbf4-4516-a2fa-c59e116a7922" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3de386c0-087f-4bc3-86cd-d3e44418deaa">
+<span class="eqno">()<a class="headerlink" href="#equation-3de386c0-087f-4bc3-86cd-d3e44418deaa" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tau_j := x_{1j}-x_{0j}.
 \end{equation}\]</div>
 <p>Let <span class="math notranslate nohighlight">\(\tau := (\tau_1, \ldots \tau_N)\)</span>.
 The <em>average treatment effect</em> for the subjects in the experiment is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4d137585-7ab9-41f4-acf9-e7896af91e06">
-<span class="eqno">()<a class="headerlink" href="#equation-4d137585-7ab9-41f4-acf9-e7896af91e06" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-445fb684-2ad8-4a59-a688-2da180afc1bf">
+<span class="eqno">()<a class="headerlink" href="#equation-445fb684-2ad8-4a59-a688-2da180afc1bf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{\tau} := \frac{1}{N} \sum_{j=1}^N \tau_j = \boldsymbol{1} \cdot \tau/N = \frac{1}{N} \sum_{j=1}^N (x_{1j}-x_{0j}) = \bar{x}_1 - \bar{x}_0.
 \end{equation}\]</div>
 <p>(Whether <span class="math notranslate nohighlight">\(\bar{\tau}\)</span> says anything about any larger population
 depends on how the subjects in the experiment were selected–i.e., on whether the experimental subjects are representative
 of that larger population.)
 The <em>strong</em> null hypothesis is <span class="math notranslate nohighlight">\(\tau = \boldsymbol{0}\)</span>, i.e.,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ec88b37b-2d32-4c52-93d1-d7855348146e">
-<span class="eqno">()<a class="headerlink" href="#equation-ec88b37b-2d32-4c52-93d1-d7855348146e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1ea168a2-6ee7-447e-a01d-6e389a103812">
+<span class="eqno">()<a class="headerlink" href="#equation-1ea168a2-6ee7-447e-a01d-6e389a103812" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tau_1 = \tau_2 = \ldots = \tau_N = 0.
 \end{equation}\]</div>
 <p>This is a composite hypothesis, because it does not specify the “baseline” responses <span class="math notranslate nohighlight">\(\{x_{j0}\}\)</span> of the subjects,
@@ -780,8 +780,8 @@ Equivalently, <span class="math notranslate nohighlight">\(H_\Xi = \cup_{\xi \in
 Then the <em>strong</em> null is <span class="math notranslate nohighlight">\(H_\boldsymbol{0}\)</span> and the
 <em>weak</em> null is <span class="math notranslate nohighlight">\(H_{\Xi_0}\)</span>,
 where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-93ca4b03-4b16-4d8e-aaf7-fdd885fcaca5">
-<span class="eqno">()<a class="headerlink" href="#equation-93ca4b03-4b16-4d8e-aaf7-fdd885fcaca5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-84f58b3a-e79a-4fe6-b340-41439cd5bd68">
+<span class="eqno">()<a class="headerlink" href="#equation-84f58b3a-e79a-4fe6-b340-41439cd5bd68" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Xi_0 := \left \{ \xi \in \mathbb{R}^N : \boldsymbol{1}_N \cdot \xi/N = 0 \right \}.
 \end{equation}\]</div>
 <section id="inference-about-the-average-treatment-effect">
@@ -813,36 +813,36 @@ thus <span class="math notranslate nohighlight">\(\mathbb{E} \sum_{j=1}^N W_j = 
 Since <span class="math notranslate nohighlight">\(\sum_{j=1}^N W_j = n\)</span> is constant, <span class="math notranslate nohighlight">\(\mathbb{E} \sum_{j=1}^N W_j = n\)</span>.
 Hence, <span class="math notranslate nohighlight">\(\mathbb{E} W_j = n/N\)</span>, <span class="math notranslate nohighlight">\(j = 1, \ldots, N\)</span>.</p>
 <p>Here is a bit more notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b0f2a42d-042f-4e07-b635-264b14c1f1de">
-<span class="eqno">()<a class="headerlink" href="#equation-b0f2a42d-042f-4e07-b635-264b14c1f1de" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-80172618-bf24-469c-b99f-b2f8c71d45ca">
+<span class="eqno">()<a class="headerlink" href="#equation-80172618-bf24-469c-b99f-b2f8c71d45ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
 X_0^* := \sum_{j=1}^N (1-W_j)x_{j0}
 \end{equation}\]</div>
 <p>is the sum of the responses of the subjects assigned to treatment 0
 and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ff269366-b79a-4438-bb53-f25cb34a9bbf">
-<span class="eqno">()<a class="headerlink" href="#equation-ff269366-b79a-4438-bb53-f25cb34a9bbf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8a8249f7-11fa-40fa-8d01-978d94be1714">
+<span class="eqno">()<a class="headerlink" href="#equation-8a8249f7-11fa-40fa-8d01-978d94be1714" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{X}_0 := X_0^*/m
 \end{equation}\]</div>
 <p>is their mean response.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1390250d-cf12-4a01-b214-2992fe2b5c40">
-<span class="eqno">()<a class="headerlink" href="#equation-1390250d-cf12-4a01-b214-2992fe2b5c40" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a4a4da43-3e20-4eae-a500-4062c246e5df">
+<span class="eqno">()<a class="headerlink" href="#equation-a4a4da43-3e20-4eae-a500-4062c246e5df" title="Permalink to this equation">#</a></span>\[\begin{equation}
 X_1^* := \sum_{j=1}^N W_j x_{j1} 
 \end{equation}\]</div>
 <p>is the sum of the responses of the subjects assigned to treatment 1 and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d6eccd0c-e2a8-4157-b490-fc4c30e321e8">
-<span class="eqno">()<a class="headerlink" href="#equation-d6eccd0c-e2a8-4157-b490-fc4c30e321e8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6a439973-693a-44ac-a2c2-b0014058ff4d">
+<span class="eqno">()<a class="headerlink" href="#equation-6a439973-693a-44ac-a2c2-b0014058ff4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{X}_1 := X_1^*/n,
 \end{equation}\]</div>
 <p>is their mean response.</p>
 <p>The statistics <span class="math notranslate nohighlight">\(\bar{X}_0\)</span> and <span class="math notranslate nohighlight">\(\bar{X}_1\)</span>  are unbiased estimates of
 the corresponding population parameters,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-063907c4-6dc2-48ae-8c0b-f723888f38a4">
-<span class="eqno">()<a class="headerlink" href="#equation-063907c4-6dc2-48ae-8c0b-f723888f38a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cb196dcb-2194-4603-9e45-2467f005de5c">
+<span class="eqno">()<a class="headerlink" href="#equation-cb196dcb-2194-4603-9e45-2467f005de5c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{x}_0 := \frac{1}{N} \sum_{j=1}^n x_{j0}
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6f9c00e4-61ac-4f13-bd3d-e50ec6ed16e5">
-<span class="eqno">()<a class="headerlink" href="#equation-6f9c00e4-61ac-4f13-bd3d-e50ec6ed16e5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d747e9ab-dd95-454c-b5c9-28fa219cfaae">
+<span class="eqno">()<a class="headerlink" href="#equation-d747e9ab-dd95-454c-b5c9-28fa219cfaae" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{x}_1 := \frac{1}{N} \sum_{j=1}^n x_{j1}.
 \end{equation}\]</div>
 <p>Therefore, <span class="math notranslate nohighlight">\(\hat{\tau} := \bar{X}_1 - \bar{X}_0\)</span> is an unbiased estimate of the average treatment effect <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>.
@@ -858,21 +858,21 @@ We assign a random sample of <span class="math notranslate nohighlight">\(n\)</s
 the other <span class="math notranslate nohighlight">\(m = N-n\)</span> receive a placebo, treatment 0.
 Let <span class="math notranslate nohighlight">\(W_j\)</span> denote the treatment assigned to subject <span class="math notranslate nohighlight">\(j\)</span>.
 We observe</p>
-<div class="amsmath math notranslate nohighlight" id="equation-313b58c3-9d6e-4cc4-89e3-0af1478319fb">
-<span class="eqno">()<a class="headerlink" href="#equation-313b58c3-9d6e-4cc4-89e3-0af1478319fb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9e3e6b4b-a594-4672-a64d-997f86d5fa22">
+<span class="eqno">()<a class="headerlink" href="#equation-9e3e6b4b-a594-4672-a64d-997f86d5fa22" title="Permalink to this equation">#</a></span>\[\begin{equation}
 X_j := (1-W_j) x_{j0} + W_j x_{j1}, \;\; j=1, \ldots, N.
 \end{equation}\]</div>
 <p>These are random variables, but (in this model)
 the only source of randomness is <span class="math notranslate nohighlight">\(\{W_j\}\)</span>, the
 treatment assignment variables.</p>
 <p>The total number of infections among the vaccinated is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b2772ab9-cbe9-47fd-b992-c04083271a59">
-<span class="eqno">()<a class="headerlink" href="#equation-b2772ab9-cbe9-47fd-b992-c04083271a59" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-849af083-57b0-4ccf-a52a-7d390e181aa0">
+<span class="eqno">()<a class="headerlink" href="#equation-849af083-57b0-4ccf-a52a-7d390e181aa0" title="Permalink to this equation">#</a></span>\[\begin{equation}
    X_1^* := \sum_{j=1}^N W_j x_{j1}
 \end{equation}\]</div>
 <p>and the total among the unvaccinated is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-680e8d5e-0875-4e15-99cd-c03dcfe82d81">
-<span class="eqno">()<a class="headerlink" href="#equation-680e8d5e-0875-4e15-99cd-c03dcfe82d81" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-812c3e76-1a87-4997-9a98-9c55a4f5079f">
+<span class="eqno">()<a class="headerlink" href="#equation-812c3e76-1a87-4997-9a98-9c55a4f5079f" title="Permalink to this equation">#</a></span>\[\begin{equation}
    X_0^* := \sum_{j=1}^N (1-W_j) x_{j0}.
 \end{equation}\]</div>
 <p>Under the strong null that the vaccine makes no difference whatsoever–as if whether a subject would become ill was predetermined before the assignment to treatment or control–the distribution of the number of infections among the vaccinated would have a hypergeometric distribution with parameters <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(G=X_0^*+X_1^*\)</span>, and <span class="math notranslate nohighlight">\(n=n\)</span>.
@@ -903,8 +903,8 @@ assigned to treatment.
 <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.6764">Li and Ding (2016)</a>.)</p>
 <p>Now <span class="math notranslate nohighlight">\(\sum_{j=1}^N x_{j0} = N_{1+}\)</span> and <span class="math notranslate nohighlight">\(\sum_{j=1}^N x_{j1} = N_{+1}\)</span>, so
 the average treatment effect can be written</p>
-<div class="amsmath math notranslate nohighlight" id="equation-27636627-9f30-4d4a-9169-cfac031b2f34">
-<span class="eqno">()<a class="headerlink" href="#equation-27636627-9f30-4d4a-9169-cfac031b2f34" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0783ba5a-742a-4df3-9a2b-ee3f8ea7ee04">
+<span class="eqno">()<a class="headerlink" href="#equation-0783ba5a-742a-4df3-9a2b-ee3f8ea7ee04" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{\tau} = \frac{1}{N} \sum_{j=1}^N (x_{j1}-x_{j0}) = \frac{1}{N} (N_{+1} - N_{1+}),
 \end{equation}\]</div>
 <p>the average response among the treated minus the average among the controls.</p>
@@ -918,33 +918,33 @@ Similarly, we know that <span class="math notranslate nohighlight">\(N_{+1}\)</s
 and at most <span class="math notranslate nohighlight">\(X_1^* + m\)</span> (if every subject assigned to control would have responded 1 if they had received the
 active treatment).
 Their difference is thus between</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4d865c09-c374-4a39-8cd2-84cfef8e3f45">
-<span class="eqno">()<a class="headerlink" href="#equation-4d865c09-c374-4a39-8cd2-84cfef8e3f45" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e1c848e5-7f42-4bc1-86c6-e8de7c3912e3">
+<span class="eqno">()<a class="headerlink" href="#equation-e1c848e5-7f42-4bc1-86c6-e8de7c3912e3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 X_1^* - X_0^* - n 
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-12d71706-7c56-44ca-abfe-41e4d9cf7f3b">
-<span class="eqno">()<a class="headerlink" href="#equation-12d71706-7c56-44ca-abfe-41e4d9cf7f3b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e53481d4-00a1-42b5-91af-3fa8483782ec">
+<span class="eqno">()<a class="headerlink" href="#equation-e53481d4-00a1-42b5-91af-3fa8483782ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
 X_1^* - X_0^* + m,
 \end{equation}\]</div>
 <p>a range of <span class="math notranslate nohighlight">\(n+m = N\)</span>.
 Thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-af7432dd-88ed-4247-b2fa-ec9799d06581">
-<span class="eqno">()<a class="headerlink" href="#equation-af7432dd-88ed-4247-b2fa-ec9799d06581" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4a7b7bc2-cee3-45c9-84a3-e219d3c5eb7b">
+<span class="eqno">()<a class="headerlink" href="#equation-4a7b7bc2-cee3-45c9-84a3-e219d3c5eb7b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{\tau} \in \{ (X_1^* - X_0^* - n)/N, (X_1^* - X_0^* - n + 1)/N, \ldots, (X_1^* - X_0^* + m)/N\},
 \end{equation}\]</div>
 <p>which has range <span class="math notranslate nohighlight">\(1\)</span>.</p>
 <section id="first-conservative-approach-to-confidence-bounds-for-bar-tau-bonferroni-simultaneous-confidence-intervals">
 <h4>First (conservative) approach to confidence bounds for <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>: Bonferroni simultaneous confidence intervals<a class="headerlink" href="#first-conservative-approach-to-confidence-bounds-for-bar-tau-bonferroni-simultaneous-confidence-intervals" title="Permalink to this headline">#</a></h4>
 <p>A tuple of confidence set procedures <span class="math notranslate nohighlight">\((\mathcal{I}_i )_{i=1}^C\)</span> for a corresponding tuple of parameters <span class="math notranslate nohighlight">\((\theta_i)_{i=1}^C \in \Theta\)</span> has <em>simultaneous coverage probability</em> <span class="math notranslate nohighlight">\(1-\alpha\)</span> if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-92791b88-06a2-4627-9aec-41137e6b7b70">
-<span class="eqno">()<a class="headerlink" href="#equation-92791b88-06a2-4627-9aec-41137e6b7b70" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f0f47fd7-4581-4497-916d-9abb24b632c9">
+<span class="eqno">()<a class="headerlink" href="#equation-f0f47fd7-4581-4497-916d-9abb24b632c9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P}_{\theta_1, \ldots, \theta_C} \bigcap_{i=1}^C ( \mathcal{I}_i \ni \theta_i  ) \ge 1-\alpha,
 \end{equation}\]</div>
 <p>whatever the true values <span class="math notranslate nohighlight">\((\theta_i) \in \Theta\)</span> are.</p>
 <p>Bonferroni’s inequality, also called <em>the union bound</em>, says that for any collection of events <span class="math notranslate nohighlight">\(\{A_i\}\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c6818ddc-3d8d-4fae-88c7-681f6b873042">
-<span class="eqno">()<a class="headerlink" href="#equation-c6818ddc-3d8d-4fae-88c7-681f6b873042" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-864234eb-43ee-4b07-833d-6c56ed6ec689">
+<span class="eqno">()<a class="headerlink" href="#equation-864234eb-43ee-4b07-833d-6c56ed6ec689" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P} \left ( \bigcup_i A_i \right ) \le \sum_i \mathbb{P}(A_i).
 \end{equation}\]</div>
 <p>It follows that if <span class="math notranslate nohighlight">\(\mathcal{I}_i\)</span> is a confidence interval procedure for <span class="math notranslate nohighlight">\(\theta_i\)</span> with coverage probability <span class="math notranslate nohighlight">\(1-\alpha_i\)</span>, <span class="math notranslate nohighlight">\(i=1, \ldots, C\)</span>, then the tuple of <span class="math notranslate nohighlight">\(C\)</span>
@@ -1011,8 +1011,8 @@ To test the null hypothesis <span class="math notranslate nohighlight">\(H_0: \m
 we can define some function <span class="math notranslate nohighlight">\(T\)</span> of <span class="math notranslate nohighlight">\(X_0^*\)</span> and <span class="math notranslate nohighlight">\(X_1^*\)</span> and reject <span class="math notranslate nohighlight">\(H_0\)</span> if the observed value of <span class="math notranslate nohighlight">\(T\)</span> is in the
 tail of the probability distribution corresponding to <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
 <p>What should we use for <span class="math notranslate nohighlight">\(T\)</span>? Since we are interested in <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>, we might base the test on</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0744bc74-d1d7-4e21-bf10-1aab63a871db">
-<span class="eqno">()<a class="headerlink" href="#equation-0744bc74-d1d7-4e21-bf10-1aab63a871db" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-67fa7573-50dc-48b8-8d14-88016a7ce536">
+<span class="eqno">()<a class="headerlink" href="#equation-67fa7573-50dc-48b8-8d14-88016a7ce536" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\tau} := \bar{X}_1 - \bar{X}_0 = \frac{X_1^*}{n} - \frac{X_0^*}{m}.
 \end{equation}\]</div>
 <p>This is an unbiased estimator of <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>: <span class="math notranslate nohighlight">\(X_1^*/n\)</span> is the sample mean of a simple random sample of size <span class="math notranslate nohighlight">\(n\)</span> from <span class="math notranslate nohighlight">\(\{x_{j1}\}_{j=1}^N\)</span>, so it is unbiased for
@@ -1023,13 +1023,13 @@ Their difference is thus unbiased for <span class="math notranslate nohighlight"
 <p>Rigdon and Hudgens (2015)  and Li and Ding (2016) take the test statistic to be <span class="math notranslate nohighlight">\(T=|\hat{\tau} - \bar{\tau}|\)</span> (they look at other things, too).</p>
 <p>Recall that <span class="math notranslate nohighlight">\(N_{1+} := N_{10} + N_{11}\)</span>, <span class="math notranslate nohighlight">\(N_{+1} := N_{01} + N_{11}\)</span>,
 and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8ae49802-6cac-4310-86ed-24dacd778de1">
-<span class="eqno">()<a class="headerlink" href="#equation-8ae49802-6cac-4310-86ed-24dacd778de1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-93a55905-9edd-4f39-89aa-dbb3774cc4a0">
+<span class="eqno">()<a class="headerlink" href="#equation-93a55905-9edd-4f39-89aa-dbb3774cc4a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{\tau} = \frac{N_{+1} - N_{1+}}{N} = \frac{N_{01}-N_{10}}{N}.
 \end{equation}\]</div>
 <p>For any 2x2 summary table <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> of counts of potential outcomes, define</p>
-<div class="amsmath math notranslate nohighlight" id="equation-41600c49-b657-4080-a34c-db6209d9bcf1">
-<span class="eqno">()<a class="headerlink" href="#equation-41600c49-b657-4080-a34c-db6209d9bcf1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b31f4b85-5cbc-4d47-abbf-1b9c51b90c25">
+<span class="eqno">()<a class="headerlink" href="#equation-b31f4b85-5cbc-4d47-abbf-1b9c51b90c25" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{\tau}(\mathbf{M}) := \frac{M_{01} - M_{10}}{\sum_{j,k} M_{jk}}.
 \end{equation}\]</div>
 <p>If we do not reject the simple hypothesis <span class="math notranslate nohighlight">\(\mathbf{N} = \mathbf{N}_0\)</span>, then we cannot reject the hypothesis <span class="math notranslate nohighlight">\(\bar{\tau} = \bar{\tau}(\mathbf{N}_0) := \bar{\tau}_0\)</span>.
@@ -1053,8 +1053,8 @@ the exact <span class="math notranslate nohighlight">\(P\)</span>-value for a ra
 For instance, <span class="math notranslate nohighlight">\(N_{10} + N_{11} \ge X_0^*\)</span> and <span class="math notranslate nohighlight">\(N_{01} + N_{11} \ge X_1^*\)</span>.
 There are other constraints, too, as we shall see.</p>
 <p>Define</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bc478ceb-d7d1-404c-ab41-64a753d47abe">
-<span class="eqno">()<a class="headerlink" href="#equation-bc478ceb-d7d1-404c-ab41-64a753d47abe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-011cdbc8-cf62-436c-b71a-b6afc0fcdd38">
+<span class="eqno">()<a class="headerlink" href="#equation-011cdbc8-cf62-436c-b71a-b6afc0fcdd38" title="Permalink to this equation">#</a></span>\[\begin{equation}
   n_{wk} := \sum_{j=1}^N 1_{W_j=w, x_{jw}=k}
 \end{equation}\]</div>
 <p>for <span class="math notranslate nohighlight">\(w \in \{0, 1\}\)</span> and <span class="math notranslate nohighlight">\(k \in \{0, 1\}\)</span>.
@@ -1089,8 +1089,8 @@ for <span class="math notranslate nohighlight">\(T\)</span> is thus at most <spa
 <p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.6764">Li and Ding (2016)</a> improve on that result.
 They prove that
 a table <span class="math notranslate nohighlight">\(\mathbf{N} = (N_{00}, N_{01}, N_{10}, N_{11})\)</span> is consistent with the observed values <span class="math notranslate nohighlight">\((n_{wk})\)</span> iff</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5f78f36a-d4f7-4f55-b270-d229778dad4c">
-<span class="eqno">()<a class="headerlink" href="#equation-5f78f36a-d4f7-4f55-b270-d229778dad4c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-029150c9-aab2-44f7-9e85-cc8b554995c4">
+<span class="eqno">()<a class="headerlink" href="#equation-029150c9-aab2-44f7-9e85-cc8b554995c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \max \{0,n_{11}-N_{01}, N_{11}-n_{01}, N_{10}+N_{11} - n_{10} - n_{01} \}
   \le
 \min \{N_{11}, n_{11}, N_{10}+N_{11}-n_{01}, N - N_{01} - n_{01} - n_{10} \}.
@@ -1099,8 +1099,8 @@ a table <span class="math notranslate nohighlight">\(\mathbf{N} = (N_{00}, N_{01
 <p>The overall approach of Li and Ding (2016) is as follows:</p>
 <p>The values <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\((n_{wk})\)</span>, and <span class="math notranslate nohighlight">\(\alpha\)</span> are given.
 Set</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d41d70d1-02ca-4dce-a062-64772d4656bd">
-<span class="eqno">()<a class="headerlink" href="#equation-d41d70d1-02ca-4dce-a062-64772d4656bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-77f63aa6-3a98-4d72-ac28-e95ce6321458">
+<span class="eqno">()<a class="headerlink" href="#equation-77f63aa6-3a98-4d72-ac28-e95ce6321458" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\tau}^* := \frac{n_{11}}{n} - \frac{n_{01}}{m},
 \end{equation}\]</div>
 <p>the observed value of the unbiased estimate of <span class="math notranslate nohighlight">\(\bar{\tau}\)</span>.</p>
@@ -1397,16 +1397,16 @@ creating a table of potential outcomes consistent with <span class="math notrans
 <h3>Other measures of the effect of treatment<a class="headerlink" href="#other-measures-of-the-effect-of-treatment" title="Permalink to this headline">#</a></h3>
 <p>The average treatment effect is one of many ways of quantifying the effect of treatment.
 For vaccines, a common measure of effect size is <em>vaccine efficacy</em>, defined as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-06e2250b-227d-499c-a6fc-0e8e5950574e">
-<span class="eqno">()<a class="headerlink" href="#equation-06e2250b-227d-499c-a6fc-0e8e5950574e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-50e256c0-cdac-40aa-9f45-7a802c3ef499">
+<span class="eqno">()<a class="headerlink" href="#equation-50e256c0-cdac-40aa-9f45-7a802c3ef499" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mbox{VE} := \frac{\mbox{risk among unvaccinated} - \mbox{risk among vaccinated}}{\mbox{risk among unvaccinated}}
 = 1 - \frac{\mbox{risk among vaccinated}}{\mbox{risk among unvaccinated}}.
 \end{equation}\]</div>
 <p>This is the naive estimate of the fraction of infections that vaccinating everyone would prevent.</p>
 <p>Here, <em>risk</em> is the fraction of subjects who become infected.
 In the notation we’ve been using,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7dcbcc53-fdc3-438f-b1b8-f25767bbf552">
-<span class="eqno">()<a class="headerlink" href="#equation-7dcbcc53-fdc3-438f-b1b8-f25767bbf552" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-804665a9-4c8a-4ec9-ab34-f01126b4a18f">
+<span class="eqno">()<a class="headerlink" href="#equation-804665a9-4c8a-4ec9-ab34-f01126b4a18f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mbox{VE}(\mathbf{N}) = \frac{N_{1+}/N - N_{+1}/N}{N_{1+}/N} = \frac{N_{1+} - N_{+1}}{N_{1+}} = 1 - \frac{ N_{+1}}{N_{1+}}
 \end{equation}\]</div>
 <p>if <span class="math notranslate nohighlight">\(N_{1+} &gt; 0\)</span>.</p>
@@ -1415,8 +1415,8 @@ In the notation we’ve been using,</p>
 <li><p>Choose a reasonable test statistic <span class="math notranslate nohighlight">\(T\)</span>. Here, we might use the <em>plug-in estimator</em> of VE, which is biased, but
 still a sensible choice:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-e355a097-8edb-4996-a645-b2b5352e6a13">
-<span class="eqno">()<a class="headerlink" href="#equation-e355a097-8edb-4996-a645-b2b5352e6a13" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f3233f03-6f73-4913-a9fd-a2c14fc434f1">
+<span class="eqno">()<a class="headerlink" href="#equation-f3233f03-6f73-4913-a9fd-a2c14fc434f1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \widehat{\mbox{VE}} := \left \{ \begin{array}{ll}
     1 - \bar{X}_1^*/\bar{X}_0^*, &amp; \bar{X}_0^* &gt; 0 \\
     0, &amp; \bar{X}_0^* = 0.

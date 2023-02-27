@@ -503,14 +503,14 @@ There are <span class="math notranslate nohighlight">\(N\)</span> tickets in all
 <span class="math notranslate nohighlight">\(x_i\)</span> or <span class="math notranslate nohighlight">\(y_i\)</span>, but not both.
 The percentage of consumers who would have made purchases if every consumer
 had been shown the control ads is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ce48ed42-1939-47b0-8172-3ec6deff98ac">
-<span class="eqno">()<a class="headerlink" href="#equation-ce48ed42-1939-47b0-8172-3ec6deff98ac" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d66b0356-c29f-463f-9aa9-78486a1a0e37">
+<span class="eqno">()<a class="headerlink" href="#equation-d66b0356-c29f-463f-9aa9-78486a1a0e37" title="Permalink to this equation">#</a></span>\[\begin{equation}
     p_c := \frac{1}{n}\sum_{i=1}^N x_i.
 \end{equation}\]</div>
 <p>Similarly, the percentage of consumers who would have made purchases if every
 consumer had been shown the targeted ads is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7896c215-7e88-4f7b-89fd-f20051e492e4">
-<span class="eqno">()<a class="headerlink" href="#equation-7896c215-7e88-4f7b-89fd-f20051e492e4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dd21a4ec-399f-4ad7-8847-3bc88f4acc13">
+<span class="eqno">()<a class="headerlink" href="#equation-dd21a4ec-399f-4ad7-8847-3bc88f4acc13" title="Permalink to this equation">#</a></span>\[\begin{equation}
     p_t :=  \frac{1}{n}\sum_{i=1}^N y_i.
 \end{equation}\]</div>
 <p>Let <span class="math notranslate nohighlight">\(\mu := p_t - p_c\)</span> be the difference between the rate at which consumers would have bought had all of them
@@ -533,8 +533,8 @@ for any fixed value of <span class="math notranslate nohighlight">\(N_S\)</span>
 <span class="math notranslate nohighlight">\(Y\)</span> has an hypergeometric distribution
 with parameters <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(N_S\)</span>, and <span class="math notranslate nohighlight">\(N\)</span>
 (we consider <span class="math notranslate nohighlight">\(n\)</span> to be fixed, i.e., we <em>condition</em> on the attained value of <span class="math notranslate nohighlight">\(n\)</span>):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-88aafb59-bfc3-40d0-82d7-e21673c82042">
-<span class="eqno">()<a class="headerlink" href="#equation-88aafb59-bfc3-40d0-82d7-e21673c82042" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-26b02e9a-6104-4de9-8ebd-f355af1d50fa">
+<span class="eqno">()<a class="headerlink" href="#equation-26b02e9a-6104-4de9-8ebd-f355af1d50fa" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathbb{P} \{Y=y \} = \frac{{{N_S}\choose{y}} {{N-N_S}\choose{n-y}}}{{N}\choose{n}}.
 \end{equation}\]</div>
 <p>This is a situation with many tied data, because there are only two possible
@@ -571,35 +571,35 @@ close to zero nor too close to <span class="math notranslate nohighlight">\(N\)<
 To use the normal approximation, we need to convert to
 standard units, which requires that we know the expected value and standard error of <span class="math notranslate nohighlight">\(Y\)</span>.
 The expected value of <span class="math notranslate nohighlight">\(Y\)</span> is  <span class="math notranslate nohighlight">\(\mathbb{E} Y = n \cdot N_S/N\)</span>, and the standard error of <span class="math notranslate nohighlight">\(Y\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e8e70a0c-ced3-46ad-b1df-cd46f8e1a5cf">
-<span class="eqno">()<a class="headerlink" href="#equation-e8e70a0c-ced3-46ad-b1df-cd46f8e1a5cf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4ca0f166-4009-4e67-aa90-5985a0de8f00">
+<span class="eqno">()<a class="headerlink" href="#equation-4ca0f166-4009-4e67-aa90-5985a0de8f00" title="Permalink to this equation">#</a></span>\[\begin{equation}
     SE(Y) = f n^{1/2} SD,
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(f\)</span> is the <em>finite population correction</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-8fc65dc3-8a82-4a39-a48b-acb0342b2b4d">
-<span class="eqno">()<a class="headerlink" href="#equation-8fc65dc3-8a82-4a39-a48b-acb0342b2b4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a9b91ae1-84c4-480a-ae4e-d7ff2abcc1e6">
+<span class="eqno">()<a class="headerlink" href="#equation-a9b91ae1-84c4-480a-ae4e-d7ff2abcc1e6" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f := \sqrt{\frac{N-n}{N-1}}
 \end{equation}\]</div>
 <p><span class="math notranslate nohighlight">\(SD\)</span> is the standard deviation of a list of <span class="math notranslate nohighlight">\(N\)</span> values of which <span class="math notranslate nohighlight">\(N_S\)</span> equal one and
 <span class="math notranslate nohighlight">\((N - N_S)\)</span> equal zero:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eb1d2958-87e8-4b6c-89e0-5b1ffb26a49e">
-<span class="eqno">()<a class="headerlink" href="#equation-eb1d2958-87e8-4b6c-89e0-5b1ffb26a49e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-82db3869-8c5c-47b5-b821-0099330d849f">
+<span class="eqno">()<a class="headerlink" href="#equation-82db3869-8c5c-47b5-b821-0099330d849f" title="Permalink to this equation">#</a></span>\[\begin{equation}
     SD = \sqrt{N_S/N \times (1 - N_S/N)}
 \end{equation}\]</div>
 <p>In standard units, <span class="math notranslate nohighlight">\(Y\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3beb30f1-b63b-49de-a539-5f7b6ac057d1">
-<span class="eqno">()<a class="headerlink" href="#equation-3beb30f1-b63b-49de-a539-5f7b6ac057d1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-62b6d52a-1e3f-4866-91ab-cfe1fccd3928">
+<span class="eqno">()<a class="headerlink" href="#equation-62b6d52a-1e3f-4866-91ab-cfe1fccd3928" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Z = (Y - \mathbb{E}Y)/SE(Y) = (Y - n N_S/N)/(f N^{1/2} SD).
 \end{equation}\]</div>
 <p>The area under the normal curve to the right of 1.645 standard units is 5%,
 which corresponds to the threshold value</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0d42d0de-c818-4ae9-9f93-c536bdc12b09">
-<span class="eqno">()<a class="headerlink" href="#equation-0d42d0de-c818-4ae9-9f93-c536bdc12b09" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a8f3d0dc-2818-4272-9ba2-05ba64736e8d">
+<span class="eqno">()<a class="headerlink" href="#equation-a8f3d0dc-2818-4272-9ba2-05ba64736e8d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     y = \mathbb{E}Y  + 1.645 SE(Y) = n(N_S/N) + 1.645 f N^{1/2} SD
 \end{equation}\]</div>
 <p>in the original units, so if we reject the null hypothesis when <span class="math notranslate nohighlight">\(Z &gt; 1.645\)</span> or, equivalently,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dfe4d0d4-90b7-4bd4-bb42-d93e8a760560">
-<span class="eqno">()<a class="headerlink" href="#equation-dfe4d0d4-90b7-4bd4-bb42-d93e8a760560" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e6b0f477-56f4-46fc-9fb6-38edfeb3cb37">
+<span class="eqno">()<a class="headerlink" href="#equation-e6b0f477-56f4-46fc-9fb6-38edfeb3cb37" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Y &gt; n (N_S/N) + 1.645 f N^{1/2} SD,
 \end{equation}\]</div>
 <p>we have an (approximate) 5% significance level test of the null hypothesis that
@@ -645,8 +645,8 @@ The possible numbers of “hits” are 0, 2, 4, 6, and 8.
 To get 6 hits, she must label as milk-first three of the four true milk-first cups, and
 must mislabel as milk-first one of the four tea-first cups.
 The number of arrangements that give exactly 6 hits is thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d1a38193-c32e-4d5a-8ec1-fa0465d22c27">
-<span class="eqno">()<a class="headerlink" href="#equation-d1a38193-c32e-4d5a-8ec1-fa0465d22c27" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4afdc3db-201e-4d5b-9b38-312843d6a6c5">
+<span class="eqno">()<a class="headerlink" href="#equation-4afdc3db-201e-4d5b-9b38-312843d6a6c5" title="Permalink to this equation">#</a></span>\[\begin{equation}
     {{4}\choose{3}} {{4}\choose{1}} = 16
 \end{equation}\]</div>
 <p>Thus if we reject the null hypothesis when she correctly identifies 6 of the 8 cups or all 8 of the 8

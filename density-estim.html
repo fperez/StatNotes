@@ -667,8 +667,8 @@ We will not dwell on optimality considerations.</p>
 <h3>The Histogram and the Naive Estimator<a class="headerlink" href="#the-histogram-and-the-naive-estimator" title="Permalink to this headline">#</a></h3>
 <p>This section follows Silverman  (1990).</p>
 <p>Let <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> denote the empirical cdf of the data <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^n\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1ed45052-f389-43dd-ba5a-d7ab0e0ad6b2">
-<span class="eqno">()<a class="headerlink" href="#equation-1ed45052-f389-43dd-ba5a-d7ab0e0ad6b2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-25d0a4f9-be8a-4541-afdd-83c81d0e7578">
+<span class="eqno">()<a class="headerlink" href="#equation-25d0a4f9-be8a-4541-afdd-83c81d0e7578" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{F}_n(x) = \frac{1}{n} \sum_{j=1}^n 1_{X_j \le x}.
 \end{equation}\]</div>
 <p>Although <span class="math notranslate nohighlight">\(\hat{F}_n\)</span> is often a good estimator of <span class="math notranslate nohighlight">\(F\)</span>,
@@ -682,13 +682,13 @@ It usually is not an enlightening representation of the data.</p>
 arbitrary; the essential point is that they be disjoint and that their
 union include all the data.)
 Let</p>
-<div class="amsmath math notranslate nohighlight" id="equation-80e6c1ca-4b28-424d-8a18-85d36d6ac989">
-<span class="eqno">()<a class="headerlink" href="#equation-80e6c1ca-4b28-424d-8a18-85d36d6ac989" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-afd122a4-43c9-4244-86d2-20c4a0715647">
+<span class="eqno">()<a class="headerlink" href="#equation-afd122a4-43c9-4244-86d2-20c4a0715647" title="Permalink to this equation">#</a></span>\[\begin{equation}
     w_k = \diam(\calI_k) = a_{k+1} - a_k.
 \end{equation}\]</div>
 <p>The {\em histogram/} of the data using these bins is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-223a2144-a1b1-460a-bf47-62706fbe2548">
-<span class="eqno">()<a class="headerlink" href="#equation-223a2144-a1b1-460a-bf47-62706fbe2548" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f7fd0e8e-8728-49e2-a34c-a6d519e66dd3">
+<span class="eqno">()<a class="headerlink" href="#equation-f7fd0e8e-8728-49e2-a34c-a6d519e66dd3" title="Permalink to this equation">#</a></span>\[\begin{equation}
     h(x) = \frac{1}{n}\sum_{k=1}^K \frac{1}{w_k} 1_{x \in \calI_k}
     \#\left \{ \{X_j\}_{j=1}^n \cap \calI_k \right \}.
 \end{equation}\]</div>
@@ -701,14 +701,14 @@ the sense of convergence to <span class="math notranslate nohighlight">\(f\)</sp
 grows—can be reasonable.</p>
 <p>Another estimate of <span class="math notranslate nohighlight">\(f\)</span> derives from the definition of <span class="math notranslate nohighlight">\(f\)</span> as the
 derivative of <span class="math notranslate nohighlight">\(F\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-85b7d2bd-33f4-4647-8764-668527cb40e4">
-<span class="eqno">()<a class="headerlink" href="#equation-85b7d2bd-33f4-4647-8764-668527cb40e4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7a38fae4-4f4a-4a16-85b7-0b580c2fe620">
+<span class="eqno">()<a class="headerlink" href="#equation-7a38fae4-4f4a-4a16-85b7-0b580c2fe620" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f(x) = \lim_{\epsilon \rightarrow 0} \frac{F(x+\epsilon) - F(x)}{\epsilon}
          = \lim_{h \rightarrow 0} \frac{1}{2h} \Pr \{ x - h &lt; X \le x+h \}
 \end{equation}\]</div>
 <p>One could imagine estimating <span class="math notranslate nohighlight">\(f\)</span> by picking a small value of <span class="math notranslate nohighlight">\(h\)</span> and taking</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f90ff004-dc88-4736-8638-3b9e4c3d49f5">
-<span class="eqno">()<a class="headerlink" href="#equation-f90ff004-dc88-4736-8638-3b9e4c3d49f5" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-4afb23be-3a30-45f5-8ffa-f921422cfbe6">
+<span class="eqno">()<a class="headerlink" href="#equation-4afb23be-3a30-45f5-8ffa-f921422cfbe6" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
     \hat{f}_h(x) &amp; \equiv &amp; \frac{1}{2h} \left ( \hat{F}_n(x+h) - \hat{F}_n(x-h) \right ) \nonumber \\
                &amp; = &amp; \frac{1}{2nh} \sum_{j=1}^n 1_{x-h &lt; X_j \le x+h} \nonumber \\
                &amp; = &amp; \frac{1}{n}\sum_{j=1}^n \frac{1}{h} K \left ( \frac{x - X_j}{h} \right ),
@@ -727,8 +727,8 @@ Whether “smoother” means “better” depends on the true density <span clas
 generally, there is a tradeoff between bias and variance: increasing the smoothness
 increases the bias but decreases the variance.</p>
 <p>It follows from the fact that <span class="math notranslate nohighlight">\(\int_{-\infty}^\infty K(x) dx = 1\)</span> that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c5fdfa48-e416-408a-bc2a-c916b2b21ad0">
-<span class="eqno">()<a class="headerlink" href="#equation-c5fdfa48-e416-408a-bc2a-c916b2b21ad0" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-d6cf1c8d-1f73-47b2-afd0-2f80b2144480">
+<span class="eqno">()<a class="headerlink" href="#equation-d6cf1c8d-1f73-47b2-afd0-2f80b2144480" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
     \int_{-\infty}^\infty \hat{f}(x) dx
         &amp;=&amp;
         \frac{1}{n} \sum_{j=1}^n \frac{1}{h} \int_{-\infty}^\infty K
@@ -750,8 +750,8 @@ leads to a smoother estimate <span class="math notranslate nohighlight">\(\hat{f
 Estimates that are linear combinations of such kernel functions centered at the
 data are called {\em kernel density estimates/}.
 We denote the kernel density estimate with bandwidth (smoothing parameter) <span class="math notranslate nohighlight">\(h\)</span> by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0fa37f19-fb60-40d4-8c8e-7deb59155e0f">
-<span class="eqno">()<a class="headerlink" href="#equation-0fa37f19-fb60-40d4-8c8e-7deb59155e0f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fee60f0a-8648-4c48-8182-05f2892b2b05">
+<span class="eqno">()<a class="headerlink" href="#equation-fee60f0a-8648-4c48-8182-05f2892b2b05" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{f}_h(x) = \frac{1}{nh} \sum_{j=1}^n K \left ( \frac{x - X_j}{h} \right ).
 \end{equation}\]</div>
 <p>The dependence of the estimate on the kernel is not evident in the notation—the kernel
@@ -765,8 +765,8 @@ Typically, <span class="math notranslate nohighlight">\(K\)</span> is chosen to 
 means that the estimate converges asymptotically as rapidly as possible in
 some suitable norm on probability density functions.
 The most common measure of performance is the mean integrated squared error (MISE):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a6259779-052a-4a78-9582-ad692329a279">
-<span class="eqno">()<a class="headerlink" href="#equation-a6259779-052a-4a78-9582-ad692329a279" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-5a6abeab-38ca-4265-9a89-38bf8243c7bb">
+<span class="eqno">()<a class="headerlink" href="#equation-5a6abeab-38ca-4265-9a89-38bf8243c7bb" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
     \mbox{\rm MISE}(\hat{f}) &amp; \equiv &amp;  \EE \int (\hat{f}(x) - f(x))^2 dx \nonumber \\
     &amp;=&amp; \int \EE (\hat{f}(x) - f(x))^2 dx \nonumber \\
     &amp;=&amp; \int (\EE \hat{f}(x) - f(x))^2 dx + \int \Var(\hat{f}) dx.
@@ -774,13 +774,13 @@ The most common measure of performance is the mean integrated squared error (MIS
 <p>The MISE is sum of the integral of the squared pointwise bias of the estimate and the
 pointwise variance of the estimate.
 For kernel estimates,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ad9bde62-42e0-4e05-9cf1-b50d56749593">
-<span class="eqno">()<a class="headerlink" href="#equation-ad9bde62-42e0-4e05-9cf1-b50d56749593" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8545e224-0a42-4687-9e4b-b0519aea1ef2">
+<span class="eqno">()<a class="headerlink" href="#equation-8545e224-0a42-4687-9e4b-b0519aea1ef2" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \EE \hat{f}(x) = \int \frac{1}{h} K \left ( \frac{x - y}{h} \right ) f(y) dy,
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-99a465e4-79c4-4f00-a900-6f5e6fd76a02">
-<span class="eqno">()<a class="headerlink" href="#equation-99a465e4-79c4-4f00-a900-6f5e6fd76a02" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9e6f041b-afc6-4ee9-b764-b45b4da26582">
+<span class="eqno">()<a class="headerlink" href="#equation-9e6f041b-afc6-4ee9-b764-b45b4da26582" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \Var \hat{f}(x) = \int \frac{1}{h^2} K \left ( \frac{x-y}{h} \right )^2 f(y) dy -
     \left [ \frac{1}{h} \int K \left ( \frac{x-y}{h} \right ) f(y) dy \right ]^2.
 \end{equation}\]</div>
@@ -799,27 +799,27 @@ Suppose <span class="math notranslate nohighlight">\(K\)</span> integrates to 1,
 and has nonzero finite second central moment <span class="math notranslate nohighlight">\(\int x^2 K(x) dx = k_2 \ne 0\)</span>,
 and that <span class="math notranslate nohighlight">\(f\)</span> has as many continuous derivatives as needed.
 Then, to second order in <span class="math notranslate nohighlight">\(h\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a7c7e153-ffc0-4893-9b41-2988dc522762">
-<span class="eqno">()<a class="headerlink" href="#equation-a7c7e153-ffc0-4893-9b41-2988dc522762" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0f72f534-7ac9-40e6-9696-8f8f93749b6b">
+<span class="eqno">()<a class="headerlink" href="#equation-0f72f534-7ac9-40e6-9696-8f8f93749b6b" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \Bias_h(x) \approx \frac{1}{2} h^2 f&quot;(x) k_2.
 \end{equation}\]</div>
 <p>(See Silverman  (1990), pp.~38ff.)
 Thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d009fa54-d58b-46fd-b235-e37bc3b31bab">
-<span class="eqno">()<a class="headerlink" href="#equation-d009fa54-d58b-46fd-b235-e37bc3b31bab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-516c9e55-dfc8-4f19-bc49-f1c76bb40ff9">
+<span class="eqno">()<a class="headerlink" href="#equation-516c9e55-dfc8-4f19-bc49-f1c76bb40ff9" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \int \Bias_h^2 (x) dx \approx \frac{1}{4} h^4 k_2^2 \int (f&quot;)^2(x) dx,
 \end{equation}\]</div>
 <p>confirming more quantitatively that (asymptotically)
 the integrated bias depends on the smoothness
 of <span class="math notranslate nohighlight">\(f\)</span>.
 A similar Taylor series approximation shows that to first order in <span class="math notranslate nohighlight">\(h^{-1}\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2bf03e38-64e4-4b3c-9741-634fc66636d2">
-<span class="eqno">()<a class="headerlink" href="#equation-2bf03e38-64e4-4b3c-9741-634fc66636d2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1656b7c7-c585-4932-bbc3-891fbdcd0f46">
+<span class="eqno">()<a class="headerlink" href="#equation-1656b7c7-c585-4932-bbc3-891fbdcd0f46" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \Var \hat{f}(x) \approx n^{-1}h^{-1} f(x) \int K^2(u) du,
 \end{equation}\]</div>
 <p>so</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2676336d-65f8-4cd1-9ec1-3312077bb021">
-<span class="eqno">()<a class="headerlink" href="#equation-2676336d-65f8-4cd1-9ec1-3312077bb021" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-28d73bb3-6636-4587-8b2d-8f46e7519cb8">
+<span class="eqno">()<a class="headerlink" href="#equation-28d73bb3-6636-4587-8b2d-8f46e7519cb8" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \int \Var \hat{f}(x) dx \approx n^{-1}h^{-1} \int K^2(u) du.
 \end{equation}\]</div>
 <p>Thus shows that to reduce the integrated bias, one wants a narrow kernel,
@@ -828,8 +828,8 @@ while to reduce the integrated variance, one wants the kernel to have small
 values, which requires it to be broad to satisfy <span class="math notranslate nohighlight">\(\int K = 1\)</span>.</p>
 <p>By calculus one can show that the approximate MISE is minimized by choosing the
 bandwidth to be</p>
-<div class="amsmath math notranslate nohighlight" id="equation-27c3dc12-89d6-4438-8235-54780dce847f">
-<span class="eqno">()<a class="headerlink" href="#equation-27c3dc12-89d6-4438-8235-54780dce847f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1def2152-ba9a-4164-9ba7-13e1ad218ec8">
+<span class="eqno">()<a class="headerlink" href="#equation-1def2152-ba9a-4164-9ba7-13e1ad218ec8" title="Permalink to this equation">#</a></span>\[\begin{equation}
     h^* = n^{-1/5} k_2^{-2/5} \left [ \int K^2(u) du \right ]^{1/5}
         \left [ \int (f&quot;)^2(x) dx \right ]^{-1/5},
 \end{equation}\]</div>
@@ -837,13 +837,13 @@ bandwidth to be</p>
 Note that the (approximately) optimal bandwidth for MISE decreases with <span class="math notranslate nohighlight">\(n\)</span> as
 <span class="math notranslate nohighlight">\(n^{-1/5}\)</span>.
 For the (approximately) optimal bandwidth <span class="math notranslate nohighlight">\(h^*\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f64dbccd-55f0-4c10-ba40-dec88dd9a46c">
-<span class="eqno">()<a class="headerlink" href="#equation-f64dbccd-55f0-4c10-ba40-dec88dd9a46c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f22e9bf1-23d1-4146-a233-0f118acf1b2c">
+<span class="eqno">()<a class="headerlink" href="#equation-f22e9bf1-23d1-4146-a233-0f118acf1b2c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mbox{\rm MISE} \approx n^{-4/5} \times 1.25 C(K) \left [ \int (f&quot;)^2(x) dx \right ]^{1/5},
 \end{equation}\]</div>
 <p>where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2412590f-a3a8-4f07-9ccd-904884d9ddd0">
-<span class="eqno">()<a class="headerlink" href="#equation-2412590f-a3a8-4f07-9ccd-904884d9ddd0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9be1c8c3-430d-4727-84dd-8c190be2af10">
+<span class="eqno">()<a class="headerlink" href="#equation-9be1c8c3-430d-4727-84dd-8c190be2af10" title="Permalink to this equation">#</a></span>\[\begin{equation}
     C(K) = k_2^{2/5} \left [ \int K^2(u) du \right ]^{4/5}
 \end{equation}\]</div>
 <p>depends only on the kernel.
@@ -851,8 +851,8 @@ The kernel that is approximately optimal for MISE thus has the smallest
 possible value of <span class="math notranslate nohighlight">\(C(K)\)</span> subject to the restrictions on the moments of <span class="math notranslate nohighlight">\(K\)</span>.
 If we restrict attention to kernels that are probability density functions,
 the optimal kernel is the {\em Epanechnikov kernel/} <span class="math notranslate nohighlight">\(K_e(u)\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-c713f14f-4646-4ef0-8ce5-a9a4979a6eaa">
-<span class="eqno">()<a class="headerlink" href="#equation-c713f14f-4646-4ef0-8ce5-a9a4979a6eaa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-df4d28f4-723b-4d93-9c83-052d651493a5">
+<span class="eqno">()<a class="headerlink" href="#equation-df4d28f4-723b-4d93-9c83-052d651493a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
     K_e(u) = \frac{3}{4 \sqrt{5}} (  1 - u^2/5 )_+.
 \end{equation}\]</div>
 <p>This is the positive part of a parabola.</p>
@@ -874,14 +874,14 @@ One of the most popular is least-squares cross-validation, which is a resampling
 related to the jackknife.
 Here is a sketch of the method, following Silverman  (1990), pp.~48ff.</p>
 <p>The integrated squared error of a density estimate <span class="math notranslate nohighlight">\(\hat{f}\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9a165b09-dd21-48df-87d4-3b5d63b1f0f6">
-<span class="eqno">()<a class="headerlink" href="#equation-9a165b09-dd21-48df-87d4-3b5d63b1f0f6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c71b059d-4b39-4904-b8b9-bc40561ec6bf">
+<span class="eqno">()<a class="headerlink" href="#equation-c71b059d-4b39-4904-b8b9-bc40561ec6bf" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \int (\hat{f} - f)^2 dx = \int \hat{f}^2 dx - 2 \int \hat{f}f dx + \int f^2 dx.
 \end{equation}\]</div>
 <p>The last term does not involve the density estimate, so it is not in our control.
 Thus it is enough to try to minimize</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cb5508a8-a1f5-4cd7-a982-5ea7b3a62c29">
-<span class="eqno">()<a class="headerlink" href="#equation-cb5508a8-a1f5-4cd7-a982-5ea7b3a62c29" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-54fd24b4-104b-4da8-a9b0-6b1cfa54b592">
+<span class="eqno">()<a class="headerlink" href="#equation-54fd24b4-104b-4da8-a9b0-6b1cfa54b592" title="Permalink to this equation">#</a></span>\[\begin{equation}
     R(\hat{f}) \equiv \int \hat{f}^2 dx - 2 \int \hat{f}f dx.
 \end{equation}\]</div>
 <p>Cross validation estimates <span class="math notranslate nohighlight">\(R(\hat{f}_h)\)</span> from the data, and chooses <span class="math notranslate nohighlight">\(h\)</span> to minimize
@@ -889,19 +889,19 @@ the estimate.
 The first term in <span class="math notranslate nohighlight">\(R(\hat{f})\)</span> can be calculated explicitly from <span class="math notranslate nohighlight">\(\hat{f}\)</span>.
 Estimating the second term is the crux of the method.
 By analogy to the jackknife, define the {\em leave one out/} kernel density estimate</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d9ce7a47-ea9c-45a1-83c3-f853a97317d9">
-<span class="eqno">()<a class="headerlink" href="#equation-d9ce7a47-ea9c-45a1-83c3-f853a97317d9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a066ff89-71fe-4f0b-9f41-2a104d053ea8">
+<span class="eqno">()<a class="headerlink" href="#equation-a066ff89-71fe-4f0b-9f41-2a104d053ea8" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{f}_{h,(i)} (x) = \frac{1}{(n-1)h} \sum_{j \ne i} K \left ( \frac{x - X_j}{h} \right ) .
 \end{equation}\]</div>
 <p>Let</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e8b28e64-909c-41e2-bceb-98e028c36ad5">
-<span class="eqno">()<a class="headerlink" href="#equation-e8b28e64-909c-41e2-bceb-98e028c36ad5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d388ce87-ec8f-41b0-9bf0-0ae4cd2e5536">
+<span class="eqno">()<a class="headerlink" href="#equation-d388ce87-ec8f-41b0-9bf0-0ae4cd2e5536" title="Permalink to this equation">#</a></span>\[\begin{equation}
     M_0(h) \equiv \int \hat{f}_h^2 - \frac{2}{n} \sum_i \hat{f}_{h,(i)}(X_i).
 \end{equation}\]</div>
 <p>Let’s compute the expected value of <span class="math notranslate nohighlight">\(M_0(h)\)</span>.
 First note that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f41856d1-2fd5-458d-9ff0-c85b7e505a91">
-<span class="eqno">()<a class="headerlink" href="#equation-f41856d1-2fd5-458d-9ff0-c85b7e505a91" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-112fe5b9-8c77-42d1-b291-a751d06160f6">
+<span class="eqno">()<a class="headerlink" href="#equation-112fe5b9-8c77-42d1-b291-a751d06160f6" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
     \EE \frac{1}{n} \sum_i \hat{f}_{h,(i)} (X_i) &amp; = &amp; \EE \hat{f}_{h,(1)}(X_1) \nonumber \\
     &amp; = &amp; \EE \int \hat{f}_{h,(1)}(x) f(x) dx \nonumber \\
     &amp; = &amp; \EE \int \hat{f}_{h}(x) f(x) dx.
@@ -909,8 +909,8 @@ First note that</p>
 <p>The last step uses the fact that the expected value of the kernel density estimate
 depends on <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(h\)</span> but not on the sample size.
 Thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0304dbbe-51ff-4c42-b4be-9807ef86530f">
-<span class="eqno">()<a class="headerlink" href="#equation-0304dbbe-51ff-4c42-b4be-9807ef86530f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-84609573-45c3-4972-af11-3d915103a961">
+<span class="eqno">()<a class="headerlink" href="#equation-84609573-45c3-4972-af11-3d915103a961" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \EE R(\hat{f}_h) = \EE M_0(h),
 \end{equation}\]</div>
 <p>and <span class="math notranslate nohighlight">\(M_0(h)\)</span> is an unbiased estimator of the ISE of <span class="math notranslate nohighlight">\(\hat{f}_h\)</span>, less the term <span class="math notranslate nohighlight">\(\int f^2\)</span>,
@@ -921,8 +921,8 @@ The form of <span class="math notranslate nohighlight">\(M_0(h)\)</span> is not 
 especially if <span class="math notranslate nohighlight">\(K(\cdot)\)</span> is symmetric.
 Moreover, if we use <span class="math notranslate nohighlight">\(n\)</span> in place of <span class="math notranslate nohighlight">\(n-1\)</span> in the denominators, we get a
 similar score function <span class="math notranslate nohighlight">\(M_1(h)\)</span> that is easier to compute:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-20997742-5f5f-4f2f-9420-17214df4d09f">
-<span class="eqno">()<a class="headerlink" href="#equation-20997742-5f5f-4f2f-9420-17214df4d09f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9c3340d0-e5d6-43c1-abc6-8d050f372686">
+<span class="eqno">()<a class="headerlink" href="#equation-9c3340d0-e5d6-43c1-abc6-8d050f372686" title="Permalink to this equation">#</a></span>\[\begin{equation}
     M_1(h) = \frac{1}{n^2h} \sum_i \sum_j K^*\left ( \frac{X_i - X_j}{h} \right ) +
         \frac{2}{nh} K(0),
 \end{equation}\]</div>
@@ -944,16 +944,16 @@ values of <span class="math notranslate nohighlight">\(h\)</span> that excludes 
 that could be used in a cross validation scheme.
 For example, one could use the log likelihood instead, which leads to
 maximizing the score function</p>
-<div class="amsmath math notranslate nohighlight" id="equation-741401eb-d412-4a57-a40e-b177389c5a66">
-<span class="eqno">()<a class="headerlink" href="#equation-741401eb-d412-4a57-a40e-b177389c5a66" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-88743fa1-a434-4ba2-9b50-3870dc439928">
+<span class="eqno">()<a class="headerlink" href="#equation-88743fa1-a434-4ba2-9b50-3870dc439928" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mbox{CV}(h) = \frac{1}{n} \sum_{i=1}^n \log \hat{f}_{h,(i)} (X_i).
 \end{equation}\]</div>
 <p>It turns out that under strong restrictions on <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(K\)</span>,
 <span class="math notranslate nohighlight">\(-\mbox{CV}(h)\)</span> is (within a constant) an unbiased estimator of the
 Kullback-Leibler distance between
 <span class="math notranslate nohighlight">\(\hat{f}_h\)</span> and <span class="math notranslate nohighlight">\(f\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3308c2bd-c650-4680-a314-2e8e26e8ea8f">
-<span class="eqno">()<a class="headerlink" href="#equation-3308c2bd-c650-4680-a314-2e8e26e8ea8f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9c07a9f6-060a-4d6c-9efd-db089fcc294d">
+<span class="eqno">()<a class="headerlink" href="#equation-9c07a9f6-060a-4d6c-9efd-db089fcc294d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     I(f, \hat{f}_h) \equiv \int f(x) \log \frac{f(x)}{\hat{f}_h(x)} dx.
 \end{equation}\]</div>
 <p>The score function <span class="math notranslate nohighlight">\(\mbox{CV}(h)\)</span> is not resistant.</p>
@@ -963,38 +963,38 @@ Kullback-Leibler distance between
 <p>This material is drawn from Chapter 4 of Silverman (1990).</p>
 <p>Let <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^n\)</span> each take values in <span class="math notranslate nohighlight">\(\bfR^d\)</span>, <span class="math notranslate nohighlight">\(d \ge 1\)</span>.
 Let <span class="math notranslate nohighlight">\(K: \bfR^d \rightarrow \bfR\)</span> satisfy</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ba4ef7c0-3505-4661-a946-d095508ac9dd">
-<span class="eqno">()<a class="headerlink" href="#equation-ba4ef7c0-3505-4661-a946-d095508ac9dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a271ed10-4c5b-4921-b484-890b3d493e51">
+<span class="eqno">()<a class="headerlink" href="#equation-a271ed10-4c5b-4921-b484-890b3d493e51" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \int_{\bfR^d} K(x) dx = 1.
 \end{equation}\]</div>
 <p>Typically, the kernel <span class="math notranslate nohighlight">\(K\)</span> is a radially symmetric probability distribution
 such as the standard multivariate normal, or the multivariate Epanechnikov
 kernel</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6d4bf67c-db6a-4e57-9aa3-979c3417af49">
-<span class="eqno">()<a class="headerlink" href="#equation-6d4bf67c-db6a-4e57-9aa3-979c3417af49" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-72b61ea5-153c-4eef-84fd-56d84707cebc">
+<span class="eqno">()<a class="headerlink" href="#equation-72b61ea5-153c-4eef-84fd-56d84707cebc" title="Permalink to this equation">#</a></span>\[\begin{equation}
     K_e(x) \equiv \frac{d+2}{2c_d}(1 - \|x\|^2)_+,
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(c_d\)</span> is the volume of the unit sphere in <span class="math notranslate nohighlight">\(\bfR^d\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9cb9010c-3e53-4f53-930f-769701ced28f">
-<span class="eqno">()<a class="headerlink" href="#equation-9cb9010c-3e53-4f53-930f-769701ced28f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-72798387-57cf-4504-b289-a4b849974d38">
+<span class="eqno">()<a class="headerlink" href="#equation-72798387-57cf-4504-b289-a4b849974d38" title="Permalink to this equation">#</a></span>\[\begin{equation}
     c_d = \int_{\bfR^d} 1_{\|x\| &lt; 1} dx.
 \end{equation}\]</div>
 <p>The kernels</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4ce3fe5d-deca-4cd2-935f-1704dc444128">
-<span class="eqno">()<a class="headerlink" href="#equation-4ce3fe5d-deca-4cd2-935f-1704dc444128" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7445cfb6-b931-4bc4-946c-69d59c7586e5">
+<span class="eqno">()<a class="headerlink" href="#equation-7445cfb6-b931-4bc4-946c-69d59c7586e5" title="Permalink to this equation">#</a></span>\[\begin{equation}
     K_2 (x) \equiv \frac{3}{\pi}(1 - \|x\|^2)_+^2
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-138f7419-1a20-440f-b9ca-cfc3395d112d">
-<span class="eqno">()<a class="headerlink" href="#equation-138f7419-1a20-440f-b9ca-cfc3395d112d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bd560168-7f54-456a-bd7f-1371b497dddb">
+<span class="eqno">()<a class="headerlink" href="#equation-bd560168-7f54-456a-bd7f-1371b497dddb" title="Permalink to this equation">#</a></span>\[\begin{equation}
     K_3(x) \equiv \frac{4}{\pi}(1 - \|x\|^2)_+^3
 \end{equation}\]</div>
 <p>have more derivatives than the Epanechnikov kernels, and thus produce
 smoother density estimates; also, they are easier to compute than
 the multivariate normal density.</p>
 <p>Given a multivariate kernel function, the multivariate kernel density estimate is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a8e7bed2-8221-427b-bab6-1739375b4cba">
-<span class="eqno">()<a class="headerlink" href="#equation-a8e7bed2-8221-427b-bab6-1739375b4cba" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2e371416-59b7-4ae7-9480-a40a52754958">
+<span class="eqno">()<a class="headerlink" href="#equation-2e371416-59b7-4ae7-9480-a40a52754958" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{f}_h(x) \equiv \frac{1}{nh^d} \sum_{j=1}^n K \left ( \frac{x - X_j}{h} \right ),
 \end{equation}\]</div>
 <p>which is directly analogous to the univariate kernel density estimate.
@@ -1010,8 +1010,8 @@ matrix of the observations is the identity matrix.
 The estimate can then be transformed by the inverse change of variables to get
 the density estimate in the original coordinate system.
 This corresponds to the estimate</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c15af216-2e5c-4968-8f57-c2f455799445">
-<span class="eqno">()<a class="headerlink" href="#equation-c15af216-2e5c-4968-8f57-c2f455799445" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-96f72633-7cc8-4801-a2cd-74406974c3a9">
+<span class="eqno">()<a class="headerlink" href="#equation-96f72633-7cc8-4801-a2cd-74406974c3a9" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{f}_{h,S}(x) = \frac{1}{\sqrt{|S|} n h^d} \sum_{j=1}^n
         k \left ( \frac{\|x - X_j \|_{S^{-1}}^2}{h^2} \right ),
 \end{equation}\]</div>
@@ -1023,8 +1023,8 @@ it depends on the smoothness of the underlying density (through <span class="mat
 and on the norm of the kernel and on the second moment of the kernel.
 Stone’s theorem shows that choosing the bandwidth by cross validation using the
 score function</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2b7db971-0c91-4b27-aeb1-6e8411d4aa72">
-<span class="eqno">()<a class="headerlink" href="#equation-2b7db971-0c91-4b27-aeb1-6e8411d4aa72" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4f7598e6-97de-4739-8089-cc3d4ace6070">
+<span class="eqno">()<a class="headerlink" href="#equation-4f7598e6-97de-4739-8089-cc3d4ace6070" title="Permalink to this equation">#</a></span>\[\begin{equation}
     M_1(h) = \frac{1}{n^2 h^d} \sum_i \sum_j K^* \left ( \frac{X_i - X_j}{h} \right )
     + \frac{2}{n h^d}K(0)
 \end{equation}\]</div>
@@ -1058,14 +1058,14 @@ For any point <span class="math notranslate nohighlight">\(t \in \bfR^d\)</span>
 Euclidean distance from <span class="math notranslate nohighlight">\(t\)</span> to the <span class="math notranslate nohighlight">\(k\)</span>th closest datum in
 the set <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^n\)</span>.
 Let <span class="math notranslate nohighlight">\(V_k(t)\)</span> be the volume in <span class="math notranslate nohighlight">\(\bfR^d\)</span> of a sphere of radius <span class="math notranslate nohighlight">\(r_k(t)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c9a1368f-6148-465d-8882-0ceaec1695ab">
-<span class="eqno">()<a class="headerlink" href="#equation-c9a1368f-6148-465d-8882-0ceaec1695ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fab61980-9ca2-40ec-a0ae-4887018ebf2a">
+<span class="eqno">()<a class="headerlink" href="#equation-fab61980-9ca2-40ec-a0ae-4887018ebf2a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     V_k(t) = c_d r_k^d(t),
 \end{equation}\]</div>
 <p>where as before <span class="math notranslate nohighlight">\(c_d\)</span> is the volume of the unit ball in <span class="math notranslate nohighlight">\(\bfR^d\)</span>.
 The {\em nearest neighbor density estimate/} is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-87a3d3c4-d6a2-4ea0-9fba-88141d799312">
-<span class="eqno">()<a class="headerlink" href="#equation-87a3d3c4-d6a2-4ea0-9fba-88141d799312" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-be77e120-458b-4054-8df2-4746bfff2caa">
+<span class="eqno">()<a class="headerlink" href="#equation-be77e120-458b-4054-8df2-4746bfff2caa" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{f}_k(t) \equiv \frac{k}{n V_k(t)} = \frac{k}{n c_d r_k^d(t)}.
 \end{equation}\]</div>
 <p>Usually <span class="math notranslate nohighlight">\(k\)</span> is chosen to be small compared with <span class="math notranslate nohighlight">\(n\)</span>; <span class="math notranslate nohighlight">\(k \approx \sqrt{n}\)</span>
@@ -1079,8 +1079,8 @@ expect there to be about <span class="math notranslate nohighlight">\(n f(t) V_k
 in a small sphere of volume <span class="math notranslate nohighlight">\(V_k(t)\)</span> centered at <span class="math notranslate nohighlight">\(t\)</span>.
 If we set the expected number equal to the observed number and solve for
 <span class="math notranslate nohighlight">\(f\)</span>, we get the nearest neighbor estimate:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5407fed8-6dbe-4996-a902-35e689479f37">
-<span class="eqno">()<a class="headerlink" href="#equation-5407fed8-6dbe-4996-a902-35e689479f37" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-615f8f53-ec78-4662-ae96-2484046c255a">
+<span class="eqno">()<a class="headerlink" href="#equation-615f8f53-ec78-4662-ae96-2484046c255a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \left \{ n \hat{f}(t) V_k(t) = n \hat{f}(t) c_d r_k^d(t) = k \right \} \Rightarrow
     \left \{ \hat{f}(t) = \frac{k}{n c_d r_k^d(t)} \right \}
 \end{equation}\]</div>
@@ -1109,8 +1109,8 @@ fall off.</p>
 <p>Nearest neighbor estimates can be generalized to kernels more complicated
 than indicator functions.
 The generalized nearest neighbor estimate using kernel <span class="math notranslate nohighlight">\(K\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b3b2c1ed-1af7-4a93-9243-45b8fa12e4a0">
-<span class="eqno">()<a class="headerlink" href="#equation-b3b2c1ed-1af7-4a93-9243-45b8fa12e4a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-744784a4-b22c-4480-92fb-5cb9124b4778">
+<span class="eqno">()<a class="headerlink" href="#equation-744784a4-b22c-4480-92fb-5cb9124b4778" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{f}(t) = \frac{1}{n r_k^d(t)} \sum_{j=1}^n K\left ( \frac{t - X_j}{r_k(t)} \right ).
 \end{equation}\]</div>
 <p>This reduces to the simple nearest neighborhood estimate when <span class="math notranslate nohighlight">\(K\)</span> is the indicator
@@ -1134,8 +1134,8 @@ each {\em datum/} to be different, but holds those bandwidths fixed as
 Let <span class="math notranslate nohighlight">\(d_{jk}\)</span> be the distance from the <span class="math notranslate nohighlight">\(X_j\)</span> to its <span class="math notranslate nohighlight">\(k\)</span>th nearest neighbor; {\em i.e./},
 <span class="math notranslate nohighlight">\(d_{jk} = r_{k+1}(X_j)\)</span>.
 Then the variable kernel estimate is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-46abb741-7bb4-4a7c-a077-bf6ce4e6eb77">
-<span class="eqno">()<a class="headerlink" href="#equation-46abb741-7bb4-4a7c-a077-bf6ce4e6eb77" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4fdf98aa-2380-4814-9954-2c3a7d4a4dd5">
+<span class="eqno">()<a class="headerlink" href="#equation-4fdf98aa-2380-4814-9954-2c3a7d4a4dd5" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{f} = \frac{1}{n} \sum_{j=1}^n
         \frac{K \left ( \frac{t - X_j}{hd_{jk}} \right )}{h^d d_{jk}^d}.
 \end{equation}\]</div>
@@ -1163,19 +1163,19 @@ and to base the bandwidth choice for the final estimate on the pilot.
 Let <span class="math notranslate nohighlight">\(\tilde{f}(t)\)</span> be a pilot density estimate for which <span class="math notranslate nohighlight">\(\min_j \tilde{f}(X_j) &gt; 0\)</span>.
 Let <span class="math notranslate nohighlight">\(\alpha \in [0, 1]\)</span>.
 Let <span class="math notranslate nohighlight">\(g\)</span> be the geometric mean of the values <span class="math notranslate nohighlight">\(\{\tilde{f}(X_j)\}_{j=1}^n\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bfb8e011-9747-4afc-8002-c37d9bced349">
-<span class="eqno">()<a class="headerlink" href="#equation-bfb8e011-9747-4afc-8002-c37d9bced349" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ba95348e-4639-43b1-8f2e-5cff1a0f8fbe">
+<span class="eqno">()<a class="headerlink" href="#equation-ba95348e-4639-43b1-8f2e-5cff1a0f8fbe" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g = \left ( \prod_{j=1}^n \tilde{f}(X_j) \right )^{1/n} = \exp \left \{ \frac{1}{n}
         \sum_{j=1}^n \log \tilde{f}(X_j) \right \}.
 \end{equation}\]</div>
 <p>Define</p>
-<div class="amsmath math notranslate nohighlight" id="equation-190bc506-3fae-4496-986c-1a82771944bd">
-<span class="eqno">()<a class="headerlink" href="#equation-190bc506-3fae-4496-986c-1a82771944bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6dab7e44-2497-42a0-a327-5c63da64b4a3">
+<span class="eqno">()<a class="headerlink" href="#equation-6dab7e44-2497-42a0-a327-5c63da64b4a3" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \lambda_j = \left ( \frac{\tilde{f}(X_j)}{g} \right )^{-\alpha}.
 \end{equation}\]</div>
 <p>The adaptive kernel estimate is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d3c56922-d097-41e8-b88c-e952febb5631">
-<span class="eqno">()<a class="headerlink" href="#equation-d3c56922-d097-41e8-b88c-e952febb5631" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c2dc9406-3455-426e-89e1-0472250285f8">
+<span class="eqno">()<a class="headerlink" href="#equation-c2dc9406-3455-426e-89e1-0472250285f8" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{f}(t) = \frac{1}{n} \sum_{j=1}^n \frac{K
     \left ( \frac{t-X_j}{h \lambda_j} \right )}{h^d \lambda_j^d}.
 \end{equation}\]</div>
@@ -1215,21 +1215,21 @@ favor of smoothness.
 We need a functional <span class="math notranslate nohighlight">\(R\)</span> that assigns a finite positive number to some subset
 of all density functions.
 For example, we might take</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f87305d0-33d6-4537-a0e7-198e6206897f">
-<span class="eqno">()<a class="headerlink" href="#equation-f87305d0-33d6-4537-a0e7-198e6206897f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-95cf4185-74c7-411f-b4af-b5c65d586579">
+<span class="eqno">()<a class="headerlink" href="#equation-95cf4185-74c7-411f-b4af-b5c65d586579" title="Permalink to this equation">#</a></span>\[\begin{equation}
     R(g) = \int (g&quot;)^2 dt.
 \end{equation}\]</div>
 <p>Let <span class="math notranslate nohighlight">\(\calF\)</span> be the set of probability density functions for which <span class="math notranslate nohighlight">\(R\)</span> is defined and finite.
 For a fixed positive number <span class="math notranslate nohighlight">\(\lambda\)</span> (the smoothing parameter),
 the penalized log-likelihood function of the density <span class="math notranslate nohighlight">\(g\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dca32899-23a1-4107-9bfe-058b55a9b3df">
-<span class="eqno">()<a class="headerlink" href="#equation-dca32899-23a1-4107-9bfe-058b55a9b3df" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-aecbfbdf-3ed0-4921-a5c7-6f341224a33a">
+<span class="eqno">()<a class="headerlink" href="#equation-aecbfbdf-3ed0-4921-a5c7-6f341224a33a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \ell_\lambda (g) =\sum_{j=1}^n \log g(X_j) - \lambda R(g).
 \end{equation}\]</div>
 <p>The maximum penalized likelihood density estimate <span class="math notranslate nohighlight">\(\hat{f}\)</span> is any density in
 <span class="math notranslate nohighlight">\(\calF\)</span> for which</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8980a648-77a1-41d0-a9a8-364d5c811cad">
-<span class="eqno">()<a class="headerlink" href="#equation-8980a648-77a1-41d0-a9a8-364d5c811cad" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6ed5a24d-e0dc-47de-9e27-d17a44ee227f">
+<span class="eqno">()<a class="headerlink" href="#equation-6ed5a24d-e0dc-47de-9e27-d17a44ee227f" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \ell_\lambda(\hat{f}) \ge \ell_\lambda(g) \;\; \forall g \in \calF.
 \end{equation}\]</div>
 <p>The maximum penalized log likelihood estimate is an “optimal” compromise
@@ -1306,27 +1306,27 @@ It is convenient to express the shape of the hill as the
 height <span class="math notranslate nohighlight">\(h(s)\)</span> of the hill at an arc distance <span class="math notranslate nohighlight">\(s\)</span> along the
 surface of the hill from where the ball is launched.
 The initial kinetic energy of the ball is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-75a486c2-10ea-405a-8986-31e0b5d370a3">
-<span class="eqno">()<a class="headerlink" href="#equation-75a486c2-10ea-405a-8986-31e0b5d370a3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-203e745b-a87c-4bb7-b2aa-3b84857a2b07">
+<span class="eqno">()<a class="headerlink" href="#equation-203e745b-a87c-4bb7-b2aa-3b84857a2b07" title="Permalink to this equation">#</a></span>\[\begin{equation}
     E_j = m v_j^2(0)/2.
 \end{equation}\]</div>
 <p>As the ball ascends, its energy is conserved (the ball is frictionless),
 but it is partitioned into a kinetic component and a potential
 component.
 The potential energy component at arc distance <span class="math notranslate nohighlight">\(s\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a11796b6-dd3d-4c7f-9459-58e1fd030630">
-<span class="eqno">()<a class="headerlink" href="#equation-a11796b6-dd3d-4c7f-9459-58e1fd030630" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-785c74f1-bf2a-48c9-8bf0-f2ea86cfd78f">
+<span class="eqno">()<a class="headerlink" href="#equation-785c74f1-bf2a-48c9-8bf0-f2ea86cfd78f" title="Permalink to this equation">#</a></span>\[\begin{equation}
     E_{Pj}(s) = gmh(s),
 \end{equation}\]</div>
 <p>so, by conservation of energy, the kinetic energy at arc
 distance <span class="math notranslate nohighlight">\(s\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b025ec58-a9cb-40c6-bb53-d729f994385f">
-<span class="eqno">()<a class="headerlink" href="#equation-b025ec58-a9cb-40c6-bb53-d729f994385f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fdb0e896-6e8b-48a1-a39d-9631abace5ff">
+<span class="eqno">()<a class="headerlink" href="#equation-fdb0e896-6e8b-48a1-a39d-9631abace5ff" title="Permalink to this equation">#</a></span>\[\begin{equation}
     E_{Kj}(s) = m v_j^2(0)/2 - gmh(s).
 \end{equation}\]</div>
 <p>We can find the velocity of the ball at arc distance <span class="math notranslate nohighlight">\(s\)</span> as follows</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f0ae696f-3cd4-4d9e-9569-800dcddecfce">
-<span class="eqno">()<a class="headerlink" href="#equation-f0ae696f-3cd4-4d9e-9569-800dcddecfce" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-ea79b5e6-da5f-4d5f-80c4-6e3967c2db3d">
+<span class="eqno">()<a class="headerlink" href="#equation-ea79b5e6-da5f-4d5f-80c4-6e3967c2db3d" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
     mv_j^2(s)/2 &amp; = &amp; m v_j^2(0)/2 - gmh(s) \nonumber \\
     v_j^2(s) &amp; = &amp; v_j^2(0) - 2gh(s) \nonumber \\
     v_j(s) &amp; = &amp; \sqrt{v_j^2(0) - 2gh(s)}.
@@ -1338,16 +1338,16 @@ Let <span class="math notranslate nohighlight">\(s_j\)</span> satisfy <span clas
 The time it takes the ball to return is equal to the time it takes
 the ball to ascend.
 The time it takes the ball to come back is thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f994f7e2-7b45-4f74-a384-5e3da63e0f6f">
-<span class="eqno">()<a class="headerlink" href="#equation-f994f7e2-7b45-4f74-a384-5e3da63e0f6f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b28fccf2-643d-4803-a5e1-f535ea6d7b92">
+<span class="eqno">()<a class="headerlink" href="#equation-b28fccf2-643d-4803-a5e1-f535ea6d7b92" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \tau_j = 2\int_{s=0}^{s_j} \frac{ds}{\sqrt{v_j^2(0) - 2gh(s)}}.
 \end{equation}\]</div>
 <p>This is the solution to the forward problem.
 Each transit time <span class="math notranslate nohighlight">\(\tau_j\)</span> is a nonlinear functional of the
 hill profile <span class="math notranslate nohighlight">\(h(s)\)</span>.
 The inverse problem is to learn something about <span class="math notranslate nohighlight">\(h(s)\)</span> from measurements</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5b335443-4d53-4fa0-b2c2-85c95202405a">
-<span class="eqno">()<a class="headerlink" href="#equation-5b335443-4d53-4fa0-b2c2-85c95202405a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4c2bdf43-0bfd-4a51-9de6-8c20e5c5eb20">
+<span class="eqno">()<a class="headerlink" href="#equation-4c2bdf43-0bfd-4a51-9de6-8c20e5c5eb20" title="Permalink to this equation">#</a></span>\[\begin{equation}
     d_j = \tau_j + \epsilon_j, \;\; j = 1, \ldots, n,
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{\epsilon_j\}_{j=1}^n\)</span> are stochastic errors whose joint
@@ -1368,8 +1368,8 @@ For example, we might want to estimate a parameter <span class="math notranslate
 Assume that <span class="math notranslate nohighlight">\(\Theta\)</span> contains at least two points; otherwise, we
 know <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(g(\theta)\)</span> perfectly even without data.</p>
 <p>The parameter <span class="math notranslate nohighlight">\(g(\theta)\)</span> is {\em identifiable/} if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-47ec3d46-0785-4bb1-beec-2a1b8a908db8">
-<span class="eqno">()<a class="headerlink" href="#equation-47ec3d46-0785-4bb1-beec-2a1b8a908db8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f455e783-90ca-4d60-852c-a80c7615185f">
+<span class="eqno">()<a class="headerlink" href="#equation-f455e783-90ca-4d60-852c-a80c7615185f" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \{ g(\theta) \ne g(\eta) \} \Leftarrow \{ \Pr_\theta \ne \Pr_\eta\},\;\;
     \forall \theta, \eta \in \Theta.
 \end{equation}\]</div>
@@ -1398,30 +1398,30 @@ The best studied class of inverse problems are linear inverse problems.</p>
 <p>A forward problem is {\em linear/} if the constraint set <span class="math notranslate nohighlight">\(\Theta\)</span> is
 a subset of a separable Banach space <span class="math notranslate nohighlight">\(\calT\)</span> and for some collection <span class="math notranslate nohighlight">\(\{\kappa_j\}_{j=1}^n\)</span>
 of bounded linear functionals on <span class="math notranslate nohighlight">\(\calT\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fff9110a-5088-42c9-9d60-4f478967ccc3">
-<span class="eqno">()<a class="headerlink" href="#equation-fff9110a-5088-42c9-9d60-4f478967ccc3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-516d51aa-ec5a-4911-860a-f9b77bd7c2f8">
+<span class="eqno">()<a class="headerlink" href="#equation-516d51aa-ec5a-4911-860a-f9b77bd7c2f8" title="Permalink to this equation">#</a></span>\[\begin{equation}
     X_j = \kappa_j \theta + \epsilon_j,
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{\epsilon_j\}_{j=1}^n\)</span> are random errors whose distribution does not depend on
 <span class="math notranslate nohighlight">\(\theta\)</span>.
 Usually, such a forward problem is written</p>
-<div class="amsmath math notranslate nohighlight" id="equation-54f8cb36-36db-4e04-ae9b-32605e55f211">
-<span class="eqno">()<a class="headerlink" href="#equation-54f8cb36-36db-4e04-ae9b-32605e55f211" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-94bc53d3-d8c4-4509-903a-fb4b0f485e35">
+<span class="eqno">()<a class="headerlink" href="#equation-94bc53d3-d8c4-4509-903a-fb4b0f485e35" title="Permalink to this equation">#</a></span>\[\begin{equation}
     X = K\theta + \epsilon, \;\; \theta \in \Theta.
 \end{equation}\]</div>
 <p>The corresponding {\em linear inverse problem/} is to use the data <span class="math notranslate nohighlight">\(X\)</span> and the constraint
 <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span> to learn about <span class="math notranslate nohighlight">\(g(\theta)\)</span>.
 In a linear inverse problem, the distribution of <span class="math notranslate nohighlight">\(X\)</span> depends on <span class="math notranslate nohighlight">\(\theta\)</span> through
 <span class="math notranslate nohighlight">\(K\theta\)</span>, so if there exist <span class="math notranslate nohighlight">\(\theta, \eta \in \Theta\)</span> such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4d29d959-96da-4217-b114-3f08f2429082">
-<span class="eqno">()<a class="headerlink" href="#equation-4d29d959-96da-4217-b114-3f08f2429082" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6a855232-1d8b-474b-aba6-a63894c7a362">
+<span class="eqno">()<a class="headerlink" href="#equation-6a855232-1d8b-474b-aba6-a63894c7a362" title="Permalink to this equation">#</a></span>\[\begin{equation}
     K\theta = K\eta \;\mbox{ but }\; g(\theta) \ne g(\eta)
 \end{equation}\]</div>
 <p>then <span class="math notranslate nohighlight">\(g(\theta)\)</span> is not identifiable.</p>
 <p>Let’s simplify the setup even further—we assume that <span class="math notranslate nohighlight">\(\calT\)</span> is a Hilbert space,
 that <span class="math notranslate nohighlight">\(\Theta = \calT\)</span>, and that <span class="math notranslate nohighlight">\(g\)</span> is a {\em linear parameter/}; that is,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c673ae8e-456d-4529-b147-d94977d949cf">
-<span class="eqno">()<a class="headerlink" href="#equation-c673ae8e-456d-4529-b147-d94977d949cf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-389fde8e-fa6e-44bc-b872-faca383f0d54">
+<span class="eqno">()<a class="headerlink" href="#equation-389fde8e-fa6e-44bc-b872-faca383f0d54" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g(a \theta + b \eta) = a g(\theta) + b g(\eta)
 \end{equation}\]</div>
 <p>for all <span class="math notranslate nohighlight">\(a, b \in \bfR\)</span> and all <span class="math notranslate nohighlight">\(\theta, \eta \in \Theta\)</span>.

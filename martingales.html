@@ -640,14 +640,14 @@ title="Print to PDF"
 Let <span class="math notranslate nohighlight">\(Y^{i} := (Y_1, \ldots, Y_i)\)</span> be the first <span class="math notranslate nohighlight">\(i\)</span> elements of the sequence <span class="math notranslate nohighlight">\((Y_j)_{j \in \mathbb{N}}\)</span>.
 Suppose <span class="math notranslate nohighlight">\(\mathbb{E}|X_j| &lt; \infty\)</span> for all <span class="math notranslate nohighlight">\(j \in \mathbb{N}\)</span>.</p>
 <p>Then <span class="math notranslate nohighlight">\((X_j)_{j \in \mathbb{N}}\)</span> is a <em>martingale</em> with respect to <span class="math notranslate nohighlight">\((Y_j)_{j \in \mathbb{N}}\)</span> if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3956e7c8-9373-48af-9c6a-7cfa2b478e56">
-<span class="eqno">()<a class="headerlink" href="#equation-3956e7c8-9373-48af-9c6a-7cfa2b478e56" title="Permalink to this equation">#</a></span>\[\begin{equation} \mathbb{E}(X_j | Y^{j-1}) = X_{j-1}. \end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-b9f34f36-784e-4bb8-9d55-af9bbb075a28">
+<span class="eqno">()<a class="headerlink" href="#equation-b9f34f36-784e-4bb8-9d55-af9bbb075a28" title="Permalink to this equation">#</a></span>\[\begin{equation} \mathbb{E}(X_j | Y^{j-1}) = X_{j-1}. \end{equation}\]</div>
 <p>It is a <em>supermartingale</em> if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-14c69075-cb5b-4163-abcf-567d107b34fe">
-<span class="eqno">()<a class="headerlink" href="#equation-14c69075-cb5b-4163-abcf-567d107b34fe" title="Permalink to this equation">#</a></span>\[\begin{equation} \mathbb{E}(X_j | Y^{j-1}) \le  X_{j-1}, \end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-0d49146b-5b00-49c7-863e-bd115d677947">
+<span class="eqno">()<a class="headerlink" href="#equation-0d49146b-5b00-49c7-863e-bd115d677947" title="Permalink to this equation">#</a></span>\[\begin{equation} \mathbb{E}(X_j | Y^{j-1}) \le  X_{j-1}, \end{equation}\]</div>
 <p>and a <em>submartingale</em> if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a4a720be-ddae-40f2-ad61-74603c24ee2d">
-<span class="eqno">()<a class="headerlink" href="#equation-a4a720be-ddae-40f2-ad61-74603c24ee2d" title="Permalink to this equation">#</a></span>\[\begin{equation} \mathbb{E}(X_j | Y^{j-1}) \ge  X_{j-1}. \end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-78389b98-6e70-4a0b-a93b-466f9e971d44">
+<span class="eqno">()<a class="headerlink" href="#equation-78389b98-6e70-4a0b-a93b-466f9e971d44" title="Permalink to this equation">#</a></span>\[\begin{equation} \mathbb{E}(X_j | Y^{j-1}) \ge  X_{j-1}. \end{equation}\]</div>
 <p>A martingale, supermartingale, or submartingale is <em>nonnegative</em> if <span class="math notranslate nohighlight">\(\mathbb{P} \{X_j \ge 0 \} = 1\)</span> for all
 <span class="math notranslate nohighlight">\(j \in \mathbb{N}\)</span>.</p>
 <p>Terminology: A sequence <span class="math notranslate nohighlight">\((\lambda_i)_{i \in \mathbb{N}}\)</span> is <em>predictable</em> with respect to <span class="math notranslate nohighlight">\((Y_j)_{j \in \mathbb{N}}\)</span>
@@ -660,8 +660,8 @@ if <span class="math notranslate nohighlight">\(\lambda_j\)</span> does not depe
 <p>Suppose <span class="math notranslate nohighlight">\((Y_j)_{j \in \mathbb{N}}\)</span> are independent and have expected value 1.
 Define <span class="math notranslate nohighlight">\(X_j := \prod_{i=1}^j Y_j\)</span>, <span class="math notranslate nohighlight">\(j \in \mathbb{N}\)</span>.
 Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a7862a34-2065-4ae7-8bf2-a65bfd0377f0">
-<span class="eqno">()<a class="headerlink" href="#equation-a7862a34-2065-4ae7-8bf2-a65bfd0377f0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-76fc20a7-b465-4c12-8dd7-0d00c54c9d7a">
+<span class="eqno">()<a class="headerlink" href="#equation-76fc20a7-b465-4c12-8dd7-0d00c54c9d7a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathbb{E} (X_j | Y^{j-1}) = \mathbb{E} (X_{j-1}Y_j | Y^{j-1}) =
     X_{j-1} \mathbb{E} (Y_j | Y^{j-1}) =  X_{j-1} \mathbb{E} (Y_j) =  X_{j-1} \cdot 1 = X_{j-1}.
 \end{equation}\]</div>
@@ -672,8 +672,8 @@ Then</p>
 <p>Suppose <span class="math notranslate nohighlight">\((Y_j)_{j \in \mathbb{N}}\)</span> are independent and have expected value 0.
 Define <span class="math notranslate nohighlight">\(X_j := \sum_{i=1}^j Y_j\)</span>, <span class="math notranslate nohighlight">\(j \in \mathbb{N}\)</span>.
 Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7fc0f2a3-56d8-4456-9ab4-062d76516640">
-<span class="eqno">()<a class="headerlink" href="#equation-7fc0f2a3-56d8-4456-9ab4-062d76516640" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c337c8c1-2007-4ec8-8b85-62dbc20eeeb7">
+<span class="eqno">()<a class="headerlink" href="#equation-c337c8c1-2007-4ec8-8b85-62dbc20eeeb7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathbb{E} (X_j | Y^{j-1}) = \mathbb{E} (X_{j-1}+Y_j | Y^{j-1}) =
     X_{j-1} + \mathbb{E} (Y_j | Y^{j-1}) =  X_{j-1} + \mathbb{E} (Y_j ) = 
      X_{j-1} + 0 = X_{j-1}.
@@ -690,8 +690,8 @@ If <span class="math notranslate nohighlight">\(Y_j=1\)</span>, we win the <span
 increases by <span class="math notranslate nohighlight">\(b_j\)</span>;
 if <span class="math notranslate nohighlight">\(Y_j=0\)</span>, we lose the <span class="math notranslate nohighlight">\(j\)</span>th bet and our fortune decreases by <span class="math notranslate nohighlight">\(b_j\)</span>.
 Then <span class="math notranslate nohighlight">\(X_j = X_{j-1}+b_jY_j - b_j(1-Y_j)\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-60e1929a-995a-490d-93d1-74648ef7491f">
-<span class="eqno">()<a class="headerlink" href="#equation-60e1929a-995a-490d-93d1-74648ef7491f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-91ec6473-7e09-4657-ba91-48e5176316e4">
+<span class="eqno">()<a class="headerlink" href="#equation-91ec6473-7e09-4657-ba91-48e5176316e4" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \mathbb{E} (X_j | Y^{j-1}) = X_{j-1}+ b_j \mathbb{E} (2Y_j-1) = X_{j-1}.
 \end{equation}\]</div>
 <p>Thus the fortune <span class="math notranslate nohighlight">\((X_j)_{j \in \mathbb{N}}\)</span> is a nonnegative martingale with respect to the Bernoulli
@@ -704,8 +704,8 @@ of probability distributions on a measurable space <span class="math notranslate
 common <span class="math notranslate nohighlight">\(\sigma\)</span>-finite measure <span class="math notranslate nohighlight">\(\mu\)</span>.
 Let <span class="math notranslate nohighlight">\(p_\theta(x)\)</span>, <span class="math notranslate nohighlight">\(x \in \mathcal{X}\)</span> denote the density of <span class="math notranslate nohighlight">\(P_\theta\)</span> with respect to <span class="math notranslate nohighlight">\(\mu\)</span>.
 For fixed <span class="math notranslate nohighlight">\(x \in \mathcal{X}\)</span>, the function</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6e75a809-5e4c-4e8b-9d45-a7f71c00dbe8">
-<span class="eqno">()<a class="headerlink" href="#equation-6e75a809-5e4c-4e8b-9d45-a7f71c00dbe8" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-fbfc76df-b833-446d-9c6c-72227eb1a0a2">
+<span class="eqno">()<a class="headerlink" href="#equation-fbfc76df-b833-446d-9c6c-72227eb1a0a2" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
   \mathcal{L} &amp;=&amp; \mathcal{L}_x : \Theta \mapsto \Re^+  \\
   \theta &amp;\rightarrow&amp; p_\theta(x)
 \end{eqnarray}\]</div>
@@ -719,13 +719,13 @@ with respect to some dominating measure <span class="math notranslate nohighligh
 Let <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> denote those densities.
 Suppose <span class="math notranslate nohighlight">\((Y_j)_{j \in \mathbb{N}}\)</span> are IID with density <span class="math notranslate nohighlight">\(f\)</span>.
 Define the likelihood ratio process</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5a95e400-6b1c-4cab-a724-e89cb8c5cb18">
-<span class="eqno">()<a class="headerlink" href="#equation-5a95e400-6b1c-4cab-a724-e89cb8c5cb18" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ae7218ca-8cc6-4055-8715-df4523c018ca">
+<span class="eqno">()<a class="headerlink" href="#equation-ae7218ca-8cc6-4055-8715-df4523c018ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
   L_j := \prod_{i=1}^j g(Y_i)/f(Y_i), \;\; j \in \mathbb{N}.
 \end{equation}\]</div>
 <p>Now</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2c377bc2-53b1-4f19-a01c-8dcb223b0661">
-<span class="eqno">()<a class="headerlink" href="#equation-2c377bc2-53b1-4f19-a01c-8dcb223b0661" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8ef0cadc-c675-42b3-bb33-8e6f0438a7c3">
+<span class="eqno">()<a class="headerlink" href="#equation-8ef0cadc-c675-42b3-bb33-8e6f0438a7c3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E} (L_j | Y^{j-1}) = L_{j-1} \mathbb{E}(g(Y_j)/f(Y_j)) 
     = L_{j-1} \int_\Omega \frac{g(\omega)}{f(\omega)} f(\omega) d\mu(\omega) 
     = L_{j-1} \int_\Omega g(\omega) d\mu(\omega) = L_{j-1} 
@@ -744,18 +744,18 @@ that assigns positive probability to every <span class="math notranslate nohighl
 We observe <span class="math notranslate nohighlight">\((X_i)_{i \in \mathbb{N}}\)</span> sequentially, with <span class="math notranslate nohighlight">\(X_1 \sim p_\theta\)</span> and <span class="math notranslate nohighlight">\(X_{j+1} \sim p_\theta(x | X^j)\)</span>,
 for all <span class="math notranslate nohighlight">\(j \in \mathbb{N}\)</span>, for some fixed <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span>.
 The <em>predictive distribution of <span class="math notranslate nohighlight">\(x^j = (x_1, \ldots, x_j)\)</span></em> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f411117c-25ff-46e1-8ce3-3e6efbd33aaf">
-<span class="eqno">()<a class="headerlink" href="#equation-f411117c-25ff-46e1-8ce3-3e6efbd33aaf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-618a2616-0899-416f-8848-899efa9261eb">
+<span class="eqno">()<a class="headerlink" href="#equation-618a2616-0899-416f-8848-899efa9261eb" title="Permalink to this equation">#</a></span>\[\begin{equation}
     m(x^j) := \int_\eta p_\eta(x^j) \pi(d\eta).
 \end{equation}\]</div>
 <p>The <em>posterior</em> distribution of <span class="math notranslate nohighlight">\(\theta\)</span> given <span class="math notranslate nohighlight">\(X^j=x^j\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7c92e3ba-4e42-4370-afe9-f8a3c4f79949">
-<span class="eqno">()<a class="headerlink" href="#equation-7c92e3ba-4e42-4370-afe9-f8a3c4f79949" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3a302437-ea88-4a25-a8c8-18fab290ebe2">
+<span class="eqno">()<a class="headerlink" href="#equation-3a302437-ea88-4a25-a8c8-18fab290ebe2" title="Permalink to this equation">#</a></span>\[\begin{equation}
    \pi_j(\theta) = \pi(d\theta | X^j) := \frac{p_\theta(x) \pi(\theta)}{m(x^j)}.
 \end{equation}\]</div>
 <p>Consider the sequence</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4de20fbc-e7b1-4469-80e3-dc2335458a6f">
-<span class="eqno">()<a class="headerlink" href="#equation-4de20fbc-e7b1-4469-80e3-dc2335458a6f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c10c5b09-59b8-4fa0-a1b4-3a97f2c214c4">
+<span class="eqno">()<a class="headerlink" href="#equation-c10c5b09-59b8-4fa0-a1b4-3a97f2c214c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Y_j(\theta) := \frac{\pi(\theta)}{\pi_j(\theta)}, \;\; j \in \mathbb{N}.
 \end{equation}\]</div>
 <p>Then <span class="math notranslate nohighlight">\(Y_j\)</span> is nonnegative.
@@ -767,8 +767,8 @@ Then <span class="math notranslate nohighlight">\((Y_j(\mu))\)</span> is a nonne
 <section id="general-betting-martingales">
 <h3>General betting martingales<a class="headerlink" href="#general-betting-martingales" title="Permalink to this headline">#</a></h3>
 <p><a class="reference external" href="https://arxiv.org/pdf/2010.09686.pdf">Waudby-Smith and Ramdas (2021)</a></p>
-<div class="amsmath math notranslate nohighlight" id="equation-113568c3-0a84-4812-a470-6f949ac03d69">
-<span class="eqno">()<a class="headerlink" href="#equation-113568c3-0a84-4812-a470-6f949ac03d69" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4008712e-9ee1-4d0e-9694-8e1bf9bdd120">
+<span class="eqno">()<a class="headerlink" href="#equation-4008712e-9ee1-4d0e-9694-8e1bf9bdd120" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Y_j(\eta) := \prod_{i=1}^j (1 + \lambda_i(\eta) ) (X_i-\eta)
 \end{equation}\]</div>
 <p>with <span class="math notranslate nohighlight">\(Y_0 := 1\)</span>, <span class="math notranslate nohighlight">\(\lambda_i \in [-1/(1-\eta), 1/\eta]\)</span> predictable.</p>
@@ -780,8 +780,8 @@ the fortune is nonnegative.</p>
 <p>Waudby-Smith and Ramdas Proposition 3:<br />
 For any arbitrary set of (possibly unbounded) distributions <span class="math notranslate nohighlight">\(\Theta\)</span>, every
 <span class="math notranslate nohighlight">\(\theta\)</span>-nonnegative martingale is necessarily of the form</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d3490cde-1e4a-4d2a-9164-2aaec5f9fc06">
-<span class="eqno">()<a class="headerlink" href="#equation-d3490cde-1e4a-4d2a-9164-2aaec5f9fc06" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a67486ed-a481-4132-a1d8-f541d12542e8">
+<span class="eqno">()<a class="headerlink" href="#equation-a67486ed-a481-4132-a1d8-f541d12542e8" title="Permalink to this equation">#</a></span>\[\begin{equation}
   Y_j = \prod_{i=1}^j (1 + \lambda_i Z_i)
 \end{equation}\]</div>
 <p>for some predictable <span class="math notranslate nohighlight">\(\lambda_i \le 1\)</span> and
@@ -821,10 +821,10 @@ For sampling without replacement, <span class="math notranslate nohighlight">\(\
 <p><strong>Proof.</strong>
 Suppose <span class="math notranslate nohighlight">\((X_j)_{j \in \mathbb{N}}\)</span> is a martingale w.r.t. <span class="math notranslate nohighlight">\((Y_j)_{j \in \mathbb{N}}\)</span>.
 Then, by the <a class="reference external" href="./math-inequalities.ipynb#law_of_total_expectation">law of total expectation</a>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8d1e1af6-6586-48db-8f7b-d5f3b815ad44">
-<span class="eqno">()<a class="headerlink" href="#equation-8d1e1af6-6586-48db-8f7b-d5f3b815ad44" title="Permalink to this equation">#</a></span>\[\begin{equation} \mathbb{E}X_j = \mathbb{E}\mathbb{E}(X_j | Y^{j-1}) = \mathbb{E} X_{j-1}. \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-c666a753-1aca-471d-b065-b697cd820186">
-<span class="eqno">()<a class="headerlink" href="#equation-c666a753-1aca-471d-b065-b697cd820186" title="Permalink to this equation">#</a></span>\[\begin{equation} \mathbb{E}X_{j-1} = \mathbb{E}\mathbb{E}(X_{j-1} | Y^{j-2}) = \mathbb{E} X_{j-2}. \end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-58167454-0f1e-4850-96e1-2aac687dfd86">
+<span class="eqno">()<a class="headerlink" href="#equation-58167454-0f1e-4850-96e1-2aac687dfd86" title="Permalink to this equation">#</a></span>\[\begin{equation} \mathbb{E}X_j = \mathbb{E}\mathbb{E}(X_j | Y^{j-1}) = \mathbb{E} X_{j-1}. \end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-dd5a7048-72f7-4924-ac78-17f01dc9c48b">
+<span class="eqno">()<a class="headerlink" href="#equation-dd5a7048-72f7-4924-ac78-17f01dc9c48b" title="Permalink to this equation">#</a></span>\[\begin{equation} \mathbb{E}X_{j-1} = \mathbb{E}\mathbb{E}(X_{j-1} | Y^{j-2}) = \mathbb{E} X_{j-2}. \end{equation}\]</div>
 <p>Continuing, we end up with <span class="math notranslate nohighlight">\(\mathbb{E}X_1\)</span>.</p>
 <p>For supermartingales and submartingales, <span class="math notranslate nohighlight">\(=\)</span> is replaced with <span class="math notranslate nohighlight">\(\le\)</span> or <span class="math notranslate nohighlight">\(\ge\)</span>, respectively.
 <span class="math notranslate nohighlight">\(\Box\)</span>.</p>
@@ -874,8 +874,8 @@ Then <span class="math notranslate nohighlight">\((X_j)\)</span> converges almos
 <h2>Ville’s Inequality (1939)<a class="headerlink" href="#ville-s-inequality-1939" title="Permalink to this headline">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\((X_j)_{j \in \mathbb{N}}\)</span> be a nonnegative (super)martingale with respect to <span class="math notranslate nohighlight">\((Y_j)_{j \in \mathbb{N}}\)</span>.
 Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d2367960-a641-4e15-a625-bc711d2cee2e">
-<span class="eqno">()<a class="headerlink" href="#equation-d2367960-a641-4e15-a625-bc711d2cee2e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ef0c9443-20bf-487b-9411-9fb6b480159c">
+<span class="eqno">()<a class="headerlink" href="#equation-ef0c9443-20bf-487b-9411-9fb6b480159c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P} \{ \exists j : X_j \ge c \mathbb{E} X_1 \} \le 1/c.
 \end{equation}\]</div>
 <p><strong>Proof.</strong> (informal: can be made rigorous using Doob’s martingale convergence theorem)</p>
@@ -887,13 +887,13 @@ Apply Markov’s inequality to <span class="math notranslate nohighlight">\(X_{\
 <h2>The Azuma-Hoeffding inequality<a class="headerlink" href="#the-azuma-hoeffding-inequality" title="Permalink to this headline">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\((X_j)_{j \in \mathbb{N}}\)</span> be a supermartingale and suppose that there are finite constants
 <span class="math notranslate nohighlight">\(\{c_k\}_{k \in \mathbb{N}\)</span> such that for all <span class="math notranslate nohighlight">\(k\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bae32b90-a4c7-477c-9c96-c6289e330746">
-<span class="eqno">()<a class="headerlink" href="#equation-bae32b90-a4c7-477c-9c96-c6289e330746" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-abb847a8-c6f6-493d-b20e-647d0e8b2632">
+<span class="eqno">()<a class="headerlink" href="#equation-abb847a8-c6f6-493d-b20e-647d0e8b2632" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P} \{|X_k-X_{k-1}| \leq c_k \} = 1.
 \end{equation}\]</div>
 <p>Then for all <span class="math notranslate nohighlight">\(t \in \mathbb{N}\)</span> and all <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-52c3ad4d-bc21-4b36-8fe9-0690cafb330f">
-<span class="eqno">()<a class="headerlink" href="#equation-52c3ad4d-bc21-4b36-8fe9-0690cafb330f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3d2fef42-ed82-46aa-ae51-c112f440534c">
+<span class="eqno">()<a class="headerlink" href="#equation-3d2fef42-ed82-46aa-ae51-c112f440534c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P} \{ X_t-X_0 \ge \epsilon \} \le \exp \left( - \frac{2\epsilon^2}{\sum _{j=1}^t c_j^2 }\right).
 \end{equation}\]</div>
 </section>
@@ -922,39 +922,39 @@ Assume <span class="math notranslate nohighlight">\(X_i \in [0, u]\)</span> for 
 Let <span class="math notranslate nohighlight">\(\eta_j = \eta_j(X^{j-1})\)</span>, <span class="math notranslate nohighlight">\(j=1, \ldots\)</span>, be a <em>predictable sequence</em> in the sense that
 <span class="math notranslate nohighlight">\(\eta_j\)</span> may depend on <span class="math notranslate nohighlight">\(X^{j-1}\)</span>, but not on <span class="math notranslate nohighlight">\(X_k\)</span> for <span class="math notranslate nohighlight">\(k \ge j\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(T_0 := 1\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-33e983ce-bbf9-44cc-a5ad-110817bbd95e">
-<span class="eqno">()<a class="headerlink" href="#equation-33e983ce-bbf9-44cc-a5ad-110817bbd95e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4507df85-131c-4719-a6af-5e9eafe19f62">
+<span class="eqno">()<a class="headerlink" href="#equation-4507df85-131c-4719-a6af-5e9eafe19f62" title="Permalink to this equation">#</a></span>\[\begin{equation}
     T_j := T_{j-1} u^{-1}\left ( X_j\frac{\eta_j}{\mu_j} + (u-X_j) \frac{u-\eta_j}{u-\mu_j} \right ), \;\; j=1, \ldots . \label{eq:alphaBRAVOdef}
 \end{equation}\]</div>
 <p>This can be rearranged to yield</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3b5fafb4-e41b-41c0-af1e-c90cf48cd05f">
-<span class="eqno">()<a class="headerlink" href="#equation-3b5fafb4-e41b-41c0-af1e-c90cf48cd05f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dfa8aabf-edae-41ba-8358-834ae4fbdbd4">
+<span class="eqno">()<a class="headerlink" href="#equation-dfa8aabf-edae-41ba-8358-834ae4fbdbd4" title="Permalink to this equation">#</a></span>\[\begin{equation}
     T_j := T_{j-1} \left ( \frac{X_j}{\mu_j} \cdot \frac{\eta_j-\mu_j}{u-\mu_j} + \frac{u-\eta_j}{u-\mu_j} \right ). 
 \end{equation}\]</div>
 <p>Equivalently,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f56d5fdf-d3a3-4c4f-9cae-a5c05bb59881">
-<span class="eqno">()<a class="headerlink" href="#equation-f56d5fdf-d3a3-4c4f-9cae-a5c05bb59881" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fe5812b4-c4aa-400a-af2d-0baf44118c2f">
+<span class="eqno">()<a class="headerlink" href="#equation-fe5812b4-c4aa-400a-af2d-0baf44118c2f" title="Permalink to this equation">#</a></span>\[\begin{equation}
     T_j := \prod_{i=1}^j \left ( \frac{X_i}{\mu_i} \cdot \frac{\eta_i-\mu_i}{u-\mu_i} + \frac{u-\eta_i}{u-\mu_i} \right ), \;\; j \ge 1. 
 \end{equation}\]</div>
 <p>Under the null hypothesis that <span class="math notranslate nohighlight">\(\theta_j = \mu_j\)</span>, <span class="math notranslate nohighlight">\(T_j\)</span> is nonnegative since <span class="math notranslate nohighlight">\(X_j\)</span>, <span class="math notranslate nohighlight">\(\mu_j\)</span>, and <span class="math notranslate nohighlight">\(\eta_j\)</span>
 are all in <span class="math notranslate nohighlight">\([0, u]\)</span>.
 Also,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-24b4a903-f5fd-42ff-9a5b-9454afaf85af">
-<span class="eqno">()<a class="headerlink" href="#equation-24b4a903-f5fd-42ff-9a5b-9454afaf85af" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-ab2fd9ac-4d77-4ed0-877d-4cc6bae38f4f">
+<span class="eqno">()<a class="headerlink" href="#equation-ab2fd9ac-4d77-4ed0-877d-4cc6bae38f4f" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
     \mathbb{E} (T_j | X^{j-1} ) &amp;=&amp; T_{j-1} \left ( \frac{\mu_j}{\mu_j} \cdot \frac{\eta_j-\mu_j}{u-\mu_j} + \frac{u-\eta_j}{u-\mu_j} \right ) \nonumber \\
     &amp;=&amp;  T_{j-1} \left ( \frac{\eta_j-\mu_j}{u-\mu_j} + \frac{u-\eta_j}{u-\mu_j} \right ) \nonumber \\
     &amp;=&amp; T_{j-1}.
 \end{eqnarray}\]</div>
 <p>Thus if <span class="math notranslate nohighlight">\(\theta = \mu\)</span>, <span class="math notranslate nohighlight">\((T_j)_{j \in \mathbb{N}}\)</span> is a nonnegative martingale with respect to <span class="math notranslate nohighlight">\((X_j)_{j \in \mathbb{N}}\)</span>, starting at <span class="math notranslate nohighlight">\(1\)</span>.</p>
 <p>If <span class="math notranslate nohighlight">\(\theta &lt; \mu\)</span>, then <span class="math notranslate nohighlight">\(\mathbb{E} (X_j | X^{j-1}) &lt; \mu_j\)</span> and <span class="math notranslate nohighlight">\(r_j = \frac{\mathbb{E} (X_j | X^{j-1})}{\mu_j} &lt; 1\)</span>, so</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4d7fdba2-d3a5-47e1-ada9-cc3b3f5f2df3">
-<span class="eqno">()<a class="headerlink" href="#equation-4d7fdba2-d3a5-47e1-ada9-cc3b3f5f2df3" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{eq:supermartingale}
+<div class="amsmath math notranslate nohighlight" id="equation-34d61d2d-e68a-4ab0-9c01-461de45f7110">
+<span class="eqno">()<a class="headerlink" href="#equation-34d61d2d-e68a-4ab0-9c01-461de45f7110" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{eq:supermartingale}
     \mathbb{E} (T_j | X^{j-1} ) = T_{j-1} \left ( r_j \cdot \frac{\eta_j-\mu_j}{u-\mu_j} + \frac{u-\eta_j}{u-\mu_j} \right ) &lt; T_{j-1}.
 \end{equation}\]</div>
 <p>Thus <span class="math notranslate nohighlight">\((T_j)\)</span> is a nonnegative supermartingale starting at 1 if <span class="math notranslate nohighlight">\(\theta \le \mu\)</span>.
 It follows from Ville’s inequality that if <span class="math notranslate nohighlight">\(\theta \le \mu\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9a4bff91-4477-4b95-8318-9d1301faa10f">
-<span class="eqno">()<a class="headerlink" href="#equation-9a4bff91-4477-4b95-8318-9d1301faa10f" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{eq:p-value-adapt}
+<div class="amsmath math notranslate nohighlight" id="equation-9f1053ee-5200-449e-9141-ad1e7af69de2">
+<span class="eqno">()<a class="headerlink" href="#equation-9f1053ee-5200-449e-9141-ad1e7af69de2" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{eq:p-value-adapt}
 \Pr \{ \exists j :  T_j \ge \alpha^{-1} \} \le \alpha.
 \end{equation}\]</div>
 <p>That is, <span class="math notranslate nohighlight">\(\min(1, 1/T_j)\)</span> is an “anytime <span class="math notranslate nohighlight">\(P\)</span>-value” for the composite null hypothesis <span class="math notranslate nohighlight">\(\theta \le \mu\)</span>.</p>
@@ -974,13 +974,13 @@ If <span class="math notranslate nohighlight">\(N\mu - \sum_{k=1}^{j-1}X_k &lt; 
 <p>See Howard et al. (2021), Theorem 4.1, and Waudby-Smith and Ramdas (2021).</p>
 <p>Suppose <span class="math notranslate nohighlight">\(X_t \in [a, b]\)</span> almost surely for all <span class="math notranslate nohighlight">\(t\)</span>.
 Define</p>
-<div class="amsmath math notranslate nohighlight" id="equation-155a14e4-62d0-4a97-a4d4-5589da52d4c1">
-<span class="eqno">()<a class="headerlink" href="#equation-155a14e4-62d0-4a97-a4d4-5589da52d4c1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-79377320-d77c-4777-8ad0-c850d4984d48">
+<span class="eqno">()<a class="headerlink" href="#equation-79377320-d77c-4777-8ad0-c850d4984d48" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{X}_t := \frac{1}{t}\sum_{i=1}^t X_i
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-070ffabc-75ac-4a75-af20-14cc3e3c1347">
-<span class="eqno">()<a class="headerlink" href="#equation-070ffabc-75ac-4a75-af20-14cc3e3c1347" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d93a12f0-2980-4865-9962-2df7a95dbb15">
+<span class="eqno">()<a class="headerlink" href="#equation-d93a12f0-2980-4865-9962-2df7a95dbb15" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mu_t := \frac{1}{t} \sum_{i=1}^t \mathbb{E}(X_i| X^{i-1}).
 \end{equation}\]</div>
 <p>Let <span class="math notranslate nohighlight">\((\hat{X}_t)\)</span> be any <span class="math notranslate nohighlight">\([a, b]\)</span>-valued predictable sequence, and let <span class="math notranslate nohighlight">\(\omega &gt; 0\)</span>

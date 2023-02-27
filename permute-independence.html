@@ -523,8 +523,8 @@ one to each treatment level.
 Let <span class="math notranslate nohighlight">\(T_j\)</span> denote the rank among the responses of the
 response of the subject assigned to the treatment level with rank <span class="math notranslate nohighlight">\(j\)</span>.
 Then we have a set of pairs of ranks of treatments and responses:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-91b703f3-117a-4c31-a134-9499e3f93052">
-<span class="eqno">()<a class="headerlink" href="#equation-91b703f3-117a-4c31-a134-9499e3f93052" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2dc863d2-77f2-42fe-a633-7e2a5136f429">
+<span class="eqno">()<a class="headerlink" href="#equation-2dc863d2-77f2-42fe-a633-7e2a5136f429" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \{(j, T_j): j= 1, 2, \ldots N \}
 \end{equation}\]</div>
 <p>There are <span class="math notranslate nohighlight">\(N!\)</span> possible sets of pairs, depending on which treatment
@@ -557,8 +557,8 @@ levels of response <span class="math notranslate nohighlight">\(T_j\)</span>.</p
 <h3>The Spearman rank correlation and related statistics<a class="headerlink" href="#the-spearman-rank-correlation-and-related-statistics" title="Permalink to this headline">#</a></h3>
 <p>The first statistic we consider counts the pairs <span class="math notranslate nohighlight">\((T_i, T_j)\)</span> with <span class="math notranslate nohighlight">\(i &lt; j \)</span> for which <span class="math notranslate nohighlight">\(T_i &lt; T_j\)</span>.
 Let</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7f95a21b-988f-4635-9325-b8eed6fd4492">
-<span class="eqno">()<a class="headerlink" href="#equation-7f95a21b-988f-4635-9325-b8eed6fd4492" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-26cf6def-192a-4f05-a71b-2564397efddd">
+<span class="eqno">()<a class="headerlink" href="#equation-26cf6def-192a-4f05-a71b-2564397efddd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 U_{ij} := \left \{ \begin{array}{lr} 
                  1, &amp; T_i &lt; T_j \\
                  0, &amp; T_i \ge T_j 
@@ -571,8 +571,8 @@ Then <span class="math notranslate nohighlight">\(B\)</span> tends to be large w
 treatment indices <span class="math notranslate nohighlight">\(j\)</span>.
 The statistic <span class="math notranslate nohighlight">\(B\)</span> could be the basis of a test, but one might instead
 weight the “in order” pairs, giving more weight to larger differences in position:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4e1bf3f8-b09d-48b4-87c8-d514902d44eb">
-<span class="eqno">()<a class="headerlink" href="#equation-4e1bf3f8-b09d-48b4-87c8-d514902d44eb" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-c9848e23-254b-4be8-8f71-75557639bd61">
+<span class="eqno">()<a class="headerlink" href="#equation-c9848e23-254b-4be8-8f71-75557639bd61" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 D' &amp;:=&amp;  \sum_{i &lt; j} (j-i) U_{ij} \\
    &amp; = &amp; \sum_{i \le j} (j-i) U_{ij} \\
    &amp; = &amp; \sum_{j=1}^N \sum_{i=1}^j (jU_{ij} - iU_{ij}) \\
@@ -580,13 +580,13 @@ D' &amp;:=&amp;  \sum_{i &lt; j} (j-i) U_{ij} \\
 \end{eqnarray}\]</div>
 <p>Now, <span class="math notranslate nohighlight">\(T_j\)</span> is the rank of the <span class="math notranslate nohighlight">\(j\)</span>th response, so (ignoring ties) <span class="math notranslate nohighlight">\(T_j-1\)</span> responses are less than the <span class="math notranslate nohighlight">\(j\)</span>th response.
 Hence, since <span class="math notranslate nohighlight">\(U_{ij} = 1 - U_{ji}\)</span> for <span class="math notranslate nohighlight">\(j \ne i\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-18fcf525-9253-4cc0-b08b-a771602f4582">
-<span class="eqno">()<a class="headerlink" href="#equation-18fcf525-9253-4cc0-b08b-a771602f4582" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e50225e7-2b29-47a6-8961-af3aa1bedcee">
+<span class="eqno">()<a class="headerlink" href="#equation-e50225e7-2b29-47a6-8961-af3aa1bedcee" title="Permalink to this equation">#</a></span>\[\begin{equation}
   T_j-1 =  \sum_{i \ne j} U_{ij} = \sum_{i &lt; j} U_{ij} + \sum_{i &gt; j} U_{ij}.
 \end{equation}\]</div>
 <p>So</p>
-<div class="amsmath math notranslate nohighlight" id="equation-afdce679-4dbf-4a28-b026-2f0136aceb3d">
-<span class="eqno">()<a class="headerlink" href="#equation-afdce679-4dbf-4a28-b026-2f0136aceb3d" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-12bf3f8f-74fb-4a8b-a15a-11d892033a15">
+<span class="eqno">()<a class="headerlink" href="#equation-12bf3f8f-74fb-4a8b-a15a-11d892033a15" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
  \sum_{j=1}^N jT_j - N(N+1)/2 &amp; = &amp; \sum_{j=1}^N j(T_j-1) \\
  &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} j U_{ij} + \sum_{j=1}^N \sum_{i &gt; j} jU_{ij} \\
  &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} j U_{ij} + \sum_{i=1}^N \sum_{j &gt; i} iU_{ji} \mbox{ (exchange roles of $i$ and $j$)}\\
@@ -598,28 +598,28 @@ Hence, since <span class="math notranslate nohighlight">\(U_{ij} = 1 - U_{ji}\)<
  &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + N^2(N+1)/2 - N(N+1)(2N+1)/6
 \end{eqnarray}\]</div>
 <p>Hence,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-31fc3e2b-156b-4d09-895b-f08bbf33a384">
-<span class="eqno">()<a class="headerlink" href="#equation-31fc3e2b-156b-4d09-895b-f08bbf33a384" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-ca2fc3c7-549b-4afb-a35e-9e786bb52b4b">
+<span class="eqno">()<a class="headerlink" href="#equation-ca2fc3c7-549b-4afb-a35e-9e786bb52b4b" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
  \sum_{j=1}^N jT_j &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + N^2(N+1)/2 - N(N+1)(2N+1)/6 + N(N+1)/2 \\
  &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + N^3/2 + N^2/2 - N^3/3 - N^2/2 - N/6 + N^2/2 + N/2 \\
  &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + N^3/6 + N^2/2 + N/3 \\
  &amp; = &amp; \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + N(N+1)(N+2)/6
 \end{eqnarray}\]</div>
 <p>Now</p>
-<div class="amsmath math notranslate nohighlight" id="equation-88e0bddd-66b6-4657-b80f-f4ccac2cfaf0">
-<span class="eqno">()<a class="headerlink" href="#equation-88e0bddd-66b6-4657-b80f-f4ccac2cfaf0" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-3b76bd96-45df-4272-a0ee-c3c9fe3d1e5e">
+<span class="eqno">()<a class="headerlink" href="#equation-3b76bd96-45df-4272-a0ee-c3c9fe3d1e5e" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 \sum_j (T_j-j)^2 &amp; = &amp; \sum_j T_j^2 - 2\sum_j jT_j + \sum_j j^2 \\
     &amp; = &amp;  2N(N+1)/2 - 2 \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij}  -2  N(N+1)(N+2)/6 \\
     &amp; = &amp; - 2 \sum_{j=1}^N \sum_{i &lt; j} (j-i) U_{ij} + \mbox{ constant }.
 \end{eqnarray}\]</div>
 <p>Thus <span class="math notranslate nohighlight">\(D'\)</span> yields an equivalent test to</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1baacffa-968b-4594-ad24-3cf94d0b2cb7">
-<span class="eqno">()<a class="headerlink" href="#equation-1baacffa-968b-4594-ad24-3cf94d0b2cb7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bcdc9b47-53a7-47b9-8584-aed2508aa285">
+<span class="eqno">()<a class="headerlink" href="#equation-bcdc9b47-53a7-47b9-8584-aed2508aa285" title="Permalink to this equation">#</a></span>\[\begin{equation}
 D :=  \sum_{j=1}^N (T_j - j)^{2}.
 \end{equation}\]</div>
 <p>Note that <span class="math notranslate nohighlight">\(D\)</span> takes only even values:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-36e03c59-afc5-42b6-a10b-ae2f738166bf">
-<span class="eqno">()<a class="headerlink" href="#equation-36e03c59-afc5-42b6-a10b-ae2f738166bf" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-523811fd-2408-490f-bf81-3cbd07b0c5b6">
+<span class="eqno">()<a class="headerlink" href="#equation-523811fd-2408-490f-bf81-3cbd07b0c5b6" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 D &amp; = &amp;  \sum_{j=1}^N (T_j^2 - 2jT_j + j^2) \\
   &amp; = &amp; 2 \left ( \sum_{j=1}^N j^2 - \sum_{j=1}^N jT_j \right ) \\
   &amp; = &amp; N(N+1)(2N+1)/3 - 2 \sum_{i=1}^N iT_i.
@@ -630,19 +630,19 @@ It is equivalent to a test that rejects when <span class="math notranslate nohig
 is big, where <span class="math notranslate nohighlight">\(R_{i}\)</span> is the rank of the <span class="math notranslate nohighlight">\(i\)</span>th
 treatment and <span class="math notranslate nohighlight">\(S_{i}\)</span> is the rank of the <span class="math notranslate nohighlight">\(i\)</span>th response.
 Now</p>
-<div class="amsmath math notranslate nohighlight" id="equation-48bf20bd-2ab3-477f-993a-44610c47535d">
-<span class="eqno">()<a class="headerlink" href="#equation-48bf20bd-2ab3-477f-993a-44610c47535d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-de812140-5a9f-4b65-90e9-a49c90c27f81">
+<span class="eqno">()<a class="headerlink" href="#equation-de812140-5a9f-4b65-90e9-a49c90c27f81" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{R} := \frac{1}{N} \sum_{j=1}^N R_j = \bar{S} = (N+1)/2.
 \end{equation}\]</div>
 <p>Hence</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2f663fcd-c3cc-4684-8e81-863789703a56">
-<span class="eqno">()<a class="headerlink" href="#equation-2f663fcd-c3cc-4684-8e81-863789703a56" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-aba90eb5-bdd0-45ed-ae6f-03046cf00f28">
+<span class="eqno">()<a class="headerlink" href="#equation-aba90eb5-bdd0-45ed-ae6f-03046cf00f28" title="Permalink to this equation">#</a></span>\[\begin{equation}
 (1/N) \sum_j(R_j - \bar{R})^{2} = (1/N) \sum_j(S_j - \bar{S})^{2} =
 (1/N) (N^{3}-N)/12 = (N^{2}-1)/12.
 \end{equation}\]</div>
 <p>Spearman’s rank correlation is the correlation coefficient of the ranks of the treatment and response:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-47f344fc-b3b4-48fb-9e3d-b8c9c50ef0e7">
-<span class="eqno">()<a class="headerlink" href="#equation-47f344fc-b3b4-48fb-9e3d-b8c9c50ef0e7" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-0382b044-544b-40c5-90a1-b568905c4f0e">
+<span class="eqno">()<a class="headerlink" href="#equation-0382b044-544b-40c5-90a1-b568905c4f0e" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
  r_S &amp; :=&amp; \frac{ \frac{1}{N} \sum_j (R_j - \bar{R})(S_j - \bar{S})}{\sqrt{\frac{1}{N} \sum_j (R_j - \bar{R})^2}
  \sqrt{\frac{1}{N} \sum_j (S_j - \bar{S})^2}} \\
      &amp; = &amp; \sum_i R_iS_i - \bar{R} S_i - R_i\bar{S} + \bar{R}\bar{S} / ((N^3-N)/12) \\
@@ -715,15 +715,15 @@ but the first needs to be after the first tail and the last needs to be
 before the <span class="math notranslate nohighlight">\(m\)</span>th tail, so there are only <span class="math notranslate nohighlight">\(m - 1\)</span>
 places those <span class="math notranslate nohighlight">\(k - 1\)</span> breakpoints can be.
 The number of sequences with <span class="math notranslate nohighlight">\(R = 2k\)</span> that start with heads is thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f2ca7813-e7c5-4d3e-9d9e-2ca79561afcc">
-<span class="eqno">()<a class="headerlink" href="#equation-f2ca7813-e7c5-4d3e-9d9e-2ca79561afcc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c2d5b9a8-b763-4895-ae27-3d7e74ccf5f4">
+<span class="eqno">()<a class="headerlink" href="#equation-c2d5b9a8-b763-4895-ae27-3d7e74ccf5f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
  {{n-1}\choose{k-1}}{{m-1}\choose{k-1}}.
 \end{equation}\]</div>
 <p>The number of sequences with <span class="math notranslate nohighlight">\(R = 2k\)</span> that
 start with tails is the same (just read each sequence right-to-left instead of left-to-right).</p>
 <p>Thus, if the null hypothesis is true,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-800f96dc-2624-41a9-bb90-31eed8754e16">
-<span class="eqno">()<a class="headerlink" href="#equation-800f96dc-2624-41a9-bb90-31eed8754e16" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5b0271a2-0725-422d-ac7f-38d0f9d2536f">
+<span class="eqno">()<a class="headerlink" href="#equation-5b0271a2-0725-422d-ac7f-38d0f9d2536f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P}\{R = 2k \} = \frac{2 {{n-1}\choose {k-1}} {{m-1}\choose{k-1}}}{{{N}\choose{n}}}.
 \end{equation}\]</div>
 <p>Of course, there need to be enough heads and enough tails!
@@ -739,8 +739,8 @@ If the sequence starts with tails, we need to break the <span class="math notran
 places to form <span class="math notranslate nohighlight">\(k + 1\)</span> groups using <span class="math notranslate nohighlight">\(k\)</span> groups of heads formed
 by breaking the <span class="math notranslate nohighlight">\(n\)</span> heads in <span class="math notranslate nohighlight">\(k-1\)</span> places.
 Thus, under the null hypothesis,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1b33c99a-e067-40bd-b444-0ca104c2bb2d">
-<span class="eqno">()<a class="headerlink" href="#equation-1b33c99a-e067-40bd-b444-0ca104c2bb2d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f2daf995-a511-43e9-ac1d-75427e589234">
+<span class="eqno">()<a class="headerlink" href="#equation-f2daf995-a511-43e9-ac1d-75427e589234" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P}\{R = 2k+1 \} = 
       \frac{ {{n-1}\choose{k}} {{m-1}\choose{k-1}} + {{n-1}\choose{k-1}} {{m-1}\choose{k}}}
           {{{N}\choose {n}}}.
@@ -754,8 +754,8 @@ the outcome of the <span class="math notranslate nohighlight">\(j+1\)</span>st t
 the <span class="math notranslate nohighlight">\(j\)</span>th toss, <span class="math notranslate nohighlight">\(j=1, \ldots, N-1\)</span>.
 Then <span class="math notranslate nohighlight">\(R = 1+ \sum_{j=1}^{N-1} I_j\)</span>.
 Under the null, conditional on <span class="math notranslate nohighlight">\(n\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ccc61773-4ebf-4aea-9073-ab57fb036be8">
-<span class="eqno">()<a class="headerlink" href="#equation-ccc61773-4ebf-4aea-9073-ab57fb036be8" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-e5882f83-e776-4671-af31-657ce8bd355a">
+<span class="eqno">()<a class="headerlink" href="#equation-e5882f83-e776-4671-af31-657ce8bd355a" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 \mathbb{P}(I_j = 1) 
    &amp; = &amp; \mathbb{P}(I_j = 1 | \mbox{ $j$th toss lands H}, n)\mathbb{P}( \mbox{ $j$th toss lands H} | n) +
                        \mathbb{P}(I_j = 1 | \mbox{ $j$th toss lands T}, n)\mathbb{P}(\mbox{ $j$th toss lands T} | n) \\
@@ -766,8 +766,8 @@ Under the null, conditional on <span class="math notranslate nohighlight">\(n\)<
 \end{eqnarray}\]</div>
 <p>The indicators <span class="math notranslate nohighlight">\(\{I_j\}\)</span> are identically distributed under the null hypothesis,
 so if the null holds,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-91ab7108-0fe9-4104-a228-6c3d44f1347e">
-<span class="eqno">()<a class="headerlink" href="#equation-91ab7108-0fe9-4104-a228-6c3d44f1347e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c9f937c7-b267-47a6-9412-491b2169db75">
+<span class="eqno">()<a class="headerlink" href="#equation-c9f937c7-b267-47a6-9412-491b2169db75" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{E} R = \mathbb{E} \left ( 1 + \sum_{j=1}^{N-1} I_j \right ) =
       1 + (N-1)2nm/(N(N-1)) = 1 + 2nm/N.
 \end{equation}\]</div>
@@ -795,8 +795,8 @@ correlation (why?), we might expect to see fewer runs than
 if temperatures on different days were independent.
 So, let’s do a one-sided test that rejects if there are too few runs.
 We will aim for a test with significance level <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c3b0e190-7fc5-4e15-abf8-fa074b52db5c">
-<span class="eqno">()<a class="headerlink" href="#equation-c3b0e190-7fc5-4e15-abf8-fa074b52db5c" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-c4e3595d-79a9-470c-a956-1c24c1373a93">
+<span class="eqno">()<a class="headerlink" href="#equation-c4e3595d-79a9-470c-a956-1c24c1373a93" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 \mathbb{P}_0 \{ R = 2\} &amp; = &amp; \frac{2}{{20} \choose {10}} =  1.082509e-05 \\
 \mathbb{P}_0 \{ R = 3\} &amp; = &amp; \frac{2 {{9} \choose {1}} {{9} \choose {0}}}{{20} \choose {10}} \approx 9.74258e-05 \\
 \mathbb{P}_0 \{R = 4\} &amp; = &amp; \frac{2 {{9} \choose {1}}  {{9} \choose {1}}}{{20} \choose {10}} \approx 8.768321e-04 \\
@@ -814,8 +814,8 @@ difficult to evaluate numerically.
 There are at least two options: asymptotic approximation and simulation.
 The null distribution of <span class="math notranslate nohighlight">\(R\)</span> is asymptotically normal:
 as <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m \rightarrow \infty\)</span> and <span class="math notranslate nohighlight">\(m/n \rightarrow \gamma\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8c1b14db-093f-4fd1-b51c-44883d02d279">
-<span class="eqno">()<a class="headerlink" href="#equation-8c1b14db-093f-4fd1-b51c-44883d02d279" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ba16ea0c-b9c1-47f5-be8f-e89fc06185a1">
+<span class="eqno">()<a class="headerlink" href="#equation-ba16ea0c-b9c1-47f5-be8f-e89fc06185a1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{R - 2m/(1+\gamma)}{\sqrt{4 \gamma m/(1+\gamma)^{3}}} \rightarrow N(0, 1)
 \end{equation}\]</div>
 <p>in distribution.</p>
@@ -887,13 +887,13 @@ and <span class="math notranslate nohighlight">\(R = 4\)</span>.</p>
 <p>Tthe simulated
 <span class="math notranslate nohighlight">\(P\)</span>-value using simRunTest was about 0.54.
 Exact calculation gives:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f9158570-103d-42c3-996f-cdc668203149">
-<span class="eqno">()<a class="headerlink" href="#equation-f9158570-103d-42c3-996f-cdc668203149" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2795bee0-d7a2-4532-9658-9eb4125914c4">
+<span class="eqno">()<a class="headerlink" href="#equation-2795bee0-d7a2-4532-9658-9eb4125914c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 P_{0} \{R \le 4 \} = (2 + 5 + 12)/35 = 19/35 \approx  0.5429.
 \end{equation}\]</div>
 <p>The standard error of the estimated probability is thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3adc896b-1e49-4340-9e97-5ecd9948cdf7">
-<span class="eqno">()<a class="headerlink" href="#equation-3adc896b-1e49-4340-9e97-5ecd9948cdf7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7de55103-ae52-45df-b151-8ca4ec424588">
+<span class="eqno">()<a class="headerlink" href="#equation-7de55103-ae52-45df-b151-8ca4ec424588" title="Permalink to this equation">#</a></span>\[\begin{equation}
 SE = \sqrt{(19/35\times 16/35)/10000} \approx 0.005.
 \end{equation}\]</div>
 <p>The simulation was off by about <span class="math notranslate nohighlight">\((0.54 - 0.5429)/0.005 \approx  -0.58SE\)</span>.</p>
@@ -910,12 +910,12 @@ the exchangeability, violating that null hypothesis.</p>
 <p>Suppose we have two independent time series, each of which has a trend.
 For example, we might observe the pairs <span class="math notranslate nohighlight">\((X_j, Y_j)_{j=1}^N\)</span>,
 where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-355246a0-9399-4b5e-a1d2-9ae93d034582">
-<span class="eqno">()<a class="headerlink" href="#equation-355246a0-9399-4b5e-a1d2-9ae93d034582" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5ad56815-7b9e-449d-aeff-4453c8ad6e83">
+<span class="eqno">()<a class="headerlink" href="#equation-5ad56815-7b9e-449d-aeff-4453c8ad6e83" title="Permalink to this equation">#</a></span>\[\begin{equation}
 X_j = j + \epsilon_j, \;\; j=1, \ldots, N,
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-0bfcbb17-87c8-4b08-9006-212b8cb2ee60">
-<span class="eqno">()<a class="headerlink" href="#equation-0bfcbb17-87c8-4b08-9006-212b8cb2ee60" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ba63a2f6-eb1c-493f-a7bf-b13a485a5b67">
+<span class="eqno">()<a class="headerlink" href="#equation-ba63a2f6-eb1c-493f-a7bf-b13a485a5b67" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Y_j = j + \nu_j, \;\; j=1, \ldots, N,
 \end{equation}\]</div>
 <p>and the <span class="math notranslate nohighlight">\(2N\)</span> “noise” terms <span class="math notranslate nohighlight">\(\{\epsilon_j\}\)</span> and <span class="math notranslate nohighlight">\(\{\nu_j\}\)</span> are IID with zero mean and finite variance.
@@ -932,14 +932,14 @@ is relatively large and the other is relatively small.</p>
 <p>The following examples are from Walther (1997, 1999).
 Suppose that <span class="math notranslate nohighlight">\(\{X_j\}_{j=1}^{100}\)</span> and <span class="math notranslate nohighlight">\(\{Y_j\}_{j=1}^{100}\)</span> are IID N(0,1).
 Define</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cd55e5a8-9bb6-48d1-90f3-f20248e9dc87">
-<span class="eqno">()<a class="headerlink" href="#equation-cd55e5a8-9bb6-48d1-90f3-f20248e9dc87" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-6ed459ca-e977-452b-a128-885b29e5df5f">
+<span class="eqno">()<a class="headerlink" href="#equation-6ed459ca-e977-452b-a128-885b29e5df5f" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 S_k &amp;:=&amp; \sum_{j=1}^k X_j \\
 T_k &amp; := &amp; \sum_{j=1}^k Y_j 
 \end{eqnarray}\]</div>
 <p>Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a0a055e9-6303-4771-bd9a-37d6f13ca685">
-<span class="eqno">()<a class="headerlink" href="#equation-a0a055e9-6303-4771-bd9a-37d6f13ca685" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0fc45922-4b13-4c46-9a02-6c8b63ad0b75">
+<span class="eqno">()<a class="headerlink" href="#equation-0fc45922-4b13-4c46-9a02-6c8b63ad0b75" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P}\{ r_S(S, T) &gt; c_{0.01} \} \approx 0.67,
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(c_{0.01}\)</span> is the Spearman critical value for a one-sided
@@ -959,8 +959,8 @@ Let <span class="math notranslate nohighlight">\((Y_1, \ldots, Y_4)\)</span>
 be independent, jointly Gaussian with zero mean, <span class="math notranslate nohighlight">\(\mbox{SD}(Y_j) = 1\)</span> for
 <span class="math notranslate nohighlight">\(j\)</span> = 1, 2, 3, and <span class="math notranslate nohighlight">\(\mbox{SD}(Y_4) = 4\)</span>.
 Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8e57e588-94e6-4544-8d4d-7382854227bd">
-<span class="eqno">()<a class="headerlink" href="#equation-8e57e588-94e6-4544-8d4d-7382854227bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-69b474d0-1e4c-4f01-97b2-8a8ae8012435">
+<span class="eqno">()<a class="headerlink" href="#equation-69b474d0-1e4c-4f01-97b2-8a8ae8012435" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P}_0 \{ r_S(X, Y) = 1 \} = 1/4! \approx 4.17\%.
 \end{equation}\]</div>
 <p>Note that in this example, <span class="math notranslate nohighlight">\(r_S = 1\)</span> whenever <span class="math notranslate nohighlight">\(Y_1 &lt; Y_2 &lt; Y_3 &lt; Y_4\)</span>.
@@ -989,8 +989,8 @@ let <span class="math notranslate nohighlight">\((Y_1, Y_2, Y_3, Y_4, Y_5)\)</sp
 be independent, jointly Gaussian with zero mean and SDs 1, 1, 1, 3, and 5, respectively.
 Then, under the (false) null hypothesis that every <span class="math notranslate nohighlight">\((X, Y)\)</span> pairing is
 equally likely,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ef1d0b63-2e4e-46ec-8795-57f9a58127ab">
-<span class="eqno">()<a class="headerlink" href="#equation-ef1d0b63-2e4e-46ec-8795-57f9a58127ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-040ad215-059f-4f64-a4df-e3109da7829c">
+<span class="eqno">()<a class="headerlink" href="#equation-040ad215-059f-4f64-a4df-e3109da7829c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbb{P}_0 \{r_S(X, Y) = 1 \approx 0.83\%,
 \end{equation}\]</div>
 <p>but simulation shows that the actual probability is about 2%:</p>
